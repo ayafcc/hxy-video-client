@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/pic_pop_update" />
+
+    <ScrollView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-30dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="30dp"
+        android:paddingTop="40dp">
+
+
+        <TextView
+            android:id="@+id/tvMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:gravity="center_vertical"
+            android:minHeight="60dp"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+            tools:text="1.哈哈哈大空间和\n2.哈哈哈哈\n3.哈哈哈\n4.哈哈哈" />
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_update_rl">
+
+        <TextView
+            android:id="@+id/tvUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/shape_update_btn"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:paddingLeft="40dp"
+            android:paddingTop="8dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="8dp"
+            android:text="升级"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="300dp"-->
+    <!--        android:layout_height="350dp"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:paddingTop="40dp"-->
+    <!--        android:background="@drawable/pic_pop_update"-->
+    <!--        android:orientation="vertical">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tvMsg1"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="30dp"-->
+    <!--            android:layout_marginRight="30dp"-->
+    <!--            android:layout_gravity="center_horizontal"-->
+    <!--            android:gravity="center_vertical"-->
+    <!--            android:layout_marginTop="100dp"-->
+    <!--            android:minHeight="100dp"-->
+    <!--            android:textColor="@color/textColor"-->
+    <!--            android:textSize="16sp"-->
+    <!--            android:textStyle="bold"-->
+    <!--            tools:text="1.哈哈哈大空间和\n2.哈哈哈哈\n3.哈哈哈\n4.哈哈哈" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tvUpdate"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center_horizontal"-->
+    <!--            android:layout_marginLeft="30dp"-->
+    <!--            android:layout_marginTop="30dp"-->
+    <!--            android:layout_marginRight="30dp"-->
+    <!--            android:layout_marginBottom="20dp"-->
+    <!--            android:background="@drawable/bg_login"-->
+    <!--            android:foreground="?attr/selectableItemBackground"-->
+    <!--            android:gravity="center"-->
+    <!--            android:paddingLeft="40dp"-->
+    <!--            android:paddingTop="8dp"-->
+    <!--            android:paddingRight="40dp"-->
+    <!--            android:paddingBottom="8dp"-->
+    <!--            android:text="升级"-->
+    <!--            android:textSize="@dimen/font_normal"-->
+    <!--            android:textColor="@color/white" />-->
+    <!--    </LinearLayout>-->
+
+
+</LinearLayout>

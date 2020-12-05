@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <!--    相同推荐-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="18dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvSameType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/like_recommend"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_small"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvSameActor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="@string/like_actor"
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_small"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="换一批"
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_small" />
+
+        <ImageView
+            android:layout_gravity="bottom"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@drawable/ic_enter" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRecommand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:scrollbars="none"
+        tools:layoutManager="GridLayoutManager"
+        tools:listitem="@layout/item_top_child"
+        tools:spanCount="3" />
+</LinearLayout>

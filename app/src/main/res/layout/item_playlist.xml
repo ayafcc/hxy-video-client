@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="58pt"
+        android:layout_marginStart="52pt"
+        android:layout_marginTop="26pt"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="选择资源"
+        android:textColor="@color/black"
+        android:textSize="40pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="58pt"
+        android:layout_marginTop="26pt"
+        android:layout_marginEnd="52pt"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="无法观看尝试切换下方资源"
+        android:textColor="@color/gray_999"
+        android:textSize="40pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:id="@+id/item_v_playlist_line_1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="98pt"
+        android:background="@color/lineColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_rv_playlist_source_list"
+        android:layout_width="match_parent"
+        android:layout_height="122pt"
+        android:paddingStart="52pt"
+        android:paddingEnd="0pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_v_playlist_line_1"/>
+
+    <View
+        android:id="@+id/item_v_playlist_line_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_rv_playlist_source_list" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="63pt"
+        android:layout_marginStart="52pt"
+        android:layout_marginTop="32pt"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="选集"
+        android:textColor="@color/black"
+        android:textSize="46pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_v_playlist_line_2" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_tv_playlist_episode_more"
+        android:layout_width="wrap_content"
+        android:layout_height="58pt"
+        android:layout_marginTop="40pt"
+        android:layout_marginEnd="52pt"
+        android:drawableEnd="@drawable/ic_more"
+        android:drawablePadding="15pt"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="更新至18集"
+        android:textColor="@color/gray_999"
+        android:textSize="40pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_v_playlist_line_2" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_rv_playlist_episode_list"
+        android:layout_width="match_parent"
+        android:layout_height="138pt"
+        android:layout_marginTop="98pt"
+        android:paddingStart="52pt"
+        android:paddingEnd="0pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_v_playlist_line_2"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

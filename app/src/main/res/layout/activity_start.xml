@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/advertLayout"
+	android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.start.StartActivity">
+
+    <cn.mahua.vod.ad.AdWebView
+        android:id="@+id/awv_start"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <TextView
+        android:id="@+id/tv_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="20dp"
+        android:background="@drawable/bg_skip"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="5dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_small"
+        tools:text="跳过 3s" />
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/lanch_bg2" />
+
+    <TextView
+        android:id="@+id/tv_load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/shape_bg_black_text_white"
+        android:gravity="center"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp"
+        android:text="正在选择加速通道，请稍后..."
+        android:textColor="@color/white"
+        android:textSize="14dp" />
+
+</FrameLayout>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:orientation="horizontal"
+    android:foreground="?selectableItemBackground"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:id="@+id/item_iv_seek_result_icon"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="centerCrop"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_video" />
+
+    <LinearLayout
+        android:layout_toRightOf="@id/item_iv_seek_result_icon"
+        android:layout_width="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_alignTop="@id/item_iv_seek_result_icon"
+        android:layout_alignBottom="@id/item_iv_seek_result_icon"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_tv_seek_result_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/font_normal"
+            tools:text="老师好" />
+
+        <TextView
+            android:id="@+id/item_tv_seek_result_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_small"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_iv_seek_result_icon"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_seek_result_title"
+            tools:text="主演:老师、同学" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/item_tv_seek_result_actor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_small"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_iv_seek_result_icon"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_seek_result_year"
+            tools:text="状态：连续剧/更新至18集" />
+
+        <TextView
+            android:id="@+id/item_tv_seek_result_zlass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_small"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_iv_seek_result_icon"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_seek_result_actor"
+            tools:text="播放：234次" />
+
+        <TextView
+            android:id="@+id/item_tv_seek_result_remarks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_iv_seek_result_icon"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_seek_result_zlass"
+            android:textStyle="bold"
+            tools:text="地区：2018/大陆" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/item_tv_seek_result_hits"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/item_tv_seek_result_score"
+                app:layout_constraintStart_toEndOf="@id/item_iv_seek_result_icon"
+                app:layout_constraintTop_toBottomOf="@id/item_tv_seek_result_remarks"
+                android:textStyle="bold"
+                tools:text="分类：都市/喜剧" />
+
+            <TextView
+                android:id="@+id/item_tv_seek_result_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/red"
+                android:textSize="@dimen/font_small"
+                android:textStyle="bold"
+                tools:text="8.0" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_color"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

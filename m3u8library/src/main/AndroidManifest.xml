@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="jaygoo.library.m3u8downloader">
+
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true">
+        <service
+            android:name=".service.VideoService"
+            android:exported="false"></service>
+    </application>
+
+</manifest>

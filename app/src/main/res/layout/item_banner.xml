@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.mahua.vod.banner.BlurBanner xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_banner"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    app:is_auto_play="true"
+    app:title_textsize="@dimen/font_normal" />

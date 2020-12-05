@@ -1,0 +1,175 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion '28.0.3'
+
+    signingConfigs {
+        release {
+            storeFile file('lbsp.keykjsh')
+            storePassword 'lbspyss546400...'
+            keyAlias = 'lbsp.keydhjashj'
+            keyPassword 'lbspyss585821...'
+        }
+    }
+
+    defaultConfig {
+        applicationId "cn.luobo.app"
+        minSdkVersion 22
+        targetSdkVersion 28
+
+        versionCode 2
+        versionName "2.4.1"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            if (output.outputFileName != null && output.outputFileName.endsWith('.apk')) {
+                def fileName
+                fileName = "jisuTV_${variant.versionName}.apk"
+                output.outputFileName = fileName
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/beans.xml'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation(name: 'zgalaxy1.2.0', ext: 'aar')
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    //androidTestImplementation 'androidx.test:runner:1.1.1'
+    //androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    implementation 'com.google.android.material:material:1.0.0'
+
+    //内存泄漏
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-3'
+
+    //工具箱
+    implementation 'com.blankj:utilcodex:1.26.0'
+    //黄油刀
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    kapt 'com.jakewharton:butterknife-compiler:10.2.1'
+    //fragment
+    implementation 'me.yokeyword:fragmentationx:1.0.1'
+    implementation 'me.yokeyword:fragmentationx:1.0.1'
+    implementation 'me.yokeyword:fragmentationx-swipeback:1.0.1'
+    implementation 'me.yokeyword:eventbus-activity-scope:1.1.0'
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.2.0'
+    //recyclerView  不需要混淆
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    //recyclerView适配器
+    implementation 'me.drakeet.multitype:multitype:3.5.0'
+    //RxJava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+    //Retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.6.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.1.0'
+    //下载  不需要混淆
+//    implementation 'com.arialyy.aria:core:3.8.6'
+    kapt 'com.arialyy.aria:compiler:3.8.6'
+    //Glide  图片加载
+    implementation 'jp.wasabeef:glide-transformations:4.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    //banner
+    implementation 'com.youth.banner:banner:1.4.10'
+    implementation project(path: ':av')
+
+    //图片选择
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.4'
+
+    implementation 'com.google.android:flexbox:1.1.0'
+    implementation "androidx.core:core-ktx:1.3.1"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
+
+    //BaseRecyclerViewAdapterHelper:lib自带混淆规则。用户不需要再手动配置混淆
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
+    implementation 'org.litepal.android:kotlin:3.0.0'
+    //不需要混淆
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    implementation 'com.hedgehog.ratingbar:app:1.1.2'//星星评价
+    implementation 'gdut.bsx:share2:0.9.3'
+    implementation 'com.github.SheHuan:NiceImageView:1.0.5'
+    implementation 'com.umeng.umsdk:analytics:8.0.0'
+    implementation 'com.umeng.umsdk:common:2.0.0'
+
+    implementation 'org.xutils:xutils:3.8.5'//网络请求框架
+
+    //不需要混淆
+    implementation 'com.github.Dpuntu:android-downloader:v1.0.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+
+
+
+
+    //1.0.5及以前版本的老用户升级需谨慎，API改动过大
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'  //没有使用特殊Header，可以不加这行
+
+    implementation 'com.tencent.tbs.tbssdk:sdk:43697'
+//    implementation 'com.alibaba:fastjson:1.1.54.android'
+
+    implementation 'com.alibaba:fastjson:1.1.70.android'
+
+    //不需要权限
+    implementation 'com.hjq:xxpermissions:6.2'
+    //权限请求框架
+    implementation 'com.hjq:toast:6.0'
+
+    implementation "com.orhanobut:hawk:2.0.1"//缓存数据
+    implementation project(path: ':m3u8library')
+    implementation 'commons-io:commons-io:2.8.0'
+//
+    //投屏
+    implementation project(path: ':core')
+    // Cling library
+    implementation 'org.fourthline.cling:cling-core:2.1.1'
+    implementation 'org.fourthline.cling:cling-support:2.1.1'
+    //对话框
+    api 'com.lxj:xpopup:1.6.7'
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="font_largest">22dp</dimen>
+    <dimen name="font_larger">20dp</dimen>
+    <dimen name="font_large">18dp</dimen>
+    <dimen name="font_normal">16dp</dimen>
+    <dimen name="font_small">14dp</dimen>
+    <dimen name="font_smaller">12dp</dimen>
+    <dimen name="font_smallest">10dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>

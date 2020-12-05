@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_notice"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="140dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNotice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="30dp"
+                android:autoLink="web"
+                android:lineSpacingExtra="5dp"
+                android:gravity="left|top"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                tools:text="通知sdsdsdsdfdfdadfdfdfdfdfdfdfdf" />
+        </ScrollView>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="30dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_notice_close" />
+
+</LinearLayout>

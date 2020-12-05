@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_top_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/shape_title_tip"
+            android:drawablePadding="15dp"
+            android:ellipsize="end"
+            android:gravity="center|start"
+            android:includeFontPadding="false"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:singleLine="true"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_large"
+            android:textStyle="bold"
+            app:autoSizeTextType="uniform"
+            tools:text="每月TOP排行榜" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_top_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_marginRight="3dp"
+            android:drawableEnd="@drawable/ic_more"
+            android:drawablePadding="4dp"
+            android:foreground="?selectableItemBackground"
+            android:gravity="center|end"
+            android:includeFontPadding="false"
+            android:maxLines="2"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="@string/change"
+            android:textSize="16sp"
+            app:autoSizeTextType="uniform" />
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_rv_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scrollbars="none"
+        tools:itemCount="3"
+        tools:layoutManager="GridLayoutManager"
+        android:layout_marginTop="5dp"
+        tools:listitem="@layout/item_top_child"
+        tools:spanCount="3" />
+
+    <cn.mahua.vod.ad.AdWebView
+        android:id="@+id/adWebView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp" />
+
+</LinearLayout>

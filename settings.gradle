@@ -1,0 +1,3 @@
+include ':core'
+include ':app', ':av',':m3u8library'
+rootProject.name='vod'

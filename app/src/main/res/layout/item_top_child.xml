@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/item_iv_top_child_icon"
+            android:layout_width="match_parent"
+            android:layout_height="176dp"
+            android:background="@color/transparent_25_white"
+            android:contentDescription="@string/iv"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_video" />
+
+        <TextView
+            android:id="@+id/item_tv_top_child_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape_tip_bg_orange"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_smaller"
+            tools:text="@string/tip" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_top_child_up_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shape_card_bottom_bg"
+            android:ellipsize="end"
+            android:gravity="center|end"
+            android:includeFontPadding="false"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:text="@string/up_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_smaller" />
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/item_tv_top_child_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:includeFontPadding="false"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="十万个冷笑话"
+        android:textStyle="bold"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/font_small"
+         />
+
+</LinearLayout>

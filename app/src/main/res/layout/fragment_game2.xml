@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.home.HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/title_bar"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:id="@+id/iv_home_top_bg"
+            android:layout_width="match_parent"
+            android:background="@drawable/home_top_shape"
+            android:scaleType="fitXY"
+            android:layout_height="match_parent"/>
+
+         <TextView
+             android:id="@+id/tv_title"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:paddingTop="20dp"
+             android:text="游戏"
+             android:textStyle="bold"
+             android:textSize="18sp"
+             android:textColor="#ffffff"
+             android:gravity="center"
+             android:layout_centerVertical="true"
+             android:layout_centerHorizontal="true"
+             />
+    </RelativeLayout>
+
+
+<!--    <ScrollView-->
+<!--        android:id="@+id/content_scrollview"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+        <WebView
+            android:layout_width="match_parent"
+            android:id="@+id/webview"
+            android:layout_height="match_parent"/>
+
+<!--    </ScrollView>-->
+</LinearLayout>

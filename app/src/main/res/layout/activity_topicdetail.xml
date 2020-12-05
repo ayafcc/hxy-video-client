@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.home.HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="166dp">
+
+        <ImageView
+            android:id="@+id/iv_topic_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_bg_orange_to_light_top"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:id="@+id/back_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/back_circle_shape"
+            android:orientation="horizontal"
+            android:paddingStart="11dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="6dp">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="14dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_title_back2" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/topic_name"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12dp"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"
+            android:text="2019年度十佳影片"
+            android:textColor="#191919"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/topic_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/topic_name"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="left|center_vertical"
+            android:text="在这部主打科幻题材的影片中，可谓满屏都是未来世界的“黑科技”。螺旋造型阿瓦隆号飞船外观充满未来的质感，伴随着推进器
+在这部主打科幻题材的影片中，可谓满屏都是未来世界的“黑科技”。螺旋造型阿瓦隆号飞船外观充满未来的质感，伴随着推进器"
+            android:textColor="#4D4D4D"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/top_line"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#F0F1EF" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/topic_videolist_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
+
+</LinearLayout>

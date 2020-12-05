@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="5dp"
+    android:paddingRight="10dp"
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:clickable="false"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true" />
+
+    <ImageView
+        android:id="@+id/ivImg"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="5dp"
+        android:scaleType="centerCrop"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/cb" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/ivImg"
+        android:layout_toRightOf="@id/ivImg"
+        android:textColor="@color/textColor"
+        android:textStyle="bold"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/font_normal"
+        tools:text="哪吒之魔童降世" />
+
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/ivImg"
+        android:layout_toRightOf="@id/ivImg"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/gray_999"
+        android:layout_marginBottom="10dp"
+        android:textSize="@dimen/font_small"
+        tools:text="电视剧" />
+</RelativeLayout>

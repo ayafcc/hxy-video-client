@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.home.HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/title_bar"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:id="@+id/iv_home_top_bg"
+            android:layout_width="match_parent"
+            android:background="@drawable/home_top_shape"
+            android:scaleType="fitXY"
+            android:layout_height="match_parent"/>
+
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:paddingTop="20dp"
+             android:text="游戏"
+             android:textStyle="bold"
+             android:textSize="18sp"
+             android:textColor="#ffffff"
+             android:gravity="center"
+             android:layout_centerVertical="true"
+             android:layout_centerHorizontal="true"
+             />
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:id="@+id/content_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/banner_img"
+                android:layout_width="match_parent"
+                android:layout_height="143dp"
+                android:scaleType="fitXY"
+                />
+
+            <ImageView
+                android:id="@+id/top_line"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="#F0F1EF"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="3dp"
+                android:background="#EDEEEF"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:id="@+id/sound_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:focusable="true"
+                    android:background="@drawable/gonggao" />
+
+                   <cn.mahua.vod.ui.widget.AutoRunTextView
+                       android:id="@+id/tv_notice_gdmsg"
+                       android:layout_width="wrap_content"
+                       android:singleLine="true"
+                       android:ellipsize="marquee"
+                       android:focusable="true"
+                       android:gravity="center_vertical"
+                       android:layout_marginLeft="8dp"
+                       android:layout_toRightOf="@id/sound_img"
+                       android:layout_centerVertical="true"
+                       android:focusableInTouchMode="true"
+                       android:layout_height="match_parent"/>
+
+<!--                <cn.mahua.vod.ui.widget.NoticeView-->
+<!--                    android:id="@+id/notice_view"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginLeft="2dp"-->
+<!--                    android:layout_marginRight="80dp"-->
+<!--                    android:layout_toRightOf="@+id/sound_img"-->
+<!--                    android:background="#EDEEEF"-->
+<!--                    android:paddingLeft="6dp"-->
+<!--                    android:paddingRight="6dp"-->
+<!--                    app:textColor="#222222"-->
+<!--                    app:textSize="16sp"></cn.mahua.vod.ui.widget.NoticeView>-->
+
+
+            </RelativeLayout>
+
+            <cn.mahua.vod.ui.widget.ScrollViewWithListView
+                android:id="@+id/game_listview"
+                android:layout_width="match_parent"
+                android:layout_marginTop="6dp"
+                android:layout_height="match_parent"
+                android:cacheColorHint="#00000000"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:scrollbars="none" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

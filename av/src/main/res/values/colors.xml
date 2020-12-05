@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="player_theme_color">#EC6538</color>
+    <color name="player_theme_tr_color">#66EC6538</color>
+    <!--播放器进度条-->
+    <color name="player_progress_background_color">#33ffffff</color>
+    <color name="player_progress_secondary_color">#7Fffffff</color>
+    <color name="player_progress_progress_color">#EC6538</color>
+    <color name="player_all_bg_color">#000000</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="darkGray">#A9A9A9</color><!--暗灰色 -->
+    <color name="statusColor">#22000000</color><!--暗灰色 -->
+
+</resources>

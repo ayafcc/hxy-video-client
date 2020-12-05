@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_main_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/title_home" />
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_main_topic"-->
+<!--        android:icon="@drawable/ic_topic"-->
+<!--        android:title="专题" />-->
+
+    <item
+        android:id="@+id/navigation_main_rank"
+        android:icon="@drawable/ic_game"
+        android:title="榜单" />
+    <item
+        android:id="@+id/navigation_main_live"
+        android:icon="@drawable/ic_live"
+        android:title="直播" />
+
+
+
+    <!--    <item-->
+<!--        android:id="@+id/navigation_main_game"-->
+<!--        android:icon="@drawable/ic_game"-->
+<!--        android:title="游戏" />-->
+
+    <item
+        android:id="@+id/navigation_main_share"
+        android:icon="@drawable/ic_topic"
+        android:title="@string/title_share" />
+
+    <item
+        android:id="@+id/navigation_main_user"
+        android:icon="@drawable/ic_user"
+        android:title="@string/title_user" />
+
+</menu>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/item_v_card_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="top"
+        android:background="@color/transparent_50_white" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:id="@+id/item_tv_card_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:drawableStart="@drawable/shape_title_tip"
+        android:drawablePadding="15dp"
+        android:ellipsize="end"
+        android:gravity="center|start"
+        android:includeFontPadding="false"
+        android:singleLine="true"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/font_large"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        tools:text="每月TOP排行榜" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_rv_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/item_btn_card_more"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_btn_bg"
+            android:foreground="?selectableItemBackground"
+            android:text="@string/more2"
+            android:textSize="@dimen/font_normal" />
+
+        <Button
+            android:id="@+id/item_btn_card_change"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_btn_bg"
+            android:foreground="?selectableItemBackground"
+            android:text="@string/change2"
+            android:textSize="@dimen/font_normal" />
+    </LinearLayout>
+
+
+</LinearLayout>

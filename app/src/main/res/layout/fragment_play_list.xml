@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingRight="20dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:paddingLeft="20dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="选集"
+            android:textStyle="bold"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/tvSelectedWorks"
+            android:layout_width="wrap_content"
+            tools:text="10集全"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_small"
+            android:layout_marginRight="12dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_close" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_999" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSelectWorks"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:overScrollMode="never"
+        android:layout_marginRight="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+</LinearLayout>

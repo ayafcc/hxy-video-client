@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="294dp"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="294dp">
+        
+        <ImageView
+            android:id="@+id/top_line"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="#F0F1EF"
+            />
+        
+        <LinearLayout
+            android:layout_below="@id/top_line"
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="52dp">
+
+            <ImageView
+                android:id="@+id/top_dd"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/video_icon"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="2019年度十佳影片"
+                android:id="@+id/topic_name"
+                android:textSize="18sp"
+                android:textColor="#191919"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:layout_marginLeft="12dp"
+                android:gravity="left"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/topic_cover"
+            android:layout_below="@id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="166dp"
+            android:background="@drawable/topica"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_below="@id/topic_cover"
+            android:text="在这部主打科幻题材的影片中，可谓满屏都是未来世界的“黑科技”。螺旋造型阿瓦隆号飞船外观充满未来的质感，伴随着推进器"
+            android:lines="2"
+            android:textSize="14sp"
+            android:textColor="#7A7C7A"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"
+            android:id="@+id/topic_info"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

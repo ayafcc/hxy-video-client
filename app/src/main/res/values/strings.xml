@@ -1,0 +1,121 @@
+<resources>
+    <string name="app_name">萝卜影视</string>
+
+    <string name="skip">跳过 %1$ds</string>
+    <string name="title_home">首页</string>
+    <string name="title_user">我的</string>
+
+    <string name="seek">查找片源</string>
+    <string name="seek2">搜索关键字</string>
+
+    <string name="all">全部</string>
+
+    <string name="title">标题</string>
+    <string name="up_title">更新至9999集</string>
+    <string name="tip">提示</string>
+
+    <string name="change">换一批</string>
+    <string name="change2">换一批  ⇄</string>
+    <string name="more">更多</string>
+    <string name="more2">更多  ＞</string>
+
+    <string name="comment">评论</string>
+    <string name="collect">收藏</string>
+    <string name="download">下载</string>
+    <string name="feedback">反馈</string>
+    <string name="share">分享</string>
+
+    <string name="my">我的</string>
+    <string name="sign">签到</string>
+    <string name="user_name">点我登录</string>
+    <string name="user_tip">签到、评论、分享、评分、发射弹幕或获得积分奖励！</string>
+
+    <string name="task_title">任务中心</string>
+    <string name="task_tip">每日任务</string>
+    <string name="more_task">福利任务</string>
+    <string name="go_to_task">去做任务</string>
+    <string name="has_done">已完成</string>
+
+    <string name="share_title">分享有礼</string>
+
+    <string name="service_title">专属客服</string>
+
+    <string name="withdraw_title">金币提现</string>
+
+    <string name="user_t1">在线充值</string>
+    <string name="user_t2">卡密充值</string>
+    <string name="user_t3">积分换会员</string>
+
+    <string name="jifen">剩余积分 0</string>
+    <string name="jinbi">剩余金币 0</string>
+    <string name="watch_video">观影次数 0</string>
+
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="select_play_resource">选择资源</string>
+    <string name="select_play_resource_hit">无法观看尝试切换下方资源</string>
+    <string name="update_hit">更新至%1$s集</string>
+    <string name="selection_play_source">选集</string>
+    <string name="summary">简介</string>
+    <string name="like_recommend">相似推荐</string>
+    <string name="like_actor">相同主演</string>
+    <string name="hot_comment">热门评论</string>
+    <string name="play_score">播放记录</string>
+    <string name="expand_center">推广中心</string>
+    <string name="my_expand">我的推广</string>
+    <string name="potato_group">POTATO群</string>
+    <string name="plane_group">纸飞机群</string>
+    <string name="notice_notify">公告通知</string>
+    <string name="message_center">消息中心</string>
+    <string name="system_notice">系统公告</string>
+    <string name="message_detail">消息详情</string>
+    <string name="cache">我的缓存</string>
+    <string name="collection">我的收藏</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="execution">执行</string>
+    <string name="title_activity_play_score">PlayScoreActivity</string>
+    <string name="edit">编辑</string>
+    <string name="pay_title">充值</string>
+    <string name="pay_online">在线充值</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pay_hit">在线充值积分</string>
+    <string name="vip_pay_hit">积分升级会员</string>
+    <string name="vip_upgrade_title">会员升级</string>
+    <string name="login_hit">登录须知：如未注册，请先注册</string>
+    <string name="register_hit">注册须知：手机仅限制注册一个账号，请勿重复注册</string>
+    <string name="loading_msg">加载中...</string>
+    <string name="phone_isempty">手机号码不能为空！</string>
+    <string name="username_isempty">用户名不能为空！</string>
+    <string name="password_isempty">密码不能为空！</string>
+    <string name="verify_code_isempty">验证码不能为空</string>
+    <string name="verify_code_success">验证码发送成功</string>
+    <string name="repassword_isempty">确认密码不能为空</string>
+    <string name="repassowrd_not_correct">前后密码不一致！</string>
+    <string name="register_success">注册成功</string>
+    <string name="login_success">登录成功</string>
+    <string name="phone_format_incorrect">手机号码不正确</string>
+    <string name="login_or_register">登录 | 注册</string>
+    <string name="remaining_points">%1$s\n剩余积分</string>
+    <string name="remaining_coin">%1$s\n剩余金币</string>
+    <string name="sign_success">签到成功！</string>
+    <string name="change_nickname">更换昵称</string>
+    <string name="account_setting">账户设置</string>
+    <string name="finish">完成</string>
+    <string name="new_nickname_empty">昵称不能为空！</string>
+    <string name="change_nickname_success">设置成功</string>
+    <string name="change_avator_success">更新头像成功！</string>
+    <string name="dialog_ok">确定</string>
+    <string name="dialog_hit">提示</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="day_upgrade_hit_s">确定花费%s\n兑换一天VIP会员</string>
+    <string name="week_upgrade_hit_s">确定花费%s\n兑换一周VIP会员</string>
+    <string name="month_upgrade_hit_s">确定花费%s\n兑换一月VIP会员</string>
+    <string name="year_upgrade_hit_s">确定花费%s\n兑换一年VIP会员</string>
+    <string name="coin_withdraw">金币提现</string>
+    <string name="feedback_title">问题反馈</string>
+    <string name="collection_title">我的收藏</string>
+    <string name="title_share">分享</string>
+    <string name="more_title">电影抢先看</string>
+</resources>

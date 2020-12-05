@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/item_playinfo" />
+
+    <include layout="@layout/item_recommend" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="热门评论"
+        android:textStyle="bold"
+        android:textSize="@dimen/font_small"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/userTopBg"/>
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/lineColor"
+        android:layout_marginTop="10dp"
+        android:layout_height="1dp"/>
+</LinearLayout>

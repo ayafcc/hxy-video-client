@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/item_v_card_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="top"
+        android:background="@color/transparent_50_white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:drawablePadding="15dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_card_title"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/shape_title_tip"
+            android:drawablePadding="15dp"
+            android:ellipsize="end"
+            android:gravity="center|start"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_large"
+            android:textStyle="bold"
+            app:autoSizeTextType="uniform"
+            tools:text="每月TOP排行榜" />
+
+        <TextView
+            android:id="@+id/tv_check_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="查看更多"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_small"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_rv_card"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#F1F1F1" />
+
+
+</LinearLayout>

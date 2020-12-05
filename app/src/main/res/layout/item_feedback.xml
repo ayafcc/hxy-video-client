@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/tvUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_small"
+            tools:text="用户名" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_smaller"
+            tools:text="2009-4-10" />
+
+
+        <TextView
+            android:id="@+id/tvComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvUser"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_small"
+            tools:text="看了两集，很好看呆，各种反转，这脑洞绝了" />
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/llReplay"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/tvComment"
+            android:layout_alignLeft="@id/tvComment"
+            android:background="@drawable/bg_feedback_replay"
+            android:orientation="vertical">
+            it.setGone(R.id.llReplay,true)
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvComment"
+                android:layout_alignLeft="@id/tvComment"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="小编"
+                android:textColor="@color/userTopBg"
+                android:textSize="@dimen/font_small" />
+
+            <TextView
+                android:id="@+id/tvReplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvComment"
+                android:layout_alignLeft="@id/tvComment"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:text="小编"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_small" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lineColor" />
+
+</LinearLayout>

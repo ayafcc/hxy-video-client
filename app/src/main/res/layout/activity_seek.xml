@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.seek.SeekActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_orange_to_light_top"
+        android:orientation="vertical">
+
+        <!--        <View-->
+        <!--            android:id="@+id/v_seek_top_bg"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="25dp"-->
+        <!--            android:background="@drawable/home_top_shape" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginTop="25dp"
+            android:gravity="center_vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlBack"
+                android:paddingEnd="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_seek_back"
+                    android:layout_width="14dp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="19dp"
+                    android:src="@drawable/ic_title_back2" />
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                // shape_seek_bg
+
+                <EditText
+                    android:id="@+id/et_seek_seek"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:layout_marginEnd="17dp"
+                    android:layout_weight="1"
+                    android:autofillHints="搜索"
+                    android:background="@drawable/bg_skip"
+                    android:drawableStart="@drawable/search_icon"
+                    android:drawablePadding="10dp"
+                    android:hint="影视名,演员,导演"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:paddingStart="13dp"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/font_normal" />
+
+                <ImageView
+                    android:id="@+id/iv_seek_clear_seek"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginRight="30dp"
+                    android:contentDescription="@string/iv"
+                    android:src="@drawable/ic_clear_seek"
+                    android:visibility="invisible" />
+            </FrameLayout>
+
+
+            <TextView
+                android:id="@+id/tv_seek_seek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="17dp"
+                android:text="搜索"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_normal" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <cn.mahua.vod.ad.AdWebView
+                    android:id="@+id/awvSeek"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="18dp"
+                    android:paddingRight="18dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_seek_history_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:drawableStart="@drawable/shape_title_tip"
+                        android:drawablePadding="8dp"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical|start"
+                        android:singleLine="true"
+                        android:text="搜索记录"
+                        android:textColor="@color/textColor"
+                        android:textSize="@dimen/font_normal"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/iv_seek_clear_history"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignTop="@id/tv_seek_history_title"
+                        android:layout_alignBottom="@id/tv_seek_history_title"
+                        android:layout_alignParentRight="true"
+                        android:contentDescription="@string/iv"
+                        android:src="@drawable/ic_clear_history" />
+
+                    <cn.mahua.vod.ui.seek.SeekHistoryView
+                        android:id="@+id/shv_seek"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_seek_history_title"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_seek_history_title" />
+                </RelativeLayout>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_seek_hot_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="16dp"
+                    android:drawableStart="@drawable/shape_title_tip"
+                    android:drawablePadding="8dp"
+                    android:ellipsize="end"
+                    android:gravity="center|start"
+                    android:singleLine="true"
+                    android:text="热门搜索"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/font_normal"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_seek_hot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="18dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_seek_hot_title" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_seek_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAssociate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".ui.play.PlayActivity">
+
+    <cn.mahua.av.play.AvVideoView
+        android:id="@+id/avv_play"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        app:autoRotate="true" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_play_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <ScrollView
+            android:id="@+id/scSummary"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="13dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="13dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/select_play_resource"
+                        android:textColor="@color/textColor"
+                        android:textSize="@dimen/font_large"
+                        tools:text="大宋少年志" />
+
+                    <ImageView
+                        android:id="@+id/iv_close_intro"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_clear_seek"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray_999"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="18dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/select_play_resource"
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/font_normal"
+                    tools:text="年代：2019.连续剧.大陆" />
+
+                <TextView
+                    android:id="@+id/tv_actor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="18dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/select_play_resource"
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/font_normal"
+                    tools:text="主演：2019.连续剧.大陆" />
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="18dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/select_play_resource"
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/font_normal"
+                    tools:text="类型：2019.连续剧.大陆" />
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="18dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/select_play_resource"
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/font_normal"
+                    tools:text="状态：2019.连续剧.大陆" />
+
+                <TextView
+                    android:id="@+id/tv_play_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="18dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/select_play_resource"
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/font_normal"
+                    tools:text="播放：2019.连续剧.大陆" />
+
+                <TextView
+                    android:id="@+id/tv_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="18dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/select_play_resource"
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/font_normal"
+                    tools:text="评分：2019.连续剧.大陆" />
+
+
+                <TextView
+                    android:id="@+id/tv_summary_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="13dp"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/font_large"
+                    android:text="@string/summary" />
+
+                <TextView
+                    android:id="@+id/tv_summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="18dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/select_play_resource"
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/font_normal"
+                    tools:text="评分：2019.连续剧.大陆" />
+            </LinearLayout>
+
+
+
+        </ScrollView>
+    </FrameLayout>
+
+</LinearLayout>

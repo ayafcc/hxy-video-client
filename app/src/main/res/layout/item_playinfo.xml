@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:paddingTop="10dp"
+        android:gravity="center_vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_playinfo_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_large"
+            android:textStyle="bold"
+            tools:text="爱的故事" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_playinfo_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:textStyle="bold"
+            android:foreground="?selectableItemBackground"
+            android:includeFontPadding="false"
+            android:text="简介"
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_small" />
+
+        <ImageView
+            android:layout_gravity="bottom"
+            android:layout_width="16dp"
+            android:background="@drawable/ic_enter"
+            android:layout_height="16dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="18dp"
+        android:gravity="center_vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_playinfo_hits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:textStyle="bold"
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_smaller"
+            tools:text="699次播放" />
+
+        <TextView
+            android:id="@+id/item_svv_playinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/gray_999"
+            android:textStyle="bold"
+            android:textSize="@dimen/font_smaller"
+            tools:text="古典" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_playinfo_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/font_smaller"
+            tools:text="5.9分" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_playinfo_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:drawableEnd="@drawable/ic_more2"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:text="我要评分"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/font_smaller" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_play_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="18dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_playinfo_comment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_comment"
+            android:drawablePadding="7dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:maxLength="7"
+            android:text="599评论"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_smallest" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_playinfo_collect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_collection"
+            android:drawablePadding="7dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/collect"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_smallest" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_playinfo_download"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_download"
+            android:drawablePadding="7dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/download"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_smallest" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_playinfo_feedback"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_feedback"
+            android:drawablePadding="7dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/feedback"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_smallest" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_playinfo_share"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_share"
+            android:drawablePadding="7dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/share"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_smallest" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/ll_play_comment"
+        android:layout_marginTop="15dp"
+        android:background="@color/lineColor" />
+    <cn.mahua.vod.ad.AdWebView
+        android:id="@+id/awvPlayerDown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+	    <FrameLayout
+        android:id="@+id/bannerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>		
+    <!-- 播放源和选集-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_play_resource"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/font_normal"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/select_play_resource_hit"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_small" />
+        </LinearLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tlPlaySource"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            app:tabGravity="fill"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="scrollable"
+            app:tabPaddingEnd="5dp"
+            app:tabPaddingStart="5dp"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextAppearance="@style/MyTabLayoutTextAppearance3"
+            app:tabTextColor="@color/gray_999" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/ll_play_comment"
+            android:background="@color/lineColor" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginRight="18dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/selection_play_source"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/font_normal"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvLastest"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_small" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/iv_lastest"
+                android:layout_width="16dp"
+                android:background="@drawable/ic_enter"
+                android:layout_height="16dp"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLastest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="7dp"
+            android:scrollbars="none"
+            tools:itemCount="3"
+            tools:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_video_source"
+            tools:orientation="horizontal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/ll_play_comment"
+            android:background="@color/lineColor" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="18dp"
+    android:paddingTop="20dp"
+    android:paddingRight="18dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="请选择兑换选项："
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/font_small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="点击下方需要的会员时间进行兑换"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/font_small" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rlDay"
+            android:layout_width="0dp"
+            android:layout_height="83dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_sign_bg1"
+            android:foreground="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:text="1天VIP会员"
+                android:textColor="#624218"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tv_score_day"
+                android:text="兑换需要"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/tv_score_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:textColor="#b38c59"
+                android:textSize="16sp" />
+
+
+
+
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:id="@+id/rlWeek"
+            android:layout_width="0dp"
+            android:layout_height="83dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_sign_bg1"
+            android:foreground="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="7天VIP会员"
+                android:textColor="#624218"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tv_score_week"
+                android:text="兑换需要"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_score_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:textColor="#b38c59"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rlMonth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="83dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_sign_bg1"
+            android:foreground="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:text="30天VIP会员"
+                android:textColor="#624218"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tv_score_month"
+                android:text="兑换需要"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_score_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:maxLines="1"
+                android:textColor="#b38c59"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:id="@+id/rlYear"
+            android:layout_width="0dp"
+            android:layout_height="83dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_sign_bg1"
+            android:foreground="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:text="1年VIP会员"
+                android:textColor="#624218"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tv_score_year"
+                android:text="兑换需要"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_score_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:textColor="#b38c59"
+                android:textSize="16sp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/rlProxy"
+            android:layout_width="0dp"
+            android:layout_height="83dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_sign_bg1"
+            android:foreground="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:text="升级代理"
+                android:textColor="#624218"
+                android:textSize="@dimen/font_smaller" />
+
+            <TextView
+                android:id="@+id/tvProxy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tvProxyPoints"
+                android:text="兑换需要"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvProxyPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:maxLines="1"
+                android:textColor="#b38c59"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/proxy_view"
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:id="@+id/rlPublic"
+            android:layout_width="0dp"
+            android:layout_height="83dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_sign_bg1"
+            android:foreground="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="推广提升会员等级"
+                android:textColor="#624218"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

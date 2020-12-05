@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.pay.PayActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/iv_task_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_title_back" />
+
+            <TextView
+                android:id="@+id/tv_task_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/pay_title"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/font_normal" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_bg_transparent_rect">
+
+        <ImageView
+            android:id="@+id/tvAvator"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_default_avator" />
+
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvAvator"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/tvAvator"
+            android:textColor="#624218"
+            android:textSize="@dimen/font_small"
+            android:text="默认会员"
+            />
+
+        <TextView
+            android:id="@+id/tvExpireTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tvAvator"
+            android:layout_marginBottom="2dp"
+            android:layout_toRightOf="@id/tvAvator"
+            android:textColor="#624218"
+            android:textSize="@dimen/font_smaller"
+            android:text="vip 有效期 2019-05-29 11:50:03" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvAvator"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="48dp"
+            android:layout_toRightOf="@id/tvAvator">
+
+            <TextView
+                android:id="@+id/tvPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"
+                android:textColor="#624218"
+                android:textSize="@dimen/font_smaller"
+                android:text="@string/remaining_points" />
+
+            <View
+                android:layout_width="2dp"
+                android:background="#624218"
+                android:layout_gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="20dp"/>
+            <TextView
+                android:id="@+id/tvCoin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textColor="#624218"
+                android:textSize="@dimen/font_smaller"
+                android:text="@string/remaining_coin" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        app:tabGravity="fill"
+        app:tabIndicatorHeight="2dp"
+        app:tabIndicatorColor="#FF7D39"
+        app:tabMode="fixed"
+        app:tabPaddingEnd="5dp"
+        app:tabPaddingStart="5dp"
+        app:tabIndicatorFullWidth="false"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextAppearance="@style/MyTabLayoutTextAppearance2"
+        app:tabTextColor="@color/gray_999"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vpPay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>

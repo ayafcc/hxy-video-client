@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tvPoints"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="提交积分"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_smaller" />
+
+        <TextView
+            android:id="@+id/tvMoney"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="提现金额"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_smaller" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="提现状态"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_smaller" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:text="提现时间"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/font_smaller" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineColor"
+        />
+
+</LinearLayout>
