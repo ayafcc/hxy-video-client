@@ -67,6 +67,7 @@ public class DownloadingItemList extends Fragment {
 
     }
 
+
     private void initData() {
         DowningDao downingDao = M3U8dbManager.getInstance(getContext()).downingDao();
         List<M3u8DownloadingInfo> daoAll = downingDao.getAll();
