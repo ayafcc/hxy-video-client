@@ -36,7 +36,8 @@ import cn.mahua.vod.bean.StartBean;
 import cn.mahua.vod.download.GetFileSharePreance;
 import io.reactivex.functions.Consumer;
 import io.reactivex.plugins.RxJavaPlugins;
-import com.zgalaxy.sdk.ZgalaxySDK;
+
+//import pro.dxys.fumiad.FuMiAd;
 import jaygoo.library.m3u8downloader.M3U8Library;
 
 public class App extends BaseApplication {
@@ -92,20 +93,20 @@ public class App extends BaseApplication {
         } catch (Exception e) {
         }
         LitePal.initialize(this);
-        UMConfigure.init(this, "5f7ac84a80455950e49db134", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
+        UMConfigure.init(this, "60574ea86ee47d382b8eace5", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
         weakReference = new WeakReference<>(this);
         vocApp = this; //xUtils 初始化
         x.Ext.init(this);
         x.Ext.setDebug(true);//是否输出Debug日志
 
         Hawk.init(this).build();
-        Random random = new Random();
-        int ad = random.nextInt(10);
-        if(ad > 6){
-            ZgalaxySDK.getInstance().init(this,"KA-d27e79b934f84169b7584f0c98c0ca10",true);
-        }else{
-            ZgalaxySDK.getInstance().init(this,"KA-d27e79b934f84169b7584f0c98c0ca10",true);
-        }
+//        Random random = new Random();
+//        int ad = random.nextInt(10);
+//        if(ad > 6){
+//            ZgalaxySDK.getInstance().init(this,"KA-d27e79b934f84169b7584f0c98c0ca10",true);
+//        }else{
+//            ZgalaxySDK.getInstance().init(this,"BD-f3b83ccb87a340258ec65c154da35b81",true);
+//        }
         DownloadManager.initDownloader(vocApp);
 
         QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
@@ -125,7 +126,7 @@ public class App extends BaseApplication {
         //播放器配置，注意：此为全局配置，按需开启
         VideoViewManager.setConfig(VideoViewConfig.newBuilder()
 //                .setLogEnabled(BuildConfig.DEBUG)
-                .setPlayerFactory(MyIjkPlayerFactory.create(this))
+                .setPlayerFactory(MyIjkPlayerFactory.create())
                 //.setPlayerFactory(ExoMediaPlayerFactory.create(this))
                 //.setAutoRotate(true)
 //                .setEnableMediaCodec(true)

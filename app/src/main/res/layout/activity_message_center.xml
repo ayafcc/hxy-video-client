@@ -19,7 +19,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="@color/userTopBg">
+        android:background="@drawable/bg_dialog_hit">
 
         <RelativeLayout
             android:id="@+id/rlBack"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/message_center"
-                android:textColor="@color/white"
+                android:textColor="#3388e3"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
@@ -58,7 +58,7 @@
                 android:layout_height="3dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:background="@color/white" />
+                android:background="#3388e3" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/system_notice"
-                android:textColor="@color/white"
+                android:textColor="@color/darkGray"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
@@ -82,7 +82,7 @@
                 android:layout_height="3dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:background="@color/white"
+                android:background="@color/darkGray"
                 android:visibility="gone" />
         </RelativeLayout>
 

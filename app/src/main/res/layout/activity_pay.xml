@@ -22,8 +22,8 @@
 
             <ImageView
                 android:id="@+id/iv_task_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="22dp"
+                android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
                 android:src="@drawable/ic_title_back" />
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/pay_title"
-                android:textColor="@color/textColor"
+                android:textColor="@color/black"
                 android:textSize="@dimen/font_normal" />
 
         </RelativeLayout>
@@ -44,9 +44,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/shape_bg_transparent_rect">
+        android:layout_marginRight="18dp"
+        android:background="@drawable/shape_bg_orange_to_light_top">
 
         <ImageView
             android:id="@+id/tvAvator"
@@ -64,10 +64,9 @@
             android:layout_alignTop="@id/tvAvator"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/tvAvator"
-            android:textColor="#624218"
-            android:textSize="@dimen/font_small"
             android:text="默认会员"
-            />
+            android:textColor="#7f6541"
+            android:textSize="@dimen/font_small" />
 
         <TextView
             android:id="@+id/tvExpireTime"
@@ -76,9 +75,9 @@
             android:layout_alignBottom="@id/tvAvator"
             android:layout_marginBottom="2dp"
             android:layout_toRightOf="@id/tvAvator"
-            android:textColor="#624218"
-            android:textSize="@dimen/font_smaller"
-            android:text="vip 有效期 2019-05-29 11:50:03" />
+            android:text="vip 有效期 2019-05-29 11:50:03"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/font_smaller" />
 
 
         <RelativeLayout
@@ -86,8 +85,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvAvator"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="10dp"
             android:layout_marginRight="48dp"
+            android:layout_marginBottom="10dp"
             android:layout_toRightOf="@id/tvAvator">
 
             <TextView
@@ -96,26 +95,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:gravity="center"
-                android:textColor="#624218"
-                android:textSize="@dimen/font_smaller"
-                android:text="@string/remaining_points" />
+                android:text="@string/remaining_points"
+                android:textColor="#7f6541"
+                android:textSize="@dimen/font_smaller" />
 
             <View
                 android:layout_width="2dp"
-                android:background="#624218"
-                android:layout_gravity="center_vertical"
+                android:layout_height="20dp"
                 android:layout_centerInParent="true"
-                android:layout_height="20dp"/>
+                android:layout_gravity="center_vertical"
+                android:background="#D3D3D3" />
+
             <TextView
                 android:id="@+id/tvCoin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
                 android:layout_alignParentRight="true"
+                android:layout_marginBottom="2dp"
                 android:gravity="center"
-                android:textColor="#624218"
-                android:textSize="@dimen/font_smaller"
-                android:text="@string/remaining_coin" />
+                android:text="@string/remaining_coin"
+                android:textColor="#7f6541"
+                android:textSize="@dimen/font_smaller" />
 
         </RelativeLayout>
 
@@ -129,14 +129,14 @@
         android:layout_marginRight="18dp"
         app:tabGravity="fill"
         app:tabIndicatorHeight="2dp"
-        app:tabIndicatorColor="#FF7D39"
+        app:tabIndicatorColor="@color/colorAccent"
         app:tabMode="fixed"
         app:tabPaddingEnd="5dp"
         app:tabPaddingStart="5dp"
         app:tabIndicatorFullWidth="false"
-        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabSelectedTextColor="@color/colorAccent"
         app:tabTextAppearance="@style/MyTabLayoutTextAppearance2"
-        app:tabTextColor="@color/gray_999"/>
+        app:tabTextColor="@color/black"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpPay"

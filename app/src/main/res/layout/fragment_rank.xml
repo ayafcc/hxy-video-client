@@ -26,7 +26,7 @@
             android:layout_marginTop="33dp"
             android:gravity="center"
             android:text="观影排行"
-            android:textColor="#ffffff"
+            android:textColor="@color/background"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -39,13 +39,13 @@
             android:clipChildren="false"
             android:clipToPadding="false"
             app:tabGravity="center"
-            app:tabIndicatorColor="#ffffff"
+            app:tabIndicatorColor="@color/background"
             app:tabIndicatorFullWidth="false"
             app:tabIndicatorHeight="3dp"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/white"
+            app:tabSelectedTextColor="@color/background"
             app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
-            app:tabTextColor="@color/white" />
+            app:tabTextColor="@color/background" />
 
         <RelativeLayout
             android:id="@+id/rl_day"
@@ -68,7 +68,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="全部"
-                android:textColor="#333333"
+                android:textColor="@color/black"
                 android:textSize="12dp" />
 
             <ImageView

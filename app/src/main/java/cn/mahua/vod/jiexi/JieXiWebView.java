@@ -344,6 +344,7 @@ public class JieXiWebView extends WebView {
             proxyPort = android.net.Proxy.getPort(App.getInstance().getContext());
         }
         return (!TextUtils.isEmpty(proxyAddress)) && (proxyPort != -1);
+        //return false;
     }
 
     /**

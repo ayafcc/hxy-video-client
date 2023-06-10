@@ -16,7 +16,7 @@
             android:id="@+id/item_iv_card_child_icon"
             android:layout_width="match_parent"
             android:layout_height="166dp"
-            android:background="#EEEEEE"
+            android:background="@color/colorWhite"
             android:contentDescription="@string/iv"
             android:scaleType="centerCrop"
              />
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/shape_tip_bg_orange"
+            android:background="@drawable/shape_card_bottom_bg"
             android:gravity="center"
             android:includeFontPadding="false"
             android:textColor="@color/white"

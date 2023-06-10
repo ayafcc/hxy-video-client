@@ -195,13 +195,13 @@ public class HomeFirstChildFragment2 extends BaseItemFragment<String> {
 
             @Override
             public void onClickItem(View view, Object item) {
-                if(LoginUtils.checkLogin(getActivity())){
+                //if(LoginUtils.checkLogin(getActivity())){
                     if (item instanceof Vod) {
                         Vod vod = (Vod) item;
                         PlayActivity.startByVod(vod);
                     }
 
-                }
+                //}
             }
         }));
         adapter.register(StartBean.Ad.class, new AdViewBinder());

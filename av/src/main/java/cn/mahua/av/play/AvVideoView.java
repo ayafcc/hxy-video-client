@@ -3,8 +3,10 @@ package cn.mahua.av.play;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 import com.blankj.utilcode.util.ConvertUtils;
+import com.dueeeke.videoplayer.controller.MediaPlayerControl;
 import com.dueeeke.videoplayer.player.VideoView;
 import java.util.LinkedHashMap;
 
@@ -100,7 +102,6 @@ public class AvVideoView extends VideoView implements VideoViewImpt {
             if (mDanmakuView != null) mDanmakuView.seekTo(pos);
         }
     }
-
     private void initDanmakuView() {
         if (mDanmakuView == null) {
             mDanmakuView = new DanmakuView(getContext());

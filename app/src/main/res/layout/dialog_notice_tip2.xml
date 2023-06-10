@@ -4,7 +4,7 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:background="@drawable/shape_bottom_radius"
+    android:background="#FFEED1"
     android:orientation="vertical"
     >
 
@@ -45,10 +45,12 @@
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/shape_purple"
-        android:gravity="center"
-        android:text="我知道了"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_login"
+        android:gravity="center"
+        android:rotation="0"
+        android:text="我知道了"
         android:textColor="@color/white"
         android:textSize="16sp" />
 

@@ -18,9 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/like_recommend"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorAccent"
             android:textSize="@dimen/font_small"
-            android:textStyle="bold" />
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/tvSameActor"
@@ -32,7 +32,7 @@
             android:text="@string/like_actor"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_small"
-            android:textStyle="bold" />
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/tvChange"

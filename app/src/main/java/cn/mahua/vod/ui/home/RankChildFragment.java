@@ -135,14 +135,14 @@ public class RankChildFragment extends BaseItemFragment<Type> {
             @Override
             public void onClick(View view) {
                 Object o = view.getTag();
-                if(LoginUtils.checkLogin(getActivity())){
+                //if(LoginUtils.checkLogin(getActivity())){
 
                         if (o instanceof Vod) {
                             Vod vod = (Vod) o;
                             PlayActivity.startByVod(vod);
                         }
 
-                }
+               // }
             }
         }));
         layoutManager = new LinearLayoutManager(getContext());

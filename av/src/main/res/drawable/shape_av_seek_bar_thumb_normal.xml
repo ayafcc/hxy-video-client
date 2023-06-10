@@ -8,7 +8,7 @@
         android:width="50pt"
         android:height="50pt" />-->
     <!--第二种-->
-    <solid android:color="@color/player_theme_color" />
+    <solid android:color="@android:color/holo_blue_bright" />
     <size
         android:width="20dp"
         android:height="20dp" />

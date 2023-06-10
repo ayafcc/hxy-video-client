@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:textColor="@color/textColor4"
+        android:textColor="#2196F3"
         android:textSize="@dimen/font_smallest"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

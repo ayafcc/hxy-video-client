@@ -52,7 +52,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/shape_update_btn"
+            android:background="@drawable/bg_login"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
             android:paddingLeft="40dp"

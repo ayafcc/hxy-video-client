@@ -122,7 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:background="@drawable/shape_bg_blue_radius_25dp"
+        android:background="@drawable/bg_login"
         android:gravity="center"
         android:maxLines="1"
         android:paddingStart="20dp"

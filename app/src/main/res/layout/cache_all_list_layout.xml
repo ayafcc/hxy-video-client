@@ -40,17 +40,17 @@
        android:textColor="@color/cardview_dark_background"
        android:id="@+id/close"
        />
+
    <TextView
+       android:id="@+id/down_center"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:text="查看下载"
-       android:layout_marginRight="20dp"
        android:layout_alignBottom="@+id/close"
-       android:textSize="14sp"
-       android:textColor="@color/color_blue"
+       android:layout_marginRight="20dp"
        android:layout_toLeftOf="@+id/close"
-       android:id="@+id/down_center"
-       />
+       android:text="查看下载"
+       android:textColor="#3388e3"
+       android:textSize="14sp" />
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/all_list"
        android:layout_below="@id/title"

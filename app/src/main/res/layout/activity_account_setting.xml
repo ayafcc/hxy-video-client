@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/account_setting"
-                android:textColor="@color/white"
+                android:textColor="@color/background"
                 android:textSize="@dimen/font_normal" />
 
         </RelativeLayout>
@@ -127,7 +127,7 @@
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
         android:text="退出登录"
-        android:textColor="#292929"
+        android:textColor="#3388e3"
         android:textSize="16dp"
 
         />

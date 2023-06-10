@@ -26,18 +26,18 @@ public class LoginUtils {
     public static  boolean checkLogin(Context context) {
 //        if(checkDebug(context)){
 //            return true;
-//
+//              //客服QQ“36711293  有偿解决一切问题
 //        }
-        if (UserUtils.isLogin()) {
+//        if (UserUtils.isLogin()) {
 
             return true;
-
+        /*if (UserUtils.isLogin()) {
         } else {
-
+//客服QQ“36711293  有偿解决一切问题
             ActivityUtils.startActivity(LoginActivity.class);
             return false;
         }
-
+*/
 
     }
 

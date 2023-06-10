@@ -132,10 +132,15 @@
 
 ## recyclerview
 -keep class androidx.recyclerview.** {*;}
-## 广告
--keep class com.bytedance.sdk.openadsdk.** { *; }
--keep public interface com.bytedance.sdk.openadsdk.downloadnew.** {*;}
--keep class com.pgl.sys.ces.* {*;}
+## 银河广告
+#-keep class com.bytedance.sdk.openadsdk.** { *; }
+#-keep public interface com.bytedance.sdk.openadsdk.downloadnew.** {*;}
+#-keep class com.pgl.sys.ces.* {*;}
+##付米广告
+#-keep class com.bytedance.sdk.openadsdk.** { *; }
+#-keep public interface com.bytedance.sdk.openadsdk.downloadnew.** {*;}
+#-keep class com.pgl.sys.ces.* {*;}
+
 ## Butterknife
 -keep public class * implements butterknife.Unbinder { public <init>(**, android.view.View); }
 -keep class butterknife.*
@@ -314,10 +319,12 @@ public static final int *;
 -keep class com.hjq.toast.** {*;}
 
 ## danmaku.ijk
--keep class tv.danmaku.ijk.media.player.** {*;}
+-keep class tv.danmaku.ijk.** { *; }
+-dontwarn tv.danmaku.ijk.**
 
 ##com.dueeeke.ijk
--keep class com.dueeeke.** {*;}
+-keep class com.dueeeke.videoplayer.** { *; }
+-dontwarn com.dueeeke.videoplayer.**
 
 ## reactivestreams
 -keep class org.reactivestreams.** {*;}

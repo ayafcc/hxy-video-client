@@ -31,7 +31,7 @@ public class CommentBean {
     private int user_id;
     private int comment_status;
     private String comment_name;
-    private int comment_ip;
+    private long comment_ip;
     private long comment_time;
     private String comment_content;
     private int comment_up;
@@ -98,11 +98,11 @@ public class CommentBean {
         this.comment_name = comment_name;
     }
 
-    public int getComment_ip() {
+    public long getComment_ip() {
         return comment_ip;
     }
 
-    public void setComment_ip(int comment_ip) {
+    public void setComment_ip(long comment_ip) {
         this.comment_ip = comment_ip;
     }
 

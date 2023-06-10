@@ -15,22 +15,22 @@
         android:background="@color/transparent_50_white" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:paddingLeft="3dp"
-        android:paddingRight="3dp"
         android:id="@+id/item_tv_card_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:drawableStart="@drawable/shape_title_tip"
-        android:drawablePadding="15dp"
+        android:drawablePadding="6dp"
         android:ellipsize="end"
         android:gravity="center|start"
         android:includeFontPadding="false"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
         android:singleLine="true"
         android:textColor="@color/textColor"
         android:textSize="@dimen/font_large"
-        android:textStyle="bold"
+        android:textStyle="normal"
         app:autoSizeTextType="uniform"
         tools:text="每月TOP排行榜" />
 

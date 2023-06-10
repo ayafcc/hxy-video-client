@@ -15,9 +15,9 @@
         <ImageView
             android:id="@+id/iv_home_top_bg"
             android:layout_width="match_parent"
-            android:background="@drawable/home_top_shape"
-            android:scaleType="fitXY"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_bg_orange_to_light_top"
+            android:scaleType="fitXY" />
 
          <TextView
              android:id="@+id/tv_title"

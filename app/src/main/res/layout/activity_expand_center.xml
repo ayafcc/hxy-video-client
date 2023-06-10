@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/expand_center"
-            android:textColor="@color/white"
+            android:textColor="@color/background"
             android:textSize="@dimen/font_normal" />
 
         <TextView
@@ -53,20 +53,20 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:text="@string/my_expand"
-            android:textColor="@color/white"
+            android:textColor="@color/background"
             android:textSize="14dp" />
 
     </RelativeLayout>
 
     <ScrollView
-        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F5F5F5"
+            android:background="@drawable/grid_item_decor"
             android:orientation="vertical">
 
 
@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:background="@drawable/shape_bg_white_radius_8dp"
+                android:background="@drawable/shape_bottom_radius"
                 android:paddingStart="15dp"
                 android:paddingTop="15dp"
                 android:paddingEnd="15dp"
@@ -87,14 +87,14 @@
                     android:background="@drawable/ic_default_avator" />
 
                 <TextView
-                    android:layout_alignTop="@+id/iv_avatar"
-                    android:layout_marginTop="15dp"
                     android:id="@+id/tv_nick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/iv_avatar"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
                     android:layout_toEndOf="@+id/iv_avatar"
-                    android:textColor="#757575"
+                    android:textColor="#000000"
                     android:textSize="12dp" />
 
 
@@ -108,8 +108,8 @@
 
                     <ImageView
                         android:id="@+id/iv_start_level"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
                         android:layout_marginEnd="5dp" />
 
                     <ProgressBar
@@ -121,8 +121,8 @@
 
                     <ImageView
                         android:id="@+id/iv_end_level"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
                         android:layout_marginStart="5dp" />
                 </LinearLayout>
 
@@ -173,8 +173,8 @@
 
                     <ImageView
                         android:id="@+id/iv_v1"
-                        android:layout_width="16dp"
-                        android:layout_height="14dp"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/vip1" />
 
@@ -233,8 +233,8 @@
 
                     <ImageView
                         android:id="@+id/iv_v2"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/vip2" />
 
@@ -293,8 +293,8 @@
 
                     <ImageView
                         android:id="@+id/iv_v3"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/vip3" />
 
@@ -354,8 +354,8 @@
 
                     <ImageView
                         android:id="@+id/iv_v4"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/vip4" />
 
@@ -415,8 +415,8 @@
 
                     <ImageView
                         android:id="@+id/iv_v5"
-                        android:layout_width="19dp"
-                        android:layout_height="19dp"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/vip5" />
 
@@ -467,7 +467,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="50dp"
                 android:layout_marginBottom="40dp"
-                android:background="@drawable/shape_bg_blue_radius_23dp">
+                android:background="@drawable/bg_login_an">
 
                 <TextView
                     android:layout_width="wrap_content"

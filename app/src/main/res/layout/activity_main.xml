@@ -18,7 +18,7 @@
         android:id="@+id/bnv_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/ghostWhite"
+        android:background="#FFFFFF"
         app:labelVisibilityMode="labeled"
         app:itemTextAppearanceInactive="@style/bottom_normal_text"
         app:itemTextAppearanceActive="@style/bottom_selected_text"

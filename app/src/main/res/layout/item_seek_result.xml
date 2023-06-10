@@ -48,7 +48,7 @@
             android:singleLine="true"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_small"
-            android:textStyle="bold"
+            android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_iv_seek_result_icon"
             app:layout_constraintTop_toBottomOf="@id/item_tv_seek_result_title"
@@ -58,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
+
         <TextView
             android:id="@+id/item_tv_seek_result_actor"
             android:layout_width="wrap_content"
@@ -67,7 +68,7 @@
             android:singleLine="true"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_small"
-            android:textStyle="bold"
+            android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_iv_seek_result_icon"
             app:layout_constraintTop_toBottomOf="@id/item_tv_seek_result_year"
@@ -82,7 +83,7 @@
             android:singleLine="true"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_small"
-            android:textStyle="bold"
+            android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_iv_seek_result_icon"
             app:layout_constraintTop_toBottomOf="@id/item_tv_seek_result_actor"
@@ -97,30 +98,31 @@
             android:singleLine="true"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_small"
+            android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_iv_seek_result_icon"
             app:layout_constraintTop_toBottomOf="@id/item_tv_seek_result_zlass"
-            android:textStyle="bold"
             tools:text="地区：2018/大陆" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/item_tv_seek_result_hits"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:textColor="@color/gray_999"
                 android:textSize="@dimen/font_small"
+                android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/item_tv_seek_result_score"
                 app:layout_constraintStart_toEndOf="@id/item_iv_seek_result_icon"
                 app:layout_constraintTop_toBottomOf="@id/item_tv_seek_result_remarks"
-                android:textStyle="bold"
                 tools:text="分类：都市/喜剧" />
 
             <TextView

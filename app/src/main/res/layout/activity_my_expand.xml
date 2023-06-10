@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F4F8"
+    android:background="@drawable/divider_image"
     android:orientation="vertical">
 
     <LinearLayout
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/my_expand"
-            android:textColor="@color/white"
+            android:textColor="@color/background"
             android:textSize="@dimen/font_normal" />
 
     </RelativeLayout>
@@ -51,8 +51,8 @@
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp">
+        android:layout_height="508dp"
+        android:layout_weight="1">
 
 
         <LinearLayout
@@ -128,7 +128,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/white"
+        android:background="@drawable/list_bg_shap"
         android:paddingStart="25dp"
         android:paddingEnd="25dp">
 
@@ -137,16 +137,16 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="累计推广"
-            android:textColor="@color/black"
+            android:textColor="@color/background"
             android:textSize="14dp" />
 
         <TextView
             android:id="@+id/tv_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:textColor="@color/colorAccent"
+            android:layout_centerVertical="true"
+            android:textColor="@color/background"
             android:textSize="14dp" />
     </RelativeLayout>
 

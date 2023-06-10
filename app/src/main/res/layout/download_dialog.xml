@@ -3,27 +3,28 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical" >
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:background="@color/color_blue"
-        android:layout_height="40dp">
+        android:layout_height="40dp"
+        android:background="@drawable/shape_bg_orange_to_light_top"
+        android:gravity="center">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
-            android:textColor="@color/colorWhite"
             android:text="确定删除歌曲"
-            android:textSize="14dp"
-        />
+            android:textColor="@color/colorWhite"
+            android:textSize="14dp" />
+
         <TextView
             android:id="@+id/deletMusicName"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
             android:textColor="@color/colorAccent"
-            android:textSize="18dp"
-        />
+            android:textSize="18dp" />
     </LinearLayout>
 
     <LinearLayout

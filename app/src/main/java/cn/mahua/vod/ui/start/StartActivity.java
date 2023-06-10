@@ -1,6 +1,8 @@
 package cn.mahua.vod.ui.start;
 
 import android.animation.ValueAnimator;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -8,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.FrameLayout;
+
+import androidx.annotation.RequiresApi;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
@@ -25,11 +29,13 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.NotNull;
 
-import com.zgalaxy.sdk.SplashSdk;
-import com.zgalaxy.sdk.listener.SplashAdListener;
 
+
+import pro.dxys.fumiad.FuMiAd;
+import pro.dxys.fumiad.FuMiSplashListener;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 import butterknife.BindView;
@@ -289,52 +295,77 @@ public class StartActivity extends BaseActivity {
                     public void onError(Throwable e) {
                         e.printStackTrace();
                         Log.i("xxxxxxx", "startbean========555" + e.getMessage());
-                        adinit();
+                        init();
                     }
 
                     @Override
                     public void onComplete() {
-                        adinit();
+                        init();
                     }
                 });
     }
     /**
-     * 广告
-     * ik2021.com
+     * 付米广告
+     * 58rf.cn
      */
-    public void splashShow(){
-        SplashSdk.getInstance(this).loadSplashAdvert(mAdviceLayout, new SplashAdListener() {
-            @Override
-            public void onError(int i, String s) {
-                gotoMain();
-            }
-            @Override
-            public void onAdClick() {
-                gotoMain();
-            }
+  //  public void splashShow(){
+    //    FuMiAd.showSplash(this,mAdviceLayout, new FuMiSplashListener(){
+    //        @Override
+       //     public void onAdShow() {
 
-            @Override
-            public void onAdShow() {
-            }
+        //    }
 
-            @Override
-            public void onAdSkip() {
-                gotoMain();
-            }
+         //   @Override
+        //    public void onAdClick() {
+       //         gotoMain();
+      //          Log.e("tag", "onAdClick");
+     //       }
 
-            @Override
-            public void onAdTimeOver() {
-                gotoMain();
-            }
-
-            @Override
-            public void onAdvertStatusClose() {
-                gotoMain();
-            }
-
-
-        });
-    }
+       //     @Override
+       //     public void onComplete(boolean success, String errorMsg) {
+       //         Log.e("tag", "onComplete");
+       //         gotoMain();
+       //         finish();
+      //      }
+   //     });
+ //
+    /**
+     * 广告
+     * 58rf.cn
+     */
+//    public void splashShow(){
+//        SplashSdk.getInstance(this).loadSplashAdvert(mAdviceLayout, new SplashAdListener() {
+//            @Override
+//            public void onError(int i, String s) {
+//                gotoMain();
+//            }
+//            @Override
+//            public void onAdClick() {
+//                gotoMain();
+//            }
+//
+//            @Override
+//            public void onAdShow() {
+//            }
+//
+//            @Override
+//            public void onAdSkip() {
+//                gotoMain();
+//            }
+//
+//            @Override
+//            public void onAdTimeOver() {
+//                gotoMain();
+//            }
+//
+//            @Override
+//            public void onAdvertStatusClose() {
+//                gotoMain();
+//            }
+//
+//
+//        });
+//    }
     private void stopGet() {
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
@@ -344,14 +375,14 @@ public class StartActivity extends BaseActivity {
     private  void get_base_url(){
         OkHttpUtils.getInstance()
                 .getDataAsynFromNet(ApiConfig.codeurl, new OkHttpUtils.MyNetCall() {
-                    @Override
-                    public void success(Call call, Response response) throws IOException {
-                        boolean isSuccessful = response.isSuccessful();
-                        if (isSuccessful) {
-                            LogUtils.d("", "====Parse jiexi2 url="+response.body().string());
-                          //  ApiConfig.BASE_URL = response.body().string();
-                        }
-                    }
+                            @Override
+                            public void success(Call call, Response response) throws IOException {
+                                boolean isSuccessful = response.isSuccessful();
+                                if (isSuccessful) {
+                                    LogUtils.d("", "====Parse jiexi2 url="+response.body().string());
+                                    //  ApiConfig.BASE_URL = response.body().string();
+                                }
+                            }
 
                             @Override
                             public void failed(Call call, IOException e) {
@@ -362,26 +393,27 @@ public class StartActivity extends BaseActivity {
 
                 );
     }
-    private void adinit() {
-        String ad_key ="ik2021";
-        if(ad_str_status == 1 && StringUtils.isEmpty(ad_str)) {
-            isInit = true;
-            try {
-                splashShow();
-            } catch (Exception e) {
-                gotoMain();
-            }
-        }else if(ad_str_status == 1 && !StringUtils.isEmpty(ad_str)){
-            if(ad_key.equals(ad_str)){
-                splashShow();// 广告弹窗轰炸  描述为特定值
-            }else{   //后台广告  描述不为空
-                init();
-            }
-        }else if(ad_str_status == 0){
-            init();
-        }
-    }
+//    private void adinit() {
+//        String ad_key ="58rf";
+//        if(ad_str_status == 1 && StringUtils.isEmpty(ad_str)) {
+//            isInit = true;
+//            try {
+//                splashShow();
+//            } catch (Exception e) {
+//                gotoMain();
+//            }
+//        }else if(ad_str_status == 1 && !StringUtils.isEmpty(ad_str)){
+//            if(ad_key.equals(ad_str)){
+//                splashShow();// 广告弹窗轰炸  描述为特定值
+//            }else{   //后台广告  描述不为空
+//                init();
+//            }
+//        }else if(ad_str_status == 0){
+//            init();
+//        }
+//    }
     private void init() {
+
         if (StringUtils.isEmpty(ad_str) || ad_str_status == 0) {
             gotoMain();
         }

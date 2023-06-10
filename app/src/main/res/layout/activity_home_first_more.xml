@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/more_title"
-                android:textColor="@color/white"
+                android:textColor="@color/background"
                 android:textSize="@dimen/font_normal" />
 
             <ImageView

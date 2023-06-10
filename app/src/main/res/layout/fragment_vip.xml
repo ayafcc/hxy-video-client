@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:paddingLeft="18dp"
     android:paddingTop="20dp"
+    android:background="@drawable/bg_dialog_hit"
     android:paddingRight="18dp">
 
     <TextView
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="请选择兑换选项："
-        android:textColor="@color/gray_999"
+        android:textColor="@color/colorAccent"
         android:textSize="@dimen/font_small"
         android:textStyle="bold" />
 
@@ -33,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="83dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_sign_bg1"
+            android:background="@drawable/shape_purple"
             android:foreground="?attr/selectableItemBackground">
 
             <TextView
@@ -43,7 +44,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:text="1天VIP会员"
-                android:textColor="#624218"
+                android:textColor="#7f6541"
                 android:textSize="12sp" />
 
             <TextView
@@ -54,7 +55,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/tv_score_day"
                 android:text="兑换需要"
-                android:textColor="#666666"
+                android:textColor="@color/gray_999"
                 android:textSize="12sp" />
 
 
@@ -65,12 +66,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:textColor="#b38c59"
+                android:textColor="#bc9a6d"
                 android:textSize="16sp" />
-
-
-
-
 
 
         </RelativeLayout>
@@ -84,7 +81,7 @@
             android:layout_width="0dp"
             android:layout_height="83dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_sign_bg1"
+            android:background="@drawable/shape_tip_bg_orange"
             android:foreground="?attr/selectableItemBackground">
 
             <TextView
@@ -93,7 +90,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="7天VIP会员"
-                android:textColor="#624218"
+                android:textColor="#7f6541"
                 android:textSize="12sp" />
 
             <TextView
@@ -104,7 +101,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/tv_score_week"
                 android:text="兑换需要"
-                android:textColor="#666666"
+                android:textColor="@color/gray_999"
                 android:textSize="12sp" />
 
             <TextView
@@ -114,7 +111,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:textColor="#b38c59"
+                android:textColor="#bc9a6d"
                 android:textSize="16sp" />
 
         </RelativeLayout>
@@ -131,7 +128,7 @@
             android:layout_width="0dp"
             android:layout_height="83dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_sign_bg1"
+            android:background="@drawable/shape_card_bottom_bg_10dp_an"
             android:foreground="?attr/selectableItemBackground">
 
             <TextView
@@ -141,7 +138,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:text="30天VIP会员"
-                android:textColor="#624218"
+                android:textColor="#7f6541"
                 android:textSize="12sp" />
 
             <TextView
@@ -152,7 +149,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/tv_score_month"
                 android:text="兑换需要"
-                android:textColor="#666666"
+                android:textColor="@color/gray_999"
                 android:textSize="12sp" />
 
             <TextView
@@ -163,7 +160,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:maxLines="1"
-                android:textColor="#b38c59"
+                android:textColor="#bc9a6d"
                 android:textSize="16sp" />
 
         </RelativeLayout>
@@ -177,7 +174,7 @@
             android:layout_width="0dp"
             android:layout_height="83dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_sign_bg1"
+            android:background="@drawable/shape_bg_transparent_rect1"
             android:foreground="?attr/selectableItemBackground">
 
             <TextView
@@ -187,7 +184,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:text="1年VIP会员"
-                android:textColor="#624218"
+                android:textColor="#7f6541"
                 android:textSize="12sp" />
 
             <TextView
@@ -198,7 +195,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/tv_score_year"
                 android:text="兑换需要"
-                android:textColor="#666666"
+                android:textColor="@color/gray_999"
                 android:textSize="12sp" />
 
             <TextView
@@ -208,8 +205,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:textColor="#b38c59"
-                android:textSize="16sp"/>
+                android:textColor="#bc9a6d"
+                android:textSize="16sp" />
 
         </RelativeLayout>
 
@@ -221,13 +218,13 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:visibility="gone"
             android:id="@+id/rlProxy"
             android:layout_width="0dp"
             android:layout_height="83dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_sign_bg1"
-            android:foreground="?attr/selectableItemBackground">
+            android:background="@drawable/shape_bg_transparent_rect3"
+            android:foreground="?attr/selectableItemBackground"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -236,7 +233,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:text="升级代理"
-                android:textColor="#624218"
+                android:textColor="#bc9a6d"
                 android:textSize="@dimen/font_smaller" />
 
             <TextView
@@ -247,7 +244,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/tvProxyPoints"
                 android:text="兑换需要"
-                android:textColor="#666666"
+                android:textColor="@color/gray_999"
                 android:textSize="12sp" />
 
             <TextView
@@ -258,7 +255,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:maxLines="1"
-                android:textColor="#b38c59"
+                android:textColor="#bc9a6d"
                 android:textSize="16sp" />
 
         </RelativeLayout>
@@ -274,7 +271,7 @@
             android:layout_width="0dp"
             android:layout_height="83dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_sign_bg1"
+            android:background="@drawable/shape_bg_transparent_rect2"
             android:foreground="?attr/selectableItemBackground">
 
             <TextView
@@ -282,7 +279,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="推广提升会员等级"
-                android:textColor="#624218"
+                android:textColor="#7f6541"
                 android:textSize="12sp" />
 
         </RelativeLayout>

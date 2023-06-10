@@ -125,13 +125,13 @@ public class HomeOtherChildFragment extends BaseItemFragment<Type> {
 
             @Override
             public void onBannerClick(int position, Object item) {
-                if(LoginUtils.checkLogin(getActivity())){
+                //if(LoginUtils.checkLogin(getActivity())){
                     if (item instanceof Vod) {
                         Vod vod = (Vod) item;
                         PlayActivity.startByVod(vod);
                     }
 
-                }
+                //}
             }
         }));
         adapter.register(TopBean.class, new TopItemViewBinder(_data.getTypeId()).setActionListener(new TopItemViewBinder.TopItemActionListener() {
@@ -147,13 +147,13 @@ public class HomeOtherChildFragment extends BaseItemFragment<Type> {
 
             @Override
             public void onClickItem(View view, Object item) {
-                if(LoginUtils.checkLogin(getActivity())){
+                //if(LoginUtils.checkLogin(getActivity())){
                     if (item instanceof Vod) {
                         Vod vod = (Vod) item;
                         PlayActivity.startByVod(vod);
                     }
 
-                }
+                //}
 
             }
         }));
@@ -175,13 +175,13 @@ public class HomeOtherChildFragment extends BaseItemFragment<Type> {
 
             @Override
             public void onClickItem(View view, Object item) {
-                if(LoginUtils.checkLogin(getActivity())){
+                //if(LoginUtils.checkLogin(getActivity())){
                     if (item instanceof Vod) {
                         Vod vod = (Vod) item;
                         PlayActivity.startByVod(vod);
                     }
 
-                }
+                //}
 
             }
         }));

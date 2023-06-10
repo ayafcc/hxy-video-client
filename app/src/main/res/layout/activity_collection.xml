@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/collection_title"
-                android:textColor="@color/white"
+                android:textColor="@color/background"
                 android:textSize="@dimen/font_normal" />
 
             <TextView
@@ -52,7 +52,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginRight="20dp"
                 android:text="@string/edit"
-                android:textColor="@color/white"
+                android:textColor="@color/background"
                 android:textSize="@dimen/font_normal" />
 
         </RelativeLayout>

@@ -25,7 +25,7 @@
             android:singleLine="true"
             android:textColor="@color/textColor"
             android:textSize="@dimen/font_large"
-            android:textStyle="bold"
+            android:textStyle="normal"
             tools:text="爱的故事" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -33,12 +33,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:textStyle="bold"
             android:foreground="?selectableItemBackground"
             android:includeFontPadding="false"
             android:text="简介"
             android:textColor="@color/gray_999"
-            android:textSize="@dimen/font_small" />
+            android:textSize="@dimen/font_small"
+            android:textStyle="normal" />
 
         <ImageView
             android:layout_gravity="bottom"
@@ -61,9 +61,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:includeFontPadding="false"
-            android:textStyle="bold"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_smaller"
+            android:textStyle="normal|bold"
             tools:text="699次播放" />
 
         <TextView
@@ -73,8 +73,8 @@
             android:layout_marginLeft="7dp"
             android:gravity="center_vertical"
             android:textColor="@color/gray_999"
-            android:textStyle="bold"
             android:textSize="@dimen/font_smaller"
+            android:textStyle="normal"
             tools:text="古典" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -86,25 +86,25 @@
             android:gravity="center_vertical"
             android:includeFontPadding="false"
             android:singleLine="true"
-            android:textStyle="bold"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/font_smaller"
+            android:textStyle="normal"
             tools:text="5.9分" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_playinfo_grade"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="7dp"
             android:drawableEnd="@drawable/ic_more2"
             android:drawablePadding="5dp"
             android:gravity="center_vertical"
             android:includeFontPadding="false"
             android:singleLine="true"
-            android:textStyle="bold"
             android:text="我要评分"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/font_smaller" />
+            android:textColor="#F44336"
+            android:textSize="@dimen/font_smaller"
+            android:textStyle="normal" />
 
     </LinearLayout>
 
@@ -197,7 +197,11 @@
 	    <FrameLayout
         android:id="@+id/bannerLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>		
+        android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:id="@+id/rl_native_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     <!-- 播放源和选集-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -219,7 +223,7 @@
                 android:text="@string/select_play_resource"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/font_normal"
-                android:textStyle="bold" />
+                android:textStyle="normal" />
 
             <TextView
                 android:layout_width="0dp"
@@ -267,7 +271,7 @@
                 android:text="@string/selection_play_source"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/font_normal"
-                android:textStyle="bold" />
+                android:textStyle="normal" />
 
             <TextView
                 android:id="@+id/tvLastest"

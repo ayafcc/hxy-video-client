@@ -15,6 +15,7 @@ import cn.mahua.vod.ui.play.PlayActivity
 import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.MyLinearLayoutManager
 import cn.mahua.vod.utils.Retrofit2Utils
+import cn.mahua.vod.utils.UserUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
@@ -198,25 +199,29 @@ class PlayScoreActivity : BaseActivity() {
 
 
     private fun deletePlayScore(id: String) {
-        var vodService= Retrofit2Utils.INSTANCE.createByGson(VodService::class.java)
-        if (AgainstCheatUtil.showWarn(vodService)) {
-            return;
+        if(UserUtils.isLogin()) {
+            var vodService = Retrofit2Utils.INSTANCE.createByGson(VodService::class.java)
+            if (AgainstCheatUtil.showWarn(vodService)) {
+                return;
+            }
+            RequestManager.execute(
+                    mActivity,
+                    vodService.deletePlayLogList(id),
+                    object : LoadingObserver<String>(mActivity) {
+                        override fun onSuccess(data: String) {
+                            ToastUtils.showShort("删除成功！")
+                            getPlayScore(1, false)
+                        }
+
+                        override fun onError(e: ResponseException) {
+                            ToastUtils.showShort("删除失败！")
+                        }
+
+                    }
+            )
+        }else{
+            ToastUtils.showShort("删除失败！")
         }
-        RequestManager.execute(
-                mActivity,
-                vodService.deletePlayLogList(id),
-                object : LoadingObserver<String>(mActivity) {
-                    override fun onSuccess(data: String) {
-                        ToastUtils.showShort("删除成功！")
-                    }
-
-                    override fun onError(e: ResponseException) {
-                        ToastUtils.showShort("删除失败！")
-                    }
-
-                }
-        )
-
 
     }
 

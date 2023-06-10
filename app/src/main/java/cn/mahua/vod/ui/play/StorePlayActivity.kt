@@ -7,12 +7,10 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import cn.mahua.av.play.AvVideoController
-import cn.mahua.vod.App
 import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
-import com.blankj.utilcode.util.ToastUtils
-import com.dueeeke.videoplayer.listener.OnVideoViewStateChangeListener
 import com.dueeeke.videoplayer.player.VideoView
+import com.dueeeke.videoplayer.player.VideoView.OnStateChangeListener
 import kotlinx.android.synthetic.main.activity_new_play.*
 import java.io.File
 import java.text.DecimalFormat
@@ -71,7 +69,7 @@ class StorePlayActivity : BaseActivity() {
         Log.d(TAG, "ins[0]${ins[0].absolutePath}")
         videoView.setUrl(ins[0].absolutePath)
         videoView.start()
-        videoView.setOnVideoViewStateChangeListener(object : OnVideoViewStateChangeListener {
+        videoView.setOnStateChangeListener(object : OnStateChangeListener {
 
             override fun onPlayerStateChanged(playerState: Int) {
                 if (playerState == VideoView.PLAYER_NORMAL) {

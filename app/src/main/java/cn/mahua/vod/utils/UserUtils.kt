@@ -32,6 +32,7 @@ object UserUtils {
         list.add(ApiConfig.COMMENT)
         list.add(ApiConfig.FEEDBACK)
         list.add(ApiConfig.COLLECTION)
+        list.add(ApiConfig.dleltePlayLogList)
         list.add(ApiConfig.COLLECTION_LIST)
         list.add(ApiConfig.SHARE_SCORE)
         list.add(ApiConfig.SCORE)
@@ -88,6 +89,10 @@ object UserUtils {
                 cookie.name.startsWith("user_portrait") -> {
                     SPUtils.getInstance("user_cookie").put("cookie_user_portrait", cookie.value, true)
                     SPUtils.getInstance("user_cookie").put("cookie_user_portrait_domain", cookie.domain, true)
+                }
+                cookie.name.startsWith("gbook_timespan") -> {
+                    SPUtils.getInstance("user_cookie").put("cookie_gbook_timespan", cookie.value, true)
+                    SPUtils.getInstance("user_cookie").put("cookie_gbook_timespan_domain", cookie.domain, true)
                 }
             }
         }

@@ -45,7 +45,7 @@
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:text="@string/play_score"
-                android:textColor="@color/white"
+                android:textColor="@color/background"
                 android:textSize="@dimen/font_large" />
 
             <TextView
@@ -58,9 +58,9 @@
                 android:contentDescription="@string/iv"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/edit"
-                android:textColor="@color/white"
+                android:textColor="@color/background"
                 android:textSize="@dimen/font_normal"
-                android:visibility="gone" />
+                android:visibility="visible" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -83,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/lineColor"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <LinearLayout
         android:id="@+id/rlEdit"

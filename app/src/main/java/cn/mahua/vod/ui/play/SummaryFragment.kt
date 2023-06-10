@@ -23,7 +23,7 @@ class SummaryFragment : BaseFragment() {
             tvTitle.text = vodName
             tvYear.text = "年代：${vod_year}.${type.typeName}.${vod_area}"
             tvActor.text = "主演：$vod_actor"
-            tvType.text = "类型：" + vod_class
+            tvType.text = "类型：" + type_id
             tvStatus.text = "状态：$vodRemarks"
             tvPlayNumber.text = "播放：" + vod_hits + "次"
             tvScore.text = "评分：$vod_score"

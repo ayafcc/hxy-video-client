@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/grid_item_decor"
     android:orientation="vertical"
     tools:context=".ui.feedback.FeedbackActivity">
 
@@ -42,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/feedback_title"
-                android:textColor="@color/white"
+                android:textColor="@color/background"
                 android:textSize="@dimen/font_normal" />
 
         </RelativeLayout>
@@ -81,7 +82,7 @@
             android:layout_gravity="left"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:textColor="@color/gray_999"
+            android:textColor="@color/background"
             android:textSize="@dimen/font_small"
             tools:text="还可以输入10个字" />
 
@@ -92,7 +93,7 @@
             android:layout_alignTop="@id/tvCount"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/bg_pay"
+            android:background="@drawable/bg_login"
             android:paddingLeft="10dp"
             android:paddingTop="5dp"
             android:paddingRight="10dp"
@@ -105,7 +106,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:background="@color/lineColor" />
+        android:background="#00ECECEC" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -114,7 +115,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:text="看看大家说什么："
-        android:textColor="@color/userTopBg"
+        android:textColor="@color/darkGray"
         android:textSize="@dimen/font_small" />
 
     <View

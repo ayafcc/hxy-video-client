@@ -5,7 +5,7 @@ import org.litepal.crud.LitePalSupport;
 
 public class PlayScoreBean extends LitePalSupport {
 
-    private int vodId;
+    private int id;
     private int typeId;
     private String vodName;
     private String vodImgUrl;
@@ -74,11 +74,11 @@ public class PlayScoreBean extends LitePalSupport {
     }
 
     public int getVodId() {
-        return vodId;
+        return id;
     }
 
-    public void setVodId(int vodId) {
-        this.vodId = vodId;
+    public void setVodId(int id) {
+        this.id = id;
     }
 
     public int getUrlIndex() {

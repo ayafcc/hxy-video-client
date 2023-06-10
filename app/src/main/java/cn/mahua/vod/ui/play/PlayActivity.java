@@ -15,8 +15,8 @@ import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.dueeeke.videoplayer.listener.OnVideoViewStateChangeListener;
 import com.dueeeke.videoplayer.player.VideoView;
+import com.dueeeke.videoplayer.util.PlayerUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,7 +56,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import me.drakeet.multitype.MultiTypeAdapter;
 import cn.mahua.vod.utils.AgainstCheatUtil;
-public class PlayActivity extends BaseSupportActivity implements ControllerClickListener, HdClickListener, BackListener, OnVideoViewStateChangeListener {
+public class PlayActivity extends BaseSupportActivity implements ControllerClickListener, HdClickListener, BackListener, VideoView.OnStateChangeListener {
     public static final String KEY_VOD = "KEY_VOD";
     public static final String KEY_SHOW_PROGRESS = "KEY_SHOW_PROGRESS";
 
@@ -363,7 +363,7 @@ public class PlayActivity extends BaseSupportActivity implements ControllerClick
         videoView.setHdClickListener(this);
         //设置控制器，如需定制可继承BaseVideoController
         videoView.setVideoController(controller);
-        videoView.setOnVideoViewStateChangeListener(this);
+        videoView.setOnStateChangeListener(this);
         videoView.setVideoSpeed(SPUtils.getInstance().getInt(AvVideoController.KEY_SPEED_INDEX,3));
 
         title(mVodBean.getVodName());
@@ -564,5 +564,10 @@ public class PlayActivity extends BaseSupportActivity implements ControllerClick
 //                JieXiUtils.INSTANCE.getPlayUrl(s, u, this);
             }
         }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

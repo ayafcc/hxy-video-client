@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_dialog_hit"
     android:orientation="vertical"
-    android:paddingRight="18dp"
     android:paddingLeft="18dp"
     android:paddingTop="20dp"
+    android:paddingRight="18dp"
+
     tools:context=".ui.pay.PayFragment">
 
     <LinearLayout
@@ -14,17 +16,19 @@
         android:layout_height="30dp"
 
         android:gravity="center">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:textColor="@color/textColor"
-            android:textSize="20sp"
             android:text="在线充值"
+            android:textColor="@color/black"
+            android:textSize="20sp"
 
             />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="41dp"
@@ -42,8 +46,8 @@
         <View
             android:layout_width="1dp"
             android:layout_height="15dp"
-            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@color/black" />
 
         <EditText
@@ -51,49 +55,49 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:inputType="number"
-            android:hint="填入您要充值的金额"
-            android:textSize="@dimen/font_small"
-            android:textColor="@color/gray_999"
             android:background="@null"
-            />
+            android:hint="填入您要充值的金额"
+            android:inputType="number"
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_small" />
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/tvHit"
-        android:textColor="@color/gray_999"
-        android:textSize="@dimen/font_smaller"
-        android:text="1元可兑换10个积分"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="1元可兑换10个积分"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/font_smaller" />
 
     <TextView
         android:id="@+id/tvMoney"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_bg_transparent_rect"
+        android:background="@drawable/bg_login"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:text="立即充值"
-        android:textColor="#351a0f" />
+        android:textColor="#FFFFFF" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="15dp"
         android:gravity="center">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/textColor"
-            android:textSize="20sp"
             android:text="卡密充值"
+            android:textColor="@color/black"
+            android:textSize="20sp"
 
             />
 
@@ -117,8 +121,8 @@
         <View
             android:layout_width="1dp"
             android:layout_height="15dp"
-            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@color/black" />
 
         <EditText
@@ -126,35 +130,36 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:hint="输入或粘贴密码"
-            android:textSize="@dimen/font_small"
-            android:textColor="@color/gray_999"
             android:background="@null"
-            />
+            android:hint="输入或粘贴密码"
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_small" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:gravity="center_vertical"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp"
-        android:layout_height="wrap_content">
+        android:gravity="center_vertical">
+
         <TextView
-            android:textColor="@color/gray_999"
-            android:textSize="@dimen/font_smaller"
-            android:text="友情提示: "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="友情提示: "
+            android:textColor="@color/red"
+            android:textSize="@dimen/font_smaller" />
+
         <TextView
             android:id="@+id/tvOnlinePay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:textColor="#2196F3"
-            android:textSize="@dimen/font_smaller"
-            android:text="在线购卡链接"
-            />
+            android:text="在线购卡链接>"
+            android:textColor="@color/red"
+            android:textSize="@dimen/font_smaller" />
     </LinearLayout>
 
 
@@ -162,14 +167,13 @@
         android:id="@+id/tvCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_bg_transparent_rect"
+        android:background="@drawable/bg_login"
         android:foreground="?attr/selectableItemBackground"
-        android:text="立即充值"
+        android:gravity="center"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:textColor="#351a0f"
-        android:gravity="center"
-        />
+        android:text="立即充值"
+        android:textColor="#FFFFFF" />
 
 
 </LinearLayout>

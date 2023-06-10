@@ -15,7 +15,7 @@
             android:id="@+id/iv_home_top_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/home_top_shape"
+            android:background="@drawable/shape_bg_orange_to_light_top"
             android:scaleType="fitXY" />
 
         <RelativeLayout
@@ -37,12 +37,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:gravity="center"
             android:paddingTop="20dp"
             android:text="视频下载"
-            android:textColor="#ffffff"
+            android:textColor="@color/background"
             android:textSize="18sp"
             android:textStyle="bold" />
     </RelativeLayout>

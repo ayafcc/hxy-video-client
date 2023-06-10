@@ -35,14 +35,14 @@
                 android:gravity="center_vertical">
 
 
-                <ImageView
-                    android:layout_width="37dp"
-                    android:layout_height="37dp"
+                <!-- <ImageView
+                     android:layout_width="37dp"
+                     android:layout_height="37dp"
 
 
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_zhuye"
-                     />
+                     android:scaleType="fitXY"
+                     android:src="@drawable/ic_zhuye"
+                      />-->
 
                 <ImageView
                     android:layout_width="10dp"
@@ -66,8 +66,8 @@
                     android:gravity="center_vertical|start"
                     android:paddingLeft="30dp"
                     android:text="@string/seek"
-                    android:textSize="@dimen/font_normal"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/background"
+                    android:textSize="@dimen/font_normal" />
 
                 <TextView
                     android:id="@+id/tv_home_all"
@@ -76,12 +76,12 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/bg_skip"
                     android:drawableStart="@drawable/ic_all"
-                    android:gravity="center"
                     android:drawablePadding="1dp"
+                    android:gravity="center"
                     android:paddingLeft="19dp"
                     android:paddingRight="19dp"
                     android:text="@string/all"
-                    android:textColor="@color/white"
+                    android:textColor="@color/background"
                     android:textSize="@dimen/font_normal"
                     android:visibility="visible" />
 
@@ -127,26 +127,26 @@
                     android:clipChildren="false"
                     android:clipToPadding="false"
                     app:tabGravity="center"
-                    app:tabIndicatorColor="#ffffff"
+                    app:tabIndicatorColor="@color/background"
                     app:tabIndicatorFullWidth="false"
                     app:tabIndicatorHeight="3dp"
                     app:tabMode="scrollable"
-                    app:tabSelectedTextColor="@color/white"
+                    app:tabSelectedTextColor="@color/background"
                     app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
-                    app:tabTextColor="@color/white" />
+                    app:tabTextColor="@color/background" />
 
             </LinearLayout>
 
 
         </LinearLayout>
 
-    </FrameLayout>
+     </FrameLayout>
 
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vp_home"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+     <androidx.viewpager.widget.ViewPager
+         android:id="@+id/vp_home"
+         android:layout_width="match_parent"
+         android:layout_height="0dp"
+         android:layout_weight="1" />
 
-</LinearLayout>
+ </LinearLayout>

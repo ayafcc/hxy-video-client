@@ -47,7 +47,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:drawableStart="@drawable/shape_title_tip"
-        android:drawablePadding="15dp"
+        android:drawablePadding="3dp"
         android:text="@string/task_tip"
         android:textColor="@color/textColor"
         android:textSize="@dimen/font_small"

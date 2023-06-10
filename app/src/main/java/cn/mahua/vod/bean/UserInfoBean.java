@@ -61,11 +61,11 @@ public class UserInfoBean {
     private int user_points;
     private int user_points_froze;
     private int user_reg_time;
-    private int user_reg_ip;
+    private long user_reg_ip;
     private int user_login_time;
-    private int user_login_ip;
+    private long user_login_ip;
     private int user_last_login_time;
-    private int user_last_login_ip;
+    private long user_last_login_ip;
     private int user_login_num;
     private int user_extend;
     private String user_random;
@@ -233,11 +233,11 @@ public class UserInfoBean {
         this.user_reg_time = user_reg_time;
     }
 
-    public int getUser_reg_ip() {
+    public long getUser_reg_ip() {
         return user_reg_ip;
     }
 
-    public void setUser_reg_ip(int user_reg_ip) {
+    public void setUser_reg_ip(long user_reg_ip) {
         this.user_reg_ip = user_reg_ip;
     }
 
@@ -249,11 +249,11 @@ public class UserInfoBean {
         this.user_login_time = user_login_time;
     }
 
-    public int getUser_login_ip() {
+    public long getUser_login_ip() {
         return user_login_ip;
     }
 
-    public void setUser_login_ip(int user_login_ip) {
+    public void setUser_login_ip(long user_login_ip) {
         this.user_login_ip = user_login_ip;
     }
 
@@ -265,7 +265,7 @@ public class UserInfoBean {
         this.user_last_login_time = user_last_login_time;
     }
 
-    public int getUser_last_login_ip() {
+    public long getUser_last_login_ip() {
         return user_last_login_ip;
     }
 

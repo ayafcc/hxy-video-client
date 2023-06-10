@@ -78,7 +78,7 @@
     <ImageView
         android:id="@+id/top_line"
         android:layout_width="match_parent"
-        android:layout_height="8dp"
+        android:layout_height="3dp"
         android:background="#F0F1EF" />
 
     <androidx.recyclerview.widget.RecyclerView

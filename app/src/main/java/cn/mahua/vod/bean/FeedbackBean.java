@@ -21,7 +21,7 @@ public class FeedbackBean {
     private int user_id;
     private int gbook_status;
     private String gbook_name;
-    private int gbook_ip;
+    private long gbook_ip;
     private long gbook_time;
     private int gbook_reply_time;
     private String gbook_content;
@@ -68,11 +68,11 @@ public class FeedbackBean {
         this.gbook_name = gbook_name;
     }
 
-    public int getGbook_ip() {
+    public long getGbook_ip() {
         return gbook_ip;
     }
 
-    public void setGbook_ip(int gbook_ip) {
+    public void setGbook_ip(long gbook_ip) {
         this.gbook_ip = gbook_ip;
     }
 

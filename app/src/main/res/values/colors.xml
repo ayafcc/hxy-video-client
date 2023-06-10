@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#EC6538</color>
-    <color name="colorPrimaryDark">#EC6538</color>
-    <color name="colorAccent">#EC6538</color>
+    <color name="colorPrimary">#3388e3</color>
+    <color name="colorPrimaryDark">#3388e3</color>
+    <color name="colorAccent">#3388e3</color>
 
-    <color name="picTopBgColor">#EC6538</color>
+    <color name="picTopBgColor">#3388e3</color>
 
     <color name="textColor">#333333</color>
     <color name="subTitleColor"></color>
     <color name="gray_999">#999999</color>
-    <color name="textColor3">#ED6519</color>
+    <color name="textColor3">#3388e3</color>
     <color name="textColor4">#FF6600</color>
-    <color name="textColor5">#FF7D39</color>
+    <color name="textColor5">#3388e3</color>
     <color name="textColor6">#666666</color>
     <color name="textColor7">#B9325F</color>
     <color name="lineColor">#ECECEC</color>
     <color name="hintColor">#CCCCCC</color>
 
     <color name="screenTopBg">#FF6600</color>
-    <color name="userTopBg">#FF7D39</color>
-    <color name="loginTopBg">#FF7D39</color>
+    <color name="userTopBg">#3388e3</color>
+    <color name="loginTopBg">#3388e3</color>
     <color name="picTopBg">#4CCCCCCC</color>
 
     <color name="etBg">#4CCCCCCC</color>
@@ -221,13 +221,13 @@
     <color name="white_translucence2">#99ffffff</color>
     <color name="color_black">#000000</color>
     <color name="color_blue">#0099cc</color>
-    <color name="background">#303030</color>
+    <color name="background">#FFFFFF</color>
 
     <!--标签-->
     <color name="tag_color_blue">#0D9195</color>
     <color name="tag_color_red">#F9281A</color>
     <color name="tag_color_purple">#BD27FC</color>
-    <color name="tag_color_orange">#FF7900</color>
+    <color name="tag_color_orange">#3388e3</color>
     <color name="tag_color_green">#29D023</color>
     <color name="dark_colorPrimaryDark">#465a64</color>
 

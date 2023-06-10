@@ -29,7 +29,6 @@ import cn.mahua.vod.utils.OkHttpUtils
 import cn.mahua.vod.utils.Retrofit2Utils
 import cn.mahua.vod.utils.UserUtils
 import com.blankj.utilcode.util.*
-import com.dueeeke.videoplayer.listener.OnVideoViewStateChangeListener
 import com.dueeeke.videoplayer.player.VideoView
 import com.github.StormWyrm.wanandroid.base.exception.ResponseException
 import com.github.StormWyrm.wanandroid.base.net.RequestManager
@@ -38,11 +37,11 @@ import com.github.StormWyrm.wanandroid.base.net.observer.PlayLoadingObserver
 import com.liuwei.android.upnpcast.NLUpnpCastManager
 import com.liuwei.android.upnpcast.device.CastDevice
 import com.lxj.xpopup.XPopup
-import com.zgalaxy.sdk.RewardAdSdk
-import com.zgalaxy.sdk.listener.RewardAdListener
 import kotlinx.android.synthetic.main.activity_new_play.*
 import okhttp3.Call
 import okhttp3.Response
+import pro.dxys.fumiad.FuMiAd
+import pro.dxys.fumiad.FumiRewardVideoSimpleListener
 import java.io.IOException
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -63,7 +62,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
     private var isPlay = false//是否正在播放
     private var playSourceIndex = 0//播放源位置
     private var urlIndex = 0//当前播放的到哪一集
-	private var curindex = 0
+    private var curindex = 0
     private lateinit var playFormList: List<PlayFromBean>
     private lateinit var playFrom: PlayFromBean //当前播放播放源信息
     private var playList: List<UrlBean>? = null//当前播放列表
@@ -170,7 +169,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                 R.id.iv_av_miracast -> {
 
                     //if (LoginUtils.checkVIP(this@NewPlayActivity, "投屏需要开通vip,是否去开通")) { //去除开通VIP限制
-                        showCastScreenDialog()
+                    showCastScreenDialog()
                     //}
                 }
 
@@ -179,8 +178,8 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                     payPlay()
                 }
                 R.id.tvUpdateButton, R.id.tvEndUpdateButton -> {
-                    //updateVip()
-                    RewardAd()
+                    updateVip()
+                    //RewardAd()
                 }
                 R.id.btn_pop_danmaku -> {
                     val s = it.tag as String
@@ -189,7 +188,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
             }
         }
 
-        videoView.setOnVideoViewStateChangeListener(object : OnVideoViewStateChangeListener {
+        videoView.setOnStateChangeListener(object : VideoView.OnStateChangeListener {
             override fun onPlayStateChanged(playState: Int) {
                 if (playState == VideoView.STATE_PLAYBACK_COMPLETED) {
                     val percentage = getPercentage(curProgressHistory, vodDuration)
@@ -223,7 +222,12 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                             if (videoNetProgress == 0L) {
                                 //videoView.seekTo(30000)
                             } else {
-                                videoView.seekTo(videoNetProgress)
+                                val islive =controller.duration
+                                if(islive == 0L){
+                                    controller.addDefaultControlComponent(mVodBean.vodName,true)
+                                }else if(islive>videoNetProgress) {
+                                    videoView.seekTo(videoNetProgress)
+                                }
                             }
                             println("进度4：== videoNetProgress=" + videoNetProgress)
                         }
@@ -329,16 +333,25 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        return if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            if(controller.isLocked){
+                controller.show()
+                ToastUtils.showShort(cn.mahua.av.R.string.av_lock_tip)
+                return true
+            }
+            if(controller.isFullScreen){
+                return controller.tzFullScreen()
+            }
             App.curPlayScoreBean = null
             playScoreInfo = null
             savePlayRecord(true)
             setResult(3)
             finish()
-            false
+            return false
         } else {
-            super.onKeyDown(keyCode, event)
+
         }
+        return super.onKeyDown(keyCode, event)
     }
 
     fun  m3u8down(): String {
@@ -381,26 +394,48 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
     }
     fun RewardAd(){
         ToastUtils.showShort("广告播放结束后将获得观影权限！")
-        RewardAdSdk.getInstance(this).loadRewardAdvert("观影次数", 1, object : RewardAdListener {
-            override fun onError(i: Int, s: String) {}
-            override fun onAdShow() {}
-            override fun onAdVideoBarClick() {}
-            override fun onAdClose() {}
-            override fun onVideoComplete() {
-                LogUtils.d("=====广告完成")
-                isAllowAdScreen=true
+        FuMiAd.showRewardVideoAutoStart(this, object : FumiRewardVideoSimpleListener() {
+            override fun onAdClose(b: Boolean) {
+
+            }
+
+            override fun onReward() {
+                //发放奖励
+                Log.e("tag", "onReward")
+                Toast.makeText(this@NewPlayActivity, "您已获得观影次数1次！", Toast.LENGTH_SHORT).show()
+                isAllowAdScreen = true
                 checkVodTrySee()
             }
-            override fun onRewardVerify(b: Boolean, i: Int, s: String) {
-                if(b) {
-                    Toast.makeText(this@NewPlayActivity, "您已获得"+s+i+"次！", Toast.LENGTH_SHORT).show()
-                    isAllowAdScreen = true
-                    checkVodTrySee()
-                }
+
+            override fun onError(s: String) {
+                super.onError(s)
+                Log.e("tag", "onError:$s")
+
             }
-            override fun onAdvertStatusClose() {}
         })
     }
+    //    fun RewardAd(){
+//        ToastUtils.showShort("广告播放结束后将获得观影权限！")
+//        RewardAdSdk.getInstance(this).loadRewardAdvert("观影次数", 1, object : RewardAdListener {
+//            override fun onError(i: Int, s: String) {}
+//            override fun onAdShow() {}
+//            override fun onAdVideoBarClick() {}
+//            override fun onAdClose() {}
+//            override fun onVideoComplete() {
+//                LogUtils.d("=====广告完成")
+//                isAllowAdScreen=true
+//                checkVodTrySee()
+//            }
+//            override fun onRewardVerify(b: Boolean, i: Int, s: String) {
+//                if(b) {
+//                    Toast.makeText(this@NewPlayActivity, "您已获得"+s+i+"次！", Toast.LENGTH_SHORT).show()
+//                    isAllowAdScreen = true
+//                    checkVodTrySee()
+//                }
+//            }
+//            override fun onAdvertStatusClose() {}
+//        })
+//    }
     fun showPlayList() {
         if (playListFragment == null) {
             val spanCount = if (mVodBean.type_id == 3) {
@@ -493,7 +528,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
         this.playSourceIndex = playSourceIndex
         this.curParseIndex = 0
         curFailIndex = -1
-        if(playFromBean.urls.size >= curindex ) {
+        if(playFromBean!=null && playFromBean.urls.size >= curindex ) {
             LogUtils.d(playFromBean.urls.size)
             LogUtils.d("=====问题 changePlaySource")
             parseData()
@@ -772,12 +807,25 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
         if(url.contains(".m3u8")){
             getSameActorData(url)
         }else {
+            var curl: String = ""
+            if (playList != null ) {
+                curl = playList!![urlIndex].url
+            }
             videoView.post {
-                    if (url.startsWith("//")) {
-                        videoView.setUrl("https:$url")
-                    } else {
-                        videoView.setUrl(url)
+                if (url.startsWith("//")) {
+                    videoView.setUrl("https:$url")
+                } else if(curl.contains("bilibili.com")){
+                    val airPorts = mapOf(Pair("Referer", curl),Pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36"))
+                    if(avheaders==null){
+                        avheaders = mutableMapOf(Pair("Referer",curl))
+                        avheaders!!.putAll(airPorts)
+                    }else {
+                        avheaders!!.putAll(airPorts)
                     }
+                    videoView.setUrl(url,avheaders)
+                }else {
+                    videoView.setUrl(url)
+                }
                 videoView.start()
             }
         }
@@ -982,6 +1030,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                         }
 
                         override fun onError(e: ResponseException) {
+                            ToastUtils.showShort("积分不足，请到个人中心充值！")
                         }
 
                     }
@@ -1150,7 +1199,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
 //        if(urlList!!.size >=curpase_int){
 //            curpase_url=urlList.get(curParseIndex)
 //        }
-       // Log.d("222ssss1", url + "_______")
+        // Log.d("222ssss1", url + "_______")
         var p1: String = ""
         OkHttpUtils.getInstance().getDataAsynFromNet1(url, object : OkHttpUtils.MyNetCall {
             override fun success(call: Call?, response: Response?) {
@@ -1187,7 +1236,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                 mActivity.runOnUiThread {
                     Toast.makeText(this@NewPlayActivity, "此源暂时无法播放，请更换播放源再试", Toast.LENGTH_SHORT).show()
                 }
-				//chengeNextLine()
+                //chengeNextLine()
             }
         })
         return p1

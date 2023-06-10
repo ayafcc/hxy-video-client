@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:useLevel="false">
-    <solid android:color="@color/player_theme_color" />
+    <gradient android:startColor="#25ceec" android:endColor="#0eec99" android:angle="45"/>
     <corners android:radius="10dp"/>
 </shape>

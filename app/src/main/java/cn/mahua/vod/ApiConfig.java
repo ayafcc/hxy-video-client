@@ -1,12 +1,12 @@
 package cn.mahua.vod;
 
 public class ApiConfig {
-
-    public static final String BASE_URL = "http://app.luob.top";
+    //public static final String AD_ID = "demo";
+    public static final String BASE_URL = "http://xc.45h.cn";
     public static final String getStart = "/api.php/v1.main/startup";
     public static final String getTypeList = "/api.php/v1.vod/types";
     public static final String getBannerList = "/api.php/v1.vod";
-    public static final String codeurl = "https://gitee.com/jiangsonglin/codes/5exs3k1tmqrp4hnfgjo0718/raw?blob_name=app";
+    public static final String codeurl = "http://xc.45h.cn";
     //专题
     public static final String getTopicList = "/api.php/v1.topic/topicList";
     //专题详情

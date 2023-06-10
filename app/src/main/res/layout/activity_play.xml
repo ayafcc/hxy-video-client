@@ -11,8 +11,7 @@
     <cn.mahua.av.play.AvVideoView
         android:id="@+id/avv_play"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
-        app:autoRotate="true" />
+        android:layout_height="260dp" />
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -191,8 +191,8 @@ public class JieXiWebView2 extends WebView {
         mBackListener = null;
     }
 
-    private int time = 10;//一条线路探8s
-    private int time2 = 10;
+    private int time = 8;//一条线路探8s
+    private int time2 = 8;
     private Timer timer;
     private TimerTask task;
 
@@ -209,9 +209,9 @@ public class JieXiWebView2 extends WebView {
         }
         index = curIndex;
         size = curSize;
-        if (realUrl.contains("json") || realUrl.contains("..") || realUrl.contains("...")|| realUrl.contains("&iktoken=ik2021.com")) {
-            if(realUrl.contains("&iktoken=ik2021.com")){
-                realUrl = realUrl.replaceFirst("&iktoken=ik2021\\.com", "");
+        if (realUrl.contains("json") || realUrl.contains("..") || realUrl.contains("...")|| realUrl.contains("&iktoken=ik2021")) {
+            if(realUrl.contains("&iktoken=ik2021")){
+                realUrl = realUrl.replaceFirst("&iktoken=ik2021", "");
                 LogUtils.d("", "====Parse jiexi realUrl2="+realUrl);
                 getJsonResult(realUrl, false);
             }
@@ -446,6 +446,7 @@ public class JieXiWebView2 extends WebView {
             proxyPort = android.net.Proxy.getPort(App.getInstance().getContext());
         }
         return (!TextUtils.isEmpty(proxyAddress)) && (proxyPort != -1);
+        //return false;
     }
 
     /**

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/whiteSmoke"
     tools:context=".ui.user.UserFragment">
 
     <!--    <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
@@ -17,17 +18,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_pay"
+        android:background="@drawable/shape_bg_orange_to_light_top"
         android:orientation="vertical"
-        android:paddingTop="25dp">
+        android:paddingTop="10dp">
 
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?actionBarSize"-->
-<!--            android:gravity="center"-->
-<!--            android:text=""-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="@dimen/font_large" />-->
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="?actionBarSize"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text=""-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textSize="@dimen/font_large" />-->
 
     </LinearLayout>
 
@@ -44,7 +45,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_pay"
+                android:background="@drawable/shape_bg_orange_to_light_top"
                 android:orientation="vertical">
 
                 <ImageView
@@ -52,7 +53,7 @@
                     android:layout_width="71dp"
                     android:layout_height="71dp"
                     android:layout_marginStart="18dp"
-                    android:layout_marginTop="85dp"
+                    android:layout_marginTop="50dp"
                     android:background="@drawable/ic_default_avator" />
 
                 <TextView
@@ -60,12 +61,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="85dp"
+                    android:layout_marginTop="50dp"
                     android:layout_marginRight="30dp"
                     android:background="@drawable/shape_sign_bg"
                     android:gravity="center"
                     android:text="@string/sign"
-                    android:textColor="#FFFF"
+                    android:textColor="@color/background"
                     android:textSize="@dimen/font_smaller" />
 
                 <TextView
@@ -78,7 +79,7 @@
                     android:layout_toRightOf="@id/iv_user_pic"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:textColor="#dfbf7e"
+                    android:textColor="@color/background"
                     android:textSize="@dimen/font_small"
                     tools:text="默认会员:17979797988" />
 
@@ -94,11 +95,8 @@
                     android:gravity="start|center"
                     android:singleLine="true"
                     android:text="@string/user_tip"
-                    android:textColor="#6e6e6f"
+                    android:textColor="@color/aliceBlue"
                     android:textSize="@dimen/font_smaller" />
-
-
-
 
 
                 <TextView
@@ -131,14 +129,14 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/shape_bg_transparent_rect1"
+                        android:background="@drawable/shape_purple"
                         android:ellipsize="end"
                         android:gravity="center"
                         android:singleLine="true"
                         android:text="@string/user_t1"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/font_small"
-                        android:textStyle="bold" />
+                        android:textStyle="normal" />
 
                     <TextView
                         android:id="@+id/tv_user_t2"
@@ -154,7 +152,7 @@
                         android:text="@string/user_t2"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/font_small"
-                        android:textStyle="bold" />
+                        android:textStyle="normal" />
 
                     <TextView
                         android:id="@+id/tv_user_t3"
@@ -168,7 +166,7 @@
                         android:text="@string/user_t3"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/font_small"
-                        android:textStyle="bold" />
+                        android:textStyle="normal" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -187,13 +185,14 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_dialog_hit">
 
                     <LinearLayout
                         android:id="@+id/ll_task"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp">
+                        android:layout_marginTop="20dp">
 
                         <TextView
                             android:id="@+id/tv_user_task"
@@ -204,9 +203,9 @@
                             android:drawablePadding="8dp"
                             android:gravity="center"
                             android:text="@string/task_title"
-                            android:textColor="@color/textColor"
+                            android:textColor="@color/colorAccent"
                             android:textSize="@dimen/font_small"
-                            android:textStyle="bold" />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/tv_user_share"
@@ -218,9 +217,9 @@
                             android:drawablePadding="8dp"
                             android:gravity="center"
                             android:text="@string/share_title"
-                            android:textColor="@color/textColor"
+                            android:textColor="@color/colorAccent"
                             android:textSize="@dimen/font_small"
-                            android:textStyle="bold" />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/tv_user_service"
@@ -232,9 +231,9 @@
                             android:drawablePadding="8dp"
                             android:gravity="center"
                             android:text="@string/service_title"
-                            android:textColor="@color/textColor"
+                            android:textColor="@color/colorAccent"
                             android:textSize="@dimen/font_small"
-                            android:textStyle="bold" />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/tv_coin_withdraw"
@@ -246,9 +245,11 @@
                             android:drawablePadding="8dp"
                             android:gravity="center"
                             android:text="@string/withdraw_title"
-                            android:textColor="@color/textColor"
+                            android:textColor="@color/colorAccent"
                             android:textSize="14dp"
-                            android:textStyle="bold" />
+                            android:textStyle="normal" />
+
+
                     </LinearLayout>
 
 
@@ -262,20 +263,20 @@
                         android:layout_marginTop="13dp"
                         android:layout_marginBottom="10dp"
                         android:text="@string/jifen"
-                        android:textColor="@color/textColor3"
+                        android:textColor="@color/red"
                         android:textSize="12dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_user_video"
-                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ll_task"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="13dp"
                         android:layout_marginBottom="10dp"
                         android:text="@string/watch_video"
-                        android:textColor="@color/textColor3"
+                        android:textColor="@color/red"
                         android:textSize="12dp"
                         android:textStyle="bold" />
 
@@ -285,13 +286,14 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ll_task"
                         android:layout_alignRight="@id/ll_task"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="11dp"
                         android:layout_marginBottom="10dp"
                         android:text="@string/jinbi"
-                        android:textColor="@color/textColor3"
+                        android:textColor="@color/red"
                         android:textSize="12dp"
                         android:textStyle="bold" />
+
                 </RelativeLayout>
 
 
@@ -304,12 +306,12 @@
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="18dp" />
 
-<!--            <cn.mahua.vod.ad.AdWebView-->
-<!--                android:id="@+id/awvUser"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="18dp"-->
-<!--                android:layout_marginRight="18dp" />-->
+            <!--            <cn.mahua.vod.ad.AdWebView-->
+            <!--                android:id="@+id/awvUser"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginLeft="18dp"-->
+            <!--                android:layout_marginRight="18dp" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -337,15 +339,15 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/play_score"
-                        android:textColor="@color/textColor"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/font_small"
-                        android:textStyle="bold" />
+                        android:textStyle="normal" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/more"
-                        android:textColor="@color/gray_999"
+                        android:textColor="@color/darkGray"
                         android:textSize="@dimen/font_smaller" />
 
                     <ImageView
@@ -370,7 +372,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginLeft="18dp"
-                android:background="#ececec" />
+                android:background="#00ECECEC" />
+
 
             <LinearLayout
                 android:id="@+id/llExpand"
@@ -381,7 +384,8 @@
                 android:paddingLeft="18dp"
                 android:paddingTop="12dp"
                 android:paddingRight="18dp"
-                android:paddingBottom="12dp">
+                android:paddingBottom="12dp"
+                android:background="#FFFFFF">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -394,15 +398,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/my_expand"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/font_small"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/more"
-                    android:textColor="@color/gray_999"
+                    android:textColor="@color/darkGray"
                     android:textSize="@dimen/font_smaller" />
 
                 <ImageView
@@ -412,13 +416,12 @@
 
             </LinearLayout>
 
-
             <View
                 android:id="@+id/line_expand"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginLeft="18dp"
-                android:background="#ececec" />
+                android:background="#00ECECEC" />
 
             <LinearLayout
                 android:id="@+id/llPotato"
@@ -443,7 +446,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/darkGray"
                     android:textSize="@dimen/font_small"
                     android:textStyle="bold" />
 
@@ -451,7 +454,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/more"
-                    android:textColor="@color/gray_999"
+                    android:textColor="@color/darkGray"
                     android:textSize="@dimen/font_smaller" />
 
                 <ImageView
@@ -466,7 +469,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginLeft="18dp"
-                android:background="#ececec"
+                android:background="#00ECECEC"
                 android:visibility="gone" />
 
             <LinearLayout
@@ -492,7 +495,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/darkGray"
                     android:textSize="@dimen/font_small"
                     android:textStyle="bold" />
 
@@ -500,7 +503,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/more"
-                    android:textColor="@color/gray_999"
+                    android:textColor="#F3F3F3"
                     android:textSize="@dimen/font_smaller" />
 
                 <ImageView
@@ -515,7 +518,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginLeft="18dp"
-                android:background="#ececec"
+                android:textColor="#F3F3F3"
                 android:visibility="gone" />
 
             <LinearLayout
@@ -527,7 +530,8 @@
                 android:paddingLeft="18dp"
                 android:paddingTop="12dp"
                 android:paddingRight="18dp"
-                android:paddingBottom="12dp">
+                android:paddingBottom="12dp"
+                android:background="#FFFFFF">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -540,15 +544,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/notice_notify"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/font_small"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/more"
-                    android:textColor="@color/gray_999"
+                    android:textColor="@color/darkGray"
                     android:textSize="@dimen/font_smaller" />
 
                 <ImageView
@@ -562,7 +566,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginLeft="18dp"
-                android:background="#ececec" />
+                android:background="#00ECECEC" />
 
             <LinearLayout
                 android:id="@+id/llCache"
@@ -573,7 +577,8 @@
                 android:paddingLeft="18dp"
                 android:paddingTop="12dp"
                 android:paddingRight="18dp"
-                android:paddingBottom="12dp">
+                android:paddingBottom="12dp"
+                android:background="#FFFFFF">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -586,15 +591,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/cache"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/font_small"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/more"
-                    android:textColor="@color/gray_999"
+                    android:textColor="@color/darkGray"
                     android:textSize="@dimen/font_smaller" />
 
                 <ImageView
@@ -608,7 +613,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginLeft="18dp"
-                android:background="#ececec" />
+                android:background="#00ECECEC" />
 
             <LinearLayout
                 android:id="@+id/llCollect"
@@ -619,7 +624,8 @@
                 android:paddingLeft="18dp"
                 android:paddingTop="12dp"
                 android:paddingRight="18dp"
-                android:paddingBottom="12dp">
+                android:paddingBottom="12dp"
+                android:background="#FFFFFF">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -632,15 +638,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/collection"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/font_small"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/more"
-                    android:textColor="@color/gray_999"
+                    android:textColor="@color/darkGray"
                     android:textSize="@dimen/font_smaller" />
 
                 <ImageView
@@ -654,7 +660,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginLeft="18dp"
-                android:background="#ececec" />
+                android:background="#00ECECEC" />
 
 
             <LinearLayout
@@ -666,7 +672,8 @@
                 android:paddingLeft="18dp"
                 android:paddingTop="12dp"
                 android:paddingRight="18dp"
-                android:paddingBottom="12dp">
+                android:paddingBottom="12dp"
+                android:background="#FFFFFF">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -679,15 +686,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/clear_cache"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/font_small"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/execution"
-                    android:textColor="@color/gray_999"
+                    android:textColor="@color/darkGray"
                     android:textSize="@dimen/font_smaller" />
 
                 <ImageView
@@ -701,7 +708,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginLeft="18dp"
-                android:background="#ececec" />
+                android:background="#00ECECEC" />
 
         </LinearLayout>
 

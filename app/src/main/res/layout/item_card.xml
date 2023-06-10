@@ -9,7 +9,7 @@
     <View
         android:id="@+id/item_v_card_top"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0dp"
         android:layout_gravity="top"
         android:background="@color/transparent_50_white" />
 
@@ -28,15 +28,13 @@
             android:layout_height="25dp"
             android:layout_weight="1"
             android:drawableStart="@drawable/shape_title_tip"
-            android:drawablePadding="15dp"
+            android:drawablePadding="2dp"
             android:ellipsize="end"
             android:gravity="center|start"
             android:includeFontPadding="false"
             android:singleLine="true"
             android:textColor="@color/textColor"
-            android:textSize="@dimen/font_large"
-            android:textStyle="bold"
-            app:autoSizeTextType="uniform"
+            android:textSize="@dimen/font_normal"
             tools:text="每月TOP排行榜" />
 
         <TextView
@@ -45,9 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:text="查看更多"
-            android:textColor="@color/textColor"
-            android:textSize="@dimen/font_small"
-            android:textStyle="bold" />
+            android:textColor="@color/gray_999"
+            android:textSize="@dimen/font_small" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -58,8 +55,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="#F1F1F1" />
+        android:layout_height="3dp"
+        android:background="@color/colorWhite" />
 
 
 </LinearLayout>

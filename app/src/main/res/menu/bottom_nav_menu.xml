@@ -6,15 +6,19 @@
         android:icon="@drawable/ic_home"
         android:title="@string/title_home" />
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_main_topic"-->
-<!--        android:icon="@drawable/ic_topic"-->
-<!--        android:title="专题" />-->
 
     <item
         android:id="@+id/navigation_main_rank"
         android:icon="@drawable/ic_game"
         android:title="榜单" />
+
+
+    <item
+        android:id="@+id/navigation_main_topic"
+        android:icon="@drawable/ic_topic"
+        android:title="专题" />
+
+
     <item
         android:id="@+id/navigation_main_live"
         android:icon="@drawable/ic_live"
@@ -27,10 +31,10 @@
 <!--        android:icon="@drawable/ic_game"-->
 <!--        android:title="游戏" />-->
 
-    <item
-        android:id="@+id/navigation_main_share"
-        android:icon="@drawable/ic_topic"
-        android:title="@string/title_share" />
+    <!-- <item
+         android:id="@+id/navigation_main_share"
+         android:icon="@drawable/ic_topic"
+         android:title="@string/title_share" />-->
 
     <item
         android:id="@+id/navigation_main_user"

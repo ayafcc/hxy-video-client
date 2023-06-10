@@ -27,7 +27,7 @@
                 android:layout_weight="1"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/font_normal"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 tools:text="大宋少年志" />
 
             <ImageView
@@ -53,7 +53,7 @@
             android:paddingBottom="3dp"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_small"
-            android:textStyle="bold"
+            android:textStyle="normal"
             tools:text="年代：2019.连续剧.大陆" />
 
         <TextView
@@ -66,7 +66,7 @@
             android:paddingBottom="3dp"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_small"
-            android:textStyle="bold"
+            android:textStyle="normal"
             tools:text="主演：2019.连续剧.大陆" />
 
         <TextView
@@ -79,7 +79,7 @@
             android:paddingBottom="3dp"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_small"
-            android:textStyle="bold"
+            android:textStyle="normal"
             tools:text="类型：2019.连续剧.大陆" />
 
         <TextView
@@ -92,7 +92,7 @@
             android:paddingBottom="3dp"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_small"
-            android:textStyle="bold"
+            android:textStyle="normal"
             tools:text="状态：2019.连续剧.大陆" />
 
         <TextView
@@ -105,7 +105,7 @@
             android:paddingBottom="3dp"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_small"
-            android:textStyle="bold"
+            android:textStyle="normal"
             tools:text="播放：2019.连续剧.大陆" />
 
         <TextView
@@ -118,7 +118,7 @@
             android:paddingBottom="3dp"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_small"
-            android:textStyle="bold"
+            android:textStyle="normal"
             tools:text="评分：2019.连续剧.大陆" />
 
 
@@ -133,7 +133,7 @@
             android:text="@string/summary"
             android:textColor="@color/textColor"
             android:textSize="@dimen/font_normal"
-            android:textStyle="bold" />
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/tvSummary"

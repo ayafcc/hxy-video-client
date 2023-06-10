@@ -52,8 +52,6 @@ import cn.mahua.vod.utils.UserUtils;
 import me.yokeyword.fragmentation.SupportFragment;
 
 
-import com.zgalaxy.sdk.SplashSdk;
-import com.zgalaxy.sdk.listener.SplashAdListener;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, BaseMainFragment.OnBackToFirstListener {
 
@@ -95,7 +93,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             mFragments[LIVE] = LiveFragment.newInstance();
             mFragments[RANK] = RankFragment.newInstance();
             mFragments[USER] = UserFragment.newInstance();
-//            mFragments[TOPIC] = SpecialtTopicFragment.newInstance();
+            mFragments[TOPIC] = SpecialtTopicFragment.newInstance();
 //            mFragments[GAME] = GameFragment2.newInstance();
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -210,9 +208,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 showHideFragment(mFragments[HOME]);
                 return true;
 
-//            case R.id.navigation_main_topic:
-//                showHideFragment(mFragments[TOPIC]);
-//                return true;
+            case R.id.navigation_main_topic:
+                showHideFragment(mFragments[TOPIC]);
+                return true;
 
             case R.id.navigation_main_rank:
                 showHideFragment(mFragments[RANK]);
@@ -226,14 +224,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //                showHideFragment(mFragments[GAME]);
 //                mFragments[GAME].setUserVisibleHint(true);
 //                return true;
-            case R.id.navigation_main_share:
-                if (!UserUtils.isLogin()) {
-                    LoginActivity.Companion.start();
-                    return false;
-                } else {
-                    showHideFragment(mFragments[TOPIC]);
-                    return true;
-                }
+//            case R.id.navigation_main_share:
+//                if (!UserUtils.isLogin()) {
+//                    LoginActivity.Companion.start();
+//                    return false;
+//                } else {
+//                    showHideFragment(mFragments[TOPIC]);
+//                    return true;
+//                }
             case R.id.navigation_main_user:
                 showHideFragment(mFragments[USER]);
                 mFragments[USER].setUserVisibleHint(true);

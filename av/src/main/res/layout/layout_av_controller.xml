@@ -289,7 +289,7 @@
             android:paddingTop="3dp"
             android:paddingRight="10dp"
             android:paddingBottom="3dp"
-            android:text="观看广告"
+            android:text="升级会员"
             android:textColor="@color/player_theme_color"
             android:textSize="12dp" />
     </LinearLayout>
@@ -473,13 +473,25 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ProgressBar
+            android:id="@+id/av_loading"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:visibility="gone"
             android:indeterminateBehavior="repeat"
             android:indeterminateDrawable="@anim/progressbar_drawable"
             android:indeterminateOnly="true" />
 
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:indeterminate="true"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateDrawable="@drawable/dkplayer_progress_loading"
+            android:indeterminateOnly="true"
+            android:visibility="gone" />
         <TextView
+            android:id="@+id/clpb_av_load"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -605,7 +617,7 @@
                 android:paddingTop="3dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="3dp"
-                android:text="观看广告"
+                android:text="升级会员"
                 android:textColor="#ffffff" />
         </LinearLayout>
 

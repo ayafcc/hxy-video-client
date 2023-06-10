@@ -11,7 +11,9 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -23,10 +25,17 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextClock;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
@@ -36,10 +45,15 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
+
+import com.dueeeke.videocontroller.component.GestureView;
 import com.dueeeke.videoplayer.controller.GestureVideoController;
+
 import com.dueeeke.videoplayer.controller.MediaPlayerControl;
 import com.dueeeke.videoplayer.player.VideoView;
+import com.dueeeke.videoplayer.player.VideoViewManager;
 import com.dueeeke.videoplayer.util.PlayerUtils;
+import com.dueeeke.videocontroller.component.PrepareView;
 import com.xiaweizi.marquee.MarqueeTextView;
 
 import java.lang.ref.WeakReference;
@@ -52,13 +66,9 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import cn.mahua.av.CheckVodTrySeeBean;
 import cn.mahua.av.R;
+import static com.dueeeke.videoplayer.util.PlayerUtils.stringForTime;
 
 public class AvVideoController extends GestureVideoController implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private int isNeedVip;
@@ -69,6 +79,7 @@ public class AvVideoController extends GestureVideoController implements View.On
     public static final int RECEIVER_TYPE_REPLAY = 1;
     public static final int RECEIVER_TYPE_TIMER = 2;
     private Boolean mReplayByCurProgress = false;
+
 
     @SuppressWarnings("unused")
     public void setControllerClickListener(ControllerClickListener controllerClickListener) {
@@ -129,10 +140,13 @@ public class AvVideoController extends GestureVideoController implements View.On
     //加载进度条
     protected LinearLayout clpb_jiexi;
     protected TextView tvJiexiMsg;
+    protected TextView tvload;
     //是否在滑动进度条
     private boolean mIsDragging;
     private Animation animation;
     private VideoViewImpt videoViewImpt;
+    private ProgressBar mLoading;
+    private ProgressBar avLoading;
     private WeakReference<AppCompatActivity> curActivity;
 
     public AvVideoController(VideoViewImpt impt, @NonNull Context context) {
@@ -163,114 +177,119 @@ public class AvVideoController extends GestureVideoController implements View.On
     protected void initView() {
         super.initView();
         Log.e(TAG, "initView");
+        mLoading =findViewById(R.id.loading);
+        tvAvAnnouncement = findViewById(R.id.tv_av_announcement);
+        v_av_top_bg = findViewById(R.id.v_av_top_bg);
+        tvUpdateTitle = findViewById(R.id.tvUpdateTitle);
+        tvJiexiMsg = findViewById(R.id.tvJiexiMsg);
+        tvload = findViewById(R.id.clpb_av_load);
+        tvPayTitle = findViewById(R.id.tvPayTitle);
+        tvEndPayTitle = findViewById(R.id.tvEndPayTitle);
+        rlEndUpdate = findViewById(R.id.rlEndUpdate);
+        rlEndPay = findViewById(R.id.rlEndPay);
+        llPay = findViewById(R.id.llPay);
+        llUpdate = findViewById(R.id.llUpdateVip);
+        iv_bg = findViewById(R.id.iv_av_bg);
+        llSkip = findViewById(R.id.llSkip);
+        tvSkip = findViewById(R.id.tvSkip);
+        awvPlayer = findViewById(R.id.awvPlayer);
 
-        tvAvAnnouncement = mControllerView.findViewById(R.id.tv_av_announcement);
-        v_av_top_bg = mControllerView.findViewById(R.id.v_av_top_bg);
-        tvUpdateTitle = mControllerView.findViewById(R.id.tvUpdateTitle);
-        tvJiexiMsg = mControllerView.findViewById(R.id.tvJiexiMsg);
-        tvPayTitle = mControllerView.findViewById(R.id.tvPayTitle);
-        tvEndPayTitle = mControllerView.findViewById(R.id.tvEndPayTitle);
-        rlEndUpdate = mControllerView.findViewById(R.id.rlEndUpdate);
-        rlEndPay = mControllerView.findViewById(R.id.rlEndPay);
-        llPay = mControllerView.findViewById(R.id.llPay);
-        llUpdate = mControllerView.findViewById(R.id.llUpdateVip);
-        iv_bg = mControllerView.findViewById(R.id.iv_av_bg);
-        llSkip = mControllerView.findViewById(R.id.llSkip);
-        tvSkip = mControllerView.findViewById(R.id.tvSkip);
-        awvPlayer = mControllerView.findViewById(R.id.awvPlayer);
-
-        mControllerView.findViewById(R.id.tvPayButton).setOnClickListener(this);
-        mControllerView.findViewById(R.id.tvUpdateButton).setOnClickListener(this);
-        mControllerView.findViewById(R.id.tvEndPayButton).setOnClickListener(this);
-        mControllerView.findViewById(R.id.tvEndUpdateButton).setOnClickListener(this);
+        findViewById(R.id.tvPayButton).setOnClickListener(this);
+        findViewById(R.id.tvUpdateButton).setOnClickListener(this);
+        findViewById(R.id.tvEndPayButton).setOnClickListener(this);
+        findViewById(R.id.tvEndUpdateButton).setOnClickListener(this);
         //全部背景
-        v_all_bg = mControllerView.findViewById(R.id.v_av_all_bg);
+        v_all_bg = findViewById(R.id.v_av_all_bg);
         //顶部背景
-        v_top_bg = mControllerView.findViewById(R.id.v_av_top_bg);
+        v_top_bg = findViewById(R.id.v_av_top_bg);
         //底部背景
-        v_bottom_bg = mControllerView.findViewById(R.id.v_av_bottom_bg);
+        v_bottom_bg = findViewById(R.id.v_av_bottom_bg);
         //-------------顶部
         //返回键
-        iv_back = mControllerView.findViewById(R.id.iv_av_back);
+        iv_back = findViewById(R.id.iv_av_back);
         iv_back.setOnClickListener(this);
-        mControllerView.findViewById(R.id.iv_av_back1).setOnClickListener(this);
-        mControllerView.findViewById(R.id.iv_av_back2).setOnClickListener(this);
+        findViewById(R.id.iv_av_back1).setOnClickListener(this);
+        findViewById(R.id.iv_av_back2).setOnClickListener(this);
         //标题
-        tv_title = mControllerView.findViewById(R.id.tv_av_title);
+        tv_title = findViewById(R.id.tv_av_title);
         //系统时间
-        tc_localtime = mControllerView.findViewById(R.id.tc_av_localtime);
+        tc_localtime = findViewById(R.id.tc_av_localtime);
         //投屏
-        iv_miracast = mControllerView.findViewById(R.id.iv_av_miracast);
+        iv_miracast = findViewById(R.id.iv_av_miracast);
         iv_miracast.setOnClickListener(this);
         //下载
-        iv_download = mControllerView.findViewById(R.id.iv_av_download);
+        iv_download = findViewById(R.id.iv_av_download);
         iv_download.setOnClickListener(this);
         //--------------中部
         //锁定
-        iv_lock = mControllerView.findViewById(R.id.iv_av_lock);
+        iv_lock = findViewById(R.id.iv_av_lock);
         iv_lock.setOnClickListener(this);
         //画中画
-        iv_pip = mControllerView.findViewById(R.id.iv_av_pip);
+        iv_pip = findViewById(R.id.iv_av_pip);
         iv_pip.setOnClickListener(this);
         //视频比例
-        iv_scale = mControllerView.findViewById(R.id.iv_av_scale);
+        iv_scale = findViewById(R.id.iv_av_scale);
         iv_scale.setOnClickListener(this);
         //---------------底部
         //播放
-        iv_play = mControllerView.findViewById(R.id.iv_av_play);
+        iv_play = findViewById(R.id.iv_av_play);
         iv_play.setOnClickListener(this);
         //当前播放时间
-        tv_curr_time = mControllerView.findViewById(R.id.tv_av_curr_time);
+        tv_curr_time = findViewById(R.id.tv_av_curr_time);
         //总播放时间
-        tv_total_time = mControllerView.findViewById(R.id.tv_av_total_time);
+        tv_total_time = findViewById(R.id.tv_av_total_time);
         //播放时间合集
-        tv_playtime = mControllerView.findViewById(R.id.tv_av_playtime);
+        tv_playtime = findViewById(R.id.tv_av_playtime);
         //播放进度条
-        sb_1 = mControllerView.findViewById(R.id.sb_av_1);
+        sb_1 = findViewById(R.id.sb_av_1);
         sb_1.setOnSeekBarChangeListener(null);
-        sb_2 = mControllerView.findViewById(R.id.sb_av_2);
+        sb_2 = findViewById(R.id.sb_av_2);
         sb_2.setOnSeekBarChangeListener(null);
         progress = sb_1;
         progress.setOnSeekBarChangeListener(this);
         //全屏
-        iv_fullscreen = mControllerView.findViewById(R.id.iv_av_fullscreen);
-        rl_fullscreen = mControllerView.findViewById(R.id.rl_av_fullscreen);
+        iv_fullscreen = findViewById(R.id.iv_av_fullscreen);
+        rl_fullscreen = findViewById(R.id.rl_av_fullscreen);
         rl_fullscreen.setOnClickListener(this);
         //下一集
-        iv_next = mControllerView.findViewById(R.id.iv_av_next);
+        iv_next = findViewById(R.id.iv_av_next);
         iv_next.setOnClickListener(this);
         //弹幕开关
-        iv_danmaku = mControllerView.findViewById(R.id.iv_av_danmaku);
+        iv_danmaku = findViewById(R.id.iv_av_danmaku);
         iv_danmaku.setOnClickListener(this);
         //弹幕发送按钮
-        tvPlaySource = mControllerView.findViewById(R.id.tvPlaySource);
+        tvPlaySource = findViewById(R.id.tvPlaySource);
         tvPlaySource.setOnClickListener(this);
 
         //弹幕发送按钮
-        tv_danmaku = mControllerView.findViewById(R.id.tv_av_danmaku);
+        tv_danmaku = findViewById(R.id.tv_av_danmaku);
         tv_danmaku.setOnClickListener(this);
 
         //初始化弹幕状态
         boolean b = SPUtils.getInstance().getBoolean(KEY_IS_OPEN_DANMAKU, true);
         iv_danmaku.setSelected(b);
         //播放倍数
-        tv_speed = mControllerView.findViewById(R.id.tv_av_speed);
+        tv_speed = findViewById(R.id.tv_av_speed);
         tv_speed.setOnClickListener(this);
         //清晰度
-        tv_hd = mControllerView.findViewById(R.id.tv_av_hd);
+        tv_hd = findViewById(R.id.tv_av_hd);
         tv_hd.setOnClickListener(this);
         //选集
-        tv_selected = mControllerView.findViewById(R.id.tv_av_selected);
+        tv_selected = findViewById(R.id.tv_av_selected);
         tv_selected.setOnClickListener(this);
         //加载进度条
-        clpb_loading = mControllerView.findViewById(R.id.clpb_av_loading);
+        clpb_loading = findViewById(R.id.clpb_av_loading);
+        avLoading =findViewById(R.id.av_loading);
+        avLoading.setVisibility(View.GONE);
         clpb_loading.setVisibility(View.GONE);
         //加载进度条
-        clpb_jiexi = mControllerView.findViewById(R.id.clpb_av_jiexi);
+        clpb_jiexi = findViewById(R.id.clpb_av_jiexi);
         //重新播放
-        iv_replay = mControllerView.findViewById(R.id.iv_av_replay);
+        iv_replay = findViewById(R.id.iv_av_replay);
         iv_replay.setOnClickListener(this);
-        tv_replay = mControllerView.findViewById(R.id.tv_av_replay);
+        tv_replay = findViewById(R.id.tv_av_replay);
+        addControlComponent(new GestureView(getContext()));
+        //addControlComponent(new PrepareView(getContext()));
     }
 
     int bufferTime = 0;
@@ -303,10 +322,53 @@ public class AvVideoController extends GestureVideoController implements View.On
         };
         bufferTimer.schedule(bufferTask, 0, 1000);
     }
-
-    //窗口切换
+    //锁定处理
+    protected void doLockUnlock() {
+        if (mIsLocked) {
+            mIsLocked = false;
+            mShowing = false;
+            show();
+            ToastUtils.showShort(R.string.av_unlocked);
+        } else {
+            hide();
+            mIsLocked = true;
+            ToastUtils.showShort(R.string.av_locked);
+        }
+        iv_lock.setSelected(mIsLocked);
+        setLocked(mIsLocked);
+    }
     @Override
-    public void setPlayerState(int playerState) {
+    protected void onVisibilityChanged(boolean isVisible, Animation anim) {
+        if (mControlWrapper.isFullScreen()) {
+            if (isVisible) {
+                if (iv_lock.getVisibility() == GONE) {
+                    iv_lock.setVisibility(VISIBLE);
+                    if (anim != null) {
+                        iv_lock.startAnimation(anim);
+                    }
+                }
+            } else {
+                iv_lock.setVisibility(GONE);
+                if (anim != null) {
+                    iv_lock.startAnimation(anim);
+                }
+            }
+        }
+    }
+    /**
+     * 显示移动网络播放提示
+     *
+     * @return 返回显示移动网络播放提示的条件，false:不显示, true显示
+     * 此处默认根据手机网络类型来决定是否显示，开发者可以重写相关逻辑
+     */
+    public boolean showNetWarning() {
+        return false;
+    }
+
+        //窗口切换
+    @Override
+    public void onPlayerStateChanged(int playerState) {
+        super.onPlayerStateChanged(playerState);
         if (mIsLocked) return;
         switch (playerState) {
             case VideoView.PLAYER_NORMAL:
@@ -315,7 +377,7 @@ public class AvVideoController extends GestureVideoController implements View.On
                     animation.reset();
                     tvAvAnnouncement.startAnimation(animation);
                 }
-                mIsGestureEnabled = true;
+                //mIsGestureEnabled = true;
                 iv_back.setVisibility(VISIBLE);
                 //系统时间
                 tc_localtime.setVisibility(GONE);
@@ -361,7 +423,7 @@ public class AvVideoController extends GestureVideoController implements View.On
                     animation.reset();
                     tvAvAnnouncement.startAnimation(animation);
                 }
-                mIsGestureEnabled = true;
+                //mIsGestureEnabled = true;
                 //系统时间
                 tc_localtime.setVisibility(VISIBLE);
                 //下载
@@ -369,7 +431,7 @@ public class AvVideoController extends GestureVideoController implements View.On
                 //锁定
                 iv_lock.setVisibility(VISIBLE);
                 //画中画
-               // iv_pip.setVisibility(VISIBLE);
+                // iv_pip.setVisibility(VISIBLE);
                 //视频比列
                 iv_scale.setVisibility(VISIBLE);
                 //当前播放时间
@@ -421,9 +483,8 @@ public class AvVideoController extends GestureVideoController implements View.On
 
     //播放状态
     @Override
-    public void setPlayState(int playState) {
-        mCurrentPlayState = playState;
-        hideStatusView();
+    public void onPlayStateChanged(int playState) {
+        super.onPlayStateChanged(playState);
         switch (playState) {
             case VideoView.STATE_IDLE:
                 Log.e(TAG, "初始状态");
@@ -431,12 +492,12 @@ public class AvVideoController extends GestureVideoController implements View.On
                 tv_hd.setText(R.string.av_hd);
                 iv_bg.setVisibility(VISIBLE);
                 clpb_loading.setVisibility(View.GONE);
+                mLoading.setVisibility(GONE);
                 sb_1.setProgress(0);
                 sb_1.setSecondaryProgress(0);
                 sb_2.setProgress(0);
                 sb_2.setSecondaryProgress(0);
                 mIsLocked = false;
-                mMediaPlayer.setLock(false);
                 iv_lock.setSelected(false);
                 iv_play.setSelected(false);
                 //重新播放
@@ -462,7 +523,11 @@ public class AvVideoController extends GestureVideoController implements View.On
                 startBufferTimer();
                 onDanmakuChanged(true);
                 iv_bg.setVisibility(GONE);
+                mLoading.setVisibility(VISIBLE);
+                //tvload.setText("正在缓冲...");//交给prepare
                 clpb_loading.setVisibility(View.VISIBLE);
+                avLoading.setVisibility(GONE);
+                tvload.setVisibility(GONE);
                 //重新播放
                 v_all_bg.setVisibility(GONE);
                 iv_replay.setVisibility(GONE);
@@ -470,6 +535,7 @@ public class AvVideoController extends GestureVideoController implements View.On
                 show();
                 break;
             case VideoView.STATE_PREPARED:
+                mLoading.setVisibility(GONE);
                 stopBufferTime();
 //                hide();
                 postDelayed(() -> {
@@ -496,21 +562,25 @@ public class AvVideoController extends GestureVideoController implements View.On
             case VideoView.STATE_BUFFERING:
                 Log.e(TAG, "加载中");
                 iv_bg.setVisibility(GONE);
+                //showhcjd();
+                //tvload.setText("正在缓冲..."+String.valueOf(mControlWrapper.getTcpSpeed()));
+                tvload.setVisibility(View.VISIBLE);
+                avLoading.setVisibility(View.VISIBLE);
+                mLoading.setVisibility(View.GONE);
                 clpb_loading.setVisibility(View.VISIBLE);
-                iv_play.setSelected(mMediaPlayer.isPlaying());
+                iv_play.setSelected(mControlWrapper.isPlaying());
                 break;
             case VideoView.STATE_BUFFERED:
                 Log.e(TAG, "加载结束");
                 iv_bg.setVisibility(GONE);
                 clpb_loading.setVisibility(View.GONE);
-                iv_play.setSelected(mMediaPlayer.isPlaying());
+                iv_play.setSelected(mControlWrapper.isPlaying());
                 break;
             case VideoView.STATE_PLAYBACK_COMPLETED:
                 Log.e(TAG, "播放完毕");
                 iv_bg.setVisibility(VISIBLE);
                 clpb_loading.setVisibility(View.GONE);
                 mIsLocked = false;
-                mMediaPlayer.setLock(false);
                 iv_lock.setSelected(false);
                 iv_play.setSelected(false);
                 //重新播放
@@ -539,7 +609,7 @@ public class AvVideoController extends GestureVideoController implements View.On
                 setAllView(false);
             }
             ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) v_av_top_bg.getLayoutParams();
-            if (curActivity.get() != null && !mMediaPlayer.isFullScreen()) {
+            if (curActivity.get() != null && !mControlWrapper.isFullScreen()) {
                 layoutParams.topMargin = BarUtils.getStatusBarHeight();
                 layoutParams.height = ConvertUtils.dp2px(45);
                 BarUtils.setStatusBarVisibility(curActivity.get(), false);
@@ -562,24 +632,24 @@ public class AvVideoController extends GestureVideoController implements View.On
     }
 
     public long getDuration() {
-        return mMediaPlayer.getDuration();
+        return mControlWrapper.getDuration();
     }
 
     public float getPercentage() {
-//        if (mMediaPlayer.getDuration() == 0) {
+//        if (mControlWrapper.getDuration() == 0) {
 //            return 100f;
 //        }
-        float percentage = mMediaPlayer.getCurrentPosition() / (mMediaPlayer.getDuration() * 1.0f);
+        float percentage = mControlWrapper.getCurrentPosition() / (mControlWrapper.getDuration() * 1.0f);
         DecimalFormat df = new DecimalFormat("#.00");
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
         dfs.setDecimalSeparator('.');
         df.setDecimalFormatSymbols(dfs);
-        System.out.println("进度11：curr=" + mMediaPlayer.getCurrentPosition() + " duration=" + mMediaPlayer.getDuration() + " percentage=" + percentage + "   >" + df.format(percentage));
-        return Float.valueOf(df.format(percentage));
+        System.out.println("进度11：curr=" + mControlWrapper.getCurrentPosition() + " duration=" + mControlWrapper.getDuration() + " percentage=" + percentage + "   >" + df.format(percentage));
+        return mControlWrapper.getDuration()==0?0:Float.valueOf(df.format(percentage));
     }
 
     public long getCurProgress() {
-        return mMediaPlayer.getCurrentPosition();
+        return mControlWrapper.getCurrentPosition();
     }
 
     public void CheckVodTrySeeBean(int freeCount, CheckVodTrySeeBean bean, boolean isVip, int vod_point_pay) {
@@ -593,7 +663,7 @@ public class AvVideoController extends GestureVideoController implements View.On
             llUpdate.setVisibility(View.GONE);
             return;
         }
-        if (freeCount > 0) {
+        if (freeCount > 0 && status!=2) {
             isNeedVip = 0;
             trySeeTime = bean.getTrysee();
             llPay.setVisibility(View.GONE);
@@ -603,7 +673,6 @@ public class AvVideoController extends GestureVideoController implements View.On
 
         isNeedVip = status;
         trySeeTime = bean.getTrysee();
-
         if (status == 1) {
             if (isVip) {
                 isNeedVip = 0;
@@ -614,17 +683,48 @@ public class AvVideoController extends GestureVideoController implements View.On
                 llUpdate.setVisibility(View.VISIBLE);
                 tvUpdateTitle.setText("暂无观影次数，可试看" + trySeeTime + "分钟，观看完整版请 ");
             }
-        } else if (status == 2) {
-            llPay.setVisibility(View.VISIBLE);
-            llUpdate.setVisibility(View.GONE);
-            tvPayTitle.setText("可试看" + trySeeTime + "分钟 ，观看完整版请支付" + vod_point_pay + "积分 ");
-            tvEndPayTitle.setText("可试看" + trySeeTime + "分钟 ，观看完整版请支付\n" + vod_point_pay + "积分");
+        } else if (status == 2 ) {
+                if (isVip) {
+                isNeedVip = 0;
+                llPay.setVisibility(View.GONE);
+                llUpdate.setVisibility(View.GONE);
+                } else {
+                llPay.setVisibility(View.VISIBLE);
+                llUpdate.setVisibility(View.GONE);
+                tvPayTitle.setText("可试看" + trySeeTime + "分钟 ，观看完整版请支付" + vod_point_pay + "积分 ");
+                tvEndPayTitle.setText("可试看" + trySeeTime + "分钟 ，观看完整版请支付\n" + vod_point_pay + "积分");
+            }
         }
     }
 
     Timer timer = null;
     Timer bufferTimer = null;
+    Timer hqtimer = null;
+    public void showhcjd() {
+        if (hqtimer != null) {
+            hqtimer.cancel();
+            hqtimer = null;
+        }
+        hqtimer =new Timer();
+        hqtimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                post(() -> {
+                    updateshowhcjd(mControlWrapper.getTcpSpeed());
+                });
+            }
+        }, 1000, 1000);
+        clpb_loading.post(new Runnable() {
+            @Override
+            public void run() {
+                clpb_loading.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+    public void updateshowhcjd(float progress1) {
+        post(() -> tvload.setText("加载中"+String.valueOf(progress1)));
 
+    }
     public void showAd(String gifUrl, String url) {
         llSkip.setVisibility(View.VISIBLE);
         if (timer != null) {
@@ -688,7 +788,7 @@ public class AvVideoController extends GestureVideoController implements View.On
 
     private void show(int timeout) {
         if (!mShowing) {
-            if (mMediaPlayer.isFullScreen()) {
+            if (mControlWrapper.isFullScreen()) {
                 iv_lock.setVisibility(VISIBLE);
             }
             if (!mIsLocked) {
@@ -696,7 +796,7 @@ public class AvVideoController extends GestureVideoController implements View.On
             }
 
             ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) v_av_top_bg.getLayoutParams();
-            if (curActivity.get() != null && !mMediaPlayer.isFullScreen()) {
+            if (curActivity.get() != null && !mControlWrapper.isFullScreen()) {
                 layoutParams.topMargin = BarUtils.getStatusBarHeight();
                 layoutParams.height = ConvertUtils.dp2px(45);
                 BarUtils.setStatusBarVisibility(curActivity.get(), true);
@@ -753,16 +853,13 @@ public class AvVideoController extends GestureVideoController implements View.On
             view.startAnimation(mHideAnim);
         }
     }
-
     @Override
-    protected int setProgress() {
-        if (mMediaPlayer == null || mIsDragging) {
-            return 0;
+    public void setProgress(int duration, int position) {
+        if (mControlWrapper == null || mIsDragging) {
+            return ;
         }
 
         //   clpb_loading.setVisibility(View.GONE);
-        long position = mMediaPlayer.getCurrentPosition();
-        long duration = mMediaPlayer.getDuration();
         if (isNeedVip != 0) {
             if (position / 1000f > trySeeTime * 60) {
                 if (isNeedVip == 1) {
@@ -772,7 +869,7 @@ public class AvVideoController extends GestureVideoController implements View.On
                     rlEndPay.setVisibility(View.VISIBLE);
                     rlEndUpdate.setVisibility(View.GONE);
                 }
-                mMediaPlayer.pause();
+                mControlWrapper.pause();
             }
         }
         if (progress != null) {
@@ -783,7 +880,8 @@ public class AvVideoController extends GestureVideoController implements View.On
             } else {
                 progress.setEnabled(false);
             }
-            int percent = mMediaPlayer.getBufferedPercentage();
+            int percent = mControlWrapper.getBufferedPercentage();
+            //updateshowhcjd(percent);
             if (percent >= 95) { //解决缓冲进度不能100%问题
                 progress.setSecondaryProgress(progress.getMax());
             } else {
@@ -800,22 +898,21 @@ public class AvVideoController extends GestureVideoController implements View.On
             tv_playtime.setText(text);
         }
 
-        return (int) position;
+
+    }
+    /**
+     * 快速添加各个组件
+     * @param title  标题
+     * @param isLive 是否为直播
+     */
+    public void addDefaultControlComponent(String title, boolean isLive) {
+
+        setCanChangePosition(!isLive);
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-        if (!b) {
-            return;
-        }
-        long duration = mMediaPlayer.getDuration();
-        long newPosition = (duration * i) / progress.getMax();
-        if (tv_curr_time != null)
-            tv_curr_time.setText(stringForTime((int) newPosition));
-        if (tv_playtime != null) {
-            String text = stringForTime((int) newPosition) + "/" + stringForTime((int) duration);
-            tv_playtime.setText(text);
-        }
+
     }
 
     @Override
@@ -827,9 +924,9 @@ public class AvVideoController extends GestureVideoController implements View.On
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        long duration = mMediaPlayer.getDuration();
+        long duration = mControlWrapper.getDuration();
         long newPosition = (duration * seekBar.getProgress()) / progress.getMax();
-        mMediaPlayer.seekTo((int) newPosition);
+        mControlWrapper.seekTo((int) newPosition);
         mIsDragging = false;
         post(mShowProgress);
         show();
@@ -844,79 +941,80 @@ public class AvVideoController extends GestureVideoController implements View.On
     //返回键
     @Override
     public boolean onBackPressed() {
-        if (mIsLocked) {
+        if (isLocked()) {
             show();
             ToastUtils.showShort(R.string.av_lock_tip);
             return true;
         }
 
-        Activity activity = PlayerUtils.scanForActivity(getContext());
-        if (activity == null) return super.onBackPressed();
-        if (mMediaPlayer.isFullScreen()) {
-            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            mMediaPlayer.stopFullScreen();
-            return true;
+        if (mControlWrapper.isFullScreen()) {
+            return stopFullScreen();
         }
         return super.onBackPressed();
     }
-
+    public boolean isFullScreen() {
+        return mControlWrapper.isFullScreen();
+    }
+    public boolean tzFullScreen() {
+        return stopFullScreen();
+    }
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
         show();
-        int i = view.getId();
-        if (view.getId() == R.id.tvEndUpdateButton || view.getId() == R.id.tvUpdateButton) {
-            if (mMediaPlayer.isFullScreen()) {
+        int i = v.getId();
+        if (i == R.id.tvEndUpdateButton || i == R.id.tvUpdateButton ) {
+            mControlWrapper.toggleLockState();
+            if (mControlWrapper.isFullScreen()) {
 
-                doStartStopFullScreen();
+                toggleFullScreen();
             }
-            if (controllerClickListener != null) controllerClickListener.onClick(view);
-
-        } else if (view.getId() == R.id.tvEndPayButton || view.getId() == R.id.tvPayButton) {
-            if (mMediaPlayer.isFullScreen()) {
-                doStartStopFullScreen();
+            if (controllerClickListener != null) controllerClickListener.onClick(v);
+        } else if (v.getId() == R.id.tvEndPayButton || v.getId() == R.id.tvPayButton) {
+            if (mControlWrapper.isFullScreen()) {
+                toggleFullScreen();
             }
-            if (controllerClickListener != null) controllerClickListener.onClick(view);
+            if (controllerClickListener != null) controllerClickListener.onClick(v);
 
-        } else if (view.getId() == R.id.iv_av_lock) {//先处理锁屏
+        } else if (v.getId() == R.id.iv_av_lock) {//先处理锁屏
             doLockUnlock();
         } else if (i == R.id.iv_av_back) {//返回键
-            if (mMediaPlayer.isFullScreen()) {
-                doStartStopFullScreen();
+            if (mControlWrapper.isFullScreen()) {
+                toggleFullScreen();
             } else {
                 //需要加接口
-                if (controllerClickListener != null) controllerClickListener.onClick(view);
+                if (controllerClickListener != null) controllerClickListener.onClick(v);
             }
         } else if (i == R.id.iv_av_back1) {//返回键
-            if (mMediaPlayer.isFullScreen()) {
-                doStartStopFullScreen();
+            if (mControlWrapper.isFullScreen()) {
+                toggleFullScreen();
             } else {
                 //需要加接口
-                if (controllerClickListener != null) controllerClickListener.onClick(view);
+                if (controllerClickListener != null) controllerClickListener.onClick(v);
             }
         } else if (i == R.id.iv_av_back2) {//返回键
-            if (mMediaPlayer.isFullScreen()) {
-                doStartStopFullScreen();
+            if (mControlWrapper.isFullScreen()) {
+                toggleFullScreen();
             } else {
                 //需要加接口
-                if (controllerClickListener != null) controllerClickListener.onClick(view);
+                if (controllerClickListener != null) controllerClickListener.onClick(v);
             }
         } else if (i == R.id.iv_av_miracast) {//投屏
             if (controllerClickListener != null) {
                 hide();
-                controllerClickListener.onClick(view);
+                controllerClickListener.onClick(v);
             }
         } else if (i == R.id.iv_av_download) {//下载
-            if (controllerClickListener != null) controllerClickListener.onClick(view);
+            if (controllerClickListener != null) controllerClickListener.onClick(v);
         } else if (i == R.id.iv_av_pip) {//画中画
-            if (controllerClickListener != null) controllerClickListener.onClick(view);
+            if (controllerClickListener != null) controllerClickListener.onClick(v);
         } else if (i == R.id.iv_av_scale) {//视频比例
             doScale();
         } else if (i == R.id.iv_av_play) {//播放
-            doPauseResume();
+            togglePlay();
         } else if (i == R.id.rl_av_fullscreen) {//全屏
-            doStartStopFullScreen();
+            toggleFullScreen();
         } else if (i == R.id.iv_av_next) {//下集
-            if (controllerClickListener != null) controllerClickListener.onClick(view);
+            if (controllerClickListener != null) controllerClickListener.onClick(v);
         } else if (i == R.id.iv_av_danmaku) {//弹幕开关
             onDanmakuChanged(false);
         } else if (i == R.id.tv_av_danmaku) {//显示弹幕发送框
@@ -924,98 +1022,51 @@ public class AvVideoController extends GestureVideoController implements View.On
         } else if (i == R.id.btn_pop_danmaku) {//发送弹幕
             sendDanmaku();
             if (controllerClickListener != null) {
-                view.setTag(et_danmaku.getText().toString());
-                controllerClickListener.onClick(view);
+                v.setTag(et_danmaku.getText().toString());
+                controllerClickListener.onClick(v);
             }
             et_danmaku.setText("");
         } else if (i == R.id.tv_av_speed) {//视频播放速度
             if (controllerClickListener != null) {
                 hide();
-                view.setTag(curSpeedSelect);
-                controllerClickListener.onClick(view);
+                v.setTag(curSpeedSelect);
+                controllerClickListener.onClick(v);
             }
         } else if (i == R.id.tv_av_hd) {//视频清晰度
-            if (controllerClickListener != null) controllerClickListener.onClick(view);
+            if (controllerClickListener != null) controllerClickListener.onClick(v);
         } else if (i == R.id.tv_av_selected) {//选集
             if (controllerClickListener != null) {
                 hide();
-                controllerClickListener.onClick(view);
+                controllerClickListener.onClick(v);
             }
         } else if (i == R.id.iv_av_replay) {//重新播放
             if (mReplayByCurProgress) {
-                mMediaPlayer.replay(true);
+                mControlWrapper.replay(true);
                 Intent intent = new Intent("cn.whiner.av.AvVideoController");
                 intent.putExtra("type", RECEIVER_TYPE_REPLAY);
                 LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
                 mReplayByCurProgress = false;
+                tv_replay.setVisibility(GONE);
                 System.out.println("进度6：==");
             } else {
-                mMediaPlayer.replay(true);
+                mControlWrapper.replay(true);
                 System.out.println("进度7：==");
             }
         } else if (i == R.id.tvPlaySource) {//选择播放源
             if (controllerClickListener != null) {
                 hide();
-                controllerClickListener.onClick(view);
+                controllerClickListener.onClick(v);
             }
         } else {
-            ToastUtils.showShort("未知View" + view.getId());
+            ToastUtils.showShort("未知View" + v.getId());
         }
     }
 
-    //锁定处理
-    protected void doLockUnlock() {
-        if (mIsLocked) {
-            mIsLocked = false;
-            mIsGestureEnabled = true;
-            mShowing = false;
-            show();
-            ToastUtils.showShort(R.string.av_unlocked);
-        } else {
-            hide();
-            mIsLocked = true;
-            mIsGestureEnabled = false;
-            ToastUtils.showShort(R.string.av_locked);
-        }
-        iv_lock.setSelected(mIsLocked);
-        mMediaPlayer.setLock(mIsLocked);
-    }
 
-    //视频比例模式
-    private int scale_val = 0;
 
-    protected void doScale() {
-        scale_val++;
-        if (scale_val >= 6) scale_val = 0;
-        switch (scale_val) {
-            case 0:
-                ToastUtils.showShort("默认");
-                mMediaPlayer.setScreenScale(VideoView.SCREEN_SCALE_DEFAULT);
-                break;
-            case 1:
-                ToastUtils.showShort("16:9");
-                mMediaPlayer.setScreenScale(VideoView.SCREEN_SCALE_16_9);
-                break;
-            case 2:
-                ToastUtils.showShort("4:3");
-                mMediaPlayer.setScreenScale(VideoView.SCREEN_SCALE_4_3);
-                break;
-            case 3:
-                ToastUtils.showShort("填充");
-                mMediaPlayer.setScreenScale(VideoView.SCREEN_SCALE_MATCH_PARENT);
-                break;
-            case 4:
-                ToastUtils.showShort("原始大小");
-                mMediaPlayer.setScreenScale(VideoView.SCREEN_SCALE_ORIGINAL);
-                break;
-            case 5:
-                ToastUtils.showShort("居中裁剪");
-                mMediaPlayer.setScreenScale(VideoView.SCREEN_SCALE_CENTER_CROP);
-                break;
-            default:
-                break;
-        }
-    }
+
+
+
 
     //弹幕开关
     public void onDanmakuChanged(boolean isFirst) {
@@ -1090,6 +1141,40 @@ public class AvVideoController extends GestureVideoController implements View.On
 
     public void setSpeed(String speed) {
         tv_speed.setText(speed);
+    }
+    //视频比例模式
+    private int scale_val = 0;
+    protected void doScale() {
+        scale_val++;
+        if (scale_val >= 6) scale_val = 0;
+        switch (scale_val) {
+            case 0:
+                ToastUtils.showShort("默认");
+                mControlWrapper.setScreenScaleType(VideoView.SCREEN_SCALE_DEFAULT);
+                break;
+            case 1:
+                ToastUtils.showShort("16:9");
+                mControlWrapper.setScreenScaleType(VideoView.SCREEN_SCALE_16_9);
+                break;
+            case 2:
+                ToastUtils.showShort("4:3");
+                mControlWrapper.setScreenScaleType(VideoView.SCREEN_SCALE_4_3);
+                break;
+            case 3:
+                ToastUtils.showShort("填充");
+                mControlWrapper.setScreenScaleType(VideoView.SCREEN_SCALE_MATCH_PARENT);
+                break;
+            case 4:
+                ToastUtils.showShort("原始大小");
+                mControlWrapper.setScreenScaleType(VideoView.SCREEN_SCALE_ORIGINAL);
+                break;
+            case 5:
+                ToastUtils.showShort("居中裁剪");
+                mControlWrapper.setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
+                break;
+            default:
+                break;
+        }
     }
 
     private int curSpeedSelect = SPUtils.getInstance().getInt(KEY_SPEED_INDEX, 3);

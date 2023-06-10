@@ -30,7 +30,6 @@ import cn.mahua.vod.ui.share.ShareActivity
 import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.DensityUtils.dp2px
 import cn.mahua.vod.utils.DensityUtils.getScreenWidth
-import cn.mahua.vod.utils.LoginUtils
 import cn.mahua.vod.utils.Retrofit2Utils
 import cn.mahua.vod.utils.UserUtils
 import cn.mahua.vod.utils.decoration.GridItemDecoration
@@ -48,14 +47,15 @@ import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
-import com.zgalaxy.sdk.BannerSdk
-import com.zgalaxy.sdk.listener.BannerAdListener
 import jaygoo.library.m3u8downloader.control.DownloadPresenter
 import jaygoo.library.m3u8downloader.db.table.M3u8DoneInfo
 import jaygoo.library.m3u8downloader.db.table.M3u8DownloadingInfo
 import kotlinx.android.synthetic.main.fragment_play_detail.*
 import me.drakeet.multitype.MultiTypeAdapter
 import org.litepal.LitePalApplication
+import pro.dxys.fumiad.FuMiAd
+import pro.dxys.fumiad.FumiBannerListener
+import pro.dxys.fumiad.FumiNativeAdListener
 import java.util.*
 
 class VideoDetailFragment : BaseFragment() {
@@ -157,11 +157,6 @@ class VideoDetailFragment : BaseFragment() {
             awvPlayerDown.visibility = View.GONE
         } else if(ad != null ||ad.status == 1) {
             if(ad?.description.isNullOrEmpty()) {
-                try {
-                    banner()
-                }catch (e: Exception) {
-
-                }
             }else {
                 awvPlayerDown.visibility = View.VISIBLE
                 awvPlayerDown.loadHtmlBody(ad.description)
@@ -338,21 +333,42 @@ class VideoDetailFragment : BaseFragment() {
         }
     }
     private fun banner() {
-        mBannerLayout = headerView.findViewById(R.id.bannerLayout)
-        BannerSdk.getInstance(playActivity).loadBannerAdvert(mBannerLayout, object : BannerAdListener {
-            override fun onError(i: Int, s: String) {
-                mBannerLayout.removeAllViews()
-            }
-            override fun onAdClicked() {
-            }
-            override fun onAdShow() {}
-            override fun onSelectedClose(s: String) {
-            }
-            override fun onAdvertStatusClose() {
+        Log.e("fumiad", "进入")
 
+        FuMiAd.addNativeAd(playActivity,headerView.findViewById<AdWebView>(R.id.rl_native_horizontal),true, object : FumiNativeAdListener {
+            override fun onAdShow() {
+                Log.e("fumiad", "onAdShow")
+            }
+
+            override fun onError(s: String) {
+                Log.e("fumiad", "onError:$s")
+            }
+
+            override fun onAdClose() {
+                Log.e("fumiad", "onAdClose")
+            }
+
+            override fun onAdClick() {
+                Log.e("fumiad", "onAdClick")
             }
         })
     }
+    //    private fun banner() {
+//        mBannerLayout = headerView.findViewById(R.id.bannerLayout)
+//        BannerSdk.getInstance(playActivity).loadBannerAdvert(mBannerLayout, object : BannerAdListener {
+//            override fun onError(i: Int, s: String) {
+//                mBannerLayout.removeAllViews()
+//            }
+//            override fun onAdClicked() {
+//            }
+//            override fun onAdShow() {}
+//            override fun onSelectedClose(s: String) {
+//            }
+//            override fun onAdvertStatusClose() {
+//
+//            }
+//        })
+//    }
     private fun collection() {
         val vodService = Retrofit2Utils.INSTANCE.createByGson(VodService::class.java)
         if (AgainstCheatUtil.showWarn(vodService)) {
@@ -730,7 +746,7 @@ class VideoDetailFragment : BaseFragment() {
             val playerInfo = playFromBean.player_info
             val parse = playerInfo.parse2
             val urls = playFromBean.urls
-
+            val urlsize=urls.size
 
             val square = Square(downIndex + 1) {
                 val downloadTitle = "${mVodBean.vodName}\t${urls[downIndex].name}"
