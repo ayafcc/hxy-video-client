@@ -37,7 +37,7 @@ android {
         variant.outputs.each { output ->
             if (output.outputFileName != null && output.outputFileName.endsWith('.apk')) {
                 def fileName
-                fileName = "tiantian_${variant.versionName}.apk"
+                fileName = "botship_${variant.versionName}.apk"
                 output.outputFileName = fileName
             }
         }
