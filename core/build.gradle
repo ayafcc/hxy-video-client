@@ -33,7 +33,9 @@ dependencies {
     implementation 'org.fourthline.cling:cling-support:2.1.1'
 //
     // Jetty library
-    implementation 'org.eclipse.jetty:jetty-server:8.1.18.v20150929'
-    implementation 'org.eclipse.jetty:jetty-servlet:8.1.18.v20150929'
+    implementation('org.eclipse.jetty:jetty-server:8.1.18.v20150929') {
+        exclude group: 'org.eclipse.jetty.orbit', module: 'javax.servlet'
+    }
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'org.eclipse.jetty:jetty-client:8.1.18.v20150929'
 }

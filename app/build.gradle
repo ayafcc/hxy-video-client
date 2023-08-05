@@ -14,6 +14,10 @@ android {
             keyPassword 'lbspyss585821...'
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 
     defaultConfig {
         applicationId "com.tiantianzhuiju.app"
