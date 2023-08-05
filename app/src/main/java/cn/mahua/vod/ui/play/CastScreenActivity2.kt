@@ -68,13 +68,13 @@ class CastScreenActivity2 : BaseActivity() {
 
     override fun initData() {
         super.initData()
-        mVodBean = intent.getParcelableExtra("vod") as VodBean
+        mVodBean = intent.getParcelableExtra("vod")!!
         playSourceIndex = intent.getIntExtra("playSourceIndex", 0)
         urlIndex = intent.getIntExtra("urlIndex", 0)
-        vodurl = intent.getStringExtra("vodurl")
+        vodurl = intent.getStringExtra("vodurl")!!
         vodLong = intent.getLongExtra("vodLong", 1)
 //        device = intent.getParcelableExtra("device")
-        playFormList = intent.getParcelableArrayListExtra<PlayFromBean>(("playFormList"))
+        playFormList = intent.getParcelableArrayListExtra<PlayFromBean>(("playFormList"))!!
 
         playFrom = playFormList[playSourceIndex]
         playList = playFrom.urls

@@ -57,8 +57,8 @@ class StorePlayActivity : BaseActivity() {
 
         videoView.setVideoController(controller)
 
-        localUrl = intent.getStringExtra("play_url")
-        localName = intent.getStringExtra("play_name")
+        localUrl = intent.getStringExtra("play_url")!!
+        localName = intent.getStringExtra("play_name")!!
         var file = File(localUrl)
 
 

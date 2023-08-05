@@ -210,7 +210,6 @@ public class JieXiWebView extends WebView {
         webSetting.setSupportZoom(true);
         webSetting.setUseWideViewPort(true);
         webSetting.setSupportMultipleWindows(true);
-        webSetting.setAppCacheEnabled(false);
         webSetting.setCacheMode(WebSettings.LOAD_NO_CACHE);
         webSetting.setGeolocationEnabled(true);
         webSetting.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);

@@ -88,7 +88,7 @@ public class OkHttpUtils {
     public void getDataAsynFromNet(String url, final MyNetCall myNetCall) {
         //1 构造Request
         Request.Builder builder = new Request.Builder();
-        Request request = builder.get().url(url).removeHeader("User-Agent").addHeader("User-Agent","okhttp/4.1.0/luob.app").addHeader("Referer", ApiConfig.BASE_URL).build();
+        Request request = builder.get().url(url).removeHeader("User-Agent").addHeader("User-Agent","okhttp/4.1.0/botship.app").addHeader("Referer", ApiConfig.BASE_URL).build();
         //2 将Request封装为Call
         Call call = mOkHttpClient.newCall(request);
         //3 执行Call
