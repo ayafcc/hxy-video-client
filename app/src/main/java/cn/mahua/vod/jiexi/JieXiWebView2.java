@@ -75,7 +75,7 @@ public class JieXiWebView2 extends WebView {
     private Context mContext;
     static Handler mainHanlder = new Handler(Looper.getMainLooper());
     private boolean mIsEnd = false;
-    private Map<String, String> headers = new Map<String, String>() {
+    private Map<String, String> headers = new Map<>() {
         @Override
         public int size() {
             return 0;
