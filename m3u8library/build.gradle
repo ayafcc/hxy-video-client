@@ -12,11 +12,11 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 28
-        targetSdkVersion 33
+        minSdkVersion 19
+        targetSdkVersion 26
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

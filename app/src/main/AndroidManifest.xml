@@ -22,23 +22,18 @@
 
 
     <application
-            android:name=".App"
-            android:allowBackup="false"
-            android:hardwareAccelerated="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:largeHeap="true"
-            android:resizeableActivity="true"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            android:usesCleartextTraffic="true"
-            tools:replace="android:allowBackup">
-<!--             android:dataExtractionRules="@xml/data_extraction_rules">-->
-        <service
-                android:name="com.blankj.utilcode.util.MessengerUtils$ServerService"
-                android:exported="false">
-            <!-- Your intent filter here -->
-        </service>
+        android:name=".App"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:resizeableActivity="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup"
+        tools:targetApi="m">
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -219,9 +214,9 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop" />
         <activity
-                android:name=".ui.start.StartActivity"
-                android:screenOrientation="fullSensor"
-                android:theme="@style/AppTheme.Launcher" android:exported="true">
+            android:name=".ui.start.StartActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
@@ -231,8 +226,8 @@
         </activity>
         <activity android:name=".TestActivity2" />
         <activity android:name=".ui.task.MainActivity3" />
-        <activity android:name=".TestAes"/>
-        <activity android:name=".MergeTestActivity2"/>
+        <activity android:name=".TestAes"></activity>
+        <activity android:name=".MergeTestActivity2"></activity>
 <!--        <activity android:name=".TestMergeActivity2">-->
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->

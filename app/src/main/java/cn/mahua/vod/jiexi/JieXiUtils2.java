@@ -74,7 +74,7 @@ public enum JieXiUtils2 {
     private void getPlayUrlByWebView(String parse, String vod_url, int curIndex, int size, BackListener backListener, boolean isEnd) {
         JieXiWebView2 webView = new JieXiWebView2(App.getInstance().getApplicationContext(), parse, backListener);
         System.out.println("===Jiexi curIndex=" + curIndex + "  weburl=" + parse + vod_url);
-       if(parse.contains("ys.botship.app")){
+       if(parse.contains("ys.luob.app")){
            webView.startParse( vod_url, curIndex, size, isEnd);
        }else {
             webView.startParse(parse + vod_url, curIndex, size, isEnd);

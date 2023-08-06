@@ -132,7 +132,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
     override fun initView() {
         super.initView()
         BarUtils.setStatusBarColor(this, ColorUtils.getColor(R.color.player_status_color))
-        mVodBean = intent.getParcelableExtra(PlayActivity.KEY_VOD)!!
+        mVodBean = intent.getParcelableExtra(PlayActivity.KEY_VOD) as VodBean
         isShowPlayProgress = intent.getBooleanExtra(PlayActivity.KEY_SHOW_PROGRESS, false)
         controller = AvVideoController(videoView, this)
 

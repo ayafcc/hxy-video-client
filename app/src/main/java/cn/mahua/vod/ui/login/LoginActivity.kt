@@ -283,8 +283,8 @@ class LoginActivity : BaseActivity(), Handler.Callback {
         }
     }
 
-    override fun handleMessage(msg: Message): Boolean {
-        return when (msg.what) {
+    override fun handleMessage(msg: Message?): Boolean {
+        return when (msg?.what) {
             WHAT_COUNT -> {
                 if (msg.arg1 == MAX_NUM) {
                     tv_send.isEnabled = true

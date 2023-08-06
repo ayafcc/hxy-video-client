@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 28
 
 
     defaultConfig {
-        minSdkVersion 28
-        targetSdkVersion 33
+        minSdkVersion 22
+        targetSdkVersion 28
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -19,8 +19,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = 1.11
-        targetCompatibility = 1.11
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 
 }
