@@ -6,7 +6,7 @@ public class ApiConfig {
     public static final String getStart = "/api.php/v1.main/startup";
     public static final String getTypeList = "/api.php/v1.vod/types";
     public static final String getBannerList = "/api.php/v1.vod";
-    public static final String codeurl = "http://74.120.170.55:8090";
+    public static final String codeurl = "http://xc.45h.cn";
     //专题
     public static final String getTopicList = "/api.php/v1.topic/topicList";
     //专题详情

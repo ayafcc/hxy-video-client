@@ -270,7 +270,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         vodService
                 .checkVersion("v" + AppUtils.getAppVersionName(), 1 + "")
                 .compose(new IoMainScheduler<>())
-                .subscribe(new BaseObserver<>(true) {
+                .subscribe(new BaseObserver<BaseResult<AppUpdateBean>>(true) {
 
                     @Override
                     public void onError(@NotNull ResponseException e) {
