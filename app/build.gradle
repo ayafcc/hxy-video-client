@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdk 33
+    compileSdkVersion 33
 
     signingConfigs {
         release {
@@ -33,7 +33,7 @@ android {
         }
     }
 
-    android.applicationVariants.configureEach { variant ->
+    android.applicationVariants.all { variant ->
         variant.outputs.each { output ->
             if (output.outputFileName != null && output.outputFileName.endsWith('.apk')) {
                 def fileName
