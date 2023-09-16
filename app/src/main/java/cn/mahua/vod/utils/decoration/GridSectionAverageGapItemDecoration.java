@@ -48,18 +48,18 @@ public class GridSectionAverageGapItemDecoration extends RecyclerView.ItemDecora
         }
     }
 
-    private float                            gapHorizontalDp;
-    private float                            gapVerticalDp;
-    private float                            sectionEdgeHPaddingDp;
-    private float                            sectionEdgeVPaddingDp;
+    private final float                            gapHorizontalDp;
+    private final float                            gapVerticalDp;
+    private final float                            sectionEdgeHPaddingDp;
+    private final float                            sectionEdgeVPaddingDp;
     private int                              gapHSizePx = -1;
     private int                              gapVSizePx = -1;
     private int                              sectionEdgeHPaddingPx;
     private int                              eachItemHPaddingPx; //每个条目应该在水平方向上加的padding 总大小，即=paddingLeft+paddingRight
     private int                              sectionEdgeVPaddingPx;
-    private List<Section>                    mSectionList = new ArrayList<>();
+    private final List<Section>                    mSectionList = new ArrayList<>();
     private BaseSectionQuickAdapter mAdapter;
-    private RecyclerView.AdapterDataObserver mDataObserver = new RecyclerView.AdapterDataObserver() {
+    private final RecyclerView.AdapterDataObserver mDataObserver = new RecyclerView.AdapterDataObserver() {
         @Override
         public void onChanged() {
             markSections();

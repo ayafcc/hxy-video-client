@@ -136,12 +136,12 @@ public class M3u8ItemViewBinder extends ItemViewBinder<M3u8Item, M3u8ItemViewBin
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemContorl;
-        TextView itemState;
-        TextView itemTitle;
-        ImageView itemIcon;
-        TextView itemSpeed;
-        android.widget.ProgressBar itemProgress;
+        final TextView itemContorl;
+        final TextView itemState;
+        final TextView itemTitle;
+        final ImageView itemIcon;
+        final TextView itemSpeed;
+        final android.widget.ProgressBar itemProgress;
 
         ViewHolder(View itemView) {
             super(itemView);

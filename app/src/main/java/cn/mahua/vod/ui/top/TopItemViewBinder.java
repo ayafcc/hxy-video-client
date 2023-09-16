@@ -109,8 +109,8 @@ public class TopItemViewBinder extends ItemViewBinder<TopBean, TopItemViewBinder
         private @NonNull
         final RecyclerView recyclerView;
 
-        private MultiTypeAdapter adapter;
-        private TopChildItemViewBinder topChildItemViewBinder;
+        private final MultiTypeAdapter adapter;
+        private final TopChildItemViewBinder topChildItemViewBinder;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -42,8 +42,8 @@ import okhttp3.Response;
 public class JieXiWebView extends WebView {
     private static final String TAG = "JieXi--";
     private int index = 0;
-    private String[] parseUrls;
-    private String url;
+    private final String[] parseUrls;
+    private final String url;
     private Map<String, String> headers = new Map<String, String>() {
         @Override
         public int size() {
@@ -130,9 +130,9 @@ public class JieXiWebView extends WebView {
     private int time = 8;//一条线路探8s
     private Timer timer;
     private TimerTask task;
-    private Handler handler = new Handler();
-    private Context mContext;
-    static Handler mainHanlder = new Handler(Looper.getMainLooper());
+    private final Handler handler = new Handler();
+    private final Context mContext;
+    static final Handler mainHanlder = new Handler(Looper.getMainLooper());
 
     public JieXiWebView(Context context, String parses, String url, int curParseIndex, BackListener backListener) {
         super(context);
@@ -182,7 +182,7 @@ public class JieXiWebView extends WebView {
 
     public void startParse() {
         if (isWifiProxy() || isVpnUsed()) {
-            AgainstCheatUtil.INSTANCE.showWarn(null);
+            AgainstCheatUtil.showWarn(null);
             return;
         }
         String realUrl = parseUrls[index] + url;
@@ -218,7 +218,7 @@ public class JieXiWebView extends WebView {
     }
 
 
-    private WebViewClient webViewClient = new WebViewClient() {
+    private final WebViewClient webViewClient = new WebViewClient() {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {

@@ -6,5 +6,5 @@ public class UpdateEvent {
         this.isScroll = isScroll;
     }
 
-    public boolean isScroll;
+    public final boolean isScroll;
 }

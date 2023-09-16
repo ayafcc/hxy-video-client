@@ -130,15 +130,15 @@ public class CardChildItemViewBinder extends ItemViewBinder<Vod, CardChildItemVi
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private @NonNull
+        private final @NonNull
         ImageView icon;
-        private @NonNull
+        private final @NonNull
         TextView tip;
-        private @NonNull
+        private final @NonNull
         TextView up_title;
-        private @NonNull
+        private final @NonNull
         TextView title;
-        private @NonNull
+        private final @NonNull
         TextView blurb;
 
         ViewHolder(View itemView) {

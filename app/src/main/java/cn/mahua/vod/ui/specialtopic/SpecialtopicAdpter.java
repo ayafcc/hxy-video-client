@@ -15,9 +15,9 @@ import cn.mahua.vod.bean.SpecialtTopicBean;
 import cn.mahua.vod.utils.SimpleUtils;
 
 public class SpecialtopicAdpter extends BaseAdapter {
-    private List<SpecialtTopicBean> coll;// 消息对象数组
-    private LayoutInflater mInflater;
-    private Context context;
+    private final List<SpecialtTopicBean> coll;// 消息对象数组
+    private final LayoutInflater mInflater;
+    private final Context context;
 
     public SpecialtopicAdpter(Context context, List<SpecialtTopicBean> coll) {
         this.coll = coll;

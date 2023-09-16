@@ -80,9 +80,9 @@ public class SquareViewBinder extends ItemViewBinder<Square, SquareViewBinder.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView squareView;
+        private final TextView squareView;
         private Square square;
-        ImageView statuTag;
+        final ImageView statuTag;
 
         ViewHolder(final View itemView) {
             super(itemView);

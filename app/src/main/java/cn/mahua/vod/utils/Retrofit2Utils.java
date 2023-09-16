@@ -33,8 +33,8 @@ public enum Retrofit2Utils {
     private static final int DEFAULT_TIME_OUT = 5;//超时时间 5s
     private static final int DEFAULT_READ_TIME_OUT = 5;
 
-    private Retrofit mGsonRetrofit;
-    private Retrofit mScalarsRetrofit;
+    private final Retrofit mGsonRetrofit;
+    private final Retrofit mScalarsRetrofit;
 
     Retrofit2Utils() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();

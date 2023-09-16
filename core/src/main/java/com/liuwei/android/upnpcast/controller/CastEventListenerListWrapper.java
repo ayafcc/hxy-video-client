@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CastEventListenerListWrapper implements ICastEventListener
 {
-    private List<ICastEventListener> mCastListenerList;
+    private final List<ICastEventListener> mCastListenerList;
 
     public CastEventListenerListWrapper(List<ICastEventListener> list)
     {

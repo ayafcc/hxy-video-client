@@ -79,7 +79,7 @@ public class LiveFragment extends BaseMainFragment {
 //        }
 
         if (liveBeans == null) {
-            liveBeans = new ArrayList<LiveBean>();
+            liveBeans = new ArrayList<>();
         }
 
         liveAdpter = new LiveAdpter(getActivity(), liveBeans);

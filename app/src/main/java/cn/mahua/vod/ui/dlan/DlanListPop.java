@@ -32,7 +32,7 @@ public class DlanListPop extends CenterPopupView {
 
 
     private DeviceAdapter mDeviceAdapter;
-    Context mContext;
+    final Context mContext;
     OnSelectDeviceListener onSelectDeviceListener;
 
 
@@ -89,7 +89,7 @@ public class DlanListPop extends CenterPopupView {
     }
 
 
-    public DeviceAdapter.OnItemSelectedListener mOnClickListener = (castDevice, selected) -> {
+    public final DeviceAdapter.OnItemSelectedListener mOnClickListener = (castDevice, selected) -> {
         if (selected) {
             mDeviceAdapter.setSelectedDevice(castDevice);
 //

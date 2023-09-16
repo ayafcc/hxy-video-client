@@ -15,7 +15,7 @@ public abstract class BaseSession implements ICastSession
 {
     protected final ILogger mLogger = new DefaultLoggerImpl(this);
 
-    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     private Timer mTimer;
 

@@ -43,9 +43,9 @@ public class FiltrateItemViewBinder extends ItemViewBinder<FiltrateResult, Filtr
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private RecyclerView recyclerView;
-        private MultiTypeAdapter adapter;
-        private VodItemViewBinder vodItemViewBinder;
+        private final RecyclerView recyclerView;
+        private final MultiTypeAdapter adapter;
+        private final VodItemViewBinder vodItemViewBinder;
 
         ViewHolder(View itemView) {
             super(itemView);

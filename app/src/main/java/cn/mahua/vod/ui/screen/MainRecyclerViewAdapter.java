@@ -39,11 +39,11 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     private final static int VIEW_TYPE_DATA = 1;
 
     //data
-    private Activity mActivity;
+    private final Activity mActivity;
     private List<VodBean> dataList;
     //ui
     private FrameLayout headerContainer;
-    private RecyclerView mRecyclerView;
+    private final RecyclerView mRecyclerView;
     MultiTypeAdapter adapter1;
     MultiTypeAdapter adapter2;
     MultiTypeAdapter adapter3;
@@ -332,15 +332,15 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     static class DataViewHolder extends RecyclerView.ViewHolder {
 
-        private @NonNull
+        private final @NonNull
         ImageView icon;
-        private @NonNull
+        private final @NonNull
         TextView tip;
-        private @NonNull
+        private final @NonNull
         TextView up_title;
-        private @NonNull
+        private final @NonNull
         TextView title;
-        private @NonNull
+        private final @NonNull
         TextView subTitle;
 
         DataViewHolder(View itemView) {

@@ -40,10 +40,10 @@ public class NoticeView extends FrameLayout implements View.OnClickListener {
     private int mCurrentNotice;
     private AnimationSet mEnterAnimSet;
     private AnimationSet mExitAnimSet;
-    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
     private NoticeRunnable mNoticeRunnalbe;
     private OnItemClickListener mListener;
-    private TextPaint textPaint;
+    private final TextPaint textPaint;
 
 
     public NoticeView(Context context) {

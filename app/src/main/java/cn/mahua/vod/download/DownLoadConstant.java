@@ -11,7 +11,7 @@ import java.io.File;
  */
 
 public class DownLoadConstant {
-    public static String PATH = getSDPath()+"/ZLdownDemo/";
+    public static final String PATH = getSDPath()+"/ZLdownDemo/";
 
     public static String PATH1 = Environment.getExternalStorageDirectory().getPath()+"/ZLdownDemo";
     //权限sd卡写权限key常量

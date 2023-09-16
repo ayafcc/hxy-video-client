@@ -22,13 +22,13 @@ import cn.mahua.vod.R;
  */
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceHolder> implements OnRegistryDeviceListener
 {
-    private List<CastDevice> mDeviceList = new ArrayList<>();
+    private final List<CastDevice> mDeviceList = new ArrayList<>();
 
-    private LayoutInflater mLayoutInflater;
+    private final LayoutInflater mLayoutInflater;
 
-    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
-    private OnItemSelectedListener mOnItemSelectedListener;
+    private final OnItemSelectedListener mOnItemSelectedListener;
 
     private CastDevice mSelectedDevice;
 

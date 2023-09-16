@@ -33,13 +33,13 @@ import java.util.Set;
  */
 public abstract class BaseCastEventSubscription extends SubscriptionCallback
 {
-    protected Handler mHandler = new Handler(Looper.getMainLooper());
+    protected final Handler mHandler = new Handler(Looper.getMainLooper());
 
     protected final ILogger mLogger = new DefaultLoggerImpl(this);
 
-    protected ICastControlListener mControlListener;
+    protected final ICastControlListener mControlListener;
 
-    protected EventCallbackListener mEventCallback;
+    protected final EventCallbackListener mEventCallback;
 
     public interface EventCallbackListener
     {
@@ -169,7 +169,7 @@ public abstract class BaseCastEventSubscription extends SubscriptionCallback
     // -------------------------------------------------------------------------------------------
     public static class AvTransportSubscription extends BaseCastEventSubscription
     {
-        private LastChangeParser mLastChangeParser;
+        private final LastChangeParser mLastChangeParser;
 
         public AvTransportSubscription(Service service, ICastControlListener listener, EventCallbackListener eventCallback)
         {
@@ -258,7 +258,7 @@ public abstract class BaseCastEventSubscription extends SubscriptionCallback
 
     public static class RenderSubscription extends BaseCastEventSubscription
     {
-        private LastChangeParser mLastChangeParser;
+        private final LastChangeParser mLastChangeParser;
 
         public RenderSubscription(Service service, ICastControlListener listener, EventCallbackListener eventCallback)
         {

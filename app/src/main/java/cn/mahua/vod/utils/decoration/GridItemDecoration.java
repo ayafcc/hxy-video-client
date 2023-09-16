@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class GridItemDecoration extends RecyclerView.ItemDecoration {
 
-    private Drawable dividerDrawable;
+    private final Drawable dividerDrawable;
     private int orientation = LinearLayoutManager.VERTICAL;
 
     public GridItemDecoration(Drawable divider) {

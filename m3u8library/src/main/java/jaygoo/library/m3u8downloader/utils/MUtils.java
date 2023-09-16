@@ -52,16 +52,16 @@ import jaygoo.library.m3u8downloader.bean.M3U8TsInfo;
 public class MUtils {
     private static final String TAG = "MUtils";
     //重试次数
-    public static int retryCount = 30;
+    public static final int retryCount = 30;
 
     //链接连接超时时间（单位：毫秒）
-    public static long timeoutMillisecond = 3000L;
+    public static final long timeoutMillisecond = 3000L;
     //自定义请求头
-    public static Map<String, Object> requestHeaderMap = new HashMap<>();
+    public static final Map<String, Object> requestHeaderMap = new HashMap<>();
     //key是否为字节
-    public static boolean isByte = false;
+    public static final boolean isByte = false;
     //密钥字节
-    public static byte[] keyBytes = new byte[16];
+    public static final byte[] keyBytes = new byte[16];
     private static OnTaskMergeListener onmerge ;
     public static void  mergelist(OnTaskMergeListener onmerges){
         onmerge= onmerges;
@@ -341,9 +341,9 @@ public class MUtils {
         return true;
     }
 
-    private static float KB = 1024;
-    private static float MB = 1024 * KB;
-    private static float GB = 1024 * MB;
+    private static final float KB = 1024;
+    private static final float MB = 1024 * KB;
+    private static final float GB = 1024 * MB;
 
     /**
      * 格式化文件大小

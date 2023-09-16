@@ -15,9 +15,9 @@ import cn.mahua.vod.bean.GameBean;
 import cn.mahua.vod.utils.SimpleUtils;
 
 public class GameAdpter extends BaseAdapter {
-    private List<GameBean> coll;// 消息对象数组
-    private LayoutInflater mInflater;
-    private Context context;
+    private final List<GameBean> coll;// 消息对象数组
+    private final LayoutInflater mInflater;
+    private final Context context;
 
     public GameAdpter(Context context, List<GameBean> coll) {
         this.coll = coll;

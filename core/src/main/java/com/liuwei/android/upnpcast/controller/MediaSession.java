@@ -19,11 +19,11 @@ public class MediaSession extends BaseSession
 {
     private static final int POSITION_INTERVAL = 500;
 
-    private ControlPoint mControlPoint;
+    private final ControlPoint mControlPoint;
 
-    private ICastActionFactory mCastActionFactory;
+    private final ICastActionFactory mCastActionFactory;
 
-    private ICastControlListener mControlListener;
+    private final ICastControlListener mControlListener;
 
     private SubscriptionCallback mAvServiceSubscription;
 
@@ -112,7 +112,7 @@ public class MediaSession extends BaseSession
 
     private boolean mSubscriptionCallback = false;
 
-    private EventCallbackListener mEventCallbackListener = new EventCallbackListener()
+    private final EventCallbackListener mEventCallbackListener = new EventCallbackListener()
     {
         @Override
         public void established(GENASubscription subscription)

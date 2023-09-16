@@ -54,7 +54,7 @@ public class NLUpnpCastManager implements IUpnpCast
 
     private NLUpnpCastService mUpnpCastService;
 
-    private ILogger mLogger = new DefaultLoggerImpl(this);
+    private final ILogger mLogger = new DefaultLoggerImpl(this);
 
     private NLUpnpCastManager()
     {
@@ -86,7 +86,7 @@ public class NLUpnpCastManager implements IUpnpCast
         }
     }
 
-    private ServiceConnection mUpnpCastServiceConnection = new ServiceConnection()
+    private final ServiceConnection mUpnpCastServiceConnection = new ServiceConnection()
     {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder)
@@ -181,9 +181,9 @@ public class NLUpnpCastManager implements IUpnpCast
         mNLDeviceRegistryListener.removeRegistryListener(listener);
     }
 
-    private NLDeviceRegistryListener mNLDeviceRegistryListener = new NLDeviceRegistryListener();
+    private final NLDeviceRegistryListener mNLDeviceRegistryListener = new NLDeviceRegistryListener();
 
-    private List<ICastEventListener> mListeners = new ArrayList<>();
+    private final List<ICastEventListener> mListeners = new ArrayList<>();
 
     public void addCastEventListener(ICastEventListener listener)
     {

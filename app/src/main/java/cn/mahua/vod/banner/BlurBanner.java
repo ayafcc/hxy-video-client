@@ -44,7 +44,7 @@ public class BlurBanner<T extends BannerData> extends Banner implements OnBanner
     }
 
 
-    private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+    private final ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -100,7 +100,7 @@ public class BlurBanner<T extends BannerData> extends Banner implements OnBanner
     }
 
     private boolean flag_is_first_bitmap = true;
-    private LinkedHashMap<String, Bitmap> blurBitmaps = new LinkedHashMap<>();
+    private final LinkedHashMap<String, Bitmap> blurBitmaps = new LinkedHashMap<>();
 
     @Override
     public void getBitmap(Bitmap bitmap, String key) {

@@ -6,5 +6,5 @@ public class SpeedEvent {
         this.speed = speed;
     }
 
-    public String speed;
+    public final String speed;
 }

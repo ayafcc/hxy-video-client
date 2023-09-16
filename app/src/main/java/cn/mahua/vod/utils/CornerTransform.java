@@ -20,7 +20,7 @@ import java.security.MessageDigest;
 import androidx.annotation.NonNull;
 
 public class CornerTransform implements Transformation<Bitmap> {
-    private BitmapPool mBitmapPool;
+    private final BitmapPool mBitmapPool;
 
     private float radius;
 

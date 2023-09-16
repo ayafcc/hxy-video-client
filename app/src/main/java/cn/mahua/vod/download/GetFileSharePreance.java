@@ -18,7 +18,7 @@ import static com.alibaba.fastjson.JSON.parseObject;
  *
  */
 public class GetFileSharePreance {
-	private Context context;
+	private final Context context;
 	public GetFileSharePreance(Context context) {
 		this.context = context;
 	}

@@ -71,9 +71,9 @@ public class JieXiWebView2 extends WebView {
 
         }
     };
-    private Handler handler = new Handler();
-    private Context mContext;
-    static Handler mainHanlder = new Handler(Looper.getMainLooper());
+    private final Handler handler = new Handler();
+    private final Context mContext;
+    static final Handler mainHanlder = new Handler(Looper.getMainLooper());
     private boolean mIsEnd = false;
     private Map<String, String> headers = new Map<String, String>() {
         @Override
@@ -200,7 +200,7 @@ public class JieXiWebView2 extends WebView {
         mIsEnd = isEnd;
         System.out.println("----- mIsEnd" + mIsEnd + "  curIndex=" + curIndex);
         if (isWifiProxy() || isVpnUsed()) {
-            AgainstCheatUtil.INSTANCE.showWarn(null);
+            AgainstCheatUtil.showWarn(null);
             return;
         }
         if(realUrl.contains("zhenbuka.com")){
@@ -252,7 +252,7 @@ public class JieXiWebView2 extends WebView {
     }
 
 
-    private WebViewClient webViewClient = new WebViewClient() {
+    private final WebViewClient webViewClient = new WebViewClient() {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {

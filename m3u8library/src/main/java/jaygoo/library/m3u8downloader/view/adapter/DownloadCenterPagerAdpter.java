@@ -18,9 +18,9 @@ import java.util.List;
 public class DownloadCenterPagerAdpter extends FragmentPagerAdapter {
 
 
-    private Context context;
-    private List<Fragment> listfragment;
-    private String[] tile = {"正在下载","已完成"};
+    private final Context context;
+    private final List<Fragment> listfragment;
+    private final String[] tile = {"正在下载","已完成"};
 
     public DownloadCenterPagerAdpter(FragmentManager fm, List<Fragment> listfragment, Activity activity) {
         super(fm);

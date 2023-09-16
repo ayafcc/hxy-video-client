@@ -28,8 +28,8 @@ public class M3U8Downloader {
 
     private long currentTime;
     private M3U8Task currentM3U8Task;
-    private DownloadQueue downLoadQueue;
-    private M3U8DownloadTask m3U8DownLoadTask;
+    private final DownloadQueue downLoadQueue;
+    private final M3U8DownloadTask m3U8DownLoadTask;
     private OnM3U8DownloadListener onM3U8DownloadListener;
 
     private M3U8Downloader() {
@@ -38,7 +38,7 @@ public class M3U8Downloader {
     }
 
     private static class SingletonHolder {
-        static M3U8Downloader instance = new M3U8Downloader();
+        static final M3U8Downloader instance = new M3U8Downloader();
     }
 
     public static M3U8Downloader getInstance() {
@@ -336,7 +336,7 @@ public class M3U8Downloader {
     /**
      * 归属于每个task自己的监听，获取到该task，传入监听，即可获取其状态
      */
-    private OnTaskDownloadListener onTaskDownloadListener = new OnTaskDownloadListener() {
+    private final OnTaskDownloadListener onTaskDownloadListener = new OnTaskDownloadListener() {
         private long lastLength;
         private float downloadProgress;
 

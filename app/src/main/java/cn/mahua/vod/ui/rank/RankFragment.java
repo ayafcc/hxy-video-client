@@ -122,21 +122,13 @@ public class RankFragment extends BaseMainFragment {
 
     private void initView() {
         popup = new RankPopup(getActivity());
-        popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                iv_show.setBackgroundResource(R.drawable.icon_open);
-            }
-        });
-        rl_day.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (popup.isShowing()) {
-                    popup.dismiss();
-                } else {
-                    iv_show.setBackgroundResource(R.drawable.icon_close);
-                    popup.showAtLocation(rl_day, Gravity.RIGHT | Gravity.TOP, DensityUtils.INSTANCE.dp2px(getActivity(), 5), DensityUtils.INSTANCE.dp2px(getActivity(), 100));
-                }
+        popup.setOnDismissListener(() -> iv_show.setBackgroundResource(R.drawable.icon_open));
+        rl_day.setOnClickListener(view -> {
+            if (popup.isShowing()) {
+                popup.dismiss();
+            } else {
+                iv_show.setBackgroundResource(R.drawable.icon_close);
+                popup.showAtLocation(rl_day, Gravity.RIGHT | Gravity.TOP, DensityUtils.INSTANCE.dp2px(getActivity(), 5), DensityUtils.INSTANCE.dp2px(getActivity(), 100));
             }
         });
         vp_rank.setOffscreenPageLimit(1);

@@ -15,8 +15,8 @@ import cn.mahua.vod.App;
 
 public enum JieXiUtils2 {
     INSTANCE;
-    private List<JieXiWebView2> webViewList;
-    private HashSet<Integer> failSet;
+    private final List<JieXiWebView2> webViewList;
+    private final HashSet<Integer> failSet;
     //创建基本线程池
     final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 10, 60, TimeUnit.SECONDS,
             new LinkedBlockingQueue<Runnable>(100));

@@ -32,7 +32,7 @@ import okhttp3.Response;
 public class OkHttpUtils {
     private static final byte[] LOCKER = new byte[0];
     private static OkHttpUtils mInstance;
-    private OkHttpClient mOkHttpClient;
+    private final OkHttpClient mOkHttpClient;
 
     private OkHttpUtils() {
         OkHttpClient.Builder ClientBuilder = new OkHttpClient.Builder();

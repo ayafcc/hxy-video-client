@@ -35,9 +35,9 @@ import cn.mahua.vod.utils.UserUtils;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class LiveAdpter extends RecyclerView.Adapter<LiveAdpter.ViewHolder> {
-    private List<LiveBean> coll;// 消息对象数组
-    private LayoutInflater mInflater;
-    private Context context;
+    private final List<LiveBean> coll;// 消息对象数组
+    private final LayoutInflater mInflater;
+    private final Context context;
 
     public LiveAdpter(Context context, List<LiveBean> coll) {
         this.coll = coll;
@@ -118,9 +118,9 @@ public class LiveAdpter extends RecyclerView.Adapter<LiveAdpter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        public LinearLayout llTotal;
-        public TextView tvName;
-        public ImageView coverImg;
+        public final LinearLayout llTotal;
+        public final TextView tvName;
+        public final ImageView coverImg;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

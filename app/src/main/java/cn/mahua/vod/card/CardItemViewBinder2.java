@@ -29,8 +29,8 @@ public class CardItemViewBinder2 extends ItemViewBinder<RecommendBean2, CardItem
         return this;
     }
 
-    private boolean isNeedMore;
-    private boolean isNeedFirst;
+    private final boolean isNeedMore;
+    private final boolean isNeedFirst;
     private boolean isLimitCount;
 
     public CardItemViewBinder2(boolean isNeedMore, boolean isNeedFirst) {
@@ -117,10 +117,10 @@ public class CardItemViewBinder2 extends ItemViewBinder<RecommendBean2, CardItem
 
         private @NonNull
         final RecyclerView recyclerView;
-        private MultiTypeAdapter adapter;
+        private final MultiTypeAdapter adapter;
         private CardFirstChildItemViewBinder cardFirstChildItemViewBinder;
-        private CardChildItemViewBinder cardChildItemViewBinder;
-        private TextView tvMore;
+        private final CardChildItemViewBinder cardChildItemViewBinder;
+        private final TextView tvMore;
 
         private final Button more;
         private final Button change;

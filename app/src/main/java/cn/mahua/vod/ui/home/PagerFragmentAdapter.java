@@ -12,8 +12,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 @SuppressWarnings("WeakerAccess")
 public class PagerFragmentAdapter extends FragmentStatePagerAdapter {
 
-    private String firstName;
-    private List<Type> mTitles = new ArrayList<>();
+    private final String firstName;
+    private final List<Type> mTitles = new ArrayList<>();
 
     public PagerFragmentAdapter(FragmentManager fm, @NonNull String name) {
         super(fm);

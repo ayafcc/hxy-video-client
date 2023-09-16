@@ -92,9 +92,9 @@ public class StartActivity extends BaseActivity {
     private boolean isInit = false;
     private static final int MAX_TIME = 5;
     private int start_time = MAX_TIME;
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
     private boolean isClosed = false;
-    private Runnable runnable = new Runnable() {
+    private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
             setTime(start_time);

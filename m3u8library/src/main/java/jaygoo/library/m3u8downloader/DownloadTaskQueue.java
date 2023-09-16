@@ -16,7 +16,7 @@ import jaygoo.library.m3u8downloader.utils.MD5Utils;
  */
 class DownloadTaskQueue {
 
-    private List<M3U8DownloadTask> queue;
+    private final List<M3U8DownloadTask> queue;
 
     public DownloadTaskQueue(){
         queue = new ArrayList<>();

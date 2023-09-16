@@ -4,6 +4,9 @@
     <string name="skip">跳过 %1$ds</string>
     <string name="title_home">首页</string>
     <string name="title_user">我的</string>
+    <string name="title_rank">榜单</string>
+    <string name="title_live">直播</string>
+    <string name="title_topic">专题</string>
 
     <string name="seek">查找片源</string>
     <string name="seek2">搜索关键字</string>

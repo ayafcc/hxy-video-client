@@ -17,7 +17,7 @@ import me.drakeet.multitype.MultiTypeAdapter;
 @SuppressWarnings("unused")
 public class ScreenClassItemViewBinder extends ItemViewBinder<Titles, ScreenClassItemViewBinder.ViewHolder> {
 
-    private BaseItemClickListener2 mBaseItemClickListener;
+    private final BaseItemClickListener2 mBaseItemClickListener;
 
     public ScreenClassItemViewBinder(BaseItemClickListener2 baseItemClickListener) {
         this.mBaseItemClickListener = baseItemClickListener;
@@ -40,8 +40,8 @@ public class ScreenClassItemViewBinder extends ItemViewBinder<Titles, ScreenClas
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final RecyclerView recyclerView;
-        private MultiTypeAdapter adapter;
-        private TitleItemViewBinder titleItemViewBinder;
+        private final MultiTypeAdapter adapter;
+        private final TitleItemViewBinder titleItemViewBinder;
         private List<Title> items;
 
         ViewHolder(View itemView) {

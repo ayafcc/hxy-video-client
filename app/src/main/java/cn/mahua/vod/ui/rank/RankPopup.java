@@ -19,7 +19,7 @@ import cn.mahua.vod.utils.DensityUtils;
 public class RankPopup extends PopupWindow implements View.OnClickListener {
     private LinearLayout linear_layout;
     private TextView dbp_text;
-    private Context context;
+    private final Context context;
 
     public RankPopup(final Activity context) {
         super(context);

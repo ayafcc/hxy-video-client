@@ -18,9 +18,9 @@ import cn.mahua.vod.utils.CornerTransform;
 import cn.mahua.vod.utils.DensityUtils;
 
 public class SpecialtopicAdpter2 extends BaseAdapter {
-    private List<SpecialtTopicBean> coll;// 消息对象数组
-    private LayoutInflater mInflater;
-    private Context context;
+    private final List<SpecialtTopicBean> coll;// 消息对象数组
+    private final LayoutInflater mInflater;
+    private final Context context;
 
     public SpecialtopicAdpter2(Context context, List<SpecialtTopicBean> coll) {
         this.coll = coll;

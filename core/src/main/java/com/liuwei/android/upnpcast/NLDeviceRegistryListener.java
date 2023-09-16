@@ -20,9 +20,9 @@ import java.util.List;
  */
 public class NLDeviceRegistryListener extends DefaultRegistryListener
 {
-    private ILogger mLog = new DefaultLoggerImpl(this);
+    private final ILogger mLog = new DefaultLoggerImpl(this);
 
-    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     /* Discovery performance optimization for very slow Android devices! */
     @Override
@@ -84,7 +84,7 @@ public class NLDeviceRegistryListener extends DefaultRegistryListener
         });
     }
 
-    private List<OnRegistryDeviceListener> mOnRegistryDeviceListener = new ArrayList<>();
+    private final List<OnRegistryDeviceListener> mOnRegistryDeviceListener = new ArrayList<>();
 
     public void addRegistryDeviceListener(OnRegistryDeviceListener listener)
     {

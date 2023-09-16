@@ -85,10 +85,10 @@ public class RecommendViewBinder extends ItemViewBinder<RecommendBean, Recommend
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvLikeRecommend;
-        TextView tvLikeActor;
-        TextView tvChange;
-        RecyclerView rvLikeRecommend;
+        final TextView tvLikeRecommend;
+        final TextView tvLikeActor;
+        final TextView tvChange;
+        final RecyclerView rvLikeRecommend;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

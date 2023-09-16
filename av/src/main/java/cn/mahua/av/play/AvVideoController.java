@@ -89,8 +89,8 @@ public class AvVideoController extends GestureVideoController implements View.On
     private static final String KEY_IS_OPEN_DANMAKU = "KEY_IS_OPEN_DANMAKU";
 
     private static final String TAG = "AvVideoController";
-    private Animation mShowAnim = AnimationUtils.loadAnimation(getContext(), R.anim.anim_av_alpha_in);
-    private Animation mHideAnim = AnimationUtils.loadAnimation(getContext(), R.anim.anim_av_alpha_out);
+    private final Animation mShowAnim = AnimationUtils.loadAnimation(getContext(), R.anim.anim_av_alpha_in);
+    private final Animation mHideAnim = AnimationUtils.loadAnimation(getContext(), R.anim.anim_av_alpha_out);
 
     protected ImageView iv_bg;
     //顶部
@@ -1222,7 +1222,7 @@ public class AvVideoController extends GestureVideoController implements View.On
     private LinearLayout speedPopLayout;
     private TextView tv_speed_1, tv_speed_2, tv_speed_3, tv_speed_4, tv_speed_5, tv_speed_6;
     private TextView oldSpeedTv;
-    private OnClickListener speedOnClickListener = new OnClickListener() {
+    private final OnClickListener speedOnClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
             if (videoViewImpt == null) return;
@@ -1302,7 +1302,7 @@ public class AvVideoController extends GestureVideoController implements View.On
     private boolean isHdChange = true;
     private int currentIndex = 0;
     private List<String> hdList;
-    private OnClickListener rateOnClickListener = new OnClickListener() {
+    private final OnClickListener rateOnClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
             if (videoViewImpt == null) return;

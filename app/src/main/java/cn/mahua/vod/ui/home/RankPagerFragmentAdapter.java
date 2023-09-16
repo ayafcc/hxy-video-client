@@ -12,7 +12,7 @@ import cn.mahua.vod.bean.TypeBean;
 @SuppressWarnings("WeakerAccess")
 public class RankPagerFragmentAdapter extends FragmentStatePagerAdapter {
 
-    private List<TypeBean> mDataList = new ArrayList<>();
+    private final List<TypeBean> mDataList = new ArrayList<>();
 
     public RankPagerFragmentAdapter(FragmentManager fm) {
         super(fm);

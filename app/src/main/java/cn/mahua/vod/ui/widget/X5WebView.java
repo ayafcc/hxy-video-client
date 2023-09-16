@@ -15,7 +15,7 @@ public class X5WebView extends WebView {
 	String webTitle;
 
 	x5EventListener listener;
-	private WebViewClient client = new WebViewClient() {
+	private final WebViewClient client = new WebViewClient() {
 		/**
 		 * 防止加载网页时调起系统浏览器
 		 */

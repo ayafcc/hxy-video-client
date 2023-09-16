@@ -10,7 +10,7 @@ import cn.mahua.vod.App;
 
 public enum JieXiUtils {
     INSTANCE;
-    private List<JieXiWebView> webViewList;
+    private final List<JieXiWebView> webViewList;
 
     JieXiUtils() {
         webViewList = new ArrayList<>();

@@ -74,7 +74,7 @@ public class RankChildFragment extends BaseItemFragment<Type> {
     private List<Object> items = null;
     private boolean isShowFirstItem = true;
     private int mIndex = 1;
-    List<VodBean> list = new ArrayList<>();
+    final List<VodBean> list = new ArrayList<>();
 
     private String[] zlass;
     private int zlass_index;

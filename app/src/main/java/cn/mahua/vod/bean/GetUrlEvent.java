@@ -1,8 +1,8 @@
 package cn.mahua.vod.bean;
 
 public class GetUrlEvent {
-    public String url;
-    public String title;
+    public final String url;
+    public final String title;
 
     public GetUrlEvent(String url,String title) {
         this.url = url;

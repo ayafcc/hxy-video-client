@@ -9,8 +9,8 @@ import jaygoo.library.m3u8downloader.db.table.M3u8DoneInfo;
  * createTime 2019-09-28
  */
 public class M3u8DoneItem {
-    M3u8DoneInfo m3u8DoneInfo;
-    M3u8DoneItemViewBinder.OnItemListener clickListener;
+    final M3u8DoneInfo m3u8DoneInfo;
+    final M3u8DoneItemViewBinder.OnItemListener clickListener;
 
     public M3u8DoneInfo getM3u8DoneInfo() {
         return m3u8DoneInfo;

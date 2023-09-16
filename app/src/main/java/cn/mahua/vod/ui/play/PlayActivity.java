@@ -90,8 +90,8 @@ public class PlayActivity extends BaseSupportActivity implements ControllerClick
 
     private AvVideoController controller;
     private MultiTypeAdapter adapter;
-    private List<Object> items = new ArrayList<>();
-    private List<String> urlList = new ArrayList<>();
+    private final List<Object> items = new ArrayList<>();
+    private final List<String> urlList = new ArrayList<>();
     private boolean isPlay = false;
     private int urlIndex = 0;
     private Map<String, String> aveaders = new Map<String, String>() {

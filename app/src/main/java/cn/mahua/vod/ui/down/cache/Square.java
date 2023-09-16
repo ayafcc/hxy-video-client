@@ -26,7 +26,7 @@ public class Square {
     public final int number;
     public boolean isSelected;
     public boolean finished;
-    public View.OnClickListener clickListener;
+    public final View.OnClickListener clickListener;
 
 
     public Square(int number, View.OnClickListener clickListener) {

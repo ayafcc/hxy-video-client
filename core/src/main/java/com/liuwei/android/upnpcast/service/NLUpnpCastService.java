@@ -17,7 +17,7 @@ import org.fourthline.cling.registry.Registry;
  */
 public class NLUpnpCastService extends AndroidUpnpServiceImpl implements AndroidUpnpService
 {
-    private ILogger mLogger = new DefaultLoggerImpl(this);
+    private final ILogger mLogger = new DefaultLoggerImpl(this);
 
     @Override
     public void onCreate()

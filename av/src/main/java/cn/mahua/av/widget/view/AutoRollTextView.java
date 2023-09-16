@@ -12,7 +12,7 @@ public class AutoRollTextView extends AppCompatTextView {
 
     private boolean focus = false;
 
-    private Runnable roll = () -> {
+    private final Runnable roll = () -> {
         focus = true;
         setText(getText());
     };

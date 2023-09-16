@@ -23,7 +23,7 @@ public class GlideImageLoader extends ImageLoader {
 
     private static final long serialVersionUID = 7338929115611451024L;
 
-    private int errorId = R.drawable.blur_bg;
+    private final int errorId = R.drawable.blur_bg;
 
     private getBitmapListener bitmapListener;
 

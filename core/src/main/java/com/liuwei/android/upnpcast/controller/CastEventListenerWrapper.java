@@ -13,7 +13,7 @@ import org.fourthline.cling.support.model.TransportInfo;
  */
 public class CastEventListenerWrapper implements ICastEventListener
 {
-    private ICastEventListener mListener;
+    private final ICastEventListener mListener;
 
     public CastEventListenerWrapper(ICastEventListener listener)
     {

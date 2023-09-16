@@ -37,7 +37,7 @@ import me.drakeet.multitype.ItemViewBinder;
 public class M3u8DoneItemViewBinder extends ItemViewBinder<M3u8DoneItem, M3u8DoneItemViewBinder.ViewHolder> {
     private ViewHolder holders;
     private static final int WHAT_ON_success = 1001;
-    private WeakHandler dHandler = new WeakHandler(new Handler.Callback(){
+    private final WeakHandler dHandler = new WeakHandler(new Handler.Callback(){
 
         @Override
         public boolean handleMessage(Message message) {
@@ -147,9 +147,9 @@ public class M3u8DoneItemViewBinder extends ItemViewBinder<M3u8DoneItem, M3u8Don
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView itemState;
-        TextView itemTitle;
-        ImageView icon;
+        final TextView itemState;
+        final TextView itemTitle;
+        final ImageView icon;
 
         ViewHolder(View itemView) {
             super(itemView);

@@ -22,9 +22,9 @@ import cn.mahua.vod.utils.DensityUtils;
 import kotlin.Pair;
 
 public class FristModeAdpter extends BaseAdapter {
-    private List<VodBean> coll;// 消息对象数组
-    private LayoutInflater mInflater;
-    private Context context;
+    private final List<VodBean> coll;// 消息对象数组
+    private final LayoutInflater mInflater;
+    private final Context context;
 
     public FristModeAdpter(Context context, List<VodBean> coll) {
         this.coll = coll;

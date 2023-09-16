@@ -18,10 +18,10 @@ import cn.mahua.vod.R;
  */
 public class DeviceHolder extends RecyclerView.ViewHolder implements OnClickListener, OnCheckedChangeListener
 {
-    private TextView name;
-    private TextView description;
-    private CheckBox selector;
-    private DeviceAdapter.OnItemSelectedListener mOnItemSelectedListener;
+    private final TextView name;
+    private final TextView description;
+    private final CheckBox selector;
+    private final DeviceAdapter.OnItemSelectedListener mOnItemSelectedListener;
     private CastDevice mCastDevice;
     private boolean mBinding = false;
 

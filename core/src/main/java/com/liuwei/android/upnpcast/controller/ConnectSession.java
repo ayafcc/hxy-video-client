@@ -19,9 +19,9 @@ public class ConnectSession extends BaseSession
 {
     private static final int TASK_COUNT = 3;
     private static final int POSITION_INTERVAL = 60 * 1000; // 1min
-    private ControlPoint mControlPoint;
-    private ICastActionFactory mCastActionFactory;
-    private ConnectSessionCallback mListener;
+    private final ControlPoint mControlPoint;
+    private final ICastActionFactory mCastActionFactory;
+    private final ConnectSessionCallback mListener;
     private CountDownLatch mCountDownLatch;
 
     public interface ConnectSessionCallback

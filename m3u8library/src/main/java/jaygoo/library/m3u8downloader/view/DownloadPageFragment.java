@@ -29,7 +29,7 @@ import jaygoo.library.m3u8downloader.view.adapter.DownloadCenterPagerAdpter;
  */
 public class DownloadPageFragment extends Fragment {
 
-    BroadcastReceiver receiver = new BroadcastReceiver() {
+    final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(M3U8Library.EVENT_REFRESH)) {

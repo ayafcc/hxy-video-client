@@ -25,13 +25,13 @@ import org.fourthline.cling.support.model.TransportState;
  */
 public class CastControlImp implements ICastControl, OnRegistryDeviceListener
 {
-    private ILogger mLogger = new DefaultLoggerImpl(this);
+    private final ILogger mLogger = new DefaultLoggerImpl(this);
 
     private ControlPoint mControlPoint;
 
     private ICastActionFactory mCastActionFactory;
 
-    private ICastEventListener mCastEventListener;
+    private final ICastEventListener mCastEventListener;
 
     private ICastSession mMediaSession;
 
@@ -152,7 +152,7 @@ public class CastControlImp implements ICastControl, OnRegistryDeviceListener
 
     private CastDevice mSessionTimeoutDevice;
 
-    private ConnectSessionCallback mConnectSessionCallback = new ConnectSessionCallback()
+    private final ConnectSessionCallback mConnectSessionCallback = new ConnectSessionCallback()
     {
         @Override
         public void onCastSession(TransportInfo transportInfo, MediaInfo mediaInfo, int volume)

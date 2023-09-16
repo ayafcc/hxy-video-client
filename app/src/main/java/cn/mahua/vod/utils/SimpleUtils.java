@@ -324,7 +324,7 @@ public class SimpleUtils {
     }
 
     private class StorageInfo {
-        public String path;
+        public final String path;
         public String state;
         public boolean isRemovable;
 

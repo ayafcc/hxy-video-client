@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -39,7 +38,6 @@ import cn.mahua.vod.bean.TitleEvent;
 import cn.mahua.vod.netservice.VodService;
 import cn.mahua.vod.ui.home.HomeFragment;
 import cn.mahua.vod.ui.live.LiveFragment;
-import cn.mahua.vod.ui.login.LoginActivity;
 import cn.mahua.vod.ui.rank.RankFragment;
 import cn.mahua.vod.ui.share.ShareFragment;
 import cn.mahua.vod.ui.specialtopic.SpecialtTopicFragment;
@@ -48,7 +46,6 @@ import cn.mahua.vod.ui.widget.AppUpdateDialog;
 import cn.mahua.vod.ui.widget.NoticeDialog2;
 import cn.mahua.vod.utils.AgainstCheatUtil;
 import cn.mahua.vod.utils.Retrofit2Utils;
-import cn.mahua.vod.utils.UserUtils;
 import me.yokeyword.fragmentation.SupportFragment;
 
 
@@ -59,15 +56,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     BottomNavigationView bnv_main;
 
     public static final int HOME = 0;
-     public static final int SHARE = 3;
     public static final int TOPIC = 1;
     public static final int RANK = 2;
-//    public static final int GAME = 3;
     public static final int LIVE = 3;
     public static final int USER = 4;
-    private SupportFragment[] mFragments = new SupportFragment[6];
-    String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE};
-    List<String> mPermissionList = new ArrayList<>();
+    private final SupportFragment[] mFragments = new SupportFragment[6];
+    final String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE};
+    final List<String> mPermissionList = new ArrayList<>();
     private static final int PERMISSION_REQUEST = 1;
 
     @Override
@@ -89,7 +84,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         SupportFragment firstFragment = findFragment(HomeFragment.class);
         if (firstFragment == null) {
             mFragments[HOME] = HomeFragment.newInstance();
-              mFragments[TOPIC] = ShareFragment.newInstance();
+//              mFragments[TOPIC] = ShareFragment.newInstance();
             mFragments[LIVE] = LiveFragment.newInstance();
             mFragments[RANK] = RankFragment.newInstance();
             mFragments[USER] = UserFragment.newInstance();
@@ -109,9 +104,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         } else {
             // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
             // 这里我们需要拿到mFragments的引用
-              mFragments[TOPIC] = findFragment(ShareFragment.class);
+//              mFragments[TOPIC] = findFragment(ShareFragment.class);
             mFragments[HOME] = firstFragment;
-//            mFragments[TOPIC] = findFragment(SpecialtTopicFragment.class);
+            mFragments[TOPIC] = findFragment(SpecialtTopicFragment.class);
 //            mFragments[GAME] = findFragment(GameFragment2.class);
             mFragments[LIVE] = findFragment(LiveFragment.class);
             mFragments[RANK] = findFragment(RankFragment.class);
@@ -121,7 +116,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         initView();
         showNotice();
         checkVersion();
-        getTabThreeName();
+//        getTabThreeName();
 //        getTabFourInfo();
     }
 

@@ -18,9 +18,9 @@ public interface ICastActionFactory
     // ------------------------------------------------------------------------------------------
     class CastActionFactory implements ICastActionFactory
     {
-        private IAVServiceActionFactory mAvService;
+        private final IAVServiceActionFactory mAvService;
 
-        private IRenderServiceActionFactory mRenderService;
+        private final IRenderServiceActionFactory mRenderService;
 
         public CastActionFactory(CastDevice castDevice)
         {

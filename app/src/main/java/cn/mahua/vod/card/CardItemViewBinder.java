@@ -29,8 +29,8 @@ public class CardItemViewBinder extends ItemViewBinder<CardBean, CardItemViewBin
         return this;
     }
 
-    private boolean isNeedMore;
-    private boolean isNeedFirst;
+    private final boolean isNeedMore;
+    private final boolean isNeedFirst;
     boolean isLimitCount;//限制展示吗
 
     public CardItemViewBinder(boolean isNeedMore, boolean isNeedFirst) {
@@ -117,10 +117,10 @@ public class CardItemViewBinder extends ItemViewBinder<CardBean, CardItemViewBin
 
         private @NonNull
         final RecyclerView recyclerView;
-        private MultiTypeAdapter adapter;
+        private final MultiTypeAdapter adapter;
         private CardFirstChildItemViewBinder cardFirstChildItemViewBinder;
-        private CardChildItemViewBinder cardChildItemViewBinder;
-        private TextView tvMore;
+        private final CardChildItemViewBinder cardChildItemViewBinder;
+        private final TextView tvMore;
 
         private final Button more;
         private final Button change;

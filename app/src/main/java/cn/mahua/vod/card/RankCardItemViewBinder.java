@@ -26,7 +26,7 @@ import me.drakeet.multitype.ItemViewBinder;
 public class RankCardItemViewBinder extends ItemViewBinder<VodBean, RankCardItemViewBinder.ViewHolder> implements View.OnClickListener {
 
     private View.OnClickListener mListener;
-    private String mDay;
+    private final String mDay;
 
     public RankCardItemViewBinder setActionListener(View.OnClickListener listener) {
         this.mListener = listener;

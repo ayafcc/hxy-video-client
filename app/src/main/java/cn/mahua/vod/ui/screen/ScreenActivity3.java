@@ -58,7 +58,7 @@ public class ScreenActivity3 extends BaseActivity {
     @BindView(R.id.rv_screen_result)
     RecyclerView rv_screen_result;
     private MainRecyclerViewAdapter result_adapter;
-    private List<VodBean> itmes = new ArrayList<>();
+    private final List<VodBean> itmes = new ArrayList<>();
     private Titles titles1;
     private Titles titles2;
     private Titles titles3;

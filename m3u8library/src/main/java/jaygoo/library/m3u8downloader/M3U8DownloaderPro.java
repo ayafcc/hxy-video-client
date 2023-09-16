@@ -32,8 +32,8 @@ import jaygoo.library.m3u8downloader.utils.MUtils;
 public class M3U8DownloaderPro {
 
     private long currentTime;
-    private DownloadTaskQueue downLoadQueue;
-    private List<M3U8DownloadTask> taskStack;
+    private final DownloadTaskQueue downLoadQueue;
+    private final List<M3U8DownloadTask> taskStack;
 
     private M3U8DownloaderPro() {
         downLoadQueue = new DownloadTaskQueue();
@@ -54,7 +54,7 @@ public class M3U8DownloaderPro {
     }
 
     private static class SingletonHolder {
-        static M3U8DownloaderPro instance = new M3U8DownloaderPro();
+        static final M3U8DownloaderPro instance = new M3U8DownloaderPro();
     }
 
     public static M3U8DownloaderPro getInstance() {
@@ -319,7 +319,7 @@ public class M3U8DownloaderPro {
         }).start();
     }
 
-    OnQueneListener queneListener = new OnQueneListener() {
+    final OnQueneListener queneListener = new OnQueneListener() {
         @Override
         public void onPoll(String taskUrl) {
             if (downLoadQueue != null && downLoadQueue.getTask(taskUrl) != null) {
