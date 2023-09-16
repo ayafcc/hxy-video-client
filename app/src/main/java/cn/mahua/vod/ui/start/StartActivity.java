@@ -496,6 +496,7 @@ public class StartActivity extends BaseActivity {
                     @Override
                     public void onError(@NotNull ResponseException e) {
 
+                        e.printStackTrace();
                     }
                 }
         );
@@ -514,6 +515,7 @@ public class StartActivity extends BaseActivity {
                     @Override
                     public void onError(@NotNull ResponseException e) {
 
+                        e.printStackTrace();
                     }
                 }
         );

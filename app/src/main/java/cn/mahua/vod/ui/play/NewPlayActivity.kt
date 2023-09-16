@@ -691,6 +691,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                     }
 
                     override fun onError(e: ResponseException) {
+                        e.printStackTrace()
                         finish()
                     }
 
@@ -772,7 +773,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
 
     private fun showPlayerAd() {
         App.playAd?.let {
-            if (it.img.isNotEmpty()) {
+            if (it.img != null && it.img != "") {
                 controller.showAd(it.img, it.url)
             }
         }

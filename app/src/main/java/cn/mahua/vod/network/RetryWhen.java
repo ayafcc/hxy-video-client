@@ -37,7 +37,7 @@ public class RetryWhen implements Function<Observable<Throwable>, ObservableSour
                 return Observable.timer(trySeconds, TimeUnit.SECONDS);
             } else {
                 if (count <= maxCount) {
-                    Log.e(TAG, "请求超时，开始第" + count+ "次重试！");
+                    Log.e(TAG, "请求超时，开始第" + count+ "次重试！" + throwable.getMessage());
                     count++;
                     return Observable.timer(trySeconds, TimeUnit.SECONDS);
                 } else {

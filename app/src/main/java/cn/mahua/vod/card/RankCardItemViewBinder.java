@@ -85,7 +85,7 @@ public class RankCardItemViewBinder extends ItemViewBinder<VodBean, RankCardItem
         String vod_class = item.getVod_class().replaceAll(",", "/");
         holder.tv_type.setText(item.getVod_area() + "/" + vod_class);
         holder.tv_desc.setText(item.getVod_blurb());
-        if (item.getType().getTypeName().equals("电影")) {
+        if (item.getType() != null && "电影".equals(item.getType().getTypeName())) {
             holder.tv_score.setTextColor(ColorUtils.getColor(R.color.colorPrimary));
             TextPaint tp = holder.tv_score.getPaint();
             tp.setFakeBoldText(true);

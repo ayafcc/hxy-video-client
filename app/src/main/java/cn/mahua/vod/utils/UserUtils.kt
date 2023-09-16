@@ -104,7 +104,7 @@ object UserUtils {
         if(isLogin()){
             cookies.add(Cookie.Builder().name("user_id").value(SPUtils.getInstance("user_cookie").getString("cookie_user_id", "")).domain(SPUtils.getInstance("user_cookie").getString("cookie_user_id_domain", "")).build())
             cookies.add(Cookie.Builder().name("user_name").value(SPUtils.getInstance("user_cookie").getString("cookie_user_name", "")).domain(SPUtils.getInstance("user_cookie").getString("cookie_user_name_domain", "")).build())
-            cookies.add(Cookie.Builder().name("user_nick_name").value(SPUtils.getInstance("user_cookie").getString("cookie_user_nick_name", "")).domain(SPUtils.getInstance("user_cookie").getString("cookie_user_nick_name_domain", "")).build())
+//            cookies.add(Cookie.Builder().name("user_nick_name").value(SPUtils.getInstance("user_cookie").getString("cookie_user_nick_name", "")).domain(SPUtils.getInstance("user_cookie").getString("cookie_user_nick_name_domain", "")).build())
             cookies.add(Cookie.Builder().name("group_id").value(SPUtils.getInstance("user_cookie").getString("cookie_group_id", "")).domain(SPUtils.getInstance("user_cookie").getString("cookie_group_id_domain", "")).build())
             cookies.add(Cookie.Builder().name("group_name").value(SPUtils.getInstance("user_cookie").getString("cookie_group_name", "")).domain(SPUtils.getInstance("user_cookie").getString("cookie_group_name_domain", "")).build())
             cookies.add(Cookie.Builder().name("user_check").value(SPUtils.getInstance("user_cookie").getString("cookie_user_check", "")).domain(SPUtils.getInstance("user_cookie").getString("cookie_user_check_domain", "")).build())

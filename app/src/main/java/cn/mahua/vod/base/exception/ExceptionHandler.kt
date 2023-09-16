@@ -68,6 +68,7 @@ class ExceptionHandler {
             } else if (e is javax.net.ssl.SSLHandshakeException) {
                 responseException = ResponseException(e, SSL_ERROR, "证书验证失败")
             } else {
+                e.printStackTrace()
                 responseException = ResponseException(e, UNKNOWN_ERROR, "未知错误")
             }
             return responseException
