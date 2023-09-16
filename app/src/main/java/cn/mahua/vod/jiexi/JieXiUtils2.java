@@ -3,6 +3,7 @@ package cn.mahua.vod.jiexi;
 
 import com.blankj.utilcode.util.StringUtils;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -26,7 +27,7 @@ public enum JieXiUtils2 {
         failSet = new HashSet<Integer>();
     }
 
-    public void getPlayUrl(String url, String vod_url, int curParseIndex, BackListener backListener, int curFailIndex) {
+    public void getPlayUrl(String url, String vod_url, int curParseIndex, BackListener backListener, int curFailIndex) throws NoSuchAlgorithmException {
         if (curParseIndex == 0) {
             failSet.clear();
         }
@@ -71,7 +72,7 @@ public enum JieXiUtils2 {
         System.out.println("failList 集合：" + sb.toString());
     }
 
-    private void getPlayUrlByWebView(String parse, String vod_url, int curIndex, int size, BackListener backListener, boolean isEnd) {
+    private void getPlayUrlByWebView(String parse, String vod_url, int curIndex, int size, BackListener backListener, boolean isEnd) throws NoSuchAlgorithmException {
         JieXiWebView2 webView = new JieXiWebView2(App.getInstance().getApplicationContext(), parse, backListener);
         System.out.println("===Jiexi curIndex=" + curIndex + "  weburl=" + parse + vod_url);
        if(parse.contains("ys.luob.app")){

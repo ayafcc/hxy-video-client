@@ -4,9 +4,10 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import cn.mahua.vod.R
-import kotlinx.android.synthetic.main.dialog_hit.*
+import cn.mahua.vod.databinding.DialogHitBinding
 
 class HitDialog: Dialog {
+    private lateinit var hitBinding: DialogHitBinding
     private var onHitDialogClickListener: OnHitDialogClickListener? = null
 
     constructor(context : Context) : super(context){
@@ -18,24 +19,26 @@ class HitDialog: Dialog {
 
         setCanceledOnTouchOutside(false)
         setCancelable(false)
+        hitBinding = DialogHitBinding.inflate(layoutInflater)
+        setContentView(hitBinding.root)
 
-        tvOk.setOnClickListener {
+        hitBinding.tvOk.setOnClickListener {
             onHitDialogClickListener?.onOkClick(this@HitDialog)
         }
-        tvCancel.setOnClickListener {
+        hitBinding.tvCancel.setOnClickListener {
             onHitDialogClickListener?.onCancelClick(this@HitDialog)
         }
 
     }
 
     fun setTitle(title : String) : HitDialog{
-        tvTitle.text = title
+        hitBinding.tvTitle.text = title
         return this
     }
 
 
     fun setMessage(message : String) : HitDialog{
-        tvMessage.text = message
+        hitBinding.tvMessage.text = message
         return this
     }
 

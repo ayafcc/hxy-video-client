@@ -1,10 +1,12 @@
 package cn.mahua.vod.ui.feedback
 
+import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.FeedbackBean
 import cn.mahua.vod.bean.Page
+import cn.mahua.vod.databinding.ActivityFeedbackBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.ui.login.LoginActivity
 import cn.mahua.vod.utils.AgainstCheatUtil
@@ -19,13 +21,17 @@ import com.github.StormWyrm.wanandroid.base.exception.ResponseException
 import com.github.StormWyrm.wanandroid.base.net.RequestManager
 import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
-import kotlinx.android.synthetic.main.activity_feedback.*
 
 class FeedbackActivity : BaseActivity() {
     private var curFeedbackPage = 1
+    private lateinit var feedbackBinding: ActivityFeedbackBinding
 
     private val feedbackAdapter: FeedbackAdapter by lazy {
         FeedbackAdapter()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     override fun getLayoutResID(): Int {
@@ -34,8 +40,11 @@ class FeedbackActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
-        tvSubmit.setOnClickListener {
-            val comment = etComment.text.trim().toString()
+        feedbackBinding = ActivityFeedbackBinding.inflate(layoutInflater)
+        setContentView(feedbackBinding.root)
+
+        feedbackBinding.tvSubmit.setOnClickListener {
+            val comment = feedbackBinding.etComment.text.trim().toString()
             if (comment.isEmpty()) {
                 ToastUtils.showShort("反馈内容不能为空")
             } else {
@@ -47,11 +56,11 @@ class FeedbackActivity : BaseActivity() {
             }
         }
 
-        refreshLayout.setEnableRefresh(false)
-        refreshLayout.setRefreshFooter(ClassicsFooter(mActivity))
+        feedbackBinding.refreshLayout.setEnableRefresh(false)
+        feedbackBinding.refreshLayout.setRefreshFooter(ClassicsFooter(mActivity))
 
-        rvFeedback.layoutManager = LinearLayoutManager(mActivity)
-        rvFeedback.adapter = feedbackAdapter
+        feedbackBinding.rvFeedback.layoutManager = LinearLayoutManager(mActivity)
+        feedbackBinding.rvFeedback.adapter = feedbackAdapter
     }
 
     override fun initData() {
@@ -61,11 +70,11 @@ class FeedbackActivity : BaseActivity() {
 
     override fun initListener() {
         super.initListener()
-        refreshLayout.setOnLoadMoreListener {
+        feedbackBinding.refreshLayout.setOnLoadMoreListener {
             curFeedbackPage++
             getFeedbackList()
         }
-        rlBack.setOnClickListener {
+        feedbackBinding.rlBack.setOnClickListener {
             finish()
         }
     }
@@ -111,16 +120,16 @@ class FeedbackActivity : BaseActivity() {
                         if (curFeedbackPage > 1) {
                             feedbackAdapter.addData(data.list)
                             if (data.list.isEmpty()) {
-                                refreshLayout.finishLoadMoreWithNoMoreData()
+                                feedbackBinding.refreshLayout.finishLoadMoreWithNoMoreData()
                             } else {
-                                refreshLayout.finishLoadMore(true)
+                                feedbackBinding.refreshLayout.finishLoadMore(true)
                             }
                         }
                     }
 
                     override fun onError(e: ResponseException) {
                         if (curFeedbackPage > 1) {
-                            refreshLayout.finishLoadMore(false)
+                            feedbackBinding.refreshLayout.finishLoadMore(false)
                         }
                     }
 

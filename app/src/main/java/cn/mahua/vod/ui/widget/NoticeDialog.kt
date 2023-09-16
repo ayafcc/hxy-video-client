@@ -13,13 +13,14 @@ import android.text.style.ClickableSpan
 import android.view.Gravity
 import android.view.View
 import cn.mahua.vod.R
+import cn.mahua.vod.databinding.DialogNoticeBinding
 import cn.mahua.vod.utils.UrlUtils
 import com.blankj.utilcode.util.ActivityUtils.startActivity
 import com.blankj.utilcode.util.ConvertUtils
-import kotlinx.android.synthetic.main.dialog_notice.*
 
 
 class NoticeDialog(context: Context, val msg: String) : Dialog(context, R.style.DefaultDialogStyle) {
+    private lateinit var noticeBinding: DialogNoticeBinding
 
     init {
         setContentView(R.layout.dialog_notice_tip)
@@ -27,6 +28,8 @@ class NoticeDialog(context: Context, val msg: String) : Dialog(context, R.style.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        noticeBinding = DialogNoticeBinding.inflate(layoutInflater)
+        setContentView(noticeBinding.root)
         window!!.attributes?.apply {
             width = ConvertUtils.dp2px(300f)
             gravity = Gravity.CENTER
@@ -53,12 +56,12 @@ class NoticeDialog(context: Context, val msg: String) : Dialog(context, R.style.
             }
         }, index, index2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 
-        tvNotice.setMovementMethod(LinkMovementMethod.getInstance())
-        tvNotice.append(msg)
+        noticeBinding.tvNotice.setMovementMethod(LinkMovementMethod.getInstance())
+        noticeBinding.tvNotice.append(msg)
 
-        tvNotice.text = span
+        noticeBinding.tvNotice.text = span
 //        tvNotice.setMovementMethod(LinkMovementMethod.getInstance())
-        ivClose.setOnClickListener {
+        noticeBinding.ivClose.setOnClickListener {
             dismiss()
         }
     }

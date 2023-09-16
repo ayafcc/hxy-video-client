@@ -1,12 +1,14 @@
 package cn.mahua.vod.ui.expand
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import cn.mahua.vod.ApiConfig
 import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.ExpandCenter
 import cn.mahua.vod.bean.UserInfoBean
+import cn.mahua.vod.databinding.ActivityExpandCenterBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.ui.share.ShareActivity
 import cn.mahua.vod.utils.AgainstCheatUtil
@@ -19,9 +21,12 @@ import com.github.StormWyrm.wanandroid.base.exception.ResponseException
 import com.github.StormWyrm.wanandroid.base.net.RequestManager
 import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver
 import com.github.StormWyrm.wanandroid.base.net.observer.LoadingObserver
-import kotlinx.android.synthetic.main.activity_expand_center.*
 
 class ExpandCenterActivity : BaseActivity(), View.OnClickListener {
+    private lateinit var expandCenterBinding : ActivityExpandCenterBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun getLayoutResID(): Int {
         return R.layout.activity_expand_center
@@ -29,9 +34,13 @@ class ExpandCenterActivity : BaseActivity(), View.OnClickListener {
 
     override fun initView() {
         super.initView()
-        rlBack.setOnClickListener(this)
-        tv_my_expand.setOnClickListener(this)
-        rl_share.setOnClickListener(this)
+
+        expandCenterBinding = ActivityExpandCenterBinding.inflate(layoutInflater)
+        setContentView(expandCenterBinding.root)
+
+        expandCenterBinding.rlBack.setOnClickListener(this)
+        expandCenterBinding.tvMyExpand.setOnClickListener(this)
+        expandCenterBinding.rlShare.setOnClickListener(this)
     }
 
     override fun initData() {
@@ -47,43 +56,43 @@ class ExpandCenterActivity : BaseActivity(), View.OnClickListener {
         }
         RequestManager.execute(this, vodService.userInfo(), object : BaseObserver<UserInfoBean>() {
             override fun onSuccess(data: UserInfoBean) {
-                tv_nick.text = data.user_nick_name
+                expandCenterBinding.tvNick.text = data.user_nick_name
                 if (data.user_portrait.isNotEmpty()) {
                     Glide.with(mActivity)
                             .load(ApiConfig.BASE_URL + "/" + data.user_portrait)
                             .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                            .into(iv_avatar)
+                            .into(expandCenterBinding.ivAvatar)
                 } else {
                     Glide.with(mActivity)
                             .load(R.drawable.ic_default_avator)
                             .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                            .into(iv_avatar)
+                            .into(expandCenterBinding.ivAvatar)
                 }
                 when (data.user_level) {
                     "1" -> {
-                        iv_start_level.setBackgroundResource(R.drawable.vip1)
-                        iv_end_level.setBackgroundResource(R.drawable.vip2)
-                        tv_next.text = "距离下一等级还差${data.leave_peoples}人"
+                        expandCenterBinding.ivStartLevel.setBackgroundResource(R.drawable.vip1)
+                        expandCenterBinding.ivEndLevel.setBackgroundResource(R.drawable.vip2)
+                        expandCenterBinding.tvNext.text = "距离下一等级还差${data.leave_peoples}人"
                     }
                     "2" -> {
-                        iv_start_level.setBackgroundResource(R.drawable.vip2)
-                        iv_end_level.setBackgroundResource(R.drawable.vip3)
-                        tv_next.text = "距离下一等级还差${data.leave_peoples}人"
+                        expandCenterBinding.ivStartLevel.setBackgroundResource(R.drawable.vip2)
+                        expandCenterBinding.ivEndLevel.setBackgroundResource(R.drawable.vip3)
+                        expandCenterBinding.tvNext.text = "距离下一等级还差${data.leave_peoples}人"
                     }
                     "3" -> {
-                        iv_start_level.setBackgroundResource(R.drawable.vip3)
-                        iv_end_level.setBackgroundResource(R.drawable.vip4)
-                        tv_next.text = "距离下一等级还差${data.leave_peoples}人"
+                        expandCenterBinding.ivStartLevel.setBackgroundResource(R.drawable.vip3)
+                        expandCenterBinding.ivEndLevel.setBackgroundResource(R.drawable.vip4)
+                        expandCenterBinding.tvNext.text = "距离下一等级还差${data.leave_peoples}人"
                     }
                     "4" -> {
-                        iv_start_level.setBackgroundResource(R.drawable.vip4)
-                        iv_end_level.setBackgroundResource(R.drawable.vip5)
-                        tv_next.text = "距离下一等级还差${data.leave_peoples}人"
+                        expandCenterBinding.ivStartLevel.setBackgroundResource(R.drawable.vip4)
+                        expandCenterBinding.ivEndLevel.setBackgroundResource(R.drawable.vip5)
+                        expandCenterBinding.tvNext.text = "距离下一等级还差${data.leave_peoples}人"
                     }
                     "5" -> {
-                        iv_start_level.setBackgroundResource(R.drawable.vip5)
-                        iv_end_level.setBackgroundResource(R.drawable.vip5)
-                        tv_next.text = "已达到最高VIP级别"
+                        expandCenterBinding.ivStartLevel.setBackgroundResource(R.drawable.vip5)
+                        expandCenterBinding.ivEndLevel.setBackgroundResource(R.drawable.vip5)
+                        expandCenterBinding.tvNext.text = "已达到最高VIP级别"
                     }
                 }
             }
@@ -102,19 +111,19 @@ class ExpandCenterActivity : BaseActivity(), View.OnClickListener {
         RequestManager.execute(mActivity, vodService.expandCenter(),
                 object : LoadingObserver<ExpandCenter>(mActivity) {
                     override fun onSuccess(data: ExpandCenter) {
-                        tv_count1.text = "享受每日影片观影${data.v1.view_count}次"
+                        expandCenterBinding.tvCount1.text = "享受每日影片观影${data.v1.view_count}次"
 
-                        tv_person2.text = "推广${data.v2.people_count}人"
-                        tv_count2.text = "享受每日影片观影${data.v2.view_count}次"
+                        expandCenterBinding.tvPerson2.text = "推广${data.v2.people_count}人"
+                        expandCenterBinding.tvCount2.text = "享受每日影片观影${data.v2.view_count}次"
 
-                        tv_person3.text = "推广${data.v3.people_count}人"
-                        tv_count3.text = "享受每日影片观影${data.v3.view_count}次"
+                        expandCenterBinding.tvPerson3.text = "推广${data.v3.people_count}人"
+                        expandCenterBinding.tvCount3.text = "享受每日影片观影${data.v3.view_count}次"
 
-                        tv_person4.text = "推广${data.v4.people_count}人"
-                        tv_count4.text = "享受每日影片观影${data.v4.view_count}次"
+                        expandCenterBinding.tvPerson4.text = "推广${data.v4.people_count}人"
+                        expandCenterBinding.tvCount4.text = "享受每日影片观影${data.v4.view_count}次"
 
-                        tv_person5.text = "推广${data.v5.people_count}人"
-                        tv_count5.text = "享受每日影片观影${data.v5.view_count}次"
+                        expandCenterBinding.tvPerson5.text = "推广${data.v5.people_count}人"
+                        expandCenterBinding.tvCount5.text = "享受每日影片观影${data.v5.view_count}次"
                     }
 
                     override fun onError(e: ResponseException) {
@@ -125,14 +134,14 @@ class ExpandCenterActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v) {
-            rlBack -> {
+            expandCenterBinding.rlBack -> {
                 finish()
             }
-            tv_my_expand -> {
+            expandCenterBinding.tvMyExpand -> {
                 val intent = Intent(this@ExpandCenterActivity, MyExpandActivity::class.java)
                 startActivity(intent)
             }
-            rl_share -> {
+            expandCenterBinding.rlShare -> {
                 val intent = Intent(this@ExpandCenterActivity, ShareActivity::class.java)
                 startActivity(intent)
             }

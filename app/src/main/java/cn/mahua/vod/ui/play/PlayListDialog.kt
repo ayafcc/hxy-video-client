@@ -9,16 +9,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.mahua.vod.R
 import cn.mahua.vod.bean.UrlBean
+import cn.mahua.vod.databinding.DialogSpeedListBinding
+import cn.mahua.vod.databinding.FragmentPlayListBinding
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.ConvertUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import kotlinx.android.synthetic.main.fragment_play_list.*
 import java.lang.ref.WeakReference
 
 class PlayListDialog(context: Context, var urlIndex: Int, val playList: List<UrlBean>) : Dialog(context, R.style.PlayListDialogStyle) {
     private var playActivity: WeakReference<NewPlayActivity> = WeakReference(context as NewPlayActivity)
     private var spanCount = 4
+    private lateinit var speedListBinding: FragmentPlayListBinding
+
 
     private val selectionAdapter: SelectionAdapter by lazy {
         SelectionAdapter(playList).apply {
@@ -46,20 +49,22 @@ class PlayListDialog(context: Context, var urlIndex: Int, val playList: List<Url
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        speedListBinding = FragmentPlayListBinding.inflate(layoutInflater)
+        setContentView(speedListBinding.root)
         window!!.attributes = window!!.attributes.apply {
             width = WindowManager.LayoutParams.WRAP_CONTENT
             height = WindowManager.LayoutParams.MATCH_PARENT
             gravity = Gravity.TOP or Gravity.RIGHT
         }
 
-        rvSelectWorks.layoutManager = GridLayoutManager(context, spanCount, RecyclerView.VERTICAL, false).apply {
+        speedListBinding.rvSelectWorks.layoutManager = GridLayoutManager(context, spanCount, RecyclerView.VERTICAL, false).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
                     return spanCount
                 }
             }
         }
-        rvSelectWorks.adapter = selectionAdapter
+        speedListBinding.rvSelectWorks.adapter = selectionAdapter
 
     }
 

@@ -8,14 +8,18 @@ import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.mahua.vod.R
 import cn.mahua.vod.bean.PlayFromBean
+import cn.mahua.vod.databinding.FragmentPlayListBinding
 import com.blankj.utilcode.util.ColorUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import kotlinx.android.synthetic.main.fragment_play_list.*
 import java.lang.ref.WeakReference
+
 class PlaySourceDialog(context: Context, var playSourceIndex: Int, val playList: List<PlayFromBean>) : Dialog(context,R.style.PlayListDialogStyle) {
     private var playActivity: WeakReference<NewPlayActivity> = WeakReference(context as NewPlayActivity)
     private var spanCount = 4
+
+    private lateinit var playListBinding: FragmentPlayListBinding
+
 
     private val selectionAdapter: SelectionAdapter by lazy {
         SelectionAdapter(playList).apply {
@@ -39,14 +43,16 @@ class PlaySourceDialog(context: Context, var playSourceIndex: Int, val playList:
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        playListBinding = FragmentPlayListBinding.inflate(layoutInflater)
+        setContentView(playListBinding.root)
         window!!.attributes = window!!.attributes.apply {
             width = WindowManager.LayoutParams.WRAP_CONTENT
             height = WindowManager.LayoutParams.WRAP_CONTENT
             gravity = Gravity.CENTER
         }
 
-        rvSelectWorks.layoutManager = LinearLayoutManager(context)
-        rvSelectWorks.adapter = selectionAdapter
+        playListBinding.rvSelectWorks.layoutManager = LinearLayoutManager(context)
+        playListBinding.rvSelectWorks.adapter = selectionAdapter
 
     }
 

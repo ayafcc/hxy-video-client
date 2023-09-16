@@ -5,6 +5,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.KeyEvent
 import android.widget.Toast
@@ -17,6 +19,7 @@ import cn.mahua.vod.App
 import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.*
+import cn.mahua.vod.databinding.ActivityNewPlayBinding
 import cn.mahua.vod.jiexi.BackListener
 import cn.mahua.vod.jiexi.JieXiUtils2
 import cn.mahua.vod.netservice.VodService
@@ -36,7 +39,6 @@ import com.github.StormWyrm.wanandroid.base.net.observer.PlayLoadingObserver
 import com.liuwei.android.upnpcast.NLUpnpCastManager
 import com.liuwei.android.upnpcast.device.CastDevice
 import com.lxj.xpopup.XPopup
-import kotlinx.android.synthetic.main.activity_new_play.*
 import okhttp3.Call
 import okhttp3.Response
 import pro.dxys.fumiad.FuMiAd
@@ -47,7 +49,6 @@ import java.io.IOException
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
-import kotlin.collections.ArrayList
 
 class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
     private val TAG = "NewPlayActivity"
@@ -74,6 +75,11 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
     private var vodDuration: Long = 0
     private var videoNetProgress: Long = 0L
     private var avheaders: MutableMap<String?, String?>? = null
+    private lateinit var newPlayBinding: ActivityNewPlayBinding
+
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+    }
 
     private val onJiexiResultListener = object : BackListener {
         override fun onSuccess(url: String?, curParseIndex: Int,headers: Map<String?, String?>?) {
@@ -132,12 +138,16 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
 
     override fun initView() {
         super.initView()
-        BarUtils.setStatusBarColor(this, ColorUtils.getColor(R.color.player_status_color))
-        mVodBean = intent.getParcelableExtra(PlayActivity.KEY_VOD) as VodBean
-        isShowPlayProgress = intent.getBooleanExtra(PlayActivity.KEY_SHOW_PROGRESS, false)
-        controller = AvVideoController(videoView, this)
 
-        videoView.setVideoController(controller)
+        newPlayBinding = ActivityNewPlayBinding.inflate(layoutInflater)
+        setContentView(newPlayBinding.root)
+
+        BarUtils.setStatusBarColor(this, ColorUtils.getColor(R.color.player_status_color))
+        mVodBean = intent.getParcelableExtra(PlayActivity.KEY_VOD)!!
+        isShowPlayProgress = intent.getBooleanExtra(PlayActivity.KEY_SHOW_PROGRESS, false)
+        controller = AvVideoController(newPlayBinding.videoView, this)
+
+        newPlayBinding.videoView.setVideoController(controller)
 
         registerReceiver()
 
@@ -189,7 +199,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
             }
         }
 
-        videoView.setOnStateChangeListener(object : BaseVideoView.OnStateChangeListener {
+        newPlayBinding.videoView.setOnStateChangeListener(object : BaseVideoView.OnStateChangeListener {
             override fun onPlayStateChanged(playState: Int) {
                 if (playState == VideoView.STATE_PLAYBACK_COMPLETED) {
                     val percentage = getPercentage(curProgressHistory, vodDuration)
@@ -205,7 +215,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                     isParseSuccess = true
                     if (isShowPlayProgress) {
                         Log.i("dsd", "iko===${App.curPlayScoreBean?.curProgress ?: 0}")
-                        videoView.seekTo(playScoreInfo?.curProgress ?: 0)
+                        newPlayBinding.videoView.seekTo(playScoreInfo?.curProgress ?: 0)
                         println("进度3：==" + playScoreInfo?.curProgress)
                         //从播放记录中点击播放的时候，需要重新插入输入库
 //                        playScoreInfo?.let {
@@ -215,7 +225,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                         isShowPlayProgress = false
                     } else {
                         if (isSeekToHistory) {
-                            videoView.seekTo(curProgressHistory)
+                            newPlayBinding.videoView.seekTo(curProgressHistory)
                             println("进度2：==" + curProgressHistory)
 //                            isSeekToHistory = false
                         } else {
@@ -227,7 +237,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                                 if(islive == 0L){
                                     controller.addDefaultControlComponent(mVodBean.vodName,true)
                                 }else if(islive>videoNetProgress) {
-                                    videoView.seekTo(videoNetProgress)
+                                    newPlayBinding.videoView.seekTo(videoNetProgress)
                                 }
                             }
                             println("进度4：== videoNetProgress=" + videoNetProgress)
@@ -237,27 +247,27 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                     println("进度12：==" + vodDuration)
                     when (SPUtils.getInstance().getInt(AvVideoController.KEY_SPEED_INDEX, 3)) {
                         0 -> {
-                            videoView.setSpeed(2f)
+                            newPlayBinding.videoView.setSpeed(2f)
                             controller.setSpeed("2.00")
                         }
                         1 -> {
-                            videoView.setSpeed(1.5f)
+                            newPlayBinding.videoView.setSpeed(1.5f)
                             controller.setSpeed("1.50")
                         }
                         2 -> {
-                            videoView.setSpeed(1.25f)
+                            newPlayBinding.videoView.setSpeed(1.25f)
                             controller.setSpeed("1.25")
                         }
                         3 -> {
-                            videoView.setSpeed(1f)
+                            newPlayBinding.videoView.setSpeed(1f)
                             controller.setSpeed("1.00")
                         }
                         4 -> {
-                            videoView.setSpeed(0.75f)
+                            newPlayBinding.videoView.setSpeed(0.75f)
                             controller.setSpeed("0.75")
                         }
                         5 -> {
-                            videoView.setSpeed(0.5f)
+                            newPlayBinding.videoView.setSpeed(0.5f)
                             controller.setSpeed("0.50")
                         }
                     }
@@ -293,7 +303,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
 
     override fun onStart() {
         super.onStart()
-        videoView.resume()
+        newPlayBinding.videoView.resume()
         if (isParsed) {
             checkVodTrySee()
         }
@@ -310,20 +320,20 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
 
     override fun onStop() {
         super.onStop()
-        videoView.pause()
+        newPlayBinding.videoView.pause()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         JieXiUtils2.INSTANCE.stopGet()
         controller.onDestroy()
-        videoView.release()
+        newPlayBinding.videoView.release()
         lbm?.unregisterReceiver(localReceiver)
         cancelTimer()
     }
 
     override fun onBackPressedSupport() {
-        if (!videoView.onBackPressed()) {
+        if (!newPlayBinding.videoView.onBackPressed()) {
             try {
                 recordPlay()//播放记录可能为空
             } catch (e: Exception) {
@@ -500,7 +510,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
             playListFragment = null
         }
 
-        videoView.release()
+        newPlayBinding.videoView.release()
         controller.setTitle(mVodBean.vodName)
         getVideoDetail()
     }
@@ -551,7 +561,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                 curPlayUrl
             }
             NLUpnpCastManager.getInstance().connect(device);
-            Intent(this, CastScreenActivity2::class.java).apply {
+            Intent(this, CastScreenActivity::class.java).apply {
                 putExtra("vod", mVodBean)
                 putExtra("playSourceIndex", playSourceIndex)
                 putExtra("urlIndex", urlIndex)
@@ -740,7 +750,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
     private fun parseData() {
         LogUtils.d("=====问题 parseData")
         if (isPlay) {
-            videoView.release()
+            newPlayBinding.videoView.release()
         }
         isParseSuccess = false
         isPlay = false
@@ -813,9 +823,9 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
             if (playList != null ) {
                 curl = playList!![urlIndex].url
             }
-            videoView.post {
+            newPlayBinding.videoView.post {
                 if (url.startsWith("//")) {
-                    videoView.setUrl("https:$url")
+                    newPlayBinding.videoView.setUrl("https:$url")
                 } else if(curl.contains("bilibili.com")){
                     val airPorts = mapOf(Pair("Referer", curl),Pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36"))
                     if(avheaders==null){
@@ -824,11 +834,11 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                     }else {
                         avheaders!!.putAll(airPorts)
                     }
-                    videoView.setUrl(url,avheaders)
+                    newPlayBinding.videoView.setUrl(url,avheaders)
                 }else {
-                    videoView.setUrl(url)
+                    newPlayBinding.videoView.setUrl(url)
                 }
-                videoView.start()
+                newPlayBinding.videoView.start()
             }
         }
     }
@@ -1158,7 +1168,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
         return urlStrs
     }
     fun getSameData(url: String): String {
-        videoView.post {
+        newPlayBinding.videoView.post {
             if( playFrom.player_info.parse2.contains("ikheader=") ||url.contains("mgtv.com")){
                 if(playFrom.player_info.parse2.contains("ikheader=")) {
                     var p1: String = ""
@@ -1179,17 +1189,17 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                     }
                 }
                 LogUtils.d("", "====Parse avheaders url=" + avheaders)
-                videoView.setUrl(url,avheaders)
+                newPlayBinding.videoView.setUrl(url,avheaders)
             }else {
                 if (url.startsWith("//")) {
-                    videoView.setUrl("https:$url")
+                    newPlayBinding.videoView.setUrl("https:$url")
                 } else {
 
-                    videoView.setUrl(url)
+                    newPlayBinding.videoView.setUrl(url)
 
                 }
             }
-            videoView.start()
+            newPlayBinding.videoView.start()
 //            controller.setCurProgress(playScoreInfo?.percentage ?: 0f)
         }
         return url;
@@ -1208,7 +1218,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                 val playUrl: String? = response?.body?.string()
                 val playUrl_code: Int? = response?.code
                 LogUtils.d("", "====Parse avheaderss1 url=" + playUrl_code)
-                videoView.post {
+                newPlayBinding.videoView.post {
                     if(playUrl_code == 403) {
                         if (url.contains("mgtv.com")) {//需要header
                             val airPorts = mapOf(Pair("Referer", "https://www.mgtv.com/"),Pair("User-Agent", "6666"))
@@ -1224,11 +1234,11 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
                         } else {
                             //videoView.setUrl(url)
                         }
-                        videoView.setUrl(url,avheaders)
+                        newPlayBinding.videoView.setUrl(url,avheaders)
                     }else{
-                        videoView.setUrl(url)
+                        newPlayBinding.videoView.setUrl(url)
                     }
-                    videoView.start()
+                    newPlayBinding.videoView.start()
                 }
 
 

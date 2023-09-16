@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -19,6 +20,7 @@ import cn.mahua.vod.App
 import cn.mahua.vod.R
 import cn.mahua.vod.ad.AdWebView
 import cn.mahua.vod.bean.*
+import cn.mahua.vod.databinding.FragmentPlayDetailBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.ui.down.AllDownloadActivity
 import cn.mahua.vod.ui.down.cache.Square
@@ -50,15 +52,14 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import jaygoo.library.m3u8downloader.control.DownloadPresenter
 import jaygoo.library.m3u8downloader.db.table.M3u8DoneInfo
 import jaygoo.library.m3u8downloader.db.table.M3u8DownloadingInfo
-import kotlinx.android.synthetic.main.fragment_play_detail.*
 import me.drakeet.multitype.MultiTypeAdapter
 import org.litepal.LitePalApplication
 import pro.dxys.fumiad.FuMiAd
-import pro.dxys.fumiad.FumiBannerListener
 import pro.dxys.fumiad.FumiNativeAdListener
 import java.util.*
 
 class VideoDetailFragment : BaseFragment() {
+    private lateinit var playDetailBinding: FragmentPlayDetailBinding
 
     private lateinit var mVodBean: VodBean
     private var isCollected: Boolean = false
@@ -79,6 +80,13 @@ class VideoDetailFragment : BaseFragment() {
             }
         }
     }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        playDetailBinding = FragmentPlayDetailBinding.inflate(inflater, container, false)
+
+        return playDetailBinding.root
+    }
+
     private val commentAdapter: CommentAdapter by lazy {
         CommentAdapter().apply {
             setHeaderAndEmpty(true)
@@ -114,10 +122,10 @@ class VideoDetailFragment : BaseFragment() {
             urlIndex = getInt(URL_INDEX)
             playSourceIndex = getInt(PLAY_SOURCE_INDEX)
         }
-        refreshLayout.setEnableRefresh(false)
-        refreshLayout.setRefreshFooter(ClassicsFooter(mActivity))
-        rvPlayDetail.layoutManager = LinearLayoutManager(mActivity)
-        rvPlayDetail.adapter = commentAdapter
+        playDetailBinding.refreshLayout.setEnableRefresh(false)
+        playDetailBinding.refreshLayout.setRefreshFooter(ClassicsFooter(mActivity))
+        playDetailBinding.rvPlayDetail.layoutManager = LinearLayoutManager(mActivity)
+        playDetailBinding.rvPlayDetail.adapter = commentAdapter
         initHeaderMsg()
         commentAdapter.addHeaderView(headerView)
         mBannerLayout = headerView.findViewById(R.id.bannerLayout)
@@ -153,11 +161,11 @@ class VideoDetailFragment : BaseFragment() {
         val awvPlayerDown = headerView.findViewById<AdWebView>(R.id.awvPlayerDown)
         //val mBannerLayout = headerView.findViewById<FrameLayout>(R.id.bannerLayout);
         val ad = App.startBean?.ads?.player_down
-        if (ad == null ||ad.status == 0) {
+        if (ad == null || ad.status == 0) {
             awvPlayerDown.visibility = View.GONE
-        } else if(ad != null ||ad.status == 1) {
-            if(ad?.description.isNullOrEmpty()) {
-            }else {
+        } else if (ad != null || ad.status == 1) {
+            if (ad?.description.isNullOrEmpty()) {
+            } else {
                 awvPlayerDown.visibility = View.VISIBLE
                 awvPlayerDown.loadHtmlBody(ad.description)
             }
@@ -166,36 +174,36 @@ class VideoDetailFragment : BaseFragment() {
             score()
         }
         headerView.findViewById<TextView>(R.id.item_tv_playinfo_collect)
-                .setOnClickListener {
-                    if (UserUtils.isLogin()) {
-                        if (isCollected) {
-                            uncollection()
-                        } else {
-                            collection()
-                        }
+            .setOnClickListener {
+                if (UserUtils.isLogin()) {
+                    if (isCollected) {
+                        uncollection()
                     } else {
-                        ActivityUtils.startActivity(LoginActivity::class.java)
+                        collection()
                     }
-
+                } else {
+                    ActivityUtils.startActivity(LoginActivity::class.java)
                 }
+
+            }
         headerView.findViewById<TextView>(R.id.item_tv_playinfo_download)
-                .setOnClickListener {
-                    //if (LoginUtils.checkVIP(activity, "下载需要开通vip是否去开通")) {
-                    if(playActivity.istp()){
-                        startCache()   //去除下载需要VIP
-                    }else{
-                        ToastUtils.showShort("暂无观影次数请邀请好友或升级会员！")
-                    }
+            .setOnClickListener {
+                //if (LoginUtils.checkVIP(activity, "下载需要开通vip是否去开通")) {
+                if (playActivity.istp()) {
+                    startCache()   //去除下载需要VIP
+                } else {
+                    ToastUtils.showShort("暂无观影次数请邀请好友或升级会员！")
+                }
 
-                }
+            }
         headerView.findViewById<TextView>(R.id.item_tv_playinfo_feedback)
-                .setOnClickListener {
-                    ActivityUtils.startActivity(FeedbackActivity::class.java)
-                }
+            .setOnClickListener {
+                ActivityUtils.startActivity(FeedbackActivity::class.java)
+            }
         headerView.findViewById<TextView>(R.id.item_tv_playinfo_share)
-                .setOnClickListener {
-                    ShareActivity.start()
-                }
+            .setOnClickListener {
+                ShareActivity.start()
+            }
         tvLastest.setOnClickListener {
             playActivity.showPlayList()
         }
@@ -302,15 +310,15 @@ class VideoDetailFragment : BaseFragment() {
                 getSameActorData()
             }
         }
-        rlComment.setOnClickListener {
+        playDetailBinding.rlComment.setOnClickListener {
             if (UserUtils.isLogin()) {
                 CommentDialog(mActivity)
-                        .setOnCommentSubmitClickListener(object : CommentDialog.OnCommentSubmitClickListener {
-                            override fun onCommentSubmit(comment: String) {
-                                commitComment(comment)
-                            }
-                        })
-                        .show()
+                    .setOnCommentSubmitClickListener(object : CommentDialog.OnCommentSubmitClickListener {
+                        override fun onCommentSubmit(comment: String) {
+                            commitComment(comment)
+                        }
+                    })
+                    .show()
             } else {
                 LoginActivity.start()
             }
@@ -327,32 +335,38 @@ class VideoDetailFragment : BaseFragment() {
 
     override fun initListener() {
         super.initListener()
-        refreshLayout.setOnLoadMoreListener {
+        playDetailBinding.refreshLayout.setOnLoadMoreListener {
             curCommentPage++
             getCommentList()
         }
     }
+
     private fun banner() {
         Log.e("fumiad", "进入")
 
-        FuMiAd.addNativeAd(playActivity,headerView.findViewById<AdWebView>(R.id.rl_native_horizontal),true, object : FumiNativeAdListener {
-            override fun onAdShow() {
-                Log.e("fumiad", "onAdShow")
-            }
+        FuMiAd.addNativeAd(
+            playActivity,
+            headerView.findViewById<AdWebView>(R.id.rl_native_horizontal),
+            true,
+            object : FumiNativeAdListener {
+                override fun onAdShow() {
+                    Log.e("fumiad", "onAdShow")
+                }
 
-            override fun onError(s: String) {
-                Log.e("fumiad", "onError:$s")
-            }
+                override fun onError(s: String) {
+                    Log.e("fumiad", "onError:$s")
+                }
 
-            override fun onAdClose() {
-                Log.e("fumiad", "onAdClose")
-            }
+                override fun onAdClose() {
+                    Log.e("fumiad", "onAdClose")
+                }
 
-            override fun onAdClick() {
-                Log.e("fumiad", "onAdClick")
-            }
-        })
+                override fun onAdClick() {
+                    Log.e("fumiad", "onAdClick")
+                }
+            })
     }
+
     //    private fun banner() {
 //        mBannerLayout = headerView.findViewById(R.id.bannerLayout)
 //        BannerSdk.getInstance(playActivity).loadBannerAdvert(mBannerLayout, object : BannerAdListener {
@@ -375,26 +389,28 @@ class VideoDetailFragment : BaseFragment() {
             return
         }
         RequestManager.execute(this,
-                vodService.collect(1.toString(), mVodBean.vod_id.toString(), 2.toString()),
-                object : BaseObserver<String>() {
-                    override fun onSuccess(data: String) {
-                        ToastUtils.showShort("已收藏")
-                        val drawable = mActivity.getDrawable(R.drawable.ic_collected)
-                        isCollected = true
-                        drawable?.setBounds(0, 0, drawable.minimumWidth,
-                                drawable.minimumHeight)
-                        headerView.findViewById<TextView>(R.id.item_tv_playinfo_collect)
-                                .apply {
-                                    setCompoundDrawables(null, drawable, null, null)
-                                    text = "已收藏"
-                                }
-                    }
+            vodService.collect(1.toString(), mVodBean.vod_id.toString(), 2.toString()),
+            object : BaseObserver<String>() {
+                override fun onSuccess(data: String) {
+                    ToastUtils.showShort("已收藏")
+                    val drawable = mActivity.getDrawable(R.drawable.ic_collected)
+                    isCollected = true
+                    drawable?.setBounds(
+                        0, 0, drawable.minimumWidth,
+                        drawable.minimumHeight
+                    )
+                    headerView.findViewById<TextView>(R.id.item_tv_playinfo_collect)
+                        .apply {
+                            setCompoundDrawables(null, drawable, null, null)
+                            text = "已收藏"
+                        }
+                }
 
-                    override fun onError(e: ResponseException) {
+                override fun onError(e: ResponseException) {
 
-                    }
+                }
 
-                })
+            })
     }
 
 
@@ -404,25 +420,27 @@ class VideoDetailFragment : BaseFragment() {
             return
         }
         RequestManager.execute(this,
-                vodService.deleteCollect(mVodBean.vod_id.toString(), 2.toString()),
-                object : BaseObserver<String>() {
-                    override fun onSuccess(data: String) {
-                        ToastUtils.showShort("取消成功")
-                        isCollected = false
-                        val drawable = mActivity.getDrawable(R.drawable.ic_collection)
-                        drawable?.setBounds(0, 0, drawable.minimumWidth,
-                                drawable.minimumHeight)
-                        headerView.findViewById<TextView>(R.id.item_tv_playinfo_collect)
-                                .apply {
-                                    setCompoundDrawables(null, drawable, null, null)
-                                    text = "收藏"
-                                }
-                    }
-
-                    override fun onError(e: ResponseException) {
-                    }
-
+            vodService.deleteCollect(mVodBean.vod_id.toString(), 2.toString()),
+            object : BaseObserver<String>() {
+                override fun onSuccess(data: String) {
+                    ToastUtils.showShort("取消成功")
+                    isCollected = false
+                    val drawable = mActivity.getDrawable(R.drawable.ic_collection)
+                    drawable?.setBounds(
+                        0, 0, drawable.minimumWidth,
+                        drawable.minimumHeight
+                    )
+                    headerView.findViewById<TextView>(R.id.item_tv_playinfo_collect)
+                        .apply {
+                            setCompoundDrawables(null, drawable, null, null)
+                            text = "收藏"
+                        }
                 }
+
+                override fun onError(e: ResponseException) {
+                }
+
+            }
         )
     }
 
@@ -433,42 +451,46 @@ class VideoDetailFragment : BaseFragment() {
                 return
             }
             RequestManager.execute(this,
-                    vodService.getCollectList(1.toString(), 100.toString(), 2.toString()),
-                    object : BaseObserver<Page<CollectionBean>>() {
-                        override fun onSuccess(data: Page<CollectionBean>) {
-                            for (bean in data.list) {
-                                if (bean.data.id == mVodBean.vod_id) {
-                                    isCollected = true
-                                    break
+                vodService.getCollectList(1.toString(), 100.toString(), 2.toString()),
+                object : BaseObserver<Page<CollectionBean>>() {
+                    override fun onSuccess(data: Page<CollectionBean>) {
+                        for (bean in data.list) {
+                            if (bean.data.id == mVodBean.vod_id) {
+                                isCollected = true
+                                break
+                            }
+                        }
+                        if (isCollected) {
+                            val drawable = mActivity.getDrawable(R.drawable.ic_collected)
+                            drawable?.setBounds(
+                                0, 0, drawable.minimumWidth,
+                                drawable.minimumHeight
+                            )
+                            headerView.findViewById<TextView>(R.id.item_tv_playinfo_collect)
+                                .apply {
+                                    setCompoundDrawables(null, drawable, null, null)
+                                    text = "已收藏"
                                 }
-                            }
-                            if (isCollected) {
-                                val drawable = mActivity.getDrawable(R.drawable.ic_collected)
-                                drawable?.setBounds(0, 0, drawable.minimumWidth,
-                                        drawable.minimumHeight)
-                                headerView.findViewById<TextView>(R.id.item_tv_playinfo_collect)
-                                        .apply {
-                                            setCompoundDrawables(null, drawable, null, null)
-                                            text = "已收藏"
-                                        }
-                            } else {
-                                val drawable = mActivity.getDrawable(R.drawable.ic_collection)
-                                drawable?.setBounds(0, 0, drawable.minimumWidth,
-                                        drawable.minimumHeight)
-                                headerView.findViewById<TextView>(R.id.item_tv_playinfo_collect)
-                                        .apply {
-                                            setCompoundDrawables(null, drawable, null, null)
-                                            text = "收藏"
-                                        }
-                            }
-
+                        } else {
+                            val drawable = mActivity.getDrawable(R.drawable.ic_collection)
+                            drawable?.setBounds(
+                                0, 0, drawable.minimumWidth,
+                                drawable.minimumHeight
+                            )
+                            headerView.findViewById<TextView>(R.id.item_tv_playinfo_collect)
+                                .apply {
+                                    setCompoundDrawables(null, drawable, null, null)
+                                    text = "收藏"
+                                }
                         }
 
-                        override fun onError(e: ResponseException) {
+                    }
 
-                        }
+                    override fun onError(e: ResponseException) {
 
-                    })
+                    }
+
+                })
         }
     }
 
@@ -478,34 +500,34 @@ class VideoDetailFragment : BaseFragment() {
             return
         }
         ScoreDialog(mActivity)
-                .setOnScoreSubmitClickListener(object : ScoreDialog.OnScoreSubmitClickListener {
-                    override fun onScoreSubmit(scoreDialog: ScoreDialog, score: Float) {
-                        if (score == 0f) {
-                            ToastUtils.showShort("评分不能为空!")
-                        } else {
-                            scoreDialog.dismiss()
-                            val vodService = Retrofit2Utils.INSTANCE.createByGson(VodService::class.java)
-                            if (AgainstCheatUtil.showWarn(vodService)) {
-                                return
-                            }
-                            RequestManager.execute(
-                                    this@VideoDetailFragment,
-                                    vodService.score(mVodBean.vod_id.toString(), score.toString()),
-                                    object : BaseObserver<GetScoreBean>() {
-                                        override fun onSuccess(data: GetScoreBean) {
-                                            if (data.score != "0") {
-                                                ToastUtils.showShort("评分成功，获得${data.score}积分")
-                                            }
-                                        }
-
-                                        override fun onError(e: ResponseException) {
-                                        }
-                                    }
-                            )
+            .setOnScoreSubmitClickListener(object : ScoreDialog.OnScoreSubmitClickListener {
+                override fun onScoreSubmit(scoreDialog: ScoreDialog, score: Float) {
+                    if (score == 0f) {
+                        ToastUtils.showShort("评分不能为空!")
+                    } else {
+                        scoreDialog.dismiss()
+                        val vodService = Retrofit2Utils.INSTANCE.createByGson(VodService::class.java)
+                        if (AgainstCheatUtil.showWarn(vodService)) {
+                            return
                         }
+                        RequestManager.execute(
+                            this@VideoDetailFragment,
+                            vodService.score(mVodBean.vod_id.toString(), score.toString()),
+                            object : BaseObserver<GetScoreBean>() {
+                                override fun onSuccess(data: GetScoreBean) {
+                                    if (data.score != "0") {
+                                        ToastUtils.showShort("评分成功，获得${data.score}积分")
+                                    }
+                                }
+
+                                override fun onError(e: ResponseException) {
+                                }
+                            }
+                        )
                     }
-                })
-                .show()
+                }
+            })
+            .show()
     }
 
     private fun commitComment(commentContent: String) {
@@ -514,23 +536,23 @@ class VideoDetailFragment : BaseFragment() {
             return
         }
         RequestManager.execute(this,
-                vodService.comment(commentContent, 1.toString(), mVodBean.vod_id.toString()),
-                object : BaseObserver<GetScoreBean>() {
-                    override fun onSuccess(data: GetScoreBean) {
-                        if (data.score == "0") {
-                            ToastUtils.showShort("评论成功")
-                        } else {
-                            ToastUtils.showShort("评论成功,获得${data.score}积分")
-                        }
-                        curCommentPage = 1
-                        getCommentList(true)
+            vodService.comment(commentContent, 1.toString(), mVodBean.vod_id.toString()),
+            object : BaseObserver<GetScoreBean>() {
+                override fun onSuccess(data: GetScoreBean) {
+                    if (data.score == "0") {
+                        ToastUtils.showShort("评论成功")
+                    } else {
+                        ToastUtils.showShort("评论成功,获得${data.score}积分")
                     }
+                    curCommentPage = 1
+                    getCommentList(true)
+                }
 
-                    override fun onError(e: ResponseException) {
+                override fun onError(e: ResponseException) {
 
-                    }
+                }
 
-                })
+            })
     }
 
     private fun replayComment(commentContent: String, commentId: String, commentPid: String) {
@@ -539,17 +561,17 @@ class VideoDetailFragment : BaseFragment() {
             return
         }
         RequestManager.execute(this,
-                vodService.replayComment(commentContent, 1.toString(), mVodBean.vod_id.toString(), commentId, commentPid),
-                object : BaseObserver<String>() {
-                    override fun onSuccess(data: String) {
+            vodService.replayComment(commentContent, 1.toString(), mVodBean.vod_id.toString(), commentId, commentPid),
+            object : BaseObserver<String>() {
+                override fun onSuccess(data: String) {
 
-                    }
+                }
 
-                    override fun onError(e: ResponseException) {
+                override fun onError(e: ResponseException) {
 
-                    }
+                }
 
-                })
+            })
     }
 
     private fun getCommentList(isFresh: Boolean = false) {
@@ -558,35 +580,33 @@ class VideoDetailFragment : BaseFragment() {
             return
         }
         RequestManager.execute(this,
-                vodService.getCommentList(mVodBean.vod_id, 1.toString(), curCommentPage, 10),
-                object : BaseObserver<Page<CommentBean>>() {
-                    override fun onSuccess(data: Page<CommentBean>) {
-                        if (curCommentPage == 1) {
-                            if (isFresh)
-                                commentAdapter.setNewData(data.list)
-                            else
-                                commentAdapter.addData(data.list)
-                        }
-
-                        if (curCommentPage > 1) {
+            vodService.getCommentList(mVodBean.vod_id, 1.toString(), curCommentPage, 10),
+            object : BaseObserver<Page<CommentBean>>() {
+                override fun onSuccess(data: Page<CommentBean>) {
+                    if (curCommentPage == 1) {
+                        if (isFresh)
+                            commentAdapter.setNewData(data.list)
+                        else
                             commentAdapter.addData(data.list)
-                            if (refreshLayout != null) {
-                                if (data.list.isEmpty()) {
-                                    refreshLayout.finishLoadMoreWithNoMoreData()
-                                } else {
-                                    refreshLayout.finishLoadMore(true)
-                                }
-                            }
-                        }
                     }
 
-                    override fun onError(e: ResponseException) {
-                        if (curCommentPage > 1 && refreshLayout != null) {
-                            refreshLayout.finishLoadMore(false)
+                    if (curCommentPage > 1) {
+                        commentAdapter.addData(data.list)
+                        if (data.list.isEmpty()) {
+                            playDetailBinding.refreshLayout.finishLoadMoreWithNoMoreData()
+                        } else {
+                            playDetailBinding.refreshLayout.finishLoadMore(true)
                         }
                     }
+                }
 
-                })
+                override fun onError(e: ResponseException) {
+                    if (curCommentPage > 1) {
+                        playDetailBinding.refreshLayout.finishLoadMore(false)
+                    }
+                }
+
+            })
     }
 
     private fun getSameTypeData() {
@@ -595,19 +615,19 @@ class VideoDetailFragment : BaseFragment() {
             return
         }
         RequestManager.execute(this,
-                vodService.getSameTypeList(mVodBean.type_id, mVodBean.vod_class, curSameTypePage, 3),
-                object : BaseObserver<Page<VodBean>>() {
-                    override fun onSuccess(data: Page<VodBean>) {
-                        if (data.list.isNotEmpty()) {
-                            curSameTypePage++
-                            recommendAdapter.setNewData(data.list)
-                        }
+            vodService.getSameTypeList(mVodBean.type_id, mVodBean.vod_class, curSameTypePage, 3),
+            object : BaseObserver<Page<VodBean>>() {
+                override fun onSuccess(data: Page<VodBean>) {
+                    if (data.list.isNotEmpty()) {
+                        curSameTypePage++
+                        recommendAdapter.setNewData(data.list)
                     }
+                }
 
-                    override fun onError(e: ResponseException) {
-                    }
+                override fun onError(e: ResponseException) {
+                }
 
-                })
+            })
     }
 
     private fun getSameActorData() {
@@ -616,20 +636,20 @@ class VideoDetailFragment : BaseFragment() {
             return
         }
         RequestManager.execute(this,
-                vodService.getSameActorList(mVodBean.type_id, mVodBean.vod_actor, curSameActorPage, 3),
-                object : BaseObserver<Page<VodBean>>() {
-                    override fun onSuccess(data: Page<VodBean>) {
-                        if (data.list.isNotEmpty()) {
-                            recommendAdapter.setNewData(data.list)
-                            curSameActorPage++
-                        }
+            vodService.getSameActorList(mVodBean.type_id, mVodBean.vod_actor, curSameActorPage, 3),
+            object : BaseObserver<Page<VodBean>>() {
+                override fun onSuccess(data: Page<VodBean>) {
+                    if (data.list.isNotEmpty()) {
+                        recommendAdapter.setNewData(data.list)
+                        curSameActorPage++
                     }
+                }
 
-                    override fun onError(e: ResponseException) {
+                override fun onError(e: ResponseException) {
 
-                    }
+                }
 
-                })
+            })
     }
 
     fun changePlaysource(playSourceIndex: Int) {
@@ -646,14 +666,14 @@ class VideoDetailFragment : BaseFragment() {
                     val ivAvatar = it.getView<ImageView>(R.id.ivAvatar)
                     if (user_portrait.isNotEmpty()) {
                         Glide.with(helper.convertView)
-                                .load(ApiConfig.BASE_URL + "/" + user_portrait)
-                                .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                                .into(ivAvatar)
+                            .load(ApiConfig.BASE_URL + "/" + user_portrait)
+                            .apply(RequestOptions.bitmapTransform(CircleCrop()))
+                            .into(ivAvatar)
                     } else {
                         Glide.with(helper.convertView)
-                                .load(R.drawable.ic_default_avator)
-                                .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                                .into(ivAvatar)
+                            .load(R.drawable.ic_default_avator)
+                            .apply(RequestOptions.bitmapTransform(CircleCrop()))
+                            .into(ivAvatar)
                     }
                 }
             }
@@ -672,14 +692,15 @@ class VideoDetailFragment : BaseFragment() {
 
             val icon = helper.getView<ImageView>(R.id.item_iv_card_child_icon)
             val lp = icon.layoutParams
-            val perWidth = (getScreenWidth(LitePalApplication.getContext()) - dp2px(LitePalApplication.getContext(), 4f)) / 3
+            val perWidth =
+                (getScreenWidth(LitePalApplication.getContext()) - dp2px(LitePalApplication.getContext(), 4f)) / 3
             lp.height = (perWidth * 1.4f).toInt()
             icon.layoutParams = lp
             Glide.with(helper.itemView.context)
-                    .load(img)
-                    .thumbnail(0.1f)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(icon)
+                .load(img)
+                .thumbnail(0.1f)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(icon)
         }
     }
 
@@ -715,13 +736,14 @@ class VideoDetailFragment : BaseFragment() {
 
         const val PLAY_SOURCE_INDEX = "playInfoIndex"
 
-        fun newInstance(vodBean: VodBean, urlIndex: Int, playSourceIndex: Int): VideoDetailFragment = VideoDetailFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(VOD_BEAN, vodBean)
-                putInt(URL_INDEX, urlIndex)
-                putInt(PLAY_SOURCE_INDEX, playSourceIndex)
+        fun newInstance(vodBean: VodBean, urlIndex: Int, playSourceIndex: Int): VideoDetailFragment =
+            VideoDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(VOD_BEAN, vodBean)
+                    putInt(URL_INDEX, urlIndex)
+                    putInt(PLAY_SOURCE_INDEX, playSourceIndex)
+                }
             }
-        }
     }
 
 
@@ -732,7 +754,8 @@ class VideoDetailFragment : BaseFragment() {
         }
         val view: View = LayoutInflater.from(activity).inflate(R.layout.cache_all_list_layout, null)
         bottomSheetDialog?.setContentView(view)
-        bottomSheetDialog?.window?.findViewById<View>(R.id.design_bottom_sheet)?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        bottomSheetDialog?.window?.findViewById<View>(R.id.design_bottom_sheet)
+            ?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         if (vod_play_list.isEmpty()) {
             Toast.makeText(activity, "正在请求数据，请稍后", Toast.LENGTH_SHORT).show()
             return
@@ -746,22 +769,27 @@ class VideoDetailFragment : BaseFragment() {
             val playerInfo = playFromBean.player_info
             val parse = playerInfo.parse2
             val urls = playFromBean.urls
-            val urlsize=urls.size
+            val urlsize = urls.size
 
             val square = Square(downIndex + 1) {
                 val downloadTitle = "${mVodBean.vodName}\t${urls[downIndex].name}"
-                if(urls[downIndex].url.contains(".mp4") || urls[downIndex].url.contains(".m3u8") || urls[downIndex].url.contains("/m3u8?") || urls[downIndex].url.contains(".flv"))
-                {
+                if (urls[downIndex].url.contains(".mp4") || urls[downIndex].url.contains(".m3u8") || urls[downIndex].url.contains(
+                        "/m3u8?"
+                    ) || urls[downIndex].url.contains(".flv")
+                ) {
                     //Toast.makeText(activity, "下载"+urls[downIndex].url, Toast.LENGTH_SHORT).show()
-                }else{
+                } else {
                     urls[downIndex].url = playActivity.m3u8down().replace("\\s".toRegex(), "")
                 }
-                if(urls[downIndex].url.isNotEmpty()||urls[downIndex].url.contains(".mp4") || urls[downIndex].url.contains(".m3u8") || urls[downIndex].url.contains("/m3u8?") || urls[downIndex].url.contains(".flv")) {
+                if (urls[downIndex].url.isNotEmpty() || urls[downIndex].url.contains(".mp4") || urls[downIndex].url.contains(
+                        ".m3u8"
+                    ) || urls[downIndex].url.contains("/m3u8?") || urls[downIndex].url.contains(".flv")
+                ) {
                     Toast.makeText(activity, "开始缓存第${downIndex + 1}集", Toast.LENGTH_SHORT).show()
                     // 三个参数 下载地址 标题  封面图片
                     DownloadPresenter.addM3u8Task(activity, urls[downIndex].url, downloadTitle, mVodBean.vod_pic)
                     Log.d("down11111", "" + urls[downIndex].url)
-                }else{
+                } else {
                     Toast.makeText(activity, "请正常播放后再点击下载", Toast.LENGTH_SHORT).show()
                 }
             }

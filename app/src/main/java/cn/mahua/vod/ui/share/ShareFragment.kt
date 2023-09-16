@@ -9,11 +9,14 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import cn.mahua.vod.R
 import cn.mahua.vod.bean.LoginBean
 import cn.mahua.vod.bean.ShareBean
 import cn.mahua.vod.bean.ShareInfoBean
+import cn.mahua.vod.databinding.ActivityShareBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.Retrofit2Utils
@@ -30,15 +33,17 @@ import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver
 import com.github.StormWyrm.wanandroid.base.net.observer.LoadingObserver
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import gdut.bsx.share2.FileUtil
-import gdut.bsx.share2.Share2
-import gdut.bsx.share2.ShareContentType
-import kotlinx.android.synthetic.main.activity_share.*
 import org.greenrobot.eventbus.EventBus
 import java.io.File
 
 class ShareFragment : BaseFragment(){
+    private lateinit var shareBinding: ActivityShareBinding
     private var shareInfo: ShareInfoBean? = null
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        shareBinding = ActivityShareBinding.inflate(inflater, container, false)
+        return shareBinding.root
+    }
 
     override fun getLayoutId(): Int {
         return R.layout.activity_share
@@ -46,7 +51,7 @@ class ShareFragment : BaseFragment(){
 
     override fun initView() {
         super.initView()
-        ivBack.visibility = View.GONE
+        shareBinding.ivBack.visibility = View.GONE
     }
 
     override fun initLoad() {
@@ -56,7 +61,7 @@ class ShareFragment : BaseFragment(){
 
     override fun initListener() {
         super.initListener()
-        ivInviteFriend.setOnClickListener {
+        shareBinding.ivInviteFriend.setOnClickListener {
             PermissionUtils.permission(PermissionConstants.STORAGE)
                     .callback(object : PermissionUtils.SimpleCallback {
                         override fun onGranted() {
@@ -71,10 +76,10 @@ class ShareFragment : BaseFragment(){
                     .request()
 
         }
-        ivCopyLink.setOnClickListener {
+        shareBinding.ivCopyLink.setOnClickListener {
             copyLink()
         }
-        tvCopy.setOnClickListener {
+        shareBinding.tvCopy.setOnClickListener {
             copyShareCode()
         }
     }
@@ -100,11 +105,11 @@ class ShareFragment : BaseFragment(){
                         data.run {
                             val bitmap = BarcodeEncoder().encodeBitmap(share_url, BarcodeFormat.QR_CODE,
                                     ConvertUtils.dp2px(125f), ConvertUtils.dp2px(125f))
-                            ivQrcode.setImageBitmap(bitmap)
+                            shareBinding.ivQrcode.setImageBitmap(bitmap)
                             if (share_url.contains("=")) {
                                 val shareCode = share_url.split("=")[1]
                                 if (shareCode.isNotEmpty())
-                                    tvSharecode.text = shareCode
+                                    shareBinding.tvSharecode.text = shareCode
                             }
                             if (!share_logo.isNullOrEmpty() && mActivity != null && !mActivity.isFinishing) {
                                 Glide.with(mActivity)
@@ -114,7 +119,7 @@ class ShareFragment : BaseFragment(){
                                             }
 
                                             override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-                                                rlRoot.setBackgroundDrawable(resource)
+                                                shareBinding.rlRoot.setBackgroundDrawable(resource)
                                             }
 
                                         })
@@ -133,7 +138,7 @@ class ShareFragment : BaseFragment(){
         val progressDialog = ProgressDialog.show(mActivity, "", StringUtils.getString(R.string.loading_msg))
         ThreadUtils.executeBySingle(object : ThreadUtils.Task<File>() {
             override fun doInBackground(): File {
-                val bitmap = SimpleUtils.getCacheBitmapFromView(rlRoot)
+                val bitmap = SimpleUtils.getCacheBitmapFromView(shareBinding.rlRoot)
                 return SimpleUtils.saveBitmapToSdCard(mActivity, bitmap)
             }
 
@@ -185,7 +190,7 @@ class ShareFragment : BaseFragment(){
     }
 
     private fun copyShareCode() {
-        val clipData = ClipData.newPlainText("", tvSharecode.text.toString())
+        val clipData = ClipData.newPlainText("", shareBinding.tvSharecode.text.toString())
         val clipbrardManager = mActivity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipbrardManager.setPrimaryClip (clipData)
         ToastUtils.showShort("已经复制到剪切板")

@@ -2,12 +2,14 @@ package cn.mahua.vod.ui.expand
 
 import android.app.Activity
 import android.graphics.Rect
+import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.MyExpand
+import cn.mahua.vod.databinding.ActivityMyExpandBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.DateUtil
@@ -21,12 +23,15 @@ import com.github.StormWyrm.wanandroid.base.net.observer.LoadingObserver
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
-import kotlinx.android.synthetic.main.activity_my_expand.*
 
 class MyExpandActivity : BaseActivity(), View.OnClickListener, OnLoadMoreListener, OnRefreshListener {
     private var mPage = 1;
     private var isRefresh = true
     private var mDataList = ArrayList<MyExpand.ListBean>()
+    private lateinit var myExpandBinding:ActivityMyExpandBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     private val msgAdapter by lazy {
         ExpandAdapter(this@MyExpandActivity)
@@ -39,20 +44,23 @@ class MyExpandActivity : BaseActivity(), View.OnClickListener, OnLoadMoreListene
     override fun initView() {
         super.initView()
 
-        refreshLayout.setOnLoadMoreListener(this)
-        refreshLayout.setOnRefreshListener(this)
-        rvExpand.layoutManager = LinearLayoutManager(mActivity)
-        rvExpand.addItemDecoration(object : RecyclerView.ItemDecoration() {
+        myExpandBinding = ActivityMyExpandBinding.inflate(layoutInflater)
+        setContentView(myExpandBinding.root)
+
+        myExpandBinding.refreshLayout.setOnLoadMoreListener(this)
+        myExpandBinding.refreshLayout.setOnRefreshListener(this)
+        myExpandBinding.rvExpand.layoutManager = LinearLayoutManager(mActivity)
+        myExpandBinding.rvExpand.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 super.getItemOffsets(outRect, view, parent, state)
                 val paddingLeft = DensityUtils.dp2px(application, 5f)
                 outRect.set(paddingLeft, 0, paddingLeft, 0)
             }
         })
-        rvExpand.adapter = msgAdapter
+        myExpandBinding.rvExpand.adapter = msgAdapter
 
 
-        rlBack.setOnClickListener(this)
+        myExpandBinding.rlBack.setOnClickListener(this)
     }
 
     override fun initData() {
@@ -68,20 +76,20 @@ class MyExpandActivity : BaseActivity(), View.OnClickListener, OnLoadMoreListene
         RequestManager.execute(mActivity, vodService.myExpand(mPage.toString(), "20"),
                 object : LoadingObserver<MyExpand>(mActivity) {
                     override fun onSuccess(data: MyExpand) {
-                        refreshLayout.finishLoadMore()
-                        refreshLayout.finishRefresh()
+                        myExpandBinding.refreshLayout.finishLoadMore()
+                        myExpandBinding.refreshLayout.finishRefresh()
                         val list = data.list
                         if (list.size < 20) {
-                            refreshLayout.setNoMoreData(true)
+                            myExpandBinding.refreshLayout.setNoMoreData(true)
                         } else {
-                            refreshLayout.setNoMoreData(false)
+                            myExpandBinding.refreshLayout.setNoMoreData(false)
                         }
                         if (isRefresh) {
                             mDataList.clear()
                         }
                         mDataList.addAll(list)
                         msgAdapter.setNewData(mDataList)
-                        tv_total.text = data.total.toString() + "人"
+                        myExpandBinding.tvTotal.text = data.total.toString() + "人"
                     }
 
                     override fun onError(e: ResponseException) {
@@ -93,7 +101,7 @@ class MyExpandActivity : BaseActivity(), View.OnClickListener, OnLoadMoreListene
 
     override fun onClick(v: View?) {
         when (v) {
-            rlBack -> {
+            myExpandBinding.rlBack -> {
                 finish()
             }
         }

@@ -4,35 +4,44 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
-
+import cn.mahua.vod.databinding.ActivityAllDownloadBinding
+import cn.mahua.vod.databinding.ToolBarLayoutBinding
 import jaygoo.library.m3u8downloader.M3U8Library
 import jaygoo.library.m3u8downloader.view.DownloadItemList
 import jaygoo.library.m3u8downloader.view.DownloadingItemList
 import jaygoo.library.m3u8downloader.view.adapter.DownloadCenterPagerAdpter
-import kotlinx.android.synthetic.main.activity_all_download.*
-import kotlinx.android.synthetic.main.tool_bar_layout.*
-
-import java.util.*
 
 class AllDownloadActivity : BaseActivity() {
+    private lateinit var allDownloadBinding: ActivityAllDownloadBinding
+    private lateinit var toolBarLayoutBinding: ToolBarLayoutBinding
 
     private var downloadingItemList: DownloadingItemList? = null
     private var downloadItemList: DownloadItemList? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun initView() {
         val fragments = ArrayList<Fragment>()
+        allDownloadBinding = ActivityAllDownloadBinding.inflate(layoutInflater)
+        setContentView(allDownloadBinding.root)
+        toolBarLayoutBinding = ToolBarLayoutBinding.inflate(layoutInflater)
+
         downloadingItemList = DownloadingItemList()
         downloadItemList = DownloadItemList()
         fragments.add(downloadingItemList!!)
         fragments.add(downloadItemList!!)
         val adpter = DownloadCenterPagerAdpter(supportFragmentManager, fragments, this)
-        tab_vp.adapter = adpter
-        tl_down.setupWithViewPager(tab_vp)
+        allDownloadBinding.tabVp.adapter = adpter
+        allDownloadBinding.tlDown.setupWithViewPager(allDownloadBinding.tabVp)
         val intentFilter = IntentFilter(M3U8Library.EVENT_REFRESH)
         registerReceiver(receiver, intentFilter)
-        backup.setOnClickListener { finish() }
+        toolBarLayoutBinding.backup.setOnClickListener { finish() }
     }
 
     override fun initData() {}

@@ -7,22 +7,26 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
+import android.view.Menu
+import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import cn.mahua.vod.R
+import cn.mahua.vod.databinding.LayoutCommentBinding
 import com.blankj.utilcode.util.KeyboardUtils
 import com.blankj.utilcode.util.ToastUtils
-import kotlinx.android.synthetic.main.layout_comment.*
 
 class CommentDialog(val mContext : Context) : Dialog(mContext,R.style.DefaultDialogStyle) {
     private var onCommentSubmitClickListener: OnCommentSubmitClickListener? = null
-
+    private lateinit var commentBinding: LayoutCommentBinding
     init {
         setContentView(R.layout.layout_comment)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        commentBinding = LayoutCommentBinding.inflate(layoutInflater)
+        setContentView(commentBinding.root)
 
         setCanceledOnTouchOutside(false)
         window!!.attributes = window?.attributes?.apply {
@@ -31,11 +35,11 @@ class CommentDialog(val mContext : Context) : Dialog(mContext,R.style.DefaultDia
             gravity = Gravity.BOTTOM
         }
 
-        tvCancel.setOnClickListener {
+        commentBinding.tvCancel.setOnClickListener {
             closeSoftInput()
             dismiss()
         }
-        etComment.addTextChangedListener(object : TextWatcher {
+        commentBinding.etComment.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -44,12 +48,12 @@ class CommentDialog(val mContext : Context) : Dialog(mContext,R.style.DefaultDia
 
             @SuppressLint("SetTextI18n")
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                tvCount.text = "${s?.length ?: 0}/300"
+                commentBinding.tvCount.text = "${s?.length ?: 0}/300"
             }
         })
 
-        tvOk.setOnClickListener {
-            val comment = etComment.text.trim().toString()
+        commentBinding.tvOk.setOnClickListener {
+            val comment = commentBinding.etComment.text.trim().toString()
             if (comment.isEmpty()) {
                 ToastUtils.showShort("评论内容不能为空")
             } else {
@@ -58,7 +62,7 @@ class CommentDialog(val mContext : Context) : Dialog(mContext,R.style.DefaultDia
                 onCommentSubmitClickListener?.onCommentSubmit(comment)
             }
         }
-        KeyboardUtils.showSoftInput(etComment)
+        KeyboardUtils.showSoftInput(commentBinding.etComment)
     }
 
     fun closeSoftInput(){

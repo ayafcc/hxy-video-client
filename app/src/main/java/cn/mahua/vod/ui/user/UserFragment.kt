@@ -10,7 +10,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +20,7 @@ import cn.mahua.vod.ApiConfig
 import cn.mahua.vod.App
 import cn.mahua.vod.R
 import cn.mahua.vod.bean.*
+import cn.mahua.vod.databinding.FragmentUserBinding
 import cn.mahua.vod.download.SPUtils
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.ui.account.AccountSettingActivity
@@ -37,7 +40,6 @@ import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.LoginUtils
 import cn.mahua.vod.utils.Retrofit2Utils
 import cn.mahua.vod.utils.UserUtils
-import cn.mahua.vod.utils.UserUtils.isLogin
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
@@ -55,7 +57,6 @@ import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver
 import com.github.StormWyrm.wanandroid.base.net.observer.LoadingObserver
 import com.google.gson.Gson
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
-import kotlinx.android.synthetic.main.fragment_user.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -63,6 +64,13 @@ import org.litepal.LitePal
 
 
 class UserFragment : BaseFragment() {
+    private lateinit var userBinding : FragmentUserBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        userBinding = FragmentUserBinding.inflate(inflater, container, false)
+        return userBinding.root
+    }
+
     private val playScoreAdapter: PlayScoreAdapter by lazy {
         PlayScoreAdapter().apply {
             setOnItemClickListener { adapter, view, position ->
@@ -104,18 +112,18 @@ class UserFragment : BaseFragment() {
 
         val userTip = App.startBean?.document?.notice?.content ?: ""
         if (userTip.isNotEmpty()) {
-            tv_user_tip.text = userTip
+            userBinding.tvUserTip.text = userTip
         }
-        rvPlayScore.layoutManager = LinearLayoutManager(activity).apply {
+        userBinding.rvPlayScore.layoutManager = LinearLayoutManager(activity).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
-        rvPlayScore.adapter = playScoreAdapter
+        userBinding.rvPlayScore.adapter = playScoreAdapter
         val ad = App.startBean?.ads?.user_center
         if (ad == null || ad.status == 0 || ad.description.isNullOrEmpty()) {
-            awvUser.visibility = View.GONE
+            userBinding.awvUser.visibility = View.GONE
         } else {
-            awvUser.visibility = View.VISIBLE
-            awvUser.setOnClickListener {
+            userBinding.awvUser.visibility = View.VISIBLE
+            userBinding.awvUser.setOnClickListener {
                 if (!UserUtils.isLogin()) {
                     LoginActivity.start()
                 } else {
@@ -123,7 +131,7 @@ class UserFragment : BaseFragment() {
                     ActivityUtils.startActivity(intent)
                 }
             }
-            Glide.with(mContext).load(ad.description).into(awvUser)
+            Glide.with(mContext).load(ad.description).into(userBinding.awvUser)
         }
 
 //        userRefreshLayout.setDisableContentWhenRefresh(false) //是否在刷新的时候禁止列表的操作
@@ -147,11 +155,11 @@ class UserFragment : BaseFragment() {
 
     override fun initListener() {
         super.initListener()
-        tvLogin.setOnClickListener {
+        userBinding.tvLogin.setOnClickListener {
             LoginActivity.start()
         }
 
-        iv_user_pic.setOnClickListener {
+        userBinding.ivUserPic.setOnClickListener {
             if (!UserUtils.isLogin()) {
                 LoginActivity.start()
             } else {
@@ -159,7 +167,7 @@ class UserFragment : BaseFragment() {
             }
         }
 
-        tv_user_task.setOnClickListener {
+        userBinding.tvUserTask.setOnClickListener {
             if (!UserUtils.isLogin()) {
                 LoginActivity.start()
             } else {
@@ -167,7 +175,7 @@ class UserFragment : BaseFragment() {
             }
         }
 
-        tv_user_share.setOnClickListener {
+        userBinding.tvUserShare.setOnClickListener {
             if (!UserUtils.isLogin()) {
                 LoginActivity.start()
             } else {
@@ -176,7 +184,7 @@ class UserFragment : BaseFragment() {
             }
         }
 
-        tv_user_service.setOnClickListener {
+        userBinding.tvUserService.setOnClickListener {
             var description: String = ""
             if (App.startBean != null && App.startBean.ads != null && App.startBean.ads.service_qq != null && App.startBean.ads.service_qq.description != null) {
                 description = App.startBean.ads.service_qq.description
@@ -200,7 +208,7 @@ class UserFragment : BaseFragment() {
         }
 
 
-        tv_coin_withdraw.setOnClickListener {
+        userBinding.tvCoinWithdraw.setOnClickListener {
             if (!UserUtils.isLogin()) {
                 LoginActivity.start()
             } else {
@@ -208,7 +216,7 @@ class UserFragment : BaseFragment() {
             }
         }
 
-        tv_user_sign.setOnClickListener {
+        userBinding.tvUserSign.setOnClickListener {
             if (!UserUtils.isLogin()) {
                 LoginActivity.start()
             } else {
@@ -216,7 +224,7 @@ class UserFragment : BaseFragment() {
             }
 
         }
-        tv_user_t1.setOnClickListener {
+        userBinding.tvUserT1.setOnClickListener {
             if (!UserUtils.isLogin()) {
                 LoginActivity.start()
             } else {
@@ -225,7 +233,7 @@ class UserFragment : BaseFragment() {
                 ActivityUtils.startActivity(intent)
             }
         }
-        tv_user_t2.setOnClickListener {
+        userBinding.tvUserT2.setOnClickListener {
             if (!UserUtils.isLogin()) {
                 LoginActivity.start()
             } else {
@@ -235,7 +243,7 @@ class UserFragment : BaseFragment() {
             }
 
         }
-        tv_user_t3.setOnClickListener {
+        userBinding.tvUserT3.setOnClickListener {
             if (!UserUtils.isLogin()) {
                 LoginActivity.start()
             } else {
@@ -245,11 +253,11 @@ class UserFragment : BaseFragment() {
             }
         }
 
-        llCollect.setOnClickListener {
+        userBinding.llCollect.setOnClickListener {
             CollectionActivity.start()
         }
 
-        llPlayScore.setOnClickListener {
+        userBinding.llPlayScore.setOnClickListener {
             if (!UserUtils.isLogin()) {
                 LoginActivity.start()
             } else {
@@ -259,12 +267,12 @@ class UserFragment : BaseFragment() {
             }
         }
 
-        llClear.setOnClickListener {
+        userBinding.llClear.setOnClickListener {
             LitePal.deleteAll(PlayScoreBean::class.java)
             ToastUtils.showShort("已清除缓存")
             getPlayScore()
         }
-        llNotice.setOnClickListener {
+        userBinding.llNotice.setOnClickListener {
             if (!UserUtils.isLogin()) {
                 LoginActivity.start()
             } else {
@@ -272,7 +280,7 @@ class UserFragment : BaseFragment() {
                 startActivity(intent)
             }
         }
-        llExpand.setOnClickListener {
+        userBinding.llExpand.setOnClickListener {
             if (!UserUtils.isLogin()) {
                 LoginActivity.start()
             } else {
@@ -280,7 +288,7 @@ class UserFragment : BaseFragment() {
                 startActivity(intent)
             }
         }
-        llCache.setOnClickListener {
+        userBinding.llCache.setOnClickListener {
 
             if(LoginUtils.checkLogin(activity)){
                 activity?.let { it1 -> AllDownloadActivity.start(it1) }
@@ -422,35 +430,35 @@ class UserFragment : BaseFragment() {
 
     private fun updateUserInfo(data: UserInfoBean? = null) {
         if (UserUtils.isLogin()) {
-            tvLogin.visibility = View.GONE
-            tv_user_name.visibility = View.VISIBLE
-            tv_user_tip.visibility = View.VISIBLE
+            userBinding.tvLogin.visibility = View.GONE
+            userBinding.tvUserName.visibility = View.VISIBLE
+            userBinding.tvUserTip.visibility = View.VISIBLE
         } else {
-            tvLogin.visibility = View.VISIBLE
-            tv_user_name.visibility = View.INVISIBLE
-            tv_user_tip.visibility = View.INVISIBLE
-            tv_user_jinbi.text = "剩余金币 0"
-            tv_user_jifen.text = "剩余积分 0"
-            tv_user_video.text = "观影次数 0"
+            userBinding.tvLogin.visibility = View.VISIBLE
+            userBinding.tvUserName.visibility = View.INVISIBLE
+            userBinding.tvUserTip.visibility = View.INVISIBLE
+            userBinding.tvUserJinbi.text = "剩余金币 0"
+            userBinding.tvUserJifen.text = "剩余积分 0"
+            userBinding.tvUserVideo.text = "观影次数 0"
         }
         data?.let {
             val  isVIp=it.group.group_name.contains("VIP")
             SPUtils.setBoolean(activity, "isVip", isVIp)
-            tv_user_name.text = "${it.group?.group_name}：${data.user_nick_name}"
-            tv_user_name.text = "${it.group?.group_name}：${data.user_nick_name}"
-            tv_user_jinbi.text = "剩余金币  ${it.user_gold}"
-            tv_user_jifen.text = "剩余积分  ${it.user_points}"
-            tv_user_video.text = "观影次数  ${it.leave_times}"
+            userBinding.tvUserName.text = "${it.group?.group_name}：${data.user_nick_name}"
+            userBinding.tvUserName.text = "${it.group?.group_name}：${data.user_nick_name}"
+            userBinding.tvUserJinbi.text = "剩余金币  ${it.user_gold}"
+            userBinding.tvUserJifen.text = "剩余积分  ${it.user_points}"
+            userBinding.tvUserVideo.text = "观影次数  ${it.leave_times}"
             if (it.user_portrait.isNotEmpty()) {
                 Glide.with(mActivity)
                         .load(ApiConfig.BASE_URL + "/" + it.user_portrait)
                         .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                        .into(iv_user_pic)
+                        .into(userBinding.ivUserPic)
             } else {
                 Glide.with(mActivity)
                         .load(R.drawable.ic_default_avator)
                         .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                        .into(iv_user_pic)
+                        .into(userBinding.ivUserPic)
             }
 
         }
@@ -602,17 +610,17 @@ class UserFragment : BaseFragment() {
                 val list = data.list
                 for (i in list.indices) {
                     if (i == 0) {
-                        llPotato.visibility = View.VISIBLE
-                        line_potato.visibility = View.VISIBLE
-                        tv_potato.text = list[0].title
-                        llPotato.setOnClickListener {
+                        userBinding.llPotato.visibility = View.VISIBLE
+                        userBinding.linePotato.visibility = View.VISIBLE
+                        userBinding.tvPotato.text = list[0].title
+                        userBinding.llPotato.setOnClickListener {
                             gotoWeb(list[0].url)
                         }
                     } else if (i == 1) {
-                        llPlane.visibility = View.VISIBLE
-                        line_plane.visibility = View.VISIBLE
-                        tv_plane.text = list[1].title
-                        llPlane.setOnClickListener {
+                        userBinding.llPlane.visibility = View.VISIBLE
+                        userBinding.linePlane.visibility = View.VISIBLE
+                        userBinding.tvPlane.text = list[1].title
+                        userBinding.llPlane.setOnClickListener {
                             gotoWeb(list[1].url)
                         }
                     }

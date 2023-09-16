@@ -1,8 +1,10 @@
 package cn.mahua.vod.ui.account
 
+import android.os.Bundle
 import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.LoginBean
+import cn.mahua.vod.databinding.ActivityChangeNicknameBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.Retrofit2Utils
@@ -10,10 +12,15 @@ import com.blankj.utilcode.util.ToastUtils
 import com.github.StormWyrm.wanandroid.base.exception.ResponseException
 import com.github.StormWyrm.wanandroid.base.net.RequestManager
 import com.github.StormWyrm.wanandroid.base.net.observer.LoadingObserver
-import kotlinx.android.synthetic.main.activity_change_nickname.*
 import org.greenrobot.eventbus.EventBus
 
 class ChangeNicknameActivity : BaseActivity() {
+    private lateinit var changeNicknameBinding : ActivityChangeNicknameBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_account_setting)
+
+    }
 
     override fun getLayoutResID(): Int {
         return R.layout.activity_change_nickname
@@ -21,16 +28,20 @@ class ChangeNicknameActivity : BaseActivity() {
 
     override fun initListener() {
         super.initListener()
-        rlBack.setOnClickListener {
+
+        changeNicknameBinding = ActivityChangeNicknameBinding.inflate(layoutInflater)
+        setContentView(changeNicknameBinding.root)
+
+        changeNicknameBinding.rlBack.setOnClickListener {
             finish()
         }
-        tvFinish.setOnClickListener {
+        changeNicknameBinding.tvFinish.setOnClickListener {
             changeNickname()
         }
     }
 
     private fun changeNickname() {
-        val newNickName = etNickname.text.trim().toString()
+        val newNickName = changeNicknameBinding.etNickname.text.trim().toString()
         if(newNickName.isEmpty()){
             ToastUtils.showShort(R.string.new_nickname_empty)
             return

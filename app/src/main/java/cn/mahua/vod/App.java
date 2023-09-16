@@ -177,7 +177,7 @@ public class App extends BaseApplication {
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                Log.d(TAG, "RxJavaPlugins throw test");
+                throwable.printStackTrace();
             }
         });
     }

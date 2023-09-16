@@ -17,7 +17,7 @@ public class PlayListViewBinder extends ItemViewBinder<PlayList, PlayListViewBin
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        return new PlayListViewBinder.ViewHolder(inflater.inflate(R.layout.item_playlist, parent, false));
+        return new PlayListViewBinder.ViewHolder(inflater.inflate(R.layout.item_play_list2, parent, false));
     }
 
     @Override

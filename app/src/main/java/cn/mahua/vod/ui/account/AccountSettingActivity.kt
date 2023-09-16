@@ -1,7 +1,7 @@
 package cn.mahua.vod.ui.account
 
-import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import cn.mahua.vod.ApiConfig
 import cn.mahua.vod.R
@@ -9,6 +9,7 @@ import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.ChangeAvatorBean
 import cn.mahua.vod.bean.LoginBean
 import cn.mahua.vod.bean.LogoutBean
+import cn.mahua.vod.databinding.ActivityAccountSettingBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.Retrofit2Utils
@@ -24,13 +25,19 @@ import com.github.StormWyrm.wanandroid.base.net.observer.LoadingObserver
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
-import kotlinx.android.synthetic.main.activity_account_setting.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.greenrobot.eventbus.EventBus
 import java.io.File
+
 class AccountSettingActivity : BaseActivity() {
+    private lateinit var accountSettingBinding : ActivityAccountSettingBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
     override fun getLayoutResID(): Int {
         return R.layout.activity_account_setting
     }
@@ -38,31 +45,33 @@ class AccountSettingActivity : BaseActivity() {
     override fun initView() {
         super.initView()
         val userPortrait = UserUtils.userInfo?.user_portrait
+        accountSettingBinding = ActivityAccountSettingBinding.inflate(layoutInflater)
+        setContentView(accountSettingBinding.root)
         if (userPortrait.isNullOrEmpty()) {
-            ivAvatar.visibility = View.GONE
+            accountSettingBinding.ivAvatar.visibility = View.GONE
         } else {
-            ivAvatar.visibility = View.VISIBLE
+            accountSettingBinding.ivAvatar.visibility = View.VISIBLE
             Glide.with(mActivity)
                     .load(ApiConfig.BASE_URL + "/" + userPortrait)
                     .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                    .into(ivAvatar)
+                    .into(accountSettingBinding.ivAvatar)
         }
     }
 
     override fun initListener() {
         super.initListener()
 
-        rlBack.setOnClickListener {
+        accountSettingBinding.rlBack.setOnClickListener {
             finish()
         }
 
-        tvChangeAvator.setOnClickListener {
+        accountSettingBinding.tvChangeAvator.setOnClickListener {
             openAlbum()
         }
-        tvChangeNickname.setOnClickListener {
+        accountSettingBinding.tvChangeNickname.setOnClickListener {
             ActivityUtils.startActivity(ChangeNicknameActivity::class.java)
         }
-        tvLogout.setOnClickListener {
+        accountSettingBinding.tvLogout.setOnClickListener {
             logout()
         }
 
@@ -70,7 +79,7 @@ class AccountSettingActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == PictureConfig.CHOOSE_REQUEST) {
+        if (resultCode == RESULT_OK && requestCode == PictureConfig.CHOOSE_REQUEST) {
             // 图片选择结果回调
             val selectList = PictureSelector.obtainMultipleResult(data)
             if (selectList.size >= 1) {
@@ -149,11 +158,11 @@ class AccountSettingActivity : BaseActivity() {
                     override fun onSuccess(data: ChangeAvatorBean) {
                         ToastUtils.showShort(R.string.change_avator_success)
                         EventBus.getDefault().post(LoginBean())
-                        ivAvatar.visibility = View.VISIBLE
+                        accountSettingBinding.ivAvatar.visibility = View.VISIBLE
                         Glide.with(mActivity)
                                 .load(file)
                                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                                .into(ivAvatar)
+                                .into(accountSettingBinding.ivAvatar)
                     }
 
                     override fun onError(e: ResponseException) {

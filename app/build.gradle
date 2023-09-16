@@ -1,10 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdkVersion 29
+    compileSdk 33
+
+    viewBinding {
+        enabled = true
+    }
 
     signingConfigs {
         release {
@@ -16,16 +20,16 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.tiantianzhuiju.app"
-        minSdkVersion 22
-        targetSdkVersion 28
+        applicationId "com.botship.app"
+        minSdkVersion 29
+        targetSdkVersion 33
 
         versionCode 2
         versionName "2.3.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
-            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
         }
     }
 
@@ -53,8 +57,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility = 1.17
+        targetCompatibility = 1.17
     }
 
     repositories {
@@ -76,9 +80,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     //implementation(name: 'zgalaxy1.2.0', ext: 'aar')//银河广告联盟
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     //付米广告
@@ -90,7 +94,7 @@ dependencies {
     //androidTestImplementation 'androidx.test:runner:1.1.1'
     //androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.8.0'
 
     //内存泄漏
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-3'
@@ -108,7 +112,7 @@ dependencies {
     //EventBus
     implementation 'org.greenrobot:eventbus:3.2.0'
     //recyclerView  不需要混淆
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.3.0'
     //recyclerView适配器
     implementation 'me.drakeet.multitype:multitype:3.5.0'
     //RxJava
@@ -119,7 +123,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
     implementation 'com.squareup.retrofit2:converter-scalars:2.6.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
     //下载  不需要混淆
 //    implementation 'com.arialyy.aria:core:3.8.6'
     kapt 'com.arialyy.aria:compiler:3.8.6'
@@ -135,7 +139,7 @@ dependencies {
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.4'
 
     implementation 'com.google.android:flexbox:1.1.0'
-    implementation "androidx.core:core-ktx:1.3.1"
+    implementation "androidx.core:core-ktx:1.9.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
 
@@ -154,7 +158,7 @@ dependencies {
 
     //不需要混淆
     implementation 'com.github.Dpuntu:android-downloader:v1.0.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
 
 
 

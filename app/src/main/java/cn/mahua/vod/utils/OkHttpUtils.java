@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.net.Proxy;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -34,7 +35,21 @@ public class OkHttpUtils {
     private static OkHttpUtils mInstance;
     private final OkHttpClient mOkHttpClient;
 
-    private OkHttpUtils() {
+    private OkHttpUtils()  {
+        X509TrustManager x509TrustManager= new X509TrustManager() {
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+        };
         OkHttpClient.Builder ClientBuilder = new OkHttpClient.Builder();
         ClientBuilder.readTimeout(8, TimeUnit.SECONDS);//读取超时
         ClientBuilder.connectTimeout(8, TimeUnit.SECONDS);//连接超时
@@ -42,13 +57,8 @@ public class OkHttpUtils {
         ClientBuilder.proxy(Proxy.NO_PROXY);
 
         //支持HTTPS请求，跳过证书验证
-        ClientBuilder.sslSocketFactory(createSSLSocketFactory());
-        ClientBuilder.hostnameVerifier(new HostnameVerifier() {
-            @Override
-            public boolean verify(String hostname, SSLSession session) {
-                return true;
-            }
-        });
+        ClientBuilder.sslSocketFactory(createSSLSocketFactory(), x509TrustManager);
+        ClientBuilder.hostnameVerifier((hostname, session) -> true);
         mOkHttpClient = ClientBuilder.build();
     }
 

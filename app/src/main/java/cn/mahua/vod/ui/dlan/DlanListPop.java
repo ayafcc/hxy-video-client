@@ -2,7 +2,6 @@ package cn.mahua.vod.ui.dlan;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -10,11 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.liuwei.android.upnpcast.NLUpnpCastManager;
-import com.liuwei.android.upnpcast.controller.CastObject;
 import com.lxj.xpopup.core.CenterPopupView;
 
 import cn.mahua.vod.R;
-import cn.mahua.vod.ui.play.CastScreenActivity2;
 
 
 /**

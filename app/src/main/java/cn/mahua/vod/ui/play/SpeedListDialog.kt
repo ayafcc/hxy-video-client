@@ -7,15 +7,16 @@ import android.view.Gravity
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.mahua.vod.R
+import cn.mahua.vod.databinding.FragmentPlayListBinding
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.ConvertUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import kotlinx.android.synthetic.main.fragment_play_list.*
 import java.lang.ref.WeakReference
 
 class SpeedListDialog(context: Context,listener:OnSpeedItemClickListener,var urlIndex:Int) : Dialog(context, R.style.PlayListDialogStyle) {
     var playList = ArrayList<String>()
+    private lateinit var playListBinding: FragmentPlayListBinding
 
     init {
         playList.add("2.0X")
@@ -52,9 +53,11 @@ class SpeedListDialog(context: Context,listener:OnSpeedItemClickListener,var url
             height = WindowManager.LayoutParams.MATCH_PARENT
             gravity = Gravity.CENTER_VERTICAL or Gravity.RIGHT
         }
+        playListBinding = FragmentPlayListBinding.inflate(layoutInflater)
+        setContentView(playListBinding.root)
 
-        rvSelectWorks.layoutManager = LinearLayoutManager(context)
-        rvSelectWorks.adapter = selectionAdapter
+        playListBinding.rvSelectWorks.layoutManager = LinearLayoutManager(context)
+        playListBinding.rvSelectWorks.adapter = selectionAdapter
 
     }
 

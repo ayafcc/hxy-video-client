@@ -34,7 +34,7 @@ public class PlayInfoViewBinder extends ItemViewBinder<VodBean, PlayInfoViewBind
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        return new PlayInfoViewBinder.ViewHolder(inflater.inflate(R.layout.item_playinfo, parent, false));
+        return new PlayInfoViewBinder.ViewHolder(inflater.inflate(R.layout.item_play_info, parent, false));
     }
 
     @Override

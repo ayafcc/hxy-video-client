@@ -2,6 +2,7 @@ package cn.mahua.vod.ui.notice
 
 import android.app.Activity
 import android.graphics.Rect
+import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.MessageBean
+import cn.mahua.vod.databinding.ActivityMessageCenterBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.DensityUtils
@@ -19,9 +21,13 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.github.StormWyrm.wanandroid.base.exception.ResponseException
 import com.github.StormWyrm.wanandroid.base.net.RequestManager
 import com.github.StormWyrm.wanandroid.base.net.observer.LoadingObserver
-import kotlinx.android.synthetic.main.activity_message_center.*
 
 class MessageCenterActivity : BaseActivity(), View.OnClickListener {
+    private lateinit var messageCenterBinding: ActivityMessageCenterBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     private val msgAdapter by lazy {
         MsgAdapter(this@MessageCenterActivity)
@@ -33,9 +39,11 @@ class MessageCenterActivity : BaseActivity(), View.OnClickListener {
 
     override fun initView() {
         super.initView()
+        messageCenterBinding = ActivityMessageCenterBinding.inflate(layoutInflater)
+        setContentView(messageCenterBinding.root)
 
-        rvMsg.layoutManager = LinearLayoutManager(mActivity)
-        rvMsg.addItemDecoration(object : RecyclerView.ItemDecoration() {
+        messageCenterBinding.rvMsg.layoutManager = LinearLayoutManager(mActivity)
+        messageCenterBinding.rvMsg.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 super.getItemOffsets(outRect, view, parent, state)
                 val paddingTop = DensityUtils.dp2px(application, 5f)
@@ -43,12 +51,12 @@ class MessageCenterActivity : BaseActivity(), View.OnClickListener {
                 outRect.set(paddingLeft, paddingTop, paddingLeft, paddingTop)
             }
         })
-        rvMsg.adapter = msgAdapter
+        messageCenterBinding.rvMsg.adapter = msgAdapter
 
 
-        rlBack.setOnClickListener(this)
-        rl_msg_center.setOnClickListener(this)
-        rl_system_notice.setOnClickListener(this)
+        messageCenterBinding.rlBack.setOnClickListener(this)
+        messageCenterBinding.rlMsgCenter.setOnClickListener(this)
+        messageCenterBinding.rlSystemNotice.setOnClickListener(this)
     }
 
     override fun initData() {
@@ -77,13 +85,13 @@ class MessageCenterActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v) {
-            rlBack -> {
+            messageCenterBinding.rlBack -> {
                 finish()
             }
-            rl_msg_center -> {
+            messageCenterBinding.rlMsgCenter -> {
 
             }
-            rl_system_notice -> {
+            messageCenterBinding.rlSystemNotice -> {
                 ToastUtils.showShort("暂无系统公告")
             }
         }

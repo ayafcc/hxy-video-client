@@ -1,6 +1,7 @@
 package cn.mahua.vod.ui.login
 
 import android.graphics.Color
+import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.view.View
@@ -8,6 +9,7 @@ import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.LoginBean
 import cn.mahua.vod.bean.OpenRegister
+import cn.mahua.vod.databinding.ActivityLoginBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.Retrofit2Utils
@@ -16,7 +18,6 @@ import com.github.StormWyrm.wanandroid.base.exception.ResponseException
 import com.github.StormWyrm.wanandroid.base.net.RequestManager
 import com.github.StormWyrm.wanandroid.base.net.observer.LoadingObserver
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_login.*
 import org.greenrobot.eventbus.EventBus
 import java.util.*
 
@@ -29,6 +30,11 @@ class LoginActivity : BaseActivity(), Handler.Callback {
     private var index = MAX_NUM
     private var timer: Timer? = null
     private var task: TimerTask? = null
+    private lateinit var loginBinding: ActivityLoginBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun getLayoutResID(): Int {
         return R.layout.activity_login
@@ -36,6 +42,8 @@ class LoginActivity : BaseActivity(), Handler.Callback {
 
     override fun initView() {
         super.initView()
+        loginBinding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(loginBinding.root)
         BarUtils.setStatusBarColor(this, Color.TRANSPARENT)
         checkIsOpenRegister()
         mHanlder = Handler(this)
@@ -44,7 +52,7 @@ class LoginActivity : BaseActivity(), Handler.Callback {
     override fun initListener() {
         super.initListener()
 
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        loginBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
             }
 
@@ -55,24 +63,25 @@ class LoginActivity : BaseActivity(), Handler.Callback {
                 when (p0?.position ?: 0) {
                     0 -> {
                         curType = 0
-                        btn_login.text = StringUtils.getString(R.string.login)
+                        loginBinding.btnLogin.text = StringUtils.getString(R.string.login)
 //                        et_login_e3.visibility = View.GONE
-                        tv_login_tip.text = StringUtils.getString(R.string.login_hit)
-                        et_verify.visibility = View.GONE
-                        tv_send.visibility = View.GONE
+                        loginBinding.tvLoginTip.text = StringUtils.getString(R.string.login_hit)
+                        loginBinding.etVerify.visibility = View.GONE
+                        loginBinding.tvSend.visibility = View.GONE
                     }
+
                     1 -> {
                         curType = 1
-                        btn_login.text = StringUtils.getString(R.string.register)
+                        loginBinding.btnLogin.text = StringUtils.getString(R.string.register)
 //                        et_login_e3.visibility = View.VISIBLE
-                        tv_login_tip.text = StringUtils.getString(R.string.register_hit)
+                        loginBinding.tvLoginTip.text = StringUtils.getString(R.string.register_hit)
                         if (isOpenRegister) {
-                            et_verify.visibility = View.VISIBLE
-                            tv_send.visibility = View.VISIBLE
+                            loginBinding.etVerify.visibility = View.VISIBLE
+                            loginBinding.tvSend.visibility = View.VISIBLE
 //                            et_login_e3.visibility = View.GONE
                         } else {
-                            et_verify.visibility = View.GONE
-                            tv_send.visibility = View.GONE
+                            loginBinding.etVerify.visibility = View.GONE
+                            loginBinding.tvSend.visibility = View.GONE
 //                            et_login_e3.visibility = View.VISIBLE
                         }
                     }
@@ -80,11 +89,11 @@ class LoginActivity : BaseActivity(), Handler.Callback {
             }
 
         })
-        iv_login_back.setOnClickListener {
+        loginBinding.ivLoginBack.setOnClickListener {
             finish()
         }
 
-        btn_login.setOnClickListener {
+        loginBinding.btnLogin.setOnClickListener {
             if (curType == 0) {
                 login()
             } else {
@@ -95,7 +104,7 @@ class LoginActivity : BaseActivity(), Handler.Callback {
                 }
             }
         }
-        tv_send.setOnClickListener {
+        loginBinding.tvSend.setOnClickListener {
             sendVerifyCode()
         }
     }
@@ -107,7 +116,7 @@ class LoginActivity : BaseActivity(), Handler.Callback {
                 return;
             }
             val loginObservable = vodService
-                    .login(et_login_e1.text.trim().toString(), et_login_e2.text.trim().toString())
+                .login(loginBinding.etLoginE1.text.trim().toString(), loginBinding.etLoginE2.text.trim().toString())
             RequestManager.execute(this, loginObservable, object : LoadingObserver<String>(this) {
                 override fun onSuccess(data: String) {
                     ToastUtils.showShort(R.string.login_success)
@@ -129,12 +138,14 @@ class LoginActivity : BaseActivity(), Handler.Callback {
                 return;
             }
             val registerObservable = vodService
-                    .registerByCode(et_login_e1.text.trim().toString(), et_login_e2.text.trim().toString(),
-                            et_verify.text.trim().toString())
+                .registerByCode(
+                    loginBinding.etLoginE1.text.trim().toString(), loginBinding.etLoginE2.text.trim().toString(),
+                    loginBinding.etVerify.text.trim().toString()
+                )
             RequestManager.execute(this, registerObservable, object : LoadingObserver<String>(this) {
                 override fun onSuccess(data: String) {
                     ToastUtils.showShort(R.string.register_success)
-                    tabLayout.getTabAt(0)?.select()
+                    loginBinding.tabLayout.getTabAt(0)?.select()
                 }
 
                 override fun onError(e: ResponseException) {
@@ -151,11 +162,15 @@ class LoginActivity : BaseActivity(), Handler.Callback {
                 return;
             }
             val registerObservable = vodService
-                    .register(et_login_e1.text.trim().toString(), et_login_e2.text.trim().toString(),et_login_e2.text.trim().toString())
+                .register(
+                    loginBinding.etLoginE1.text.trim().toString(),
+                    loginBinding.etLoginE2.text.trim().toString(),
+                    loginBinding.etLoginE2.text.trim().toString()
+                )
             RequestManager.execute(this, registerObservable, object : LoadingObserver<String>(this) {
                 override fun onSuccess(data: String) {
                     ToastUtils.showShort(R.string.register_success)
-                    tabLayout.getTabAt(0)?.select()
+                    loginBinding.tabLayout.getTabAt(0)?.select()
                 }
 
                 override fun onError(e: ResponseException) {
@@ -176,8 +191,8 @@ class LoginActivity : BaseActivity(), Handler.Callback {
                 isOpenRegister = data.phone == "1"
                 if (isOpenRegister) {
                     if (curType == 1) {
-                        et_verify.visibility = View.VISIBLE
-                        tv_send.visibility = View.VISIBLE
+                        loginBinding.etVerify.visibility = View.VISIBLE
+                        loginBinding.tvSend.visibility = View.VISIBLE
 //                        et_login_e3.visibility = View.GONE
                     }
                 } else {
@@ -192,7 +207,7 @@ class LoginActivity : BaseActivity(), Handler.Callback {
     }
 
     private fun sendVerifyCode() {
-        val phone = et_login_e1.text.trim().toString()
+        val phone = loginBinding.etLoginE1.text.trim().toString()
         if (phone.isEmpty()) {
             ToastUtils.showShort(R.string.phone_isempty)
             return
@@ -203,7 +218,7 @@ class LoginActivity : BaseActivity(), Handler.Callback {
         }
         startTimer()
         val registerObservable = vodService
-                .sendVerifyCode(phone)
+            .sendVerifyCode(phone)
         RequestManager.execute(this, registerObservable, object : LoadingObserver<String>(this) {
             override fun onSuccess(data: String) {
                 ToastUtils.showShort(R.string.verify_code_success)
@@ -217,7 +232,7 @@ class LoginActivity : BaseActivity(), Handler.Callback {
 
 
     private fun startTimer() {
-        tv_send.isEnabled = false
+        loginBinding.tvSend.isEnabled = false
         timer = Timer()
         task = object : TimerTask() {
             override fun run() {
@@ -240,10 +255,10 @@ class LoginActivity : BaseActivity(), Handler.Callback {
     }
 
     private fun check(): Boolean {
-        val username = et_login_e1.text.trim().toString()
-        val password = et_login_e2.text.trim().toString()
+        val username = loginBinding.etLoginE1.text.trim().toString()
+        val password = loginBinding.etLoginE2.text.trim().toString()
 //        val repassword = et_login_e3.text.trim().toString()
-        val verifyCode = et_verify.text.trim().toString()
+        val verifyCode = loginBinding.etVerify.text.trim().toString()
         if (StringUtils.isEmpty(username)) {
             ToastUtils.showShort(R.string.phone_isempty)
             return false
@@ -283,21 +298,21 @@ class LoginActivity : BaseActivity(), Handler.Callback {
         }
     }
 
-    override fun handleMessage(msg: Message?): Boolean {
-        return when (msg?.what) {
+    override fun handleMessage(msg: Message): Boolean {
+        return when (msg.what) {
             WHAT_COUNT -> {
                 if (msg.arg1 == MAX_NUM) {
-                    tv_send.isEnabled = true
-                    tv_send.text = "发送验证码"
+                    loginBinding.tvSend.isEnabled = true
+                    loginBinding.tvSend.text = "发送验证码"
                 } else {
-                    tv_send.text = "${index}s"
+                    loginBinding.tvSend.text = "${index}s"
                 }
                 true
             }
+
             else -> {
                 false
             }
         }
     }
-
 }

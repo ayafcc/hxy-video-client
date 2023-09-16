@@ -1,6 +1,7 @@
 package cn.mahua.vod.ui.pay
 
 import android.graphics.Color
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -9,6 +10,7 @@ import cn.mahua.vod.ApiConfig
 import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.UserInfoBean
+import cn.mahua.vod.databinding.ActivityPayBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.Retrofit2Utils
@@ -22,10 +24,14 @@ import com.bumptech.glide.request.RequestOptions
 import com.github.StormWyrm.wanandroid.base.exception.ResponseException
 import com.github.StormWyrm.wanandroid.base.net.RequestManager
 import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver
-import kotlinx.android.synthetic.main.activity_pay.*
 import org.greenrobot.eventbus.Subscribe
 
 class PayActivity : BaseActivity() {
+    private lateinit var payBinding: ActivityPayBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun getLayoutResID(): Int {
         BarUtils.setStatusBarColor(this, Color.TRANSPARENT)
@@ -51,25 +57,28 @@ class PayActivity : BaseActivity() {
     }
 
     override fun initView() {
+
+        payBinding = ActivityPayBinding.inflate(layoutInflater)
+        setContentView(payBinding.root)
         changeUserInfo()
         val type = intent.getIntExtra("type", 0)
         if (type == 0) {
-            tv_task_title.setText(R.string.pay_title)
+            payBinding.tvTaskTitle.setText(R.string.pay_title)
         } else {
-            tv_task_title.setText(R.string.vip_upgrade_title)
+            payBinding.tvTaskTitle.setText(R.string.vip_upgrade_title)
         }
-        vpPay.adapter = PayFragmentPagerAdapter(supportFragmentManager)
-        tab.setupWithViewPager(vpPay)
+        payBinding.vpPay.adapter = PayFragmentPagerAdapter(supportFragmentManager)
+        payBinding.tab.setupWithViewPager(payBinding.vpPay)
         if (type == 1) {
-            vpPay.setCurrentItem(1, true)
+            payBinding.vpPay.setCurrentItem(1, true)
         }
     }
 
     override fun initListener() {
-        iv_task_back.setOnClickListener {
+        payBinding.ivTaskBack.setOnClickListener {
             finish()
         }
-        vpPay.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        payBinding.vpPay.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
 
@@ -78,9 +87,9 @@ class PayActivity : BaseActivity() {
 
             override fun onPageSelected(position: Int) {
                 if (position == 0) {
-                    tv_task_title.setText(R.string.pay_title)
+                    payBinding.tvTaskTitle.setText(R.string.pay_title)
                 } else {
-                    tv_task_title.setText(R.string.vip_upgrade_title)
+                    payBinding.tvTaskTitle.setText(R.string.vip_upgrade_title)
                 }
             }
 
@@ -98,20 +107,20 @@ class PayActivity : BaseActivity() {
 
     private fun changeUserInfo() {
         UserUtils.userInfo?.let {
-            tvMessage.text = "${it.group?.group_name}：${it.user_nick_name}"
-            tvExpireTime.text ="VIP有效期："+ TimeUtils.millis2String(it.user_end_time * 1000)
-            tvCoin.text = StringUtils.getString(R.string.remaining_coin, it.user_gold)
-            tvPoints.text = StringUtils.getString(R.string.remaining_points, it.user_points.toString())
+            payBinding.tvMessage.text = "${it.group?.group_name}：${it.user_nick_name}"
+            payBinding.tvExpireTime.text ="VIP有效期："+ TimeUtils.millis2String(it.user_end_time * 1000)
+            payBinding.tvCoin.text = StringUtils.getString(R.string.remaining_coin, it.user_gold)
+            payBinding.tvPoints.text = StringUtils.getString(R.string.remaining_points, it.user_points.toString())
             if (it.user_portrait.isNotEmpty()) {
                 Glide.with(mActivity)
                         .load(ApiConfig.BASE_URL + "/" + it.user_portrait)
                         .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                        .into(tvAvator)
+                        .into(payBinding.tvAvator)
             } else {
                 Glide.with(mActivity)
                         .load(R.drawable.ic_default_avator)
                         .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                        .into(tvAvator)
+                        .into(payBinding.tvAvator)
             }
         }
     }

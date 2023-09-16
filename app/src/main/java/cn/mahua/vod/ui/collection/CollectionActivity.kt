@@ -1,6 +1,7 @@
 package cn.mahua.vod.ui.collection
 
 import android.graphics.Bitmap
+import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +9,7 @@ import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.CollectionBean
 import cn.mahua.vod.bean.Page
+import cn.mahua.vod.databinding.ActivityCollectionBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.ui.login.LoginActivity
 import cn.mahua.vod.ui.play.PlayActivity
@@ -28,12 +30,15 @@ import com.github.StormWyrm.wanandroid.base.net.RequestManager
 import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
-import kotlinx.android.synthetic.main.activity_collection.*
 
 class CollectionActivity : BaseActivity() {
     private var curCollectionPage = 1
     private var isEditMode = false
     private var isAllSelect : Boolean = false
+    private lateinit var collectionBinding: ActivityCollectionBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     private val collectionAdapter: CollectionAdapter by lazy {
         CollectionAdapter().apply {
@@ -43,7 +48,7 @@ class CollectionActivity : BaseActivity() {
                     item.isSelect = !item.isSelect
                     if(isAllSelect && !item.isSelect){
                         isAllSelect = false
-                        tvSelect.text =  "全选"
+                        collectionBinding.tvSelect.text =  "全选"
                     }
                     adapter.data[position] = item
                     notifyItemChanged(position)
@@ -63,35 +68,37 @@ class CollectionActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
+        collectionBinding = ActivityCollectionBinding.inflate(layoutInflater)
+        setContentView(collectionBinding.root)
 
-        refreshLayout.setEnableRefresh(false)
-        refreshLayout.setRefreshFooter(ClassicsFooter(mActivity))
+        collectionBinding.refreshLayout.setEnableRefresh(false)
+        collectionBinding.refreshLayout.setRefreshFooter(ClassicsFooter(mActivity))
 
-        rvCollection.layoutManager = LinearLayoutManager(mActivity)
-        rvCollection.adapter = collectionAdapter
+        collectionBinding.rvCollection.layoutManager = LinearLayoutManager(mActivity)
+        collectionBinding.rvCollection.adapter = collectionAdapter
     }
 
     override fun initListener() {
         super.initListener()
-        tvSelect.setOnClickListener {
+        collectionBinding.tvSelect.setOnClickListener {
             if(isAllSelect){
                 collectionAdapter.data.map {
                     it.isSelect = false
                 }
                 isAllSelect = false
-                tvSelect.text =  "全选"
+                collectionBinding.tvSelect.text =  "全选"
             }else{
                 collectionAdapter.data.map {
                     it.isSelect = true
                 }
                 isAllSelect = true
-                tvSelect.text =  "取消全选"
+                collectionBinding.tvSelect.text =  "取消全选"
             }
             collectionAdapter.notifyDataSetChanged()
             changeDeleteNum()
 
         }
-        tvSelectCount.setOnClickListener {
+        collectionBinding.tvSelectCount.setOnClickListener {
             val ids = getSelectCollection()
             if (ids.isNullOrEmpty()) {
                 ToastUtils.showShort("未选择任何数据")
@@ -99,16 +106,16 @@ class CollectionActivity : BaseActivity() {
                 deleteCollection(ids)
             }
         }
-        tvEdit.setOnClickListener {
+        collectionBinding.tvEdit.setOnClickListener {
             isEditMode = !isEditMode
             changeEditMode()
         }
 
-        rlBack.setOnClickListener {
+        collectionBinding.rlBack.setOnClickListener {
             finish()
         }
 
-        refreshLayout.setOnLoadMoreListener {
+        collectionBinding.refreshLayout.setOnLoadMoreListener {
             curCollectionPage++
             getCollectionList()
         }
@@ -138,16 +145,16 @@ class CollectionActivity : BaseActivity() {
                         if (curCollectionPage > 1) {
                             collectionAdapter.addData(data.list)
                             if (data.list.isEmpty()) {
-                                refreshLayout.finishLoadMoreWithNoMoreData()
+                                collectionBinding.refreshLayout.finishLoadMoreWithNoMoreData()
                             } else {
-                                refreshLayout.finishLoadMore(true)
+                                collectionBinding.refreshLayout.finishLoadMore(true)
                             }
                         }
                     }
 
                     override fun onError(e: ResponseException) {
                         if (curCollectionPage > 1) {
-                            refreshLayout.finishLoadMore(false)
+                            collectionBinding.refreshLayout.finishLoadMore(false)
                         }
                     }
 
@@ -179,19 +186,19 @@ class CollectionActivity : BaseActivity() {
 
     private fun changeEditMode() {
         if (isEditMode) {
-            tvEdit.text = "取消"
-            breakLine.visibility = View.VISIBLE
-            rlEdit.visibility = View.VISIBLE
+            collectionBinding.tvEdit.text = "取消"
+            collectionBinding.breakLine.visibility = View.VISIBLE
+            collectionBinding.rlEdit.visibility = View.VISIBLE
             collectionAdapter.data.map {
                 it.isSelect = false
             }
             isAllSelect = false
-            tvSelect.text =  "全选"
+            collectionBinding.tvSelect.text =  "全选"
             collectionAdapter.notifyDataSetChanged()
         } else {
-            tvEdit.text = "编辑"
-            breakLine.visibility = View.GONE
-            rlEdit.visibility = View.GONE
+            collectionBinding.tvEdit.text = "编辑"
+            collectionBinding.breakLine.visibility = View.GONE
+            collectionBinding.rlEdit.visibility = View.GONE
         }
         collectionAdapter.changeEditMode(isEditMode)
     }
@@ -208,7 +215,7 @@ class CollectionActivity : BaseActivity() {
 
 
     private fun changeDeleteNum(){
-        tvSelectCount.text = "删除(${getSelectCount()})"
+        collectionBinding.tvSelectCount.text = "删除(${getSelectCount()})"
     }
 
     private fun getSelectCollection(): String {

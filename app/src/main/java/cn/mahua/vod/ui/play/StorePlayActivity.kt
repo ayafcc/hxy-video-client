@@ -9,7 +9,7 @@ import android.widget.ImageView
 import cn.mahua.av.play.AvVideoController
 import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_new_play.*
+import cn.mahua.vod.databinding.ActivityNewPlayBinding
 import xyz.doikki.videoplayer.player.BaseVideoView
 import xyz.doikki.videoplayer.player.VideoView
 import java.io.File
@@ -19,6 +19,7 @@ import java.text.DecimalFormatSymbols
 class StorePlayActivity : BaseActivity() {
 
     private lateinit var controller: AvVideoController
+    private lateinit var newPlayBinding: ActivityNewPlayBinding
 
     private var isSeekToHistory: Boolean = false
     private var curProgressHistory: Long = 0
@@ -46,19 +47,21 @@ class StorePlayActivity : BaseActivity() {
 
     override fun onStop() {
         super.onStop()
-        videoView.pause()
+        newPlayBinding.videoView.pause()
     }
 
     override fun initView() {
         super.initView()
 
+        newPlayBinding = ActivityNewPlayBinding.inflate(layoutInflater)
+        setContentView(newPlayBinding.root)
 
-        controller = AvVideoController(videoView, this)
+        controller = AvVideoController(newPlayBinding.videoView, this)
 
-        videoView.setVideoController(controller)
+        newPlayBinding.videoView.setVideoController(controller)
 
-        localUrl = intent.getStringExtra("play_url")
-        localName = intent.getStringExtra("play_name")
+        localUrl = intent.getStringExtra("play_url")!!
+        localName = intent.getStringExtra("play_name")!!
         var file = File(localUrl)
 
 
@@ -67,9 +70,9 @@ class StorePlayActivity : BaseActivity() {
 
 
         Log.d(TAG, "ins[0]${ins[0].absolutePath}")
-        videoView.setUrl(ins[0].absolutePath)
-        videoView.start()
-        videoView.setOnStateChangeListener(object : BaseVideoView.OnStateChangeListener {
+        newPlayBinding.videoView.setUrl(ins[0].absolutePath)
+        newPlayBinding.videoView.start()
+        newPlayBinding.videoView.setOnStateChangeListener(object : BaseVideoView.OnStateChangeListener {
 
             override fun onPlayerStateChanged(playerState: Int) {
                 if (playerState == VideoView.PLAYER_NORMAL) {

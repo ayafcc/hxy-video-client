@@ -5,11 +5,12 @@ import android.content.Context
 import android.os.Bundle
 import android.view.WindowManager
 import cn.mahua.vod.R
-import kotlinx.android.synthetic.main.layout_score.*
+import cn.mahua.vod.databinding.LayoutScoreBinding
 
 class ScoreDialog(context: Context) : Dialog(context,R.style.DefaultDialogStyle) {
     private var onScoreSubmitClickListener: OnScoreSubmitClickListener? = null
     private var score : Float  = 0f
+    private lateinit var scoreBinding: LayoutScoreBinding
 
     init {
         setContentView(R.layout.layout_score)
@@ -17,17 +18,18 @@ class ScoreDialog(context: Context) : Dialog(context,R.style.DefaultDialogStyle)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        scoreBinding = LayoutScoreBinding.inflate(layoutInflater)
+        setContentView(scoreBinding.root)
         window!!.attributes = window!!.attributes?.apply {
             width = WindowManager.LayoutParams.WRAP_CONTENT
             height = WindowManager.LayoutParams.WRAP_CONTENT
         }
 
-        ratingbar.setOnRatingChangeListener {
+        scoreBinding.ratingbar.setOnRatingChangeListener {
             score = it
         }
 
-        tvSubmit.setOnClickListener {
+        scoreBinding.tvSubmit.setOnClickListener {
             onScoreSubmitClickListener?.run {
                 onScoreSubmit(this@ScoreDialog,score)
             }

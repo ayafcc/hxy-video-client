@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.NetworkInterface;
 import java.net.URLDecoder;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -196,7 +197,7 @@ public class JieXiWebView2 extends WebView {
     private Timer timer;
     private TimerTask task;
 
-    public void startParse(String realUrl, int curIndex, int curSize, boolean isEnd) {
+    public void startParse(String realUrl, int curIndex, int curSize, boolean isEnd) throws NoSuchAlgorithmException {
         mIsEnd = isEnd;
         System.out.println("----- mIsEnd" + mIsEnd + "  curIndex=" + curIndex);
         if (isWifiProxy() || isVpnUsed()) {
@@ -244,7 +245,6 @@ public class JieXiWebView2 extends WebView {
         webSetting.setSupportZoom(true);
         webSetting.setUseWideViewPort(true);
         webSetting.setSupportMultipleWindows(true);
-        webSetting.setAppCacheEnabled(false);
         webSetting.setCacheMode(WebSettings.LOAD_NO_CACHE);
         webSetting.setGeolocationEnabled(true);
         webSetting.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
@@ -323,7 +323,7 @@ public class JieXiWebView2 extends WebView {
     /**
      * @param isOnlyUrl true 就是 直接返回 链接，不是 Data格式
      */
-    private void getJsonResult(String url, boolean isOnlyUrl) {
+    private void getJsonResult(String url, boolean isOnlyUrl) throws NoSuchAlgorithmException {
         System.out.println("---play----  req" + url);
         OkHttpUtils.getInstance()
                 .getDataAsynFromNet(url, new OkHttpUtils.MyNetCall() {

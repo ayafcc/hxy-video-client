@@ -33,7 +33,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup"
-        tools:targetApi="m">
+        >
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -173,11 +173,6 @@
             android:launchMode="singleTop"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.play.CastScreenActivity2"
-            android:configChanges="orientation|screenSize|keyboardHidden|screenLayout|smallestScreenSize"
-            android:launchMode="singleTop"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask" />
@@ -215,6 +210,8 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".ui.start.StartActivity"
+            android:exported="true"
+            tools:node="merge"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
@@ -226,8 +223,13 @@
         </activity>
         <activity android:name=".TestActivity2" />
         <activity android:name=".ui.task.MainActivity3" />
-        <activity android:name=".TestAes"></activity>
-        <activity android:name=".MergeTestActivity2"></activity>
+        <activity android:name=".TestAes"/>
+        <activity android:name=".MergeTestActivity2"/>
+        <service
+                android:name="com.blankj.utilcode.util.MessengerUtils$ServerService"
+                android:exported="false">
+            <!-- your intent filters here -->
+        </service>
 <!--        <activity android:name=".TestMergeActivity2">-->
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->

@@ -1,5 +1,6 @@
 package cn.mahua.vod.ui.withdraw
 
+import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.*
+import cn.mahua.vod.databinding.ActivityCoinWithdrawBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.Retrofit2Utils
@@ -20,7 +22,6 @@ import com.github.StormWyrm.wanandroid.base.net.RequestManager
 import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver
 import com.github.StormWyrm.wanandroid.base.net.observer.LoadingObserver
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
-import kotlinx.android.synthetic.main.activity_coin_withdraw.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -28,6 +29,12 @@ class GoldWithdrawActivity : BaseActivity() {
     private val array = arrayListOf("支付宝", "微信")
     private var curPayType = 1// 1 支付宝 2微信
     private var curRecordIndex = 1
+    private lateinit var coinWithdrawBinding: ActivityCoinWithdrawBinding;
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     private val recordAdapter: RecordAdapter by lazy {
         RecordAdapter()
     }
@@ -38,16 +45,19 @@ class GoldWithdrawActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
+        coinWithdrawBinding = ActivityCoinWithdrawBinding.inflate(layoutInflater)
+        setContentView(coinWithdrawBinding.root)
+
         onUserInfoChanged()
 
-        rvRecord.layoutManager = LinearLayoutManager(mActivity)
-        rvRecord.adapter = recordAdapter
-        refreshLayout.setEnableRefresh(false)
-        refreshLayout.setRefreshFooter(ClassicsFooter(mActivity))
+        coinWithdrawBinding.rvRecord.layoutManager = LinearLayoutManager(mActivity)
+        coinWithdrawBinding.rvRecord.adapter = recordAdapter
+        coinWithdrawBinding.refreshLayout.setEnableRefresh(false)
+        coinWithdrawBinding.refreshLayout.setRefreshFooter(ClassicsFooter(mActivity))
 
         val adapter = ArrayAdapter<String>(mActivity, android.R.layout.simple_dropdown_item_1line, array)
-        spinner.adapter = adapter
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        coinWithdrawBinding.spinner.adapter = adapter
+        coinWithdrawBinding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
@@ -56,18 +66,18 @@ class GoldWithdrawActivity : BaseActivity() {
             }
 
         }
-        spinner.setSelection(0)
+        coinWithdrawBinding.spinner.setSelection(0)
     }
 
     override fun initListener() {
         super.initListener()
-        rlBack.setOnClickListener {
+        coinWithdrawBinding.rlBack.setOnClickListener {
             finish()
         }
-        tvFinish.setOnClickListener {
+        coinWithdrawBinding.tvFinish.setOnClickListener {
             withdraw()
         }
-        refreshLayout.setOnLoadMoreListener {
+        coinWithdrawBinding.refreshLayout.setOnLoadMoreListener {
             curRecordIndex++
             getRecordData()
         }
@@ -86,27 +96,27 @@ class GoldWithdrawActivity : BaseActivity() {
     @Subscribe
     fun onUserInfoChanged(userinfo: UserInfoBean? = null) {
         UserUtils.userInfo?.let {
-            tvPoints.text = it.user_points.toString()
-            tvCoin.text = it.user_gold
+            coinWithdrawBinding.tvPoints.text = it.user_points.toString()
+            coinWithdrawBinding.tvCoin.text = it.user_gold
         }
     }
 
     private fun getGlodTip() {
-        var vodService= Retrofit2Utils.INSTANCE.createByGson(VodService::class.java)
+        var vodService = Retrofit2Utils.INSTANCE.createByGson(VodService::class.java)
         if (AgainstCheatUtil.showWarn(vodService)) {
             return;
         }
         RequestManager.execute(this, vodService.goldTip(),
-                object : LoadingObserver<GoldTipBean>(mActivity) {
-                    override fun onSuccess(data: GoldTipBean) {
-                        tvWithdrawHit.text = data.info
-                    }
+            object : LoadingObserver<GoldTipBean>(mActivity) {
+                override fun onSuccess(data: GoldTipBean) {
+                    coinWithdrawBinding.tvWithdrawHit.text = data.info
+                }
 
-                    override fun onError(e: ResponseException) {
+                override fun onError(e: ResponseException) {
 
-                    }
+                }
 
-                })
+            })
     }
 
     private fun refreshRecordData() {
@@ -116,37 +126,37 @@ class GoldWithdrawActivity : BaseActivity() {
     }
 
     private fun getRecordData() {
-        var vodService=Retrofit2Utils.INSTANCE.createByGson(VodService::class.java)
+        var vodService = Retrofit2Utils.INSTANCE.createByGson(VodService::class.java)
         if (AgainstCheatUtil.showWarn(vodService)) {
             return;
         }
         RequestManager.execute(this, vodService.getGoldWithdrawRecord(curRecordIndex.toString(), 10.toString()),
-                object : BaseObserver<Page<GoldWithdrawRecordBean>>() {
-                    override fun onSuccess(data: Page<GoldWithdrawRecordBean>) {
-                        recordAdapter.addData(data.list)
-                        if (curRecordIndex > 1) {
-                            if (data.list.isEmpty()) {
-                                refreshLayout.finishLoadMoreWithNoMoreData()
-                            } else {
-                                refreshLayout.finishLoadMore(true)
-                            }
+            object : BaseObserver<Page<GoldWithdrawRecordBean>>() {
+                override fun onSuccess(data: Page<GoldWithdrawRecordBean>) {
+                    recordAdapter.addData(data.list)
+                    if (curRecordIndex > 1) {
+                        if (data.list.isEmpty()) {
+                            coinWithdrawBinding.refreshLayout.finishLoadMoreWithNoMoreData()
+                        } else {
+                            coinWithdrawBinding.refreshLayout.finishLoadMore(true)
                         }
                     }
+                }
 
-                    override fun onError(e: ResponseException) {
-                        if (curRecordIndex > 1) {
-                            refreshLayout.finishLoadMore(false)
-                        }
+                override fun onError(e: ResponseException) {
+                    if (curRecordIndex > 1) {
+                        coinWithdrawBinding.refreshLayout.finishLoadMore(false)
                     }
+                }
 
-                })
+            })
 
     }
 
     private fun withdraw() {
-        val accout = etAccount.text.trim().toString()
-        val name = etName.text.trim().toString()
-        val money = etMoney.text.trim().toString()
+        val accout = coinWithdrawBinding.etAccount.text.trim().toString()
+        val name = coinWithdrawBinding.etName.text.trim().toString()
+        val money = coinWithdrawBinding.etMoney.text.trim().toString()
         if (accout.isNullOrEmpty()) {
             ToastUtils.showShort("收款账号不能为空！")
             return
@@ -161,24 +171,23 @@ class GoldWithdrawActivity : BaseActivity() {
             ToastUtils.showShort("提现金额不能为空！")
             return
         }
-        var vodService=Retrofit2Utils.INSTANCE.createByGson(VodService::class.java)
+        var vodService = Retrofit2Utils.INSTANCE.createByGson(VodService::class.java)
         if (AgainstCheatUtil.showWarn(vodService)) {
             return;
         }
         RequestManager.execute(this, vodService.goldWithdrawApply(money, curPayType.toString(), accout, name),
-                object : LoadingObserver<GoldWithdrawBean>(mActivity) {
-                    override fun onSuccess(data: GoldWithdrawBean) {
-                        ToastUtils.showShort(data.info)
-                        EventBus.getDefault().post(LoginBean())
-                        refreshRecordData()
-                    }
+            object : LoadingObserver<GoldWithdrawBean>(mActivity) {
+                override fun onSuccess(data: GoldWithdrawBean) {
+                    ToastUtils.showShort(data.info)
+                    EventBus.getDefault().post(LoginBean())
+                    refreshRecordData()
+                }
 
-                    override fun onError(e: ResponseException) {
-                    }
+                override fun onError(e: ResponseException) {
+                }
 
-                })
+            })
     }
-
 
 
     private class RecordAdapter : BaseQuickAdapter<GoldWithdrawRecordBean, BaseViewHolder>(R.layout.item_withdraw) {
@@ -194,7 +203,7 @@ class GoldWithdrawActivity : BaseActivity() {
                     else -> "未知"
                 }
                 helper.setText(R.id.tvStatus, status)
-                helper.setText(R.id.tvTime, TimeUtils.millis2String(it.created_time*1000))
+                helper.setText(R.id.tvTime, TimeUtils.millis2String(it.created_time * 1000))
             }
 
         }

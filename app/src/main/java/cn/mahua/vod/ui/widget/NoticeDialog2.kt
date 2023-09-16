@@ -13,13 +13,14 @@ import android.text.style.ClickableSpan
 import android.view.Gravity
 import android.view.View
 import cn.mahua.vod.R
+import cn.mahua.vod.databinding.DialogNoticeTip2Binding
 import cn.mahua.vod.utils.UrlUtils
 import com.blankj.utilcode.util.ActivityUtils.startActivity
 import com.blankj.utilcode.util.ConvertUtils
-import kotlinx.android.synthetic.main.dialog_notice_tip2.*
 
 
 class NoticeDialog2(context: Context, val msg: String) : Dialog(context, R.style.DefaultDialogStyle) {
+    private lateinit var noticeTip2Binding: DialogNoticeTip2Binding
 
     init {
         setContentView(R.layout.dialog_notice_tip2)
@@ -27,6 +28,8 @@ class NoticeDialog2(context: Context, val msg: String) : Dialog(context, R.style
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        noticeTip2Binding = DialogNoticeTip2Binding.inflate(layoutInflater)
+        setContentView(noticeTip2Binding.root)
         window!!.attributes?.apply {
             width = ConvertUtils.dp2px(300f)
             gravity = Gravity.CENTER
@@ -38,7 +41,7 @@ class NoticeDialog2(context: Context, val msg: String) : Dialog(context, R.style
         if (msg.contains("$")) {
 
             var index = msg.indexOfFirst { it == '$' }
-            var index2 = msg.indexOfLast { it == '$' }-1
+            var index2 = msg.indexOfLast { it == '$' } - 1
             val newMsg: String = msg.replace("$", "")
 
             if (index < 0 || index2 < 0) {
@@ -49,7 +52,10 @@ class NoticeDialog2(context: Context, val msg: String) : Dialog(context, R.style
             val span = SpannableString(newMsg)
             span.setSpan(object : ClickableSpan() {
                 override fun onClick(widget: View) {
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(UrlUtils.converKeywordLoadOrSearch(newMsg.substring(index, index2))))
+                    val browserIntent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse(UrlUtils.converKeywordLoadOrSearch(newMsg.substring(index, index2)))
+                    )
                     startActivity(browserIntent)
                 }
 
@@ -60,15 +66,15 @@ class NoticeDialog2(context: Context, val msg: String) : Dialog(context, R.style
                 }
             }, index, index2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 
-            tvNotice.movementMethod = LinkMovementMethod.getInstance()
-            tvNotice.append(newMsg)
+            noticeTip2Binding.tvNotice.movementMethod = LinkMovementMethod.getInstance()
+            noticeTip2Binding.tvNotice.append(newMsg)
 
-            tvNotice.text = span
+            noticeTip2Binding.tvNotice.text = span
         } else {
-            tvNotice.text = msg
+            noticeTip2Binding.tvNotice.text = msg
         }
 //        tvNotice.setMovementMethod(LinkMovementMethod.getInstance())
-        tv_close.setOnClickListener {
+        noticeTip2Binding.tvClose.setOnClickListener {
             dismiss()
         }
     }

@@ -1,10 +1,12 @@
 package cn.mahua.vod.ui.task
 
+import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.mahua.vod.R
 import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.TaskBean
 import cn.mahua.vod.bean.TaskItemBean
+import cn.mahua.vod.databinding.ActivityTaskBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.Retrofit2Utils
@@ -15,9 +17,14 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.github.StormWyrm.wanandroid.base.exception.ResponseException
 import com.github.StormWyrm.wanandroid.base.net.RequestManager
 import com.github.StormWyrm.wanandroid.base.net.observer.LoadingObserver
-import kotlinx.android.synthetic.main.activity_task.*
 
 class TaskActivity : BaseActivity() {
+    private lateinit var taskBinding: ActivityTaskBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     private val taskAdapter by lazy {
         TaskAdapter()
     }
@@ -29,13 +36,16 @@ class TaskActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
-        rvTask.layoutManager = LinearLayoutManager(mActivity)
-        rvTask.adapter = taskAdapter
+
+        taskBinding = ActivityTaskBinding.inflate(layoutInflater)
+        setContentView(taskBinding.root)
+        taskBinding.rvTask.layoutManager = LinearLayoutManager(mActivity)
+        taskBinding.rvTask.adapter = taskAdapter
     }
 
     override fun initListener() {
         super.initListener()
-        ivBack.setOnClickListener {
+        taskBinding.ivBack.setOnClickListener {
             finish()
         }
     }

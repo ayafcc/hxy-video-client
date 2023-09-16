@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include layout="@layout/item_playinfo" />
+    <include layout="@layout/item_play_info" />
 
     <include layout="@layout/item_recommend" />
 

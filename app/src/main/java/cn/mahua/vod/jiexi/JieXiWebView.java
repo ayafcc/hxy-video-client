@@ -21,6 +21,7 @@ import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.IOException;
 import java.net.NetworkInterface;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -160,7 +161,11 @@ public class JieXiWebView extends WebView {
                         }
                         if (--time <= 0) {
                             time = 8;
-                            parstNextOrComplete();
+                            try {
+                                parstNextOrComplete();
+                            } catch (NoSuchAlgorithmException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
                 };
@@ -180,7 +185,7 @@ public class JieXiWebView extends WebView {
         mBackListener = null;
     }
 
-    public void startParse() {
+    public void startParse() throws NoSuchAlgorithmException {
         if (isWifiProxy() || isVpnUsed()) {
             AgainstCheatUtil.showWarn(null);
             return;
@@ -210,7 +215,6 @@ public class JieXiWebView extends WebView {
         webSetting.setSupportZoom(true);
         webSetting.setUseWideViewPort(true);
         webSetting.setSupportMultipleWindows(true);
-        webSetting.setAppCacheEnabled(false);
         webSetting.setCacheMode(WebSettings.LOAD_NO_CACHE);
         webSetting.setGeolocationEnabled(true);
         webSetting.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
@@ -259,7 +263,7 @@ public class JieXiWebView extends WebView {
         }
     };
 
-    private void parstNextOrComplete() {
+    private void parstNextOrComplete() throws NoSuchAlgorithmException {
         if (++index < parseUrls.length) {
             startParse();
         } else {
@@ -273,7 +277,7 @@ public class JieXiWebView extends WebView {
     }
 
 
-    private void getJsonResult(String url) {
+    private void getJsonResult(String url) throws NoSuchAlgorithmException {
         OkHttpUtils.getInstance()
                 .getDataAsynFromNet(url, new OkHttpUtils.MyNetCall() {
                     @Override

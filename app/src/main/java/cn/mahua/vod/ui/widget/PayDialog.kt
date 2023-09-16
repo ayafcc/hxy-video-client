@@ -13,13 +13,15 @@ import cn.mahua.vod.App
 import cn.mahua.vod.R
 import cn.mahua.vod.bean.PointPurchseBean
 import cn.mahua.vod.bean.StartBean
+import cn.mahua.vod.databinding.DialogHitBinding
+import cn.mahua.vod.databinding.DialogPayBinding
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.ConvertUtils
-import kotlinx.android.synthetic.main.dialog_hit.tvCancel
-import kotlinx.android.synthetic.main.dialog_pay.*
 
 class PayDialog(context: Context, val data: PointPurchseBean) : Dialog(context, R.style.DefaultDialogStyle) {
     private var onHitDialogClickListener: OnPayDialogClickListener? = null
+    private lateinit var hitBinding: DialogHitBinding
+    private lateinit var payBinding: DialogPayBinding
 
     init {
         setContentView(R.layout.dialog_pay)
@@ -27,7 +29,9 @@ class PayDialog(context: Context, val data: PointPurchseBean) : Dialog(context, 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        hitBinding = DialogHitBinding.inflate(layoutInflater)
+        payBinding = DialogPayBinding.inflate(layoutInflater)
+        setContentView(payBinding.root)
         setCanceledOnTouchOutside(false)
         setCancelable(false)
 
@@ -63,10 +67,10 @@ class PayDialog(context: Context, val data: PointPurchseBean) : Dialog(context, 
             linearLayout.setOnClickListener {
                 onHitDialogClickListener?.onPayTypeClick(this@PayDialog, payment.payment)
             }
-            llContainer.addView(linearLayout)
+            payBinding.llContainer.addView(linearLayout)
         }
 
-        tvCancel.setOnClickListener {
+        hitBinding.tvCancel.setOnClickListener {
             dismiss()
         }
     }

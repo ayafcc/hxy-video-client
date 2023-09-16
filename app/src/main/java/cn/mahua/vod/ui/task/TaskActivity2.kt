@@ -2,6 +2,7 @@ package cn.mahua.vod.ui.task
 
 import android.app.Activity
 import android.graphics.Rect
+import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
@@ -15,6 +16,7 @@ import cn.mahua.vod.bean.OpenRecommendEvent
 import cn.mahua.vod.bean.OpenShareEvent
 import cn.mahua.vod.bean.TaskBean
 import cn.mahua.vod.bean.TaskItemBean
+import cn.mahua.vod.databinding.ActivityTask2Binding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.utils.AgainstCheatUtil
 import cn.mahua.vod.utils.DensityUtils
@@ -25,10 +27,15 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.github.StormWyrm.wanandroid.base.exception.ResponseException
 import com.github.StormWyrm.wanandroid.base.net.RequestManager
 import com.github.StormWyrm.wanandroid.base.net.observer.LoadingObserver
-import kotlinx.android.synthetic.main.activity_task2.*
 import org.greenrobot.eventbus.EventBus
 
 class TaskActivity2 : BaseActivity(), View.OnClickListener {
+    private lateinit var task2Binding: ActivityTask2Binding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     private val taskAdapter by lazy {
         TaskAdapter(this@TaskActivity2)
     }
@@ -39,8 +46,10 @@ class TaskActivity2 : BaseActivity(), View.OnClickListener {
 
     override fun initView() {
         super.initView()
-        rvTask.layoutManager = LinearLayoutManager(mActivity)
-        rvTask.addItemDecoration(object : ItemDecoration() {
+        task2Binding = ActivityTask2Binding.inflate(layoutInflater)
+        setContentView(task2Binding.root)
+        task2Binding.rvTask.layoutManager = LinearLayoutManager(mActivity)
+        task2Binding.rvTask.addItemDecoration(object : ItemDecoration() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 super.getItemOffsets(outRect, view, parent, state)
                 val paddingTop = DensityUtils.dp2px(application, 5f)
@@ -48,15 +57,15 @@ class TaskActivity2 : BaseActivity(), View.OnClickListener {
                 outRect.set(paddingLeft, paddingTop, paddingLeft, paddingTop)
             }
         })
-        rvTask.adapter = taskAdapter
+        task2Binding.rvTask.adapter = taskAdapter
 
-        rl_day_task.setOnClickListener(this)
-        rl_more_task.setOnClickListener(this)
+        task2Binding.rlDayTask.setOnClickListener(this)
+        task2Binding.rlMoreTask.setOnClickListener(this)
     }
 
     override fun initListener() {
         super.initListener()
-        ivBack.setOnClickListener {
+        task2Binding.ivBack.setOnClickListener {
             finish()
         }
     }
@@ -150,9 +159,9 @@ class TaskActivity2 : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v) {
-            rl_day_task -> {
+            task2Binding.rlDayTask -> {
             }
-            rl_more_task -> {
+            task2Binding.rlMoreTask -> {
                 finish()
                 EventBus.getDefault().postSticky(OpenShareEvent())
             }

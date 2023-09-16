@@ -8,17 +8,20 @@ import android.os.Bundle
 import android.view.Gravity
 import cn.mahua.vod.R
 import cn.mahua.vod.bean.AppUpdateBean
+import cn.mahua.vod.databinding.DialogAppUpdateBinding
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.ScreenUtils
-import kotlinx.android.synthetic.main.dialog_app_update.*
 
 class AppUpdateDialog(context: Context, val data: AppUpdateBean) : Dialog(context, R.style.DefaultDialogStyle) {
+    private lateinit var appUpdateBinding: DialogAppUpdateBinding
     init {
         setContentView(R.layout.dialog_app_update_tip)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appUpdateBinding = DialogAppUpdateBinding.inflate(layoutInflater)
+        setContentView(appUpdateBinding.root)
 
         setCanceledOnTouchOutside(false)
         setCancelable(false)
@@ -30,9 +33,9 @@ class AppUpdateDialog(context: Context, val data: AppUpdateBean) : Dialog(contex
         }
 
 
-        tvMsg.text = data.summary
+        appUpdateBinding.tvMsg.text = data.summary
         println("data.url"+data.url)
-        tvUpdate.setOnClickListener {
+        appUpdateBinding.tvUpdate.setOnClickListener {
             Intent(Intent.ACTION_VIEW, Uri.parse(data.url)).run {
                 ActivityUtils.startActivity(this)
             }

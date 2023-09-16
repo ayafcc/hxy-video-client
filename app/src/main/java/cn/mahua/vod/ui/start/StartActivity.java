@@ -35,6 +35,7 @@ import pro.dxys.fumiad.FuMiAd;
 import pro.dxys.fumiad.FuMiSplashListener;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.List;
 
@@ -372,7 +373,7 @@ public class StartActivity extends BaseActivity {
             disposable.dispose();
         }
     }
-    private  void get_base_url(){
+    private  void get_base_url() throws NoSuchAlgorithmException {
         OkHttpUtils.getInstance()
                 .getDataAsynFromNet(ApiConfig.codeurl, new OkHttpUtils.MyNetCall() {
                             @Override

@@ -1,6 +1,7 @@
 package cn.mahua.vod.ui.score
 
 import android.graphics.Bitmap
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -10,6 +11,7 @@ import cn.mahua.vod.base.BaseActivity
 import cn.mahua.vod.bean.Page
 import cn.mahua.vod.bean.PlayLogBean
 import cn.mahua.vod.bean.PlayScoreBean
+import cn.mahua.vod.databinding.ActivityPlayScoreBinding
 import cn.mahua.vod.netservice.VodService
 import cn.mahua.vod.ui.play.PlayActivity
 import cn.mahua.vod.utils.AgainstCheatUtil
@@ -31,15 +33,18 @@ import com.google.gson.Gson
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
-import kotlinx.android.synthetic.main.activity_play_score.*
 
 class PlayScoreActivity : BaseActivity() {
     private var isEditMode = false
     private var isAllSelect: Boolean = false
     private var curPage: Int = 1
+    private lateinit var playScoreBinding: ActivityPlayScoreBinding
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
-//     private lateinit var refreshLayout: RefreshLayout
+    //     private lateinit var refreshLayout: RefreshLayout
 
     private val playScoreAdapter: PlayScoreAdapter by lazy {
         PlayScoreAdapter().apply {
@@ -50,7 +55,7 @@ class PlayScoreActivity : BaseActivity() {
                     item.isSelect = !item.isSelect
                     if (isAllSelect && !item.isSelect) {
                         isAllSelect = false
-                        tvSelect.text = "全选"
+                        playScoreBinding.tvSelect.text = "全选"
                     }
                     adapter.data[position] = item
                     notifyItemChanged(position)
@@ -69,22 +74,25 @@ class PlayScoreActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
-        rvPlayScore.layoutManager = MyLinearLayoutManager(mActivity)
-        rvPlayScore.adapter = playScoreAdapter
 
-        refreshLayout.setDisableContentWhenRefresh(false) //是否在刷新的时候禁止列表的操作
-        refreshLayout.setDisableContentWhenLoading(false) //是否在加载的时候禁止列表的操作
-        refreshLayout.setEnableLoadMore(true) //是否启用上拉加载功能
-        refreshLayout.setEnableRefresh(true) //是否启用上拉加载功能;
-        refreshLayout.setEnableAutoLoadMore(true)
-        refreshLayout.setOnRefreshListener(OnRefreshListener {
+        playScoreBinding = ActivityPlayScoreBinding.inflate(layoutInflater)
+        setContentView(playScoreBinding.root)
+        playScoreBinding.rvPlayScore.layoutManager = MyLinearLayoutManager(mActivity)
+        playScoreBinding.rvPlayScore.adapter = playScoreAdapter
+
+        playScoreBinding.refreshLayout.setDisableContentWhenRefresh(false) //是否在刷新的时候禁止列表的操作
+        playScoreBinding.refreshLayout.setDisableContentWhenLoading(false) //是否在加载的时候禁止列表的操作
+        playScoreBinding.refreshLayout.setEnableLoadMore(true) //是否启用上拉加载功能
+        playScoreBinding.refreshLayout.setEnableRefresh(true) //是否启用上拉加载功能;
+        playScoreBinding.refreshLayout.setEnableAutoLoadMore(true)
+        playScoreBinding.refreshLayout.setOnRefreshListener(OnRefreshListener {
             curPage = 1
             if (curPage == 1) {
                 playScoreAdapter.data.clear()
             }
             getPlayScore(curPage, false)
         })
-        refreshLayout.setOnLoadMoreListener(OnLoadMoreListener {
+        playScoreBinding.refreshLayout.setOnLoadMoreListener(OnLoadMoreListener {
 
             curPage++
             getPlayScore(curPage, true)
@@ -105,25 +113,25 @@ class PlayScoreActivity : BaseActivity() {
 
     override fun initListener() {
         super.initListener()
-        tvSelect.setOnClickListener {
+        playScoreBinding.tvSelect.setOnClickListener {
             if (isAllSelect) {
                 playScoreAdapter.data.map {
                     it.isSelect = false
                 }
                 isAllSelect = false
-                tvSelect.text = "全选"
+                playScoreBinding.tvSelect.text = "全选"
             } else {
                 playScoreAdapter.data.map {
                     it.isSelect = true
                 }
                 isAllSelect = true
-                tvSelect.text = "取消全选"
+                playScoreBinding.tvSelect.text = "取消全选"
             }
             playScoreAdapter.notifyDataSetChanged()
             changeDeleteNum()
         }
 
-        tvSelectCount.setOnClickListener {
+        playScoreBinding.tvSelectCount.setOnClickListener {
             val ids = getSelectCollection()
             if (ids.isNullOrEmpty()) {
                 ToastUtils.showShort("未选择任何数据")
@@ -132,12 +140,12 @@ class PlayScoreActivity : BaseActivity() {
             }
         }
 
-        tvEdit.setOnClickListener {
+        playScoreBinding.tvEdit.setOnClickListener {
             isEditMode = !isEditMode
             changeEditMode()
         }
 
-        rlBack.setOnClickListener {
+        playScoreBinding.rlBack.setOnClickListener {
             setResult(5)
             finish()
         }
@@ -156,18 +164,18 @@ class PlayScoreActivity : BaseActivity() {
 
     private fun changeEditMode() {
         if (isEditMode) {
-            tvEdit.text = "取消"
-            breakLine.visibility = View.VISIBLE
-            rlEdit.visibility = View.VISIBLE
+            playScoreBinding.tvEdit.text = "取消"
+            playScoreBinding.breakLine.visibility = View.VISIBLE
+            playScoreBinding.rlEdit.visibility = View.VISIBLE
             playScoreAdapter.data.map {
                 it.isSelect = false
             }
             isAllSelect = false
-            tvSelect.text = "全选"
+            playScoreBinding.tvSelect.text = "全选"
         } else {
-            tvEdit.text = "编辑"
-            breakLine.visibility = View.GONE
-            rlEdit.visibility = View.GONE
+            playScoreBinding.tvEdit.text = "编辑"
+            playScoreBinding.breakLine.visibility = View.GONE
+            playScoreBinding.rlEdit.visibility = View.GONE
         }
         playScoreAdapter.changeEditMode(isEditMode)
     }
@@ -183,7 +191,7 @@ class PlayScoreActivity : BaseActivity() {
     }
 
     private fun changeDeleteNum() {
-        tvSelectCount.text = "删除(${getSelectCount()})"
+        playScoreBinding.tvSelectCount.text = "删除(${getSelectCount()})"
     }
 
     private fun deleteCollection(ids: List<String>) {
@@ -280,9 +288,9 @@ class PlayScoreActivity : BaseActivity() {
                         Log.i("playlog", "getPlayLogList11${data}")
 
                         if (isLoadMore) {
-                            refreshLayout.finishLoadMore(200)
+                            playScoreBinding.refreshLayout.finishLoadMore(200)
                         } else {
-                            refreshLayout.finishRefresh(200)
+                            playScoreBinding.refreshLayout.finishRefresh(200)
                         }
                     }
 
