@@ -9,22 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import com.blankj.utilcode.util.ToastUtils;
-import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.StringUtils;
-import com.dueeeke.videoplayer.player.VideoView;
-import com.dueeeke.videoplayer.util.PlayerUtils;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -37,25 +21,27 @@ import cn.mahua.av.play.ControllerClickListener;
 import cn.mahua.av.play.HdClickListener;
 import cn.mahua.vod.App;
 import cn.mahua.vod.R;
-import cn.mahua.vod.bean.StartBean;
 import cn.mahua.vod.base.BaseSupportActivity;
-import cn.mahua.vod.bean.BaseResult;
-import cn.mahua.vod.bean.PageResult;
-import cn.mahua.vod.bean.PlayFromBean;
-import cn.mahua.vod.bean.RecommendBean;
-import cn.mahua.vod.bean.VodBean;
+import cn.mahua.vod.bean.*;
 import cn.mahua.vod.jiexi.BackListener;
 import cn.mahua.vod.jiexi.JieXiUtils;
 import cn.mahua.vod.netservice.PlayService;
 import cn.mahua.vod.network.RetryWhen;
 import cn.mahua.vod.ui.home.Vod;
+import cn.mahua.vod.utils.AgainstCheatUtil;
 import cn.mahua.vod.utils.Retrofit2Utils;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import me.drakeet.multitype.MultiTypeAdapter;
-import cn.mahua.vod.utils.AgainstCheatUtil;
+import xyz.doikki.videoplayer.player.VideoView;
+
+import java.util.*;
 public class PlayActivity extends BaseSupportActivity implements ControllerClickListener, HdClickListener, BackListener, VideoView.OnStateChangeListener {
     public static final String KEY_VOD = "KEY_VOD";
     public static final String KEY_SHOW_PROGRESS = "KEY_SHOW_PROGRESS";

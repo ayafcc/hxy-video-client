@@ -16,7 +16,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.mahua.vod.ApiConfig
 import cn.mahua.vod.App
-import cn.mahua.vod.BuildConfig
 import cn.mahua.vod.R
 import cn.mahua.vod.bean.*
 import cn.mahua.vod.download.SPUtils

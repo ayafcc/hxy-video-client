@@ -1,10 +1,9 @@
 package cn.mahua.av.play;
 
 import android.content.Context;
-
-import com.dueeeke.videoplayer.ijk.IjkPlayer;
-
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
+import xyz.doikki.videoplayer.ijk.IjkPlayer;
+
 
 public class MyIjkPlayer extends IjkPlayer {
     public MyIjkPlayer(Context context) {

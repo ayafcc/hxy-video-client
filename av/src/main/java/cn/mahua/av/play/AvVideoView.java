@@ -3,11 +3,8 @@ package cn.mahua.av.play;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.ViewGroup;
 import com.blankj.utilcode.util.ConvertUtils;
-import com.dueeeke.videoplayer.controller.MediaPlayerControl;
-import com.dueeeke.videoplayer.player.VideoView;
 import java.util.LinkedHashMap;
 
 import androidx.annotation.NonNull;
@@ -22,6 +19,7 @@ import master.flame.danmaku.danmaku.model.android.Danmakus;
 import master.flame.danmaku.danmaku.model.android.SimpleTextCacheStuffer;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import master.flame.danmaku.ui.widget.DanmakuView;
+import xyz.doikki.videoplayer.player.VideoView;
 
 public class AvVideoView extends VideoView implements VideoViewImpt {
 

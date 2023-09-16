@@ -22,6 +22,7 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+    namespace 'cn.mahua.av'
 
 }
 
@@ -34,9 +35,9 @@ dependencies {
     implementation 'com.blankj:utilcodex:1.25.8'
 
     //播放器
-    api 'com.github.dueeeke.dkplayer:dkplayer-java:3.2.6'
-    api 'com.github.dueeeke.dkplayer:player-ijk:3.2.6'
-    api 'com.github.dueeeke.dkplayer:dkplayer-ui:3.2.6'
+    implementation 'xyz.doikki.android.dkplayer:dkplayer-java:3.3.7'
+    implementation 'xyz.doikki.android.dkplayer:dkplayer-ui:3.3.7'
+    implementation 'xyz.doikki.android.dkplayer:player-ijk:3.3.7'
     //弹幕
     api 'com.github.ctiao:DanmakuFlameMaster:0.9.25'
     implementation 'com.github.xiaweizi:MarqueeTextView:1.0'

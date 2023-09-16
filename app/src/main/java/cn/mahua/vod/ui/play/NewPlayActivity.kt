@@ -29,7 +29,6 @@ import cn.mahua.vod.utils.OkHttpUtils
 import cn.mahua.vod.utils.Retrofit2Utils
 import cn.mahua.vod.utils.UserUtils
 import com.blankj.utilcode.util.*
-import com.dueeeke.videoplayer.player.VideoView
 import com.github.StormWyrm.wanandroid.base.exception.ResponseException
 import com.github.StormWyrm.wanandroid.base.net.RequestManager
 import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver
@@ -42,6 +41,8 @@ import okhttp3.Call
 import okhttp3.Response
 import pro.dxys.fumiad.FuMiAd
 import pro.dxys.fumiad.FumiRewardVideoSimpleListener
+import xyz.doikki.videoplayer.player.BaseVideoView
+import xyz.doikki.videoplayer.player.VideoView
 import java.io.IOException
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -188,7 +189,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
             }
         }
 
-        videoView.setOnStateChangeListener(object : VideoView.OnStateChangeListener {
+        videoView.setOnStateChangeListener(object : BaseVideoView.OnStateChangeListener {
             override fun onPlayStateChanged(playState: Int) {
                 if (playState == VideoView.STATE_PLAYBACK_COMPLETED) {
                     val percentage = getPercentage(curProgressHistory, vodDuration)

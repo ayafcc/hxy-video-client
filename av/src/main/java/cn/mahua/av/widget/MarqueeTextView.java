@@ -3,8 +3,8 @@ package cn.mahua.av.widget;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-
 import androidx.appcompat.widget.AppCompatTextView;
+
 
 public class MarqueeTextView extends AppCompatTextView {
     public MarqueeTextView(Context context) {

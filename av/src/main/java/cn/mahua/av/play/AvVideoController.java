@@ -1,74 +1,39 @@
 package cn.mahua.av.play;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
+import android.view.*;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.SeekBar;
-import android.widget.TextClock;
-import android.widget.TextView;
-
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
-import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ConvertUtils;
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.StringUtils;
-import com.blankj.utilcode.util.ToastUtils;
+import cn.mahua.av.CheckVodTrySeeBean;
+import cn.mahua.av.R;
+import com.blankj.utilcode.util.*;
 import com.bumptech.glide.Glide;
-
-import com.dueeeke.videocontroller.component.GestureView;
-import com.dueeeke.videoplayer.controller.GestureVideoController;
-
-import com.dueeeke.videoplayer.controller.MediaPlayerControl;
-import com.dueeeke.videoplayer.player.VideoView;
-import com.dueeeke.videoplayer.player.VideoViewManager;
-import com.dueeeke.videoplayer.util.PlayerUtils;
-import com.dueeeke.videocontroller.component.PrepareView;
 import com.xiaweizi.marquee.MarqueeTextView;
+import xyz.doikki.videocontroller.component.GestureView;
+import xyz.doikki.videoplayer.controller.GestureVideoController;
+import xyz.doikki.videoplayer.controller.MediaPlayerControl;
+import xyz.doikki.videoplayer.player.VideoView;
 
 import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
-import cn.mahua.av.CheckVodTrySeeBean;
-import cn.mahua.av.R;
-import static com.dueeeke.videoplayer.util.PlayerUtils.stringForTime;
+import static xyz.doikki.videoplayer.util.PlayerUtils.stringForTime;
 
 public class AvVideoController extends GestureVideoController implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private int isNeedVip;

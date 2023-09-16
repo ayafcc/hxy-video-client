@@ -14,10 +14,6 @@ android {
             keyPassword 'lbspyss585821...'
         }
     }
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
 
     defaultConfig {
         applicationId "com.tiantianzhuiju.app"
@@ -67,7 +63,14 @@ android {
         }
     }
     packagingOptions {
-        exclude 'META-INF/beans.xml'
+        resources {
+            excludes += ['META-INF/beans.xml']
+        }
+    }
+    namespace 'cn.mahua.vod'
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
     }
 }
 
@@ -179,6 +182,9 @@ dependencies {
     // Cling library
     implementation 'org.fourthline.cling:cling-core:2.1.1'
     implementation 'org.fourthline.cling:cling-support:2.1.1'
+    implementation 'xyz.doikki.android.dkplayer:player-ijk:3.3.7'
+    implementation 'xyz.doikki.android.dkplayer:dkplayer-java:3.3.7'
+    implementation 'xyz.doikki.android.dkplayer:dkplayer-ui:3.3.7'
     //对话框
     api 'com.lxj:xpopup:1.6.7'
 }

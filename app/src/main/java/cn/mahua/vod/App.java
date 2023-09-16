@@ -2,13 +2,10 @@ package cn.mahua.vod;
 
 import android.content.Context;
 import android.util.Log;
-import java.util.Random;
 import android.view.WindowManager;
 
 import com.dpuntu.downloader.DownloadManager;
 import com.dpuntu.downloader.Downloader;
-import com.dueeeke.videoplayer.player.VideoViewConfig;
-import com.dueeeke.videoplayer.player.VideoViewManager;
 import com.orhanobut.hawk.Hawk;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
@@ -39,6 +36,8 @@ import io.reactivex.plugins.RxJavaPlugins;
 
 //import pro.dxys.fumiad.FuMiAd;
 import jaygoo.library.m3u8downloader.M3U8Library;
+import xyz.doikki.videoplayer.player.VideoViewConfig;
+import xyz.doikki.videoplayer.player.VideoViewManager;
 
 public class App extends BaseApplication {
     private static final String TAG = "App";
