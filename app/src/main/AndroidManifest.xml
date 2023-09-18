@@ -22,7 +22,7 @@
 
 
     <application
-        android:name=".App"
+        android:name="com.sweetieplayer.vod.App"
         android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -43,149 +43,134 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/fumi_file_path" />
         </provider>
-        <provider
-            android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
-            android:authorities="${applicationId}.TTFileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/fumi_file_path" />
-        </provider>
 
 
 
-        <provider
-            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
-            android:authorities="${applicationId}.TTMultiProvider"
-            android:exported="false" />
-
-
-        <activity android:name=".ui.task.MainActivity33" />
+        <activity android:name="com.sweetieplayer.vod.ui.task.MainActivity33" />
         <activity
-            android:name=".ui.browser.BrowserActivity"
+            android:name="com.sweetieplayer.vod.ui.browser.BrowserActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.collection.CollectionActivity"
+            android:name="com.sweetieplayer.vod.ui.collection.CollectionActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.feedback.FeedbackActivity"
+            android:name="com.sweetieplayer.vod.ui.feedback.FeedbackActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.down.AllDownloadActivity"
+            android:name="com.sweetieplayer.vod.ui.down.AllDownloadActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.withdraw.GoldWithdrawActivity"
+            android:name="com.sweetieplayer.vod.ui.withdraw.GoldWithdrawActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.share.ShareActivity"
+            android:name="com.sweetieplayer.vod.ui.share.ShareActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.account.ChangeNicknameActivity" />
+        <activity android:name="com.sweetieplayer.vod.ui.account.ChangeNicknameActivity" />
         <activity
-            android:name=".ui.account.AccountSettingActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.pay.PayActivity"
+            android:name="com.sweetieplayer.vod.ui.account.AccountSettingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.home.HomeFristMoreActivity"
+            android:name="com.sweetieplayer.vod.ui.pay.PayActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.score.PlayScoreActivity"
+            android:name="com.sweetieplayer.vod.ui.home.HomeFristMoreActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.sweetieplayer.vod.ui.score.PlayScoreActivity"
             android:label="@string/title_activity_play_score"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.filtrate.FiltrateActivity"
+            android:name="com.sweetieplayer.vod.ui.filtrate.FiltrateActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.seek.SeekActivity"
+            android:name="com.sweetieplayer.vod.ui.seek.SeekActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".ui.screen.ScreenActivity2"
+            android:name="com.sweetieplayer.vod.ui.screen.ScreenActivity2"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ui.screen.ScreenActivity3"
+            android:name="com.sweetieplayer.vod.ui.screen.ScreenActivity3"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name="com.sweetieplayer.vod.ui.login.LoginActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.task.TaskActivity"
+            android:name="com.sweetieplayer.vod.ui.task.TaskActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.task.TaskActivity2"
+            android:name="com.sweetieplayer.vod.ui.task.TaskActivity2"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.notice.MessageCenterActivity"
+            android:name="com.sweetieplayer.vod.ui.notice.MessageCenterActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.notice.MessageDetailActivity"
+            android:name="com.sweetieplayer.vod.ui.notice.MessageDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.expand.MyExpandActivity"
+            android:name="com.sweetieplayer.vod.ui.expand.MyExpandActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.expand.ExpandCenterActivity"
+            android:name="com.sweetieplayer.vod.ui.expand.ExpandCenterActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.play.PlayActivity"
+            android:name="com.sweetieplayer.vod.ui.play.PlayActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|screenLayout|smallestScreenSize"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.play.NewPlayActivity"
+            android:name="com.sweetieplayer.vod.ui.play.NewPlayActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|screenLayout|smallestScreenSize"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.play.StorePlayActivity"
+            android:name="com.sweetieplayer.vod.ui.play.StorePlayActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|screenLayout|smallestScreenSize"
             android:launchMode="singleTop"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.play.CastScreenActivity"
+            android:name="com.sweetieplayer.vod.ui.play.CastScreenActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|screenLayout|smallestScreenSize"
             android:launchMode="singleTop"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.sweetieplayer.vod.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.lanuch.LanuchActivity"
+            android:name="com.sweetieplayer.vod.ui.lanuch.LanuchActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.game.WebViewActivity"
+            android:name="com.sweetieplayer.vod.ui.game.WebViewActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.specialtopic.TopicDetailActivity"
+            android:name="com.sweetieplayer.vod.ui.specialtopic.TopicDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -201,15 +186,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.play.X5WebViewActivity"
+            android:name="com.sweetieplayer.vod.ui.play.X5WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop" />
         <activity
-            android:name=".ui.play.X5WebActivity"
+            android:name="com.sweetieplayer.vod.ui.play.X5WebActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop" />
         <activity
-            android:name=".ui.start.StartActivity"
+            android:name="com.sweetieplayer.vod.ui.start.StartActivity"
             android:exported="true"
             tools:node="merge"
             android:screenOrientation="portrait"
@@ -221,10 +206,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestActivity2" />
-        <activity android:name=".ui.task.MainActivity3" />
-        <activity android:name=".TestAes"/>
-        <activity android:name=".MergeTestActivity2"/>
+        <activity android:name="com.sweetieplayer.vod.TestActivity2" />
+        <activity android:name="com.sweetieplayer.vod.ui.task.MainActivity3" />
+        <activity android:name="com.sweetieplayer.vod.TestAes"/>
+        <activity android:name="com.sweetieplayer.vod.MergeTestActivity2"/>
         <service
                 android:name="com.blankj.utilcode.util.MessengerUtils$ServerService"
                 android:exported="false">

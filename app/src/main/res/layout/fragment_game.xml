@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.home.HomeFragment">
+    tools:context="com.sweetieplayer.vod.ui.home.HomeFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                     android:focusable="true"
                     android:background="@drawable/gonggao" />
 
-                   <cn.mahua.vod.ui.widget.AutoRunTextView
+                   <com.sweetieplayer.vod.ui.widget.AutoRunTextView
                        android:id="@+id/tv_notice_gdmsg"
                        android:layout_width="wrap_content"
                        android:singleLine="true"
@@ -88,25 +88,9 @@
                        android:layout_centerVertical="true"
                        android:focusableInTouchMode="true"
                        android:layout_height="match_parent"/>
-
-<!--                <cn.mahua.vod.ui.widget.NoticeView-->
-<!--                    android:id="@+id/notice_view"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:layout_marginLeft="2dp"-->
-<!--                    android:layout_marginRight="80dp"-->
-<!--                    android:layout_toRightOf="@+id/sound_img"-->
-<!--                    android:background="#EDEEEF"-->
-<!--                    android:paddingLeft="6dp"-->
-<!--                    android:paddingRight="6dp"-->
-<!--                    app:textColor="#222222"-->
-<!--                    app:textSize="16sp"></cn.mahua.vod.ui.widget.NoticeView>-->
-
-
             </RelativeLayout>
 
-            <cn.mahua.vod.ui.widget.ScrollViewWithListView
+            <com.sweetieplayer.vod.ui.widget.ScrollViewWithListView
                 android:id="@+id/game_listview"
                 android:layout_width="match_parent"
                 android:layout_marginTop="6dp"

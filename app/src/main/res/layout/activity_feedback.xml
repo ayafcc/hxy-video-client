@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/grid_item_decor"
     android:orientation="vertical"
-    tools:context=".ui.feedback.FeedbackActivity">
+    tools:context="com.sweetieplayer.vod.ui.feedback.FeedbackActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -9,7 +9,7 @@
 
     <application>
 
-        <service android:name="com.liuwei.android.upnpcast.service.NLUpnpCastService" />
+        <service android:name="com.sweetieplayer.android.upnpcast.service.NLUpnpCastService" />
 
     </application>
 

@@ -20,12 +20,12 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.botship.app"
+        applicationId "com.sweetieplayer.app"
         minSdkVersion 29
         targetSdkVersion 33
 
         versionCode 2
-        versionName "2.3.4"
+        versionName "2.3.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
@@ -37,7 +37,7 @@ android {
         variant.outputs.each { output ->
             if (output.outputFileName != null && output.outputFileName.endsWith('.apk')) {
                 def fileName
-                fileName = "botship_${variant.versionName}.apk"
+                fileName = "sweetieplalyer_${variant.versionName}.apk"
                 output.outputFileName = fileName
             }
         }
@@ -71,7 +71,7 @@ android {
             excludes += ['META-INF/beans.xml']
         }
     }
-    namespace 'cn.mahua.vod'
+    namespace 'com.sweetieplayer.vod'
     lint {
         abortOnError false
         checkReleaseBuilds false
@@ -85,11 +85,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
-    //付米广告
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.6'
-    implementation(name: 'fumiad-release', ext: 'aar')
-    implementation(name: 'fumic', ext: 'aar')
-    implementation(name: 'fumig', ext: 'aar')
+    // ad set广告
 
     //androidTestImplementation 'androidx.test:runner:1.1.1'
     //androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
@@ -102,8 +98,8 @@ dependencies {
     //工具箱
     implementation 'com.blankj:utilcodex:1.26.0'
     //黄油刀
-    implementation 'com.jakewharton:butterknife:10.2.1'
-    kapt 'com.jakewharton:butterknife-compiler:10.2.1'
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    kapt 'com.jakewharton:butterknife-compiler:10.2.3'
     //fragment
     implementation 'me.yokeyword:fragmentationx:1.0.1'
     implementation 'me.yokeyword:fragmentationx:1.0.1'
@@ -128,9 +124,9 @@ dependencies {
 //    implementation 'com.arialyy.aria:core:3.8.6'
     kapt 'com.arialyy.aria:compiler:3.8.6'
     //Glide  图片加载
-    implementation 'jp.wasabeef:glide-transformations:4.1.0'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'jp.wasabeef:glide-transformations:4.3.0'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    kapt 'com.github.bumptech.glide:compiler:4.16.0'
     //banner
     implementation 'com.youth.banner:banner:1.4.10'
     implementation project(path: ':av')

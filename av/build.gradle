@@ -22,7 +22,7 @@ android {
         sourceCompatibility = 1.17
         targetCompatibility = 1.17
     }
-    namespace 'cn.mahua.av'
+    namespace 'com.sweetieplayer.av'
 
 }
 

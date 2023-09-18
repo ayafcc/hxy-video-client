@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="146dp">
 
-        <cn.mahua.vod.ui.widget.RoundImgView
+        <com.sweetieplayer.vod.ui.widget.RoundImgView
             android:id="@+id/game_cover"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_width="match_parent"

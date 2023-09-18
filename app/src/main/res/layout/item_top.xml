@@ -63,7 +63,7 @@
         tools:listitem="@layout/item_top_child"
         tools:spanCount="3" />
 
-    <cn.mahua.vod.ad.AdWebView
+    <com.sweetieplayer.vod.ad.AdWebView
         android:id="@+id/adWebView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

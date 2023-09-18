@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,12 +19,10 @@ import com.google.gson.Gson;
 import java.io.File;
 
 import jaygoo.library.m3u8downloader.M3U8Downloader;
-import jaygoo.library.m3u8downloader.M3U8Library;
 import jaygoo.library.m3u8downloader.OnTaskMergeListener;
 import jaygoo.library.m3u8downloader.R;
 import jaygoo.library.m3u8downloader.WeakHandler;
 import jaygoo.library.m3u8downloader.bean.M3U8;
-import jaygoo.library.m3u8downloader.bean.M3U8TaskState;
 import jaygoo.library.m3u8downloader.utils.FileUtils;
 import jaygoo.library.m3u8downloader.utils.MUtils;
 import me.drakeet.multitype.ItemViewBinder;
@@ -120,7 +117,7 @@ public class M3u8DoneItemViewBinder extends ItemViewBinder<M3u8DoneItem, M3u8Don
 
 //                    Intent intent = new Intent(holder.itemView.getContext(), StorePlayActivity.class);
                     Intent intent = new Intent();
-                    intent.setClassName(holder.itemView.getContext(), "cn.mahua.vod.ui.play.StorePlayActivity");
+                    intent.setClassName(holder.itemView.getContext(), "com.sweetieplayer.vod.ui.play.StorePlayActivity");
                     intent.putExtra("play_url",path);
                     intent.putExtra("play_name",m3u8DoneItem.getM3u8DoneInfo().getTaskName());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/list_bg_shap"
     android:orientation="vertical"
-    tools:context=".ui.withdraw.GoldWithdrawActivity">
+    tools:context="com.sweetieplayer.vod.ui.withdraw.GoldWithdrawActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

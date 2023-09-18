@@ -6,10 +6,10 @@
     android:orientation="vertical">
 
 
-    <cn.mahua.vod.ui.widget.X5WebView
+    <com.sweetieplayer.vod.ui.widget.X5WebView
         android:id="@+id/myweb"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:scrollbars="horizontal"></cn.mahua.vod.ui.widget.X5WebView>
+        android:scrollbars="horizontal"></com.sweetieplayer.vod.ui.widget.X5WebView>
 
 </LinearLayout>

@@ -17,7 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    namespace 'com.liuwei.android.upnpcast'
+    namespace 'com.sweetieplayer.android.upnpcast'
 }
 
 dependencies {

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/ghostWhite"
     android:orientation="vertical"
-    tools:context=".ui.account.AccountSettingActivity">
+    tools:context="com.sweetieplayer.vod.ui.account.AccountSettingActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

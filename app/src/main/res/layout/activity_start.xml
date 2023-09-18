@@ -4,9 +4,9 @@
     android:id="@+id/advertLayout"
 	android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.start.StartActivity">
+    tools:context="com.sweetieplayer.vod.ui.start.StartActivity">
 
-    <cn.mahua.vod.ad.AdWebView
+    <com.sweetieplayer.vod.ad.AdWebView
         android:id="@+id/awv_start"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

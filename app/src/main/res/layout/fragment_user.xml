@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/whiteSmoke"
-    tools:context=".ui.user.UserFragment">
+    tools:context="com.sweetieplayer.vod.ui.user.UserFragment">
 
     <!--    <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
     <!--        android:id="@+id/userRefreshLayout"-->
@@ -305,13 +305,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="18dp" />
-
-            <!--            <cn.mahua.vod.ad.AdWebView-->
-            <!--                android:id="@+id/awvUser"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginLeft="18dp"-->
-            <!--                android:layout_marginRight="18dp" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"

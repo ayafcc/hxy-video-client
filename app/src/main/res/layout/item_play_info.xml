@@ -190,7 +190,7 @@
         android:layout_below="@id/ll_play_comment"
         android:layout_marginTop="15dp"
         android:background="@color/lineColor" />
-    <cn.mahua.vod.ad.AdWebView
+    <com.sweetieplayer.vod.ad.AdWebView
         android:id="@+id/awvPlayerDown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

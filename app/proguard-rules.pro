@@ -94,12 +94,12 @@
 -keepclassmembers class * extends android.webkit.webViewClient {
     public void *(android.webkit.webView, jWebViewav.lang.String);
 }
--keepclassmembers class cn.mahua.vod.ad.AdWebView$JsInteraction {
+-keepclassmembers class com.sweetieplayer.vod.ad.AdWebView$JsInteraction {
   public *;
 }
 -keepattributes *Annotation*
 -keepattributes *JavascriptInterface*
--keep public class cn.mahua.vod.ad.AdJavascriptInterface{
+-keep public class com.sweetieplayer.vod.ad.AdJavascriptInterface{
     public <methods>;
 }
 
@@ -214,8 +214,8 @@
 -keepattributes Signature
 -keepattributes *Annotation*
 -dontwarn sun.misc.**
--keep class cn.mahua.vod.bean.** { <fields>; }
--keep class cn.mahua.vod.entity.** { <fields>; }
+-keep class com.sweetieplayer.vod.bean.** { <fields>; }
+-keep class com.sweetieplayer.vod.entity.** { <fields>; }
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
@@ -272,7 +272,7 @@
 -keepclassmembers class * {
    public <init>(org.json.JSONObject);
 }
--keep public class cn.mahua.vod.R$*{
+-keep public class com.sweetieplayer.vod.R$*{
 public static final int *;
 }
 
@@ -544,5 +544,5 @@ public static final int *;
 -keep class master.flame.danmaku.**{*;}
 -keep class tv.cjump.jni.**{*;}
 -keep class com.dpuntu.downloader.**{*;}
--keep class cn.mahua.av.**{*;}
--keep class cn.mahua.vod.ui.widget.**{*;}
+-keep class com.sweetieplayer.av.**{*;}
+-keep class com.sweetieplayer.vod.ui.widget.**{*;}

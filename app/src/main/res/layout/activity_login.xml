@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/shape_bg_gray_radius_10dp"
     android:orientation="vertical"
-    tools:context=".ui.login.LoginActivity">
+    tools:context="com.sweetieplayer.vod.ui.login.LoginActivity">
 
     <RelativeLayout
         android:id="@+id/bg"
@@ -41,6 +41,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcv_login"
+        android:theme="@style/Theme.MaterialComponents.Bridge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -49,7 +50,8 @@
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bg">
+        app:layout_constraintTop_toBottomOf="@+id/bg"
+    >
 
         <LinearLayout
             android:layout_width="match_parent"

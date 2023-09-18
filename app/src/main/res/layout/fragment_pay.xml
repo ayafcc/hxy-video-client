@@ -9,7 +9,7 @@
     android:paddingTop="20dp"
     android:paddingRight="18dp"
 
-    tools:context=".ui.pay.PayFragment">
+    tools:context="com.sweetieplayer.vod.ui.pay.PayFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <cn.mahua.vod.ad.AdWebView
+    <com.sweetieplayer.vod.ad.AdWebView
         android:id="@+id/adWebView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

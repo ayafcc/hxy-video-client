@@ -63,8 +63,8 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <cn.mahua.vod.ui.widget.X5WebView
+    <com.sweetieplayer.vod.ui.widget.X5WebView
         android:id="@+id/main_web"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></cn.mahua.vod.ui.widget.X5WebView>
+        android:layout_height="match_parent"></com.sweetieplayer.vod.ui.widget.X5WebView>
 </LinearLayout>

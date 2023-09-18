@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.play.NewPlayActivity">
+    tools:context="com.sweetieplayer.vod.ui.play.NewPlayActivity">
 
-    <cn.mahua.av.play.AvVideoView
+    <com.sweetieplayer.av.play.AvVideoView
         android:id="@+id/videoView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

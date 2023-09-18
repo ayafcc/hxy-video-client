@@ -5,7 +5,7 @@
     android:id="@+id/rlRoot"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".ui.share.ShareActivity">
+    tools:context="com.sweetieplayer.vod.ui.share.ShareActivity">
 
     <ImageView
         android:id="@+id/ivBack"
