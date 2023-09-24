@@ -709,7 +709,7 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
         }
         isParseSuccess = false
         isPlay = false
-        showPlayerAd()
+//        showPlayerAd()
         showAnnouncement()
         // 开始解析地址
         val parse = playFrom.player_info.parse2
@@ -737,13 +737,13 @@ class NewPlayActivity : BaseActivity(), OnSpeedItemClickListener {
         }
     }
 
-    private fun showPlayerAd() {
-        App.playAd?.let {
-            if (it.img != null && it.img != "") {
-                controller.showAd(it.img, it.url)
-            }
-        }
-    }
+//    private fun showPlayerAd() {
+//        App.playAd?.let {
+//            if (it.img != null && it.img != "") {
+//                controller.showAd(it.img, it.url)
+//            }
+//        }
+//    }
 
     private fun showAnnouncement() {
         runOnUiThread {

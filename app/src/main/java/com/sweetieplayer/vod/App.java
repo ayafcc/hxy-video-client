@@ -1,43 +1,41 @@
 package com.sweetieplayer.vod;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.view.WindowManager;
-
+import androidx.multidex.MultiDex;
 import com.dpuntu.downloader.DownloadManager;
 import com.dpuntu.downloader.Downloader;
+import com.jiagu.sdk.OSETSDKProtected;
+import com.kc.openset.OSETSDK;
+import com.kc.openset.listener.OSETInitListener;
 import com.orhanobut.hawk.Hawk;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
-import com.scwang.smartrefresh.layout.api.RefreshFooter;
-import com.scwang.smartrefresh.layout.api.RefreshHeader;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.api.*;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.tencent.smtt.sdk.QbSdk;
-import com.umeng.commonsdk.UMConfigure;
-
-import org.litepal.LitePal;
-import org.xutils.x;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.sweetieplayer.av.play.MyIjkPlayerFactory;
 import com.sweetieplayer.vod.base.BaseApplication;
 import com.sweetieplayer.vod.bean.AppConfigBean;
 import com.sweetieplayer.vod.bean.PlayScoreBean;
 import com.sweetieplayer.vod.bean.StartBean;
 import com.sweetieplayer.vod.download.GetFileSharePreance;
+import com.tencent.smtt.sdk.QbSdk;
 import io.reactivex.functions.Consumer;
 import io.reactivex.plugins.RxJavaPlugins;
-
-//import pro.dxys.fumiad.FuMiAd;
 import jaygoo.library.m3u8downloader.M3U8Library;
+import org.litepal.LitePal;
+import org.xutils.x;
 import xyz.doikki.videoplayer.player.VideoViewConfig;
 import xyz.doikki.videoplayer.player.VideoViewManager;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.sweetieplayer.vod.ad3.AdConstants.AppKey;
+import static com.sweetieplayer.vod.ad3.AdConstants.userId;
 
 public class App extends BaseApplication {
     private static final String TAG = "App";
@@ -92,12 +90,12 @@ public class App extends BaseApplication {
         } catch (Exception e) {
         }
         LitePal.initialize(this);
-        UMConfigure.init(this, "60574ea86ee47d382b8eace5", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
         weakReference = new WeakReference<>(this);
         vocApp = this; //xUtils 初始化
         x.Ext.init(this);
         x.Ext.setDebug(true);//是否输出Debug日志
 
+        initAdSet();
         Hawk.init(this).build();
 //        Random random = new Random();
 //        int ad = random.nextInt(10);
@@ -180,6 +178,27 @@ public class App extends BaseApplication {
                 throwable.printStackTrace();
             }
         });
+    }
+
+    private void initAdSet() {
+
+        MultiDex.install(this);
+        OSETSDKProtected.install(this);
+        OSETSDK.getInstance().setUserId(userId);
+        OSETSDK.getInstance().init(this, AppKey, new OSETInitListener() {
+            @Override
+            public void onError(String s) {
+                //初始化失败：会调用不到广告，清选择合适的时机重新进行初始化
+            }
+
+            @Override
+            public void onSuccess() {
+                //初始化成功：可以开始调用广告
+            }
+        });
+//        OSETSDK.getInstance().setYMID(this, "9143");//对接小说要设置这个YMID（找运营要这个YMID）
+
+        Log.e("aaaaaaaadfsdf", "当前版本号：" + Build.VERSION.SDK_INT + "——android O版本号：" + Build.VERSION_CODES.O);
     }
 
 }

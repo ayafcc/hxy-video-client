@@ -41,7 +41,6 @@
 -keep public class * extends android.app.backup.BackupAgentHelper
 -keep public class * extends android.preference.Preference
 -keep public class * extends android.view.View
--keep public class com.android.vending.licensing.ILicensingService
 -keep class android.support.** {*;}
 
 -keepclasseswithmembernames class * {
@@ -83,25 +82,6 @@
     void *(**On*Event);
 }
 
-#3.webview
--keepclassmembers class fqcn.of.javascript.interface.for.webview {
-   public *;
-}
--keepclassmembers class * extends android.webkit.webViewClient {
-    public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);
-    public boolean *(android.webkit.WebView, java.lang.String);
-}
--keepclassmembers class * extends android.webkit.webViewClient {
-    public void *(android.webkit.webView, jWebViewav.lang.String);
-}
--keepclassmembers class com.sweetieplayer.vod.ad.AdWebView$JsInteraction {
-  public *;
-}
--keepattributes *Annotation*
--keepattributes *JavascriptInterface*
--keep public class com.sweetieplayer.vod.ad.AdJavascriptInterface{
-    public <methods>;
-}
 
 ###########################################################################
 -keep class com.whiner.vod.bean.** { *; }
@@ -132,14 +112,69 @@
 
 ## recyclerview
 -keep class androidx.recyclerview.** {*;}
-## 银河广告
-#-keep class com.bytedance.sdk.openadsdk.** { *; }
-#-keep public interface com.bytedance.sdk.openadsdk.downloadnew.** {*;}
-#-keep class com.pgl.sys.ces.* {*;}
-##付米广告
-#-keep class com.bytedance.sdk.openadsdk.** { *; }
-#-keep public interface com.bytedance.sdk.openadsdk.downloadnew.** {*;}
-#-keep class com.pgl.sys.ces.* {*;}
+#open_ad_sdk
+	-keep class com.bytedance.sdk.openadsdk.** { *; }
+	-keep public interface com.bytedance.sdk.openadsdk.downloadnew.** {*;}
+	-keep class com.ss.**{*;}
+	-dontwarn com.ss.**
+	# miitmdid
+	-keep class com.bun.miitmdid.core.** {*;}
+	-dontwarn com.bun.miitmdid.core.**
+
+	#广点通 start
+	-keep class com.qq.e.** {*;}
+	-dontwarn com.qq.e.**
+	#广点通 end
+
+	#快手
+	-keep class org.chromium.** {*;}
+	-keep class org.chromium.** { *; }
+	-keep class aegon.chrome.** { *; }
+	-keep class com.kwai.**{ *; }
+	-dontwarn com.kwai.**
+	-dontwarn com.kwad.**
+	-dontwarn com.ksad.**
+	-dontwarn aegon.chrome.**
+	#快手
+
+	# WindAd
+	-keep class com.sigmob.**{*;}
+	-dontwarn com.sigmob.**
+	# WindAd
+
+
+#baidu start
+-ignorewarnings
+-dontwarn com.baidu.mobads.sdk.api.**
+-keepclassmembers class * extends android.app.Activity {
+   public void *(android.view.View);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep class com.baidu.mobads.** { *; }
+-keep class com.style.widget.** {*;}
+-keep class com.component.** {*;}
+-keep class com.baidu.ad.magic.flute.** {*;}
+-keep class com.baidu.mobstat.forbes.** {*;}
+#baidu end
+
+#oaid start
+-keep class com.asus.msa.**{*;}
+-keep class com.bun.**{*;}
+-keep class com.huawei.hms.ads.identifier.**{*;}
+-keep class com.netease.nis.sdkwrapper.**{*;}
+-keep class com.samsung.android.deviceidservice.**{*;}
+-keep class com.zui.**{*;}
+-keep class XI.**{*;}
+#oaid end
+#openset start
+-keep class com.kc.openset.**{*;}
+-dontwarn com.kc.openset.**
+#openset end
 
 ## Butterknife
 -keep public class * implements butterknife.Unbinder { public <init>(**, android.view.View); }
@@ -174,20 +209,6 @@
     <init>(java.lang.Throwable);
 }
 
-## RxJava RxAndroid
--dontwarn java.util.concurrent.Flow*
--dontwarn sun.misc.**
--keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
-    long producerIndex;
-    long consumerIndex;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode producerNode;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode consumerNode;
-}
-
 ## retrofit
 -keep class retrofit2.** {*;}
 #-keepattributes Signature, InnerClasses, EnclosingMethod
@@ -197,7 +218,6 @@
 #}
 
 
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn javax.annotation.**
 -dontwarn kotlin.Unit
 -dontwarn retrofit2.KotlinExtensions
@@ -260,26 +280,8 @@
     *;
 }
 
--keep class * extends org.litepal.crud.DataSupport {
-    *;
-}
-
 -keep class * extends org.litepal.crud.LitePalSupport {
     *;
-}
-
-## umeng
--keepclassmembers class * {
-   public <init>(org.json.JSONObject);
-}
--keep public class com.sweetieplayer.vod.R$*{
-public static final int *;
-}
-
--keep class com.umeng.** {*;}
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
 }
 
 ## xUtils
@@ -303,15 +305,9 @@ public static final int *;
 -keep class com.github.mmin18.** {*;}
 
 -dontwarn android.support.v8.renderscript.*
--keepclassmembers class android.support.v8.renderscript.RenderScript {
-  native *** rsn*(...);
-  native *** n*(...);
-}
 
 -keep class com.wang.avi.** { *; }
 -keep class com.wang.avi.indicators.** { *; }
-
--keep class com.scwang.refreshlayout.activity.practice.BannerPracticeActivity$Movie {*;}
 
 ## xxpermissions
 -keep class com.hjq.permissions.** {*;}
@@ -372,9 +368,8 @@ public static final int *;
 -keepattributes Signature
 -keepattributes *Annotation*
 -keepattributes EnclosingMethod
--keep class sun.misc.Unsafe { *; }
--keep,allowobfuscation @interface com.facebook.crypto.proguard.annotations.DoNotStrip
--keep,allowobfuscation @interface com.facebook.crypto.proguard.annotations.KeepGettersAndSetters
+-keep,allowobfuscation interface com.facebook.crypto.proguard.annotations.DoNotStrip
+-keep,allowobfuscation interface com.facebook.crypto.proguard.annotations.KeepGettersAndSetters
 -keep @com.facebook.crypto.proguard.annotations.DoNotStrip class *
 -keepclassmembers class * {
     @com.facebook.crypto.proguard.annotations.DoNotStrip *;
@@ -443,8 +438,6 @@ public static final int *;
 -keep public class * extends android.content.ContentProvider
 -keep public class * extends android.app.backup.BackupAgentHelper
 -keep public class * extends android.preference.Preference
--keep public class com.google.vending.licensing.ILicensingService
--keep public class com.android.vending.licensing.ILicensingService
 
 # For native methods, see http://proguard.sourceforge.net/manual/examples.html#native
 #指定不混淆所有的JNI方法
@@ -499,23 +492,6 @@ public static final int *;
 
 -dontwarn com.markupartist.**
 
-# Understand the @Keep support annotation.
--keep class android.support.annotation.Keep
-
--keep @android.support.annotation.Keep class * {*;}
-
--keepclasseswithmembers class * {
-    @android.support.annotation.Keep <methods>;
-}
-
--keepclasseswithmembers class * {
-    @android.support.annotation.Keep <fields>;
-}
-
--keepclasseswithmembers class * {
-    @android.support.annotation.Keep <init>(...);
-}
-
 -keepclasseswithmembers class *{
       <init>(android.content.Context);
 }
@@ -546,3 +522,7 @@ public static final int *;
 -keep class com.dpuntu.downloader.**{*;}
 -keep class com.sweetieplayer.av.**{*;}
 -keep class com.sweetieplayer.vod.ui.widget.**{*;}
+
+# sdk加固
+-keep @com.qihoo.SdkProtected.OSETSDK.Keep class **{*;}
+-keep,allowobfuscation @interface com.qihoo.SdkProtected.OSETSDK.Keep

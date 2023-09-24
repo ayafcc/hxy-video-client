@@ -6,7 +6,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
+import butterknife.BindView;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -14,27 +18,9 @@ import com.github.StormWyrm.wanandroid.base.exception.ResponseException;
 import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver;
 import com.github.StormWyrm.wanandroid.base.sheduler.IoMainScheduler;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentTransaction;
-import butterknife.BindView;
 import com.sweetieplayer.vod.base.BaseActivity;
 import com.sweetieplayer.vod.base.BaseMainFragment;
-import com.sweetieplayer.vod.bean.AppUpdateBean;
-import com.sweetieplayer.vod.bean.BaseResult;
-import com.sweetieplayer.vod.bean.OpenRecommendEvent;
-import com.sweetieplayer.vod.bean.StartBean;
-import com.sweetieplayer.vod.bean.TitleEvent;
+import com.sweetieplayer.vod.bean.*;
 import com.sweetieplayer.vod.netservice.VodService;
 import com.sweetieplayer.vod.ui.home.HomeFragment;
 import com.sweetieplayer.vod.ui.live.LiveFragment;
@@ -46,6 +32,13 @@ import com.sweetieplayer.vod.ui.widget.NoticeDialog2;
 import com.sweetieplayer.vod.utils.AgainstCheatUtil;
 import com.sweetieplayer.vod.utils.Retrofit2Utils;
 import me.yokeyword.fragmentation.SupportFragment;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 

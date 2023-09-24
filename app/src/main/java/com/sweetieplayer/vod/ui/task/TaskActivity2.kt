@@ -105,7 +105,7 @@ class TaskActivity2 : BaseActivity(), View.OnClickListener {
             item?.run {
                 helper.setText(R.id.tv_name, item.title)
                 helper.setText(R.id.tv_num, "+${item.points}")
-                helper.getView<ImageView>(R.id.iv_image).setImageResource(item.image)
+                helper.getView<ImageView>(R.id.ad_show_failed_image).setImageResource(item.image)
                 val rl_do = (helper.getView(R.id.rl_status) as RelativeLayout)
 
                 if (item.finish == 1) {

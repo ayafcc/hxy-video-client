@@ -1,50 +1,26 @@
 package com.sweetieplayer.vod.ui.start;
 
 import android.animation.ValueAnimator;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.FrameLayout;
-
-import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.CacheDiskStaticUtils;
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.*;
 import com.github.StormWyrm.wanandroid.base.exception.ResponseException;
 import com.github.StormWyrm.wanandroid.base.net.RequestManager;
 import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver;
 import com.google.gson.Gson;
-
-import com.sweetieplayer.vod.R;
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-import org.jetbrains.annotations.NotNull;
-
-
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.OnClick;
+import com.kc.openset.OSETListener;
+import com.kc.openset.OSETSplash;
 import com.sweetieplayer.vod.ApiConfig;
 import com.sweetieplayer.vod.App;
 import com.sweetieplayer.vod.MainActivity;
-import com.sweetieplayer.vod.ad.AdClickListener;
-import com.sweetieplayer.vod.ad.AdWebView;
+import com.sweetieplayer.vod.R;
 import com.sweetieplayer.vod.base.BaseActivity;
-import com.sweetieplayer.vod.bean.AppConfigBean;
-import com.sweetieplayer.vod.bean.BaseResult;
-import com.sweetieplayer.vod.bean.CloseSplashEvent;
-import com.sweetieplayer.vod.bean.PageResult;
-import com.sweetieplayer.vod.bean.SpecialtTopicBean;
-import com.sweetieplayer.vod.bean.StartBean;
+import com.sweetieplayer.vod.bean.*;
 import com.sweetieplayer.vod.download.SPKey;
 import com.sweetieplayer.vod.netservice.StartService;
 import com.sweetieplayer.vod.netservice.TopicService;
@@ -59,6 +35,17 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.Response;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+
+import static com.sweetieplayer.vod.ad3.AdConstants.POS_ID_Splash;
+
 
 public class StartActivity extends BaseActivity {
 
@@ -70,22 +57,28 @@ public class StartActivity extends BaseActivity {
     private StartService startService;
     private Disposable disposable1;
     //private FrameLayout mAdviceLayout;
-    @BindView(R.id.awv_start)
-    AdWebView webView;
-    @BindView(R.id.tv_start)
-    TextView textView;
-    @BindView(R.id.iv_image)
-    ImageView imageView;
-    @BindView(R.id.tv_load)
-    TextView loadTv;
-    @BindView(R.id.advertLayout)
-    FrameLayout mAdviceLayout;
+//    @BindView(R.id.awv_start)
+//    AdWebView webView;
+//    @BindView(R.id.tv_start)
+//    TextView textView;
+//    @BindView(R.id.iv_image)
+//    ImageView imageView;
+//    @BindView(R.id.tv_load)
+//    TextView loadTv;
+//    @BindView(R.id.advertLayout)
+//    FrameLayout mAdviceLayout;
+
+    private FrameLayout adLayout;
+    private Activity thisActivity;
 
     private boolean isInit = false;
     private static final int MAX_TIME = 5;
     private int start_time = MAX_TIME;
     private final Handler handler = new Handler();
     private boolean isClosed = false;
+
+    private boolean isOnPause = false;//判断是否跳转了广告落地页
+    private boolean isClick = false;//是否进行了点击
     private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -101,7 +94,7 @@ public class StartActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_start;
+        return R.layout.activity_welcome;
     }
 
     @Override
@@ -109,7 +102,10 @@ public class StartActivity extends BaseActivity {
         setTheme(R.style.AppTheme_Launcher);
         //清空启动背景
         //this.getWindow().getDecorView().setBackground(null);
+        thisActivity = this;
+        setContentView(R.layout.activity_welcome);
         super.onCreate(savedInstanceState);
+
 //        ToastUtils.showShort("正在选择加速通道，请稍后...");
         EventBus.getDefault().register(this);
         getAppConfig();
@@ -123,7 +119,9 @@ public class StartActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         Log.i("xxxxxxx", "startbean========001onResume");
-        if (!isInit) getStartData();
+        if (!isInit) {
+            load_ad();
+        }
         // getTopicData();
 
     }
@@ -131,6 +129,7 @@ public class StartActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+        OSETSplash.getInstance().destroy();
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
@@ -405,24 +404,24 @@ public class StartActivity extends BaseActivity {
 //        }
 //    }
     private void init() {
-
         if (StringUtils.isEmpty(ad_str) || ad_str_status == 0) {
             gotoMain();
         }
+        load_ad();
 
-        webView.setVisibility(View.VISIBLE);
-        LogUtils.e(ad_str);
-
-        isInit = true;
-        webView.isforceFullScreen(true);
-        webView.addAdClickListener(new AdClickListener() {
-            @Override
-            public void onAdClick(String url) {
-                isClosed=true;
-                handler.removeCallbacks(runnable);
-            }
-        });
-        webView.loadHtmlBody(ad_str);
+//        webView.setVisibility(View.VISIBLE);
+//        LogUtils.e(ad_str);
+//
+//        isInit = true;
+//        webView.isforceFullScreen(true);
+//        webView.addAdClickListener(new AdClickListener() {
+//            @Override
+//            public void onAdClick(String url) {
+//                isClosed=true;
+//                handler.removeCallbacks(runnable);
+//            }
+//        });
+//        webView.loadHtmlBody(ad_str);
 
     }
 
@@ -430,15 +429,12 @@ public class StartActivity extends BaseActivity {
         ValueAnimator anim = ValueAnimator.ofFloat(1, 0);
         anim.setDuration(500);
         anim.setRepeatCount(0);
-        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                if (imageView != null) {
-                    imageView.setAlpha((Float) animation.getAnimatedValue());
-                    loadTv.setAlpha((Float) animation.getAnimatedValue());
-                }
-                System.out.println("onAnimationUpdate " + (Float) animation.getAnimatedValue());
-            }
+        anim.addUpdateListener(animation -> {
+//                if (imageView != null) {
+//                    imageView.setAlpha((Float) animation.getAnimatedValue());
+//                    loadTv.setAlpha((Float) animation.getAnimatedValue());
+//                }
+            System.out.println("onAnimationUpdate " + animation.getAnimatedValue());
         });
         anim.start();
     }
@@ -447,9 +443,9 @@ public class StartActivity extends BaseActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (textView != null) {
-                    textView.setText(StringUtils.getString(R.string.skip, i));
-                }
+//                if (textView != null) {
+//                    textView.setText(StringUtils.getString(R.string.skip, i));
+//                }
             }
         });
     }
@@ -462,14 +458,14 @@ public class StartActivity extends BaseActivity {
         finish();
     }
 
-    @OnClick(R.id.tv_start)
-    void missAd() {
-        isClosed = true;
-        handler.removeCallbacks(runnable);
-        stopGet();
-        ActivityUtils.startActivity(MainActivity.class);
-        finish();
-    }
+//    @OnClick(R.id.tv_start)
+//    void missAd() {
+//        isClosed = true;
+//        handler.removeCallbacks(runnable);
+//        stopGet();
+//        ActivityUtils.startActivity(MainActivity.class);
+//        finish();
+//    }
 
 
     public void getAppConfig() {
@@ -482,7 +478,7 @@ public class StartActivity extends BaseActivity {
                 new BaseObserver<AppConfigBean>() {
                     @Override
                     public void onSuccess(AppConfigBean data) {
-                        App.playAd = data;
+//                        App.playAd = data;
                     }
 
                     @Override
@@ -562,6 +558,38 @@ public class StartActivity extends BaseActivity {
         setTime(start_time);
         handler.postDelayed(runnable, 1000);
         cancleImage();
+    }
+
+    private void load_ad() {
+        adLayout = findViewById(R.id.ad_set);
+        OSETSplash.getInstance().show(thisActivity, adLayout, POS_ID_Splash, new OSETListener() {
+            @Override
+            public void onShow() {
+                Log.e(KEY_START_BEAN, "onShow");
+            }
+
+            @Override
+            public void onError(String s, String s1) {
+                Log.e(KEY_START_BEAN, "onError——————code:" + s + "----message:" + s1);
+                adLayout.setVisibility(View.GONE);
+                findViewById(R.id.lunch_bg_top).setVisibility(View.VISIBLE);
+                gotoMain();
+            }
+
+            @Override
+            public void onClick() {
+                isClick = true;
+                Log.e(KEY_START_BEAN, "onClick");
+            }
+
+            @Override
+            public void onClose() {
+                Log.e(KEY_START_BEAN, "onclose +isOnPause=" + isOnPause + "isClick=" + isClick);
+                if (!isOnPause) {//如果已经调用了onPause说明已经跳转了广告落地页
+                    gotoMain();
+                }
+            }
+        });
     }
 
 }

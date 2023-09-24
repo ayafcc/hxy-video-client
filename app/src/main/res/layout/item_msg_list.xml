@@ -9,7 +9,7 @@
     android:paddingEnd="15dp">
 
     <ImageView
-        android:id="@+id/iv_image"
+        android:id="@+id/ad_show_failed_image"
         android:layout_width="13.5dp"
         android:layout_height="12dp"
         android:layout_marginTop="15dp"
@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_desc"
         app:layout_constraintEnd_toStartOf="@+id/tv_time"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toEndOf="@+id/iv_image"
+        app:layout_constraintStart_toEndOf="@+id/ad_show_failed_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -43,11 +43,11 @@
         android:text="2019-07-11"
         android:textColor="#B8B8B8"
         android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_image"
+        app:layout_constraintBottom_toBottomOf="@id/ad_show_failed_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toEndOf="@+id/tv_title"
-        app:layout_constraintTop_toTopOf="@id/iv_image" />
+        app:layout_constraintTop_toTopOf="@id/ad_show_failed_image" />
 
     <TextView
         android:id="@+id/tv_desc"

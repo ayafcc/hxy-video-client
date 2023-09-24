@@ -8,7 +8,6 @@ import butterknife.Unbinder
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.LogUtils
 import com.sweetieplayer.vod.R
-import com.umeng.analytics.MobclickAgent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import me.yokeyword.fragmentation.SupportActivity
@@ -47,12 +46,10 @@ abstract class BaseActivity() : SupportActivity() {
 
     override fun onResume() {
         super.onResume()
-        MobclickAgent.onResume(this)
     }
 
     override fun onPause() {
         super.onPause()
-        MobclickAgent.onPause(this)
     }
 
     protected abstract fun getLayoutResID(): Int
