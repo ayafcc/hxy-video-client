@@ -160,6 +160,8 @@ public class StartBean implements Serializable {
     public static class Ads implements Serializable {
 
         private static final long serialVersionUID = -4076207452483830162L;
+        private Ad ad_user;
+        private Ad app_key;
         private Ad user_center;
         private Ad searcher;
         private Ad player_pause;
@@ -270,6 +272,22 @@ public class StartBean implements Serializable {
 
         public void setTest(Ad test) {
             this.test = test;
+        }
+
+        public Ad getAd_user() {
+            return ad_user;
+        }
+
+        public void setAd_user(Ad ad_user) {
+            this.ad_user = ad_user;
+        }
+
+        public Ad getApp_key() {
+            return app_key;
+        }
+
+        public void setApp_key(Ad app_key) {
+            this.app_key = app_key;
         }
     }
 

@@ -5,8 +5,13 @@ import android.os.Build;
 import android.util.Log;
 import android.view.WindowManager;
 import androidx.multidex.MultiDex;
+import com.alibaba.fastjson.TypeReference;
+import com.blankj.utilcode.util.CacheDiskStaticUtils;
 import com.dpuntu.downloader.DownloadManager;
-import com.dpuntu.downloader.Downloader;
+import com.github.StormWyrm.wanandroid.base.exception.ResponseException;
+import com.github.StormWyrm.wanandroid.base.net.RequestManager;
+import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver;
+import com.google.gson.Gson;
 import com.jiagu.sdk.OSETSDKProtected;
 import com.kc.openset.OSETSDK;
 import com.kc.openset.listener.OSETInitListener;
@@ -18,38 +23,52 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.sweetieplayer.av.play.MyIjkPlayerFactory;
 import com.sweetieplayer.vod.base.BaseApplication;
 import com.sweetieplayer.vod.bean.AppConfigBean;
+import com.sweetieplayer.vod.bean.BaseResult;
 import com.sweetieplayer.vod.bean.PlayScoreBean;
 import com.sweetieplayer.vod.bean.StartBean;
 import com.sweetieplayer.vod.download.GetFileSharePreance;
+import com.sweetieplayer.vod.netservice.StartService;
+import com.sweetieplayer.vod.network.RetryWhen;
+import com.sweetieplayer.vod.utils.AgainstCheatUtil;
+import com.sweetieplayer.vod.utils.OkHttpUtils;
+import com.sweetieplayer.vod.utils.Retrofit2Utils;
 import com.tencent.smtt.sdk.QbSdk;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.schedulers.Schedulers;
 import jaygoo.library.m3u8downloader.M3U8Library;
+import okhttp3.Call;
+import okhttp3.Response;
+import org.jetbrains.annotations.NotNull;
 import org.litepal.LitePal;
 import org.xutils.x;
 import xyz.doikki.videoplayer.player.VideoViewConfig;
 import xyz.doikki.videoplayer.player.VideoViewManager;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
+import java.lang.reflect.Type;
 import java.util.List;
 
-import static com.sweetieplayer.vod.ad3.AdConstants.AppKey;
-import static com.sweetieplayer.vod.ad3.AdConstants.userId;
+import static org.seamless.xhtml.XHTML.ELEMENT.object;
 
 public class App extends BaseApplication {
     private static final String TAG = "App";
 
     public static List<String> searchHot;
     public static StartBean startBean;
-    public static AppConfigBean playAd;
     public static AppConfigBean tagConfig;
 
     private static WeakReference<App> weakReference;
     private static App vocApp;
-    public static List<Downloader> downloaders = new ArrayList<>();
 
+    private Disposable disposable;
+    private static StartBean.Ads ads;
     public static PlayScoreBean curPlayScoreBean;
+    public static boolean isGetAdConf = false;
 
     public static App getInstance() {
         return weakReference.get();
@@ -72,12 +91,9 @@ public class App extends BaseApplication {
 //            }
 //        });
         //设置全局的Footer构建器
-        SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
-            @Override
-            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
-                //指定为经典Footer，默认是 BallPulseFooter
-                return new ClassicsFooter(context);
-            }
+        SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) -> {
+            //指定为经典Footer，默认是 BallPulseFooter
+            return new ClassicsFooter(context);
         });
     }
 
@@ -95,47 +111,21 @@ public class App extends BaseApplication {
         x.Ext.init(this);
         x.Ext.setDebug(true);//是否输出Debug日志
 
-        initAdSet();
         Hawk.init(this).build();
-//        Random random = new Random();
-//        int ad = random.nextInt(10);
-//        if(ad > 6){
-//            ZgalaxySDK.getInstance().init(this,"KA-d27e79b934f84169b7584f0c98c0ca10",true);
-//        }else{
-//            ZgalaxySDK.getInstance().init(this,"BD-f3b83ccb87a340258ec65c154da35b81",true);
-//        }
         DownloadManager.initDownloader(vocApp);
 
-        QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
-            @Override
-            public void onCoreInitFinished() {
-                Log.i(getClass().getName().toString(), "initX5Environment onCoreInitFinished");
-            }
-
-            @Override
-            public void onViewInitFinished(boolean b) {
-                Log.i(getClass().getName().toString(), "initX5Environment onViewInitFinished");
-            }
-        });
-
-
+        init_x5();
 
         //播放器配置，注意：此为全局配置，按需开启
         VideoViewManager.setConfig(VideoViewConfig.newBuilder()
-//                .setLogEnabled(BuildConfig.DEBUG)
                 .setPlayerFactory(MyIjkPlayerFactory.create())
-                //.setPlayerFactory(ExoMediaPlayerFactory.create(this))
-                //.setAutoRotate(true)
-//                .setEnableMediaCodec(true)
-                //.setUsingSurfaceView(true)
-                //.setEnableParallelPlay(true)
-                //.setEnableAudioFocus(true)
-                //.setScreenScale(VideoView.SCREEN_SCALE_MATCH_PARENT)
                 .build());
-//        //设置toast的颜色
-//        ToastUtils.setBgColor(ContextCompat.getColor(this, R.color.colorAccent));
 
         M3U8Library.init(this);
+
+        getStartData();
+        waitAdConf();
+        initAdSet();
     }
 
     public static int getSrceenWidth() {
@@ -163,7 +153,11 @@ public class App extends BaseApplication {
         });
     }
 
-    public synchronized static GetFileSharePreance getFileSharePreance(){
+    public static StartBean.Ads getAds() {
+        return ads;
+    }
+
+    public synchronized static GetFileSharePreance getFileSharePreance() {
         return new GetFileSharePreance(vocApp);
     }
 
@@ -181,11 +175,18 @@ public class App extends BaseApplication {
     }
 
     private void initAdSet() {
-
+        if (ads == null) {
+            Log.i(TAG, "ads is null, return");
+            return;
+        }
+        if (ads.getAd_user() == null || ads.getApp_key() == null) {
+            Log.i(TAG, "ad_user or ad_app_key is null, return");
+            return;
+        }
         MultiDex.install(this);
         OSETSDKProtected.install(this);
-        OSETSDK.getInstance().setUserId(userId);
-        OSETSDK.getInstance().init(this, AppKey, new OSETInitListener() {
+        OSETSDK.getInstance().setUserId(ads.getAd_user().getDescription());
+        OSETSDK.getInstance().init(this, ads.getApp_key().getDescription(), new OSETInitListener() {
             @Override
             public void onError(String s) {
                 //初始化失败：会调用不到广告，清选择合适的时机重新进行初始化
@@ -196,9 +197,59 @@ public class App extends BaseApplication {
                 //初始化成功：可以开始调用广告
             }
         });
-//        OSETSDK.getInstance().setYMID(this, "9143");//对接小说要设置这个YMID（找运营要这个YMID）
 
         Log.e("aaaaaaaadfsdf", "当前版本号：" + Build.VERSION.SDK_INT + "——android O版本号：" + Build.VERSION_CODES.O);
     }
 
+    private void init_x5() {
+        QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
+            @Override
+            public void onCoreInitFinished() {
+                Log.i(getClass().getName().toString(), "initX5Environment onCoreInitFinished");
+            }
+
+            @Override
+            public void onViewInitFinished(boolean b) {
+                Log.i(getClass().getName().toString(), "initX5Environment onViewInitFinished");
+            }
+        });
+    }
+
+    private void getStartData() {
+        Log.i("xxxxxxx", "startbean========001");
+        OkHttpUtils.getInstance().getDataAsynFromNet1(ApiConfig.BASE_URL + ApiConfig.getStart, new OkHttpUtils.MyNetCall() {
+            @Override
+            public void success(Call call, Response response) throws IOException {
+                String retString = response.body().string();
+                Type typeReference = new TypeReference<BaseResult<StartBean>>() {
+                }.getType();
+                BaseResult<StartBean> ret = new Gson().fromJson(retString,typeReference);
+
+
+                CacheDiskStaticUtils.put(TAG, ret.getData());
+                App.ads = ret.getData().getAds();
+                isGetAdConf = true;
+            }
+
+            @Override
+            public void failed(Call call, IOException e) {
+                Log.e(TAG, "初始化数据失败:", e);
+            }
+        });
+    }
+
+    private void waitAdConf() {
+        long start = System.currentTimeMillis();
+        long taken = 10000;
+        while (true) {
+            if (System.currentTimeMillis() - start > taken) {
+                Log.e(TAG, "等待广告配置超过10s，放弃加载广告");
+                break;
+            }
+            if (isGetAdConf) {
+                break;
+            }
+
+        }
+    }
 }

@@ -35,7 +35,6 @@ import com.sweetieplayer.vod.ApiConfig
 import com.sweetieplayer.vod.App
 import com.sweetieplayer.vod.R
 import com.sweetieplayer.vod.ad.AdWebView
-import com.sweetieplayer.vod.ad3.AdConstants.POS_ID_Banner
 import com.sweetieplayer.vod.bean.*
 import com.sweetieplayer.vod.databinding.FragmentPlayDetailBinding
 import com.sweetieplayer.vod.netservice.VodService
@@ -62,6 +61,7 @@ import java.util.*
 class VideoDetailFragment : BaseFragment() {
     private lateinit var playDetailBinding: FragmentPlayDetailBinding
 
+    private var TAG: String = "VideoDetailFragment";
     private lateinit var mVodBean: VodBean
     private var isCollected: Boolean = false
     private var urlIndex: Int = 0 //播放集
@@ -344,10 +344,15 @@ class VideoDetailFragment : BaseFragment() {
     }
 
     private fun banner() {
+        var bannerAd = App.getAds().player_down;
+        if (bannerAd == null) {
+            Log.i(TAG, "bannerAd is null, return now")
+            return;
+        }
         mBannerLayout = headerView.findViewById(R.id.bannerLayout)
         OSETBanner.getInstance().setWHScale(0.15625);//只对穿山甲起作用
 
-        OSETBanner.getInstance().show(activity, POS_ID_Banner, mBannerLayout, object : OSETListener {
+        OSETBanner.getInstance().show(activity, bannerAd.description, mBannerLayout, object : OSETListener {
             override fun onShow() {
             }
 
