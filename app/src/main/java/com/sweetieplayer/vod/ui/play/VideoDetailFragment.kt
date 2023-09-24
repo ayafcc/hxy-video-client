@@ -28,11 +28,14 @@ import com.github.StormWyrm.wanandroid.base.net.RequestManager
 import com.github.StormWyrm.wanandroid.base.net.observer.BaseObserver
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
+import com.kc.openset.OSETBanner
+import com.kc.openset.OSETListener
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.sweetieplayer.vod.ApiConfig
 import com.sweetieplayer.vod.App
 import com.sweetieplayer.vod.R
 import com.sweetieplayer.vod.ad.AdWebView
+import com.sweetieplayer.vod.ad3.AdConstants.POS_ID_Banner
 import com.sweetieplayer.vod.bean.*
 import com.sweetieplayer.vod.databinding.FragmentPlayDetailBinding
 import com.sweetieplayer.vod.netservice.VodService
@@ -129,6 +132,7 @@ class VideoDetailFragment : BaseFragment() {
         mBannerLayout = headerView.findViewById(R.id.bannerLayout)
         getCommentList()
         getSameTypeData()
+        banner()
     }
 
     override fun onResume() {
@@ -339,22 +343,26 @@ class VideoDetailFragment : BaseFragment() {
         }
     }
 
-    //    private fun banner() {
-//        mBannerLayout = headerView.findViewById(R.id.bannerLayout)
-//        BannerSdk.getInstance(playActivity).loadBannerAdvert(mBannerLayout, object : BannerAdListener {
-//            override fun onError(i: Int, s: String) {
-//                mBannerLayout.removeAllViews()
-//            }
-//            override fun onAdClicked() {
-//            }
-//            override fun onAdShow() {}
-//            override fun onSelectedClose(s: String) {
-//            }
-//            override fun onAdvertStatusClose() {
-//
-//            }
-//        })
-//    }
+    private fun banner() {
+        mBannerLayout = headerView.findViewById(R.id.bannerLayout)
+        OSETBanner.getInstance().setWHScale(0.15625);//只对穿山甲起作用
+
+        OSETBanner.getInstance().show(activity, POS_ID_Banner, mBannerLayout, object : OSETListener {
+            override fun onShow() {
+            }
+
+            override fun onError(s: String, s1: String) {
+                Log.e("openseterror", "code:$s----message:$s1")
+            }
+
+            override fun onClick() {
+            }
+
+            override fun onClose() {
+            }
+        })
+    }
+
     private fun collection() {
         val vodService = Retrofit2Utils.INSTANCE.createByGson(VodService::class.java)
         if (AgainstCheatUtil.showWarn(vodService)) {
