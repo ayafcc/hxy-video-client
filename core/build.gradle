@@ -30,9 +30,10 @@ dependencies {
     implementation('org.slf4j:slf4j-jdk14:1.7.14')
     implementation('com.orhanobut:logger:2.2.0')
     // Cling library
-    implementation 'org.fourthline.cling:cling-core:2.1.1'
-    implementation 'org.fourthline.cling:cling-support:2.1.1'
-//
+    implementation 'org.fourthline.cling:cling-core:2.1.2'
+    implementation 'org.fourthline.cling:cling-support:2.1.2'
+    implementation 'org.eclipse.jetty:jetty-servlet:8.1.22.v20160922'
+    implementation 'org.eclipse.jetty:jetty-server:8.1.22.v20160922'
     // Jetty library
     implementation('org.eclipse.jetty:jetty-server:8.1.18.v20150929') {
         exclude group: 'org.eclipse.jetty.orbit', module: 'javax.servlet'

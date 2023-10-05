@@ -27,8 +27,8 @@ android {
         minSdkVersion 29
         targetSdkVersion 33
 
-        versionCode 2
-        versionName "2.3.5"
+        versionCode 3
+        versionName "2.3.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
@@ -40,7 +40,8 @@ android {
         variant.outputs.each { output ->
             if (output.outputFileName != null && output.outputFileName.endsWith('.apk')) {
                 def fileName
-                fileName = "sweetieplalyer_${variant.versionName}.apk"
+//                fileName = "sweetieplalyer_${variant.versionName}.apk"
+                fileName = "sweetieplalyer_latest.apk"
                 output.outputFileName = fileName
             }
         }
@@ -200,8 +201,11 @@ dependencies {
     //投屏
     implementation project(path: ':core')
     // Cling library
-    implementation 'org.fourthline.cling:cling-core:2.1.1'
-    implementation 'org.fourthline.cling:cling-support:2.1.1'
+    implementation 'org.fourthline.cling:cling-core:2.1.2'
+    implementation 'org.fourthline.cling:cling-support:2.1.2'
+    implementation 'org.eclipse.jetty:jetty-servlet:8.1.22.v20160922'
+    implementation 'org.eclipse.jetty:jetty-server:8.1.22.v20160922'
+
     implementation 'xyz.doikki.android.dkplayer:player-ijk:3.3.7'
     implementation 'xyz.doikki.android.dkplayer:dkplayer-java:3.3.7'
     implementation 'xyz.doikki.android.dkplayer:dkplayer-ui:3.3.7'
