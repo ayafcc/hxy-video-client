@@ -296,7 +296,7 @@ public class HomeFirstChildFragment2 extends BaseItemFragment<String> {
     }
 
     private void initCardData(List<RecommendBean2> list) {
-        if (list == null || list.size() <= 0) return;
+        if (list == null || list.isEmpty()) return;
         for (int i = 0; i < list.size(); i++) {
             if (i == 0) {
                 items.add(list.get(0));

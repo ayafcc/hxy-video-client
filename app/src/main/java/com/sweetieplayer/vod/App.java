@@ -59,7 +59,7 @@ public class App extends BaseApplication {
     private static final String TAG = "App";
 
     public static List<String> searchHot;
-    public static StartBean startBean;
+    public static StartBean startBean = new StartBean();
     public static AppConfigBean tagConfig;
 
     private static WeakReference<App> weakReference;
