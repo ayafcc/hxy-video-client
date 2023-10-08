@@ -27,8 +27,8 @@ android {
         minSdkVersion 29
         targetSdkVersion 33
 
-        versionCode 3
-        versionName "2.3.6"
+        versionCode 4
+        versionName "2.3.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {

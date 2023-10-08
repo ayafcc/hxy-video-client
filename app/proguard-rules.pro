@@ -174,7 +174,24 @@
 #openset start
 -keep class com.kc.openset.**{*;}
 -dontwarn com.kc.openset.**
+
 #openset end
+# 倍孜混淆
+-dontwarn com.beizi.fusion.**
+-dontwarn com.beizi.ad.**
+-keep class com.beizi.fusion.** {*; }
+-keep class com.beizi.ad.** {*; }
+
+-keep class com.qq.e.** {
+    public protected *;
+}
+
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
+
+-dontwarn  org.apache.**
+#拼多多
+-keep class com.xunmeng.** {*;}
+
 
 ## Butterknife
 -keep public class * implements butterknife.Unbinder { public <init>(**, android.view.View); }
