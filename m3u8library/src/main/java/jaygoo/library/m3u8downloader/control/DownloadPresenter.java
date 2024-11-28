@@ -139,7 +139,8 @@ public class DownloadPresenter {
         }
         MUtils.clearDir(new File(M3U8Library.dirPath));
         Intent intent = new Intent();
-        intent.setAction(M3U8Library.EVENT_REFRESH);
+        // fixme setAction
+//        intent.setAction(M3U8Library.EVENT_REFRESH);
         M3U8Library.getContext().sendBroadcast(intent);
     }
 
@@ -176,7 +177,8 @@ public class DownloadPresenter {
      */
     public static void notifyGlobal() {
         Intent intent = new Intent();
-        intent.setAction(M3U8Library.EVENT_REFRESH);
+//        intent.setAction(M3U8Library.EVENT_REFRESH);
+        // todo setIntent
         M3U8Library.getContext().sendBroadcast(intent);
     }
 

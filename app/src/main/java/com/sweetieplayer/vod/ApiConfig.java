@@ -3,7 +3,7 @@ package com.sweetieplayer.vod;
 public class ApiConfig {
     //public static final String AD_ID = "demo";
 //    public static final String BASE_URL = "http://192.168.27.5";
-    public static final String BASE_URL = "http://74.120.170.55:8090";
+    public static final String BASE_URL = "http://ihxy.me:8090";
     public static final String getStart = "/api.php/v1.main/startup";
     public static final String getTypeList = "/api.php/v1.vod/types";
     public static final String getBannerList = "/api.php/v1.vod";

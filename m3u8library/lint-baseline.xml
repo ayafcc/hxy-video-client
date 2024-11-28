@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 8.0.0" type="baseline" client="gradle" dependencies="false" name="AGP (8.0.0)" variant="all" version="8.0.0">
+
+    <issue
+        id="JcenterRepositoryObsolete"
+        message="JCenter Maven repository is no longer receiving updates: newer library versions may be available elsewhere"
+        errorLine1="        jcenter()"
+        errorLine2="        ~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="7"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ApplySharedPref"
+        message="Consider using `apply()` instead; `commit` writes its data to persistent storage immediately, whereas `apply` will handle it in the background"
+        errorLine1="            settings.edit().putBoolean(Tag, Value).commit();"
+        errorLine2="                                                   ~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/utils/SPHelper.java"
+            line="28"
+            column="52"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `toUpperCase(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`."
+        errorLine1="            sb.append(hex.toUpperCase());"
+        errorLine2="                          ~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/utils/AES128Utils.java"
+            line="35"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="            return String.format(&quot;http://127.0.0.1:%d%s&quot;, myPort, filePath);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/server/M3U8HttpServer.java"
+            line="51"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="                    holder.itemState.setText(&quot;下载中：&quot; + String.format(&quot;%.1f &quot;, progress * 100) + &quot;%&quot;);"
+        errorLine2="                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/view/item/M3u8ItemViewBinder.java"
+            line="83"
+            column="55"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="            return String.format(&quot;%.1f GB&quot;, size / GB);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/utils/MUtils.java"
+            line="353"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="            return String.format(&quot;%d B&quot;, size);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/utils/MUtils.java"
+            line="361"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="OldTargetApi"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details."
+        errorLine1="        targetSdkVersion 35"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="26"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="SuspiciousIndentation"
+        message="Suspicious indentation: This is indented but is not continuing the previous expression (`path=path.substring(`...)"
+        errorLine1="                    Log.d(&quot;M3u8DoneItemViewBinder&quot;, path+&quot;__&quot;);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/view/item/M3u8DoneItemViewBinder.java"
+            line="115"
+            column="21"/>
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/view/item/M3u8DoneItemViewBinder.java"
+            line="112"
+            column="17"
+            message="Previous statement here"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.github.bumptech.glide:glide than 4.9.0 is available: 4.16.0"
+        errorLine1="    compileOnly &apos;com.github.bumptech.glide:glide:4.9.0&apos;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="47"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="GetInstance"
+        message="`Cipher.getInstance` should not be called without setting the encryption mode and padding"
+        errorLine1="        Cipher cipher = Cipher.getInstance(&quot;AES&quot;);"
+        errorLine2="                                           ~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/utils/AES128Utils.java"
+            line="92"
+            column="44"/>
+    </issue>
+
+    <issue
+        id="GetInstance"
+        message="`Cipher.getInstance` should not be called without setting the encryption mode and padding"
+        errorLine1="        Cipher cipher = Cipher.getInstance(&quot;AES&quot;);"
+        errorLine2="                                           ~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/utils/AES128Utils.java"
+            line="119"
+            column="44"/>
+    </issue>
+
+    <issue
+        id="NotifyDataSetChanged"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
+        errorLine1="            multiTypeAdapter.notifyDataSetChanged();"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/view/DownloadItemList.java"
+            line="118"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="NotifyDataSetChanged"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
+        errorLine1="                    multiTypeAdapter.notifyDataSetChanged();"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/view/DownloadItemList.java"
+            line="130"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="NotifyDataSetChanged"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
+        errorLine1="                                                multiTypeAdapter.notifyDataSetChanged();"
+        errorLine2="                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/view/DownloadingItemList.java"
+            line="120"
+            column="49"/>
+    </issue>
+
+    <issue
+        id="NotifyDataSetChanged"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
+        errorLine1="            multiTypeAdapter.notifyDataSetChanged();"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/view/DownloadingItemList.java"
+            line="157"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ObsoleteLayoutParam"
+        message="Invalid layout param in a `LinearLayout`: `layout_below`"
+        errorLine1="        android:layout_below=&quot;@+id/tablayout&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/download_page_layout.xml"
+            line="25"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="StaticFieldLeak"
+        message="Do not place Android context classes in static fields; this is a memory leak"
+        errorLine1="    public static Context context;"
+        errorLine2="           ~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/M3U8Library.java"
+            line="23"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_done_item.xml"
+            line="16"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_item.xml"
+            line="16"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+        errorLine1="                    holder.itemState.setText(&quot;下载中：&quot; + String.format(&quot;%.1f &quot;, progress * 100) + &quot;%&quot;);"
+        errorLine2="                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/view/item/M3u8ItemViewBinder.java"
+            line="83"
+            column="46"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+        errorLine1="                    holder.itemSpeed.setText(task.getFormatSpeed() + &quot;&quot;);"
+        errorLine2="                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/view/item/M3u8ItemViewBinder.java"
+            line="85"
+            column="46"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="                holder.itemState.setText(&quot;下载完成 100%&quot;);"
+        errorLine2="                                         ~~~~~~~~~~~">
+        <location
+            file="src/main/java/jaygoo/library/m3u8downloader/view/item/M3u8ItemViewBinder.java"
+            line="94"
+            column="42"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_toRightOf` with `android:layout_toEndOf=&quot;@+id/m3u8_item_icon&quot;` to better support right-to-left layouts"
+        errorLine1="            android:layout_toRightOf=&quot;@+id/m3u8_item_icon&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_done_item.xml"
+            line="26"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_marginLeft` with `android:layout_marginStart=&quot;20dp&quot;` to better support right-to-left layouts"
+        errorLine1="            android:layout_marginLeft=&quot;20dp&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_done_item.xml"
+            line="27"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_alignLeft` with `android:layout_alignStart=&quot;@+id/m3u8_title&quot;` to better support right-to-left layouts"
+        errorLine1="            android:layout_alignLeft=&quot;@+id/m3u8_title&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_done_item.xml"
+            line="40"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_toRightOf` with `android:layout_toEndOf=&quot;@+id/item_icon&quot;` to better support right-to-left layouts"
+        errorLine1="            android:layout_toRightOf=&quot;@+id/item_icon&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_item.xml"
+            line="26"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_marginLeft` with `android:layout_marginStart=&quot;10dp&quot;` to better support right-to-left layouts"
+        errorLine1="            android:layout_marginLeft=&quot;10dp&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_item.xml"
+            line="27"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_alignLeft` with `android:layout_alignStart=&quot;@+id/m3u8_title&quot;` to better support right-to-left layouts"
+        errorLine1="            android:layout_alignLeft=&quot;@+id/m3u8_title&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_item.xml"
+            line="40"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_toLeftOf` with `android:layout_toStartOf=&quot;@+id/item_control&quot;` to better support right-to-left layouts"
+        errorLine1="            android:layout_toLeftOf=&quot;@+id/item_control&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_item.xml"
+            line="50"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_alignParentRight` with `android:layout_alignParentEnd=&quot;true&quot;` to better support right-to-left layouts"
+        errorLine1="            android:layout_alignParentRight=&quot;true&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_item.xml"
+            line="61"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_alignLeft` with `android:layout_alignStart=&quot;@+id/m3u8_title&quot;` to better support right-to-left layouts"
+        errorLine1="            android:layout_alignLeft=&quot;@+id/m3u8_title&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_item.xml"
+            line="68"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_marginRight` with `android:layout_marginEnd=&quot;10dp&quot;` to better support right-to-left layouts"
+        errorLine1="            android:layout_marginRight=&quot;10dp&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_item.xml"
+            line="70"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_toLeftOf` with `android:layout_toStartOf=&quot;@+id/item_control&quot;` to better support right-to-left layouts"
+        errorLine1="            android:layout_toLeftOf=&quot;@+id/item_control&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_m3u8_item.xml"
+            line="73"
+            column="13"/>
+    </issue>
+
+</issues>

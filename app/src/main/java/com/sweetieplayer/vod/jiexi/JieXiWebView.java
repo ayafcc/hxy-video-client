@@ -185,10 +185,10 @@ public class JieXiWebView extends WebView {
     }
 
     public void startParse() throws NoSuchAlgorithmException {
-        if (isWifiProxy() || isVpnUsed()) {
-            AgainstCheatUtil.showWarn(null);
-            return;
-        }
+//        if (isWifiProxy() || isVpnUsed()) {
+//            AgainstCheatUtil.showWarn(null);
+//            return;
+//        }
         String realUrl = parseUrls[index] + url;
         if (realUrl.contains("json") || realUrl.contains("..")) {
             realUrl = realUrl.replaceFirst("\\.\\.", "\\.");

@@ -2,11 +2,11 @@ apply plugin: 'com.android.library'
 apply from: 'upload.gradle'
 
 android {
-    compileSdk 33
+    compileSdk 35
 
     defaultConfig {
         minSdkVersion 29
-        targetSdkVersion 33
+        targetSdkVersion 35
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -23,7 +23,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
@@ -33,9 +33,9 @@ dependencies {
     implementation 'org.fourthline.cling:cling-core:2.1.2'
     implementation 'org.fourthline.cling:cling-support:2.1.2'
     implementation 'org.eclipse.jetty:jetty-servlet:8.1.22.v20160922'
-    implementation 'org.eclipse.jetty:jetty-server:8.1.22.v20160922'
+    implementation 'org.eclipse.jetty:jetty-server:12.0.9'
     // Jetty library
-    implementation('org.eclipse.jetty:jetty-server:8.1.18.v20150929') {
+    implementation('org.eclipse.jetty:jetty-server:12.0.9') {
         exclude group: 'org.eclipse.jetty.orbit', module: 'javax.servlet'
     }
     implementation 'javax.servlet:javax.servlet-api:4.0.1'

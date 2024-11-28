@@ -52,7 +52,8 @@ public class DownloadPageFragment extends Fragment {
         initView(view);
         IntentFilter intentFilter = new IntentFilter(M3U8Library.EVENT_REFRESH);
         if (getActivity() != null) {
-            getActivity().registerReceiver(receiver, intentFilter);
+            // todo 不知道对不对
+            getActivity().registerReceiver(receiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
         }
         return view;
     }

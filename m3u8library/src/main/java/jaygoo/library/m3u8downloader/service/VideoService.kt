@@ -24,6 +24,7 @@ private const val EXTRA_PARAM2 = "jaygoo.library.m3u8downloader.service.extra.PA
  */
 class VideoService : IntentService("VideoService") {
 
+    @Deprecated("Deprecated in Java")
     override fun onHandleIntent(intent: Intent?) {
         when (intent?.action) {
             ACTION_FOO -> {
