@@ -5,7 +5,7 @@ import com.github.StormWyrm.wanandroid.base.exception.ResponseException
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
-abstract class BaseObserver<E>(private val showErrorTip: Boolean = true) : Observer<E> {
+abstract class BaseObserver<E : Any>(private val showErrorTip: Boolean = true) : Observer<E> {
     private lateinit var disposable: Disposable
 
     override fun onSubscribe(d: Disposable) {

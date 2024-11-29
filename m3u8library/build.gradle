@@ -23,7 +23,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 29
+        minSdkVersion 33
         targetSdkVersion 35
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -37,8 +37,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = 1.17
-        targetCompatibility = 1.17
+        sourceCompatibility = 1.21
+        targetCompatibility = 1.21
     }
     namespace 'jaygoo.library.m3u8downloader'
 }
@@ -65,6 +65,7 @@ dependencies {
     implementation 'com.lxj:xpopup:1.8.10-x'
 
     implementation 'commons-io:commons-io:2.14.0'
-    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation project(path: ":common")
 }

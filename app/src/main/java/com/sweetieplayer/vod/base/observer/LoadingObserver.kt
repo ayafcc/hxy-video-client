@@ -8,7 +8,7 @@ import com.sweetieplayer.vod.base.BaseActivity
 import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
-abstract class LoadingObserver<E>(
+abstract class LoadingObserver<E : Any>(
     context: Context,
     private val loadingMsg: Int = R.string.loading_msg,
     showLoading: Boolean = true,

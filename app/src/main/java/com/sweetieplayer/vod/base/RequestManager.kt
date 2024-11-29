@@ -12,7 +12,7 @@ import io.reactivex.Observable
 
 object RequestManager {
     @JvmStatic
-    fun <T> execute(activity: BaseActivity, observable: Observable<BaseResult<T>>?, observer: BaseObserver<T>) {
+    fun <T : Any> execute(activity: BaseActivity, observable: Observable<BaseResult<T>>?, observer: BaseObserver<T>) {
         if (observable == null)
             throw RuntimeException("the observable is null")
 
@@ -26,7 +26,7 @@ object RequestManager {
     }
 
     @JvmStatic
-    fun <T> execute(activity: App, observable: Observable<BaseResult<T>>?, observer: BaseObserver<T>) {
+    fun <T : Any> execute(activity: App, observable: Observable<BaseResult<T>>?, observer: BaseObserver<T>) {
         if (observable == null)
             throw RuntimeException("the observable is null")
 
@@ -40,7 +40,7 @@ object RequestManager {
     }
 
     @JvmStatic
-    fun <T> execute(fragment: BaseFragment, observable: Observable<BaseResult<T>>?, observer: BaseObserver<T>) {
+    fun <T : Any> execute(fragment: BaseFragment, observable: Observable<BaseResult<T>>?, observer: BaseObserver<T>) {
         if (observable == null)
             throw RuntimeException("the observable is null")
 

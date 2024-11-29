@@ -5,7 +5,7 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 29
+        minSdkVersion 33
         targetSdkVersion 35
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -19,8 +19,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = 1.17
-        targetCompatibility = 1.17
+        sourceCompatibility = 1.21
+        targetCompatibility = 1.21
     }
     namespace 'com.sweetieplayer.av'
 
@@ -32,7 +32,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
 
-    implementation 'com.blankj:utilcodex:1.26.0'
+    implementation 'com.blankj:utilcodex:1.31.1'
 
     //播放器
     implementation 'xyz.doikki.android.dkplayer:dkplayer-java:3.3.7'
@@ -44,6 +44,6 @@ dependencies {
     implementation 'com.github.xiaweizi:MarqueeTextView:1.0'
     //Glide  图片加载
     implementation 'com.github.bumptech.glide:glide:4.16.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
 }

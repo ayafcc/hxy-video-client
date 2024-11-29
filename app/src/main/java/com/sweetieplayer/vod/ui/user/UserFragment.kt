@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -15,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.ToastUtils
@@ -108,7 +110,7 @@ class UserFragment : BaseFragment() {
         filter.addAction("android.intent.action.AddPlayScore")
 
         // playVideoReceiver = PlayVideoReceiver()
-        mActivity.registerReceiver(playVideoReceiver, filter)
+        mActivity.registerReceiver(playVideoReceiver, filter, Context.RECEIVER_EXPORTED)
 
         val userTip = App.startBean?.document?.notice?.content ?: ""
         if (userTip.isNotEmpty()) {
@@ -319,6 +321,7 @@ class UserFragment : BaseFragment() {
         })
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser) {
@@ -342,6 +345,7 @@ class UserFragment : BaseFragment() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         //从我的页面点击视频播放界面和视频播放记录页面
@@ -420,6 +424,10 @@ class UserFragment : BaseFragment() {
                     ToastUtils.showShort("签到成功，获得${data.score}积分")
                 }
                 onLoginSucces()
+            }
+
+            override fun onNext(p0: GetScoreBean) {
+                TODO("Not yet implemented")
             }
 
             override fun onError(e: ResponseException) {

@@ -5,24 +5,24 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.sweetieplayer.av.play.AvVideoController
-import com.sweetieplayer.vod.base.BaseActivity
-import com.sweetieplayer.vod.bean.PlayFromBean
-import com.sweetieplayer.vod.bean.UrlBean
-import com.sweetieplayer.vod.bean.VodBean
-import com.sweetieplayer.vod.jiexi.BackListener
-import com.sweetieplayer.vod.jiexi.JieXiUtils
-import com.sweetieplayer.vod.ui.dlan.Constants
 import com.blankj.utilcode.util.BarUtils
+import com.blankj.utilcode.util.ThreadUtils
 import com.blankj.utilcode.util.ToastUtils
-import com.blankj.utilcode.util.Utils
 import com.sweetieplayer.android.upnpcast.NLUpnpCastManager
 import com.sweetieplayer.android.upnpcast.controller.CastObject
 import com.sweetieplayer.android.upnpcast.controller.ICastEventListener
 import com.sweetieplayer.android.upnpcast.device.CastDevice
 import com.sweetieplayer.android.upnpcast.util.CastUtils
+import com.sweetieplayer.av.play.AvVideoController
 import com.sweetieplayer.vod.R
+import com.sweetieplayer.vod.base.BaseActivity
+import com.sweetieplayer.vod.bean.PlayFromBean
+import com.sweetieplayer.vod.bean.UrlBean
+import com.sweetieplayer.vod.bean.VodBean
 import com.sweetieplayer.vod.databinding.ActivityCastScreenBinding
+import com.sweetieplayer.vod.jiexi.BackListener
+import com.sweetieplayer.vod.jiexi.JieXiUtils
+import com.sweetieplayer.vod.ui.dlan.Constants
 import org.fourthline.cling.support.model.MediaInfo
 import org.fourthline.cling.support.model.PositionInfo
 import org.fourthline.cling.support.model.TransportInfo
@@ -50,20 +50,21 @@ class CastScreenActivity : BaseActivity() {
     }
 
     private val onJiexiResultListener = object : BackListener {
-        override fun onSuccess(url: String?, curParseIndex: Int,headers: Map<String?, String?>?) {
+        override fun onSuccess(url: String?, curParseIndex: Int, headers: Map<String?, String?>?) {
             this@CastScreenActivity.curParseIndex = curParseIndex
             url?.let {
 //                startPlay(it)
             }
         }
+
         override fun onError() {
-            Utils.runOnUiThread {
+            ThreadUtils.runOnUiThread {
                 castScreenBinding.tvMsg.text = "获取资源失败,请换来源或者联系客服解决！"
             }
         }
 
         override fun onProgressUpdate(msg: String?) {
-            Utils.runOnUiThread {
+            ThreadUtils.runOnUiThread {
                 castScreenBinding.tvMsg.text = msg
             }
         }
@@ -93,9 +94,10 @@ class CastScreenActivity : BaseActivity() {
 //                    NLUpnpCastManager.getInstance().connect(castDevice);
 //
         NLUpnpCastManager.getInstance().cast(
-                CastObject
-                        .newInstance(vodurl, Constants.CAST_ID, mVodBean.vod_name)
-                        .setDuration(vodLong));
+            CastObject
+                .newInstance(vodurl, Constants.CAST_ID, mVodBean.vod_name)
+                .setDuration(vodLong)
+        );
         changeTitle()
         NLUpnpCastManager.getInstance().addCastEventListener(mControlListener)
 //        parseData()
@@ -138,7 +140,7 @@ class CastScreenActivity : BaseActivity() {
 
 
     private fun changeTitle() {
-        Utils.runOnUiThread {
+        ThreadUtils.runOnUiThread {
             var title = mVodBean.vod_name
             if (mVodBean.type_id == 2) {
                 title += " 第${playList[urlIndex].name}集"
@@ -151,7 +153,8 @@ class CastScreenActivity : BaseActivity() {
         curParseIndex++
         parseData()
     }
-//
+
+    //
 //    //播放下一集
     private fun playNext() {
         if (++urlIndex >= playFrom.urls.size) {
@@ -180,29 +183,39 @@ class CastScreenActivity : BaseActivity() {
 
 
         NLUpnpCastManager.getInstance().cast(
-                CastObject
-                        .newInstance(videoUrl, Constants.CAST_ID, mVodBean.vod_name)
-                        .setDuration(vodLong));
+            CastObject
+                .newInstance(videoUrl, Constants.CAST_ID, mVodBean.vod_name)
+                .setDuration(vodLong)
+        );
 
 
     }
+
     private val mControlListener: ICastEventListener = object : ICastEventListener {
         override fun onConnecting(castDevice: CastDevice) {
 //            mCastDeviceInfo.setText(String.format("设备状态: [%s] [正在连接]", castDevice.getName()));
             Toast.makeText(this@CastScreenActivity, "正在连接", Toast.LENGTH_SHORT).show()
-            Utils.runOnUiThread {
+            ThreadUtils.runOnUiThread {
                 castScreenBinding.tvMsg.text = "正在加载中...."
             }
         }
 
-        override fun onConnected(castDevice: CastDevice, transportInfo: TransportInfo, mediaInfo: MediaInfo?, volume: Int) {
+        override fun onConnected(
+            castDevice: CastDevice,
+            transportInfo: TransportInfo,
+            mediaInfo: MediaInfo?,
+            volume: Int
+        ) {
             Log.d("SampleControlVideo", String.format("播放状态: [%s]", "已连接"))
             Log.d("SampleControlVideo", String.format("播放状态: [%s]", transportInfo.currentTransportState.value))
-            Log.d("SampleControlVideo", String.format("视频信息: [%s]", if (mediaInfo != null) mediaInfo.currentURI else "NULL"))
+            Log.d(
+                "SampleControlVideo",
+                String.format("视频信息: [%s]", if (mediaInfo != null) mediaInfo.currentURI else "NULL")
+            )
 //            Log.d("SampleControlVideo", String.format("播放状态: [%s]", "断开连接"))
 
             Toast.makeText(this@CastScreenActivity, "已连接", Toast.LENGTH_SHORT).show()
-            Utils.runOnUiThread {
+            ThreadUtils.runOnUiThread {
                 castScreenBinding.tvMsg.text = "正在投屏中...."
                 castScreenBinding.ivAvPlay.isSelected = true
             }
@@ -226,7 +239,7 @@ class CastScreenActivity : BaseActivity() {
             Toast.makeText(this@CastScreenActivity, "开始播放", Toast.LENGTH_SHORT).show()
             Log.d("SampleControlVideo", String.format("播放状态: [%s]", "开始播放"))
 
-            Utils.runOnUiThread {
+            ThreadUtils.runOnUiThread {
                 castScreenBinding.tvMsg.text = "正在投屏中...."
                 castScreenBinding.ivAvPlay.isSelected = true
             }
@@ -239,7 +252,7 @@ class CastScreenActivity : BaseActivity() {
             Toast.makeText(this@CastScreenActivity, "暂停播放", Toast.LENGTH_SHORT).show()
             Log.d("SampleControlVideo", String.format("播放状态: [%s]", "暂停播放"))
 
-            Utils.runOnUiThread {
+            ThreadUtils.runOnUiThread {
                 castScreenBinding.tvMsg.text = "已暂停播放...."
                 castScreenBinding.ivAvPlay.isSelected = false
             }
@@ -248,7 +261,7 @@ class CastScreenActivity : BaseActivity() {
 
         override fun onStop() {
             Toast.makeText(this@CastScreenActivity, "停止投射", Toast.LENGTH_SHORT).show()
-            Utils.runOnUiThread {
+            ThreadUtils.runOnUiThread {
                 castScreenBinding.ivAvPlay.isSelected = false
             }
             //clear all UI
@@ -262,7 +275,8 @@ class CastScreenActivity : BaseActivity() {
         }
 
         override fun onSeekTo(position: Long) {
-            Toast.makeText(this@CastScreenActivity, "快进 " + CastUtils.getStringTime(position), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@CastScreenActivity, "快进 " + CastUtils.getStringTime(position), Toast.LENGTH_SHORT)
+                .show()
         }
 
         override fun onError(errorMsg: String) {

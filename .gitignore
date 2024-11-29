@@ -8,3 +8,5 @@
 .cxx
 .idea
 release/*
+app/proguardMapping.txt
+common/build

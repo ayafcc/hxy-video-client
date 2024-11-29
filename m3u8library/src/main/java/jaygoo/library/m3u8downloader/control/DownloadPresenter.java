@@ -8,6 +8,9 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.util.List;
+
+import com.sweetieplayer.vod.Constants;
+import jaygoo.library.m3u8downloader.BuildConfig;
 import jaygoo.library.m3u8downloader.M3U8Downloader;
 import jaygoo.library.m3u8downloader.M3U8DownloaderPro;
 import jaygoo.library.m3u8downloader.M3U8Library;
@@ -139,8 +142,8 @@ public class DownloadPresenter {
         }
         MUtils.clearDir(new File(M3U8Library.dirPath));
         Intent intent = new Intent();
-        // fixme setAction
-//        intent.setAction(M3U8Library.EVENT_REFRESH);
+        intent.setPackage(M3U8Library.getContext().getPackageName());
+        intent.setAction(M3U8Library.EVENT_REFRESH);
         M3U8Library.getContext().sendBroadcast(intent);
     }
 
@@ -177,8 +180,8 @@ public class DownloadPresenter {
      */
     public static void notifyGlobal() {
         Intent intent = new Intent();
-//        intent.setAction(M3U8Library.EVENT_REFRESH);
-        // todo setIntent
+        intent.setAction(M3U8Library.EVENT_REFRESH);
+        intent.setPackage(M3U8Library.getContext().getPackageName());
         M3U8Library.getContext().sendBroadcast(intent);
     }
 

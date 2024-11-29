@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         applicationId "com.sweetieplayer.app"
-        minSdkVersion 29
+        minSdkVersion 33
         targetSdkVersion 35
 
         versionCode 5
@@ -61,8 +61,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = 1.17
-        targetCompatibility = 1.17
+        sourceCompatibility = 1.21
+        targetCompatibility = 1.21
     }
 
     repositories {
@@ -116,15 +116,15 @@ dependencies {
     //openset
     implementation(name: 'openset_sdk6.3.0.0', ext: 'aar')
 
-    implementation 'com.qq.e.union:tools:+'
+    implementation 'com.qq.e.union:tools:2.4'
 
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.12.0'
 
     //内存泄漏
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-3'
 
     //工具箱
-    implementation 'com.blankj:utilcodex:1.26.0'
+    implementation 'com.blankj:utilcodex:1.31.1'
     //黄油刀
     implementation 'com.jakewharton:butterknife:10.2.3'
     kapt 'com.jakewharton:butterknife-compiler:10.2.3'
@@ -154,7 +154,6 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.16.0'
     //banner
     implementation 'com.youth.banner:banner:1.4.10'
-    implementation project(path: ':av')
 
     //图片选择
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.4'
@@ -195,10 +194,11 @@ dependencies {
 
     implementation "com.orhanobut:hawk:2.0.1"//缓存数据
     implementation project(path: ':m3u8library')
-    implementation 'commons-io:commons-io:2.14.0'
-//
+    implementation project(path: ':av')
     //投屏
     implementation project(path: ':core')
+    implementation 'commons-io:commons-io:2.14.0'
+//
     // Cling library
     implementation 'org.fourthline.cling:cling-core:2.1.2'
     implementation 'org.fourthline.cling:cling-support:2.1.2'

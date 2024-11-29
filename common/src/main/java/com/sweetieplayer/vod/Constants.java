@@ -1,4 +1,4 @@
-package com.sweetieplayer.android.upnpcast;
+package com.sweetieplayer.vod;
 
 /**
  */
@@ -8,9 +8,9 @@ public class Constants
 
     public static class Key
     {
-        private static final String PACKAGE = "com.sweetieplayer.android.upnpcast.key.";
+        private static final String PACKAGE = "com.sweetieplayer.vod";
 
-        public static final String ID = PACKAGE + "id";
+        public static final String ID = PACKAGE + ".id";
 
         public static final String NAME = PACKAGE + "name";
 

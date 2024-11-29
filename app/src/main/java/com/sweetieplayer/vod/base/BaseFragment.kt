@@ -58,6 +58,7 @@ abstract class BaseFragment : SupportFragment() {
         initListener()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         tryLoadData()
@@ -79,6 +80,7 @@ abstract class BaseFragment : SupportFragment() {
     /**
      * 使用ViewPager嵌套fragment时，切换ViewPager回调该方法
      */
+    @Deprecated("Deprecated in Java")
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         this.isVisibleToUser = isVisibleToUser

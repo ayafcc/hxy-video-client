@@ -5,7 +5,7 @@ android {
     compileSdk 35
 
     defaultConfig {
-        minSdkVersion 29
+        minSdkVersion 33
         targetSdkVersion 35
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -40,4 +40,5 @@ dependencies {
     }
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'org.eclipse.jetty:jetty-client:8.1.18.v20150929'
+    implementation project(path: ":common")
 }

@@ -1,8 +1,8 @@
 package com.sweetieplayer.android.upnpcast.util;
 
 import android.util.Log;
+import com.sweetieplayer.vod.Constants;
 
-import com.sweetieplayer.android.upnpcast.Constants;
 
 /**
  */
